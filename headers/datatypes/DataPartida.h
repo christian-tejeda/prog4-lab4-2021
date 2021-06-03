@@ -25,7 +25,7 @@ public:
     DataPartida();
     DataPartida(int id, DataVideojuego videojuego, /*DataFecha fechaInicio, DataFecha fechaFin,*/ float DuracionTotal);
     //Getters
-    int getId() const;
+    int getId();
     DataVideojuego getVideojuego();
     //DataFecha getFechaInicio();
     //DataFecha getFechaFin();
