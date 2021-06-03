@@ -3,6 +3,9 @@
 
 #include "../datatypes/DataVideojuego.h"
 #include "../datatypes/DataContratoSuscripcion.h"
+#include "../datatypes/DataCategoria.h"
+#include "../datatypes/DataGenero.h"
+#include "../datatypes/DataPlataforma.h"
 
 #include <set>
 
@@ -10,7 +13,7 @@ class IVideojuegoController
 { //interface
 public:
     virtual void ingresarDatosVideojuego(DataVideojuego DataV) = 0;
-    //virtual set<DataCategoria>  obtenerCategorias() = 0;
+    virtual set<DataCategoria> obtenerCategorias() = 0;
     virtual void agregarPlataformaAVideojuego(string plataforma) = 0;
     virtual void agregarGeneroAVideojuego(string genero) = 0;
     virtual void agregarOtraCategoriaAVideojuego(string cat) = 0;
@@ -23,9 +26,9 @@ public:
     virtual void puntuarVideojuego(string nombre, int puntaje) = 0;
     virtual set<DataVideojuego> obtenerVideojuegos() = 0;
     virtual DataVideojuego obtenerDataVideojuego(string nombre) = 0;
-    //    virtual void agregarPlataforma(DataPlataforma plataforma)= 0;
-    //    virtual void agregarGenero(DataGenero genero)= 0;
-    //    virtual void agregarOtraCategoria(DataCategoria otra)= 0;
+    virtual void agregarPlataforma(DataPlataforma plataforma) = 0;
+    virtual void agregarGenero(DataGenero genero) = 0;
+    virtual void agregarOtraCategoria(DataCategoria otra) = 0;
     virtual void confirmarAgregarCategoria(bool confirmar) = 0;
 
     virtual ~IVideojuegoController() {}

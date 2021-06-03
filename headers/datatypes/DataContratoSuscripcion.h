@@ -1,7 +1,7 @@
 #ifndef DATA_CONTRATO_SUSCRIPCION_H
 #define DATA_CONTRATO_SUSCRIPCION_H
 
-#include "../enums.h"
+#include "../utils/enums.h"
 #include <string>
 
 using namespace std;
@@ -14,7 +14,7 @@ private:
     float precio;
     TipoPeriodoValidez periodoValidez;
     bool cancelada;
-    //FechaHora fechaSuscripcion
+    //Fecha fechaSuscripcion
     TipoMetodoPago metodoPago;
 
 public:
@@ -27,7 +27,7 @@ public:
     float getPrecio() const;
     TipoPeriodoValidez getPeriodoValidez() const;
     bool getCancelada() const;
-    //FechaHora getFechaSuscripcion() const;
+    //Fecha getFechaSuscripcion() const;
     TipoMetodoPago getMetodoPago() const;
 
     ~DataContratoSuscripcion();

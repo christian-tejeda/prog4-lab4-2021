@@ -16,7 +16,7 @@
 
 using namespace std;
 
-class Jugador
+class Jugador : public Usuario
 {
 private:
     string nombre;
@@ -36,13 +36,13 @@ public:
     //Setters
     //Operaciones
     //set<ContratoSuscripcion> obtenerSuscripociones(EstadoSuscripcion estado);
-    cancelarSuscripcionActiva(Videojuego vj);
-    contratarSuscripcion(Videojuego vj, Suscripcion susc, TipoMetodoPago m);
+    void cancelarSuscripcionActiva(Videojuego vj);
+    void contratarSuscripcion(Videojuego vj, Suscripcion susc, TipoMetodoPago m);
     set<Partida> obtenerPartidasSinFinalizar();
-    finalizarPartida(idPartida id);
+    void finalizarPartida(idPartida id);
     set<Videojuego> obtenerVIdeojuegos();
-    eliminarContratosDeVideojuego(Videojuego vj);
-    eliminarPartidasDeVideojuego(Videojuego vj);
+    void eliminarContratosDeVideojuego(Videojuego vj);
+    void eliminarPartidasDeVideojuego(Videojuego vj);
     DataUsuario getData();
     set<Individual> obtenerPartidasFinalizadas();
     Individual obtenerPartida(string id);

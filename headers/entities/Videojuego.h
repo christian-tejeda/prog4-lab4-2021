@@ -6,8 +6,13 @@
 #include <set>
 #include <utility>
 
-#include "../enums.h"
+#include "../utils/enums.h"
 #include "../datatypes/DataVideojuego.h"
+#include "Categoria.h"
+#include "Plataforma.h"
+#include "Genero.h"
+#include "Jugador.h"
+#include "ContextoEstadistica.h"
 
 using namespace std;
 
@@ -22,19 +27,19 @@ private:
     pair<float, int> rating;
 
     //pseudoatributos
-    // set<ContratoSuscripcion*> contratos;
-    // set<Categoria *> categorias;
-    // ContextoEstadistica* ctx;
+    //set<ContratoSuscripcion*> contratos;
+    set<Categoria *> categorias;
+    ContextoEstadistica *ctx;
+
 public:
     Videojuego();
     Videojuego(string nombre,
                string descripcion,
                map<TipoPeriodoValidez, float> suscripciones,
-               pair<float, int> rating /*, 
-                   set<ContratoSuscripcion*> contratos, 
-                   set<Categoria *> categorias, 
-                   ContextoEstadistica* ctx */
-    );
+               pair<float, int> rating,
+               //set<ContratoSuscripcion*> contratos,
+               set<Categoria *> categorias,
+               ContextoEstadistica *ctx);
 
     //Getters
     string getNombre();
@@ -42,8 +47,8 @@ public:
     map<TipoPeriodoValidez, float> getSuscripciones();
     pair<float, int> getRating();
     // set<ContratoSuscripcion *> getContratos();
-    // set<Categoria *> getCategorias();
-    // ContextoEstadistica * getContextoEstadistica();
+    set<Categoria *> getCategorias();
+    ContextoEstadistica *getContextoEstadistica();
 
     //Setters
     void setNombre(string nombre);
@@ -51,14 +56,14 @@ public:
     void setSuscripciones(TipoPeriodoValidez validez, float precio);
     void setRating(float prom, int cantVotos);
     // void setContrato(ContratoSuscripcion *);
-    // void setCategoria(Categoria *);
-    // void setContextoEstadistica(ContextoEstadistica *);
+    void setCategoria(Categoria *);
+    void setContextoEstadistica(ContextoEstadistica *);
 
     //Ops
-    // void agregarGenero(Genero g);
-    // void agregarPlataforma(Plataforma p);
-    // void agregarOtraCategoria(Categoria o);
-    // set<Jugador*> getSuscriptores();
+    void agregarGenero(Genero g);
+    void agregarPlataforma(Plataforma p);
+    void agregarOtraCategoria(Categoria o);
+    set<Jugador *> getSuscriptores();
     int getCantidadSuscriptores();
     DataVideojuego getData();
 
