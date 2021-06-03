@@ -5,7 +5,7 @@
 
 class ContextoEstadistica {
     private:
-        InterfazEstadistica estrategia;
+        InterfazEstadistica *estrategia;
 
     public:
         ContextoEstadistica();
