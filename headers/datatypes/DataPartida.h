@@ -8,7 +8,7 @@
 
 #include "../enums.h"
 #include "../datatypes/DataVideojuego.h"
-#include "../datatypes/DataFecha.h"
+//#include "../datatypes/DataFecha.h"
 
 using namespace std;
 
@@ -23,17 +23,17 @@ private:
 
 public:
     DataPartida();
-    DataPartida(int id, DataVideojuego videojuego, DataFecha fechaInicio, DataFecha fechaFin, float DuracionTotal);
+    DataPartida(int id, DataVideojuego videojuego, /*DataFecha fechaInicio, DataFecha fechaFin,*/ float DuracionTotal);
     //Getters
     int getId() const;
-    DataVideojuego getVideojuego() conts;
+    DataVideojuego getVideojuego();
     //DataFecha getFechaInicio();
     //DataFecha getFechaFin();
     float getDuracionTotal();
     //Setters
 
     //Destructor
-    ~DataVideojuego();
+    ~DataPartida();
 };
 
 #endif
