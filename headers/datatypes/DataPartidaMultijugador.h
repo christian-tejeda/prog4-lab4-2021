@@ -21,16 +21,16 @@ private:
 
 public:
     DataPartidaMultijugador();
-    DataPartidaMultijugador(int id, DataVideojuego videojuego, DataFecha fechaInicio, DataFecha fechaFin, float DuracionTotal);
+    DataPartidaMultijugador(int id, DataVideojuego videojuego, /*DataFecha fechaInicio, DataFecha fechaFin,*/ float DuracionTotal);
     //Getters
     int getId() const;
-    DataVideojuego getVideojuego() conts;
+    DataVideojuego getVideojuego();
     //DataFecha getFechaInicio();
     //DataFecha getFechaFin();
     float getDuracionTotal();
     bool getTramistida();
-    DataJugador getCreador();
-    set<DataJugador> getParticipantes();
+    //DataJugador getCreador();
+    //set<DataJugador> getParticipantes();
 
     //Setters
 
