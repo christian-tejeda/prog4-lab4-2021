@@ -6,7 +6,7 @@
 #include <iostream>
 using namespace std;
 
-class DataFecha
+class Fecha
 {
 private:
     int dia;
@@ -16,11 +16,9 @@ private:
     int minuto;
 
 public:
-    DataFecha();
-
-    DataFecha(const DataFecha &fecha);
-
-    DataFecha(int dia, int mes, int anio, int hora, int minuto);
+    Fecha();
+    Fecha(const Fecha &fecha);
+    Fecha(int dia, int mes, int anio, int hora, int minuto);
 
     int getDia();
     int getMes();
@@ -28,11 +26,11 @@ public:
     int getHora();
     int getMinuto();
 
-    ~DataFecha();
+    ~Fecha();
 
-    bool operator==(DataFecha opFecha);
+    bool operator==(Fecha opFecha);
 
-    friend std::ostream &operator<<(std::ostream &os, DataFecha f);
+    friend std::ostream &operator<<(std::ostream &os, Fecha f);
 };
 
 #endif
