@@ -13,9 +13,10 @@ class DataEstadistica {
 
     public:
         DataEstadistica();
-        TipoEstadisticaVideojuego getEstadistica();
+        DataEstadistica(std::string nombre, std::string descripcion, float valor);
+        // TipoEstadistica getEstadistica(); <- tipo de retorno?
         float getResultado();
         ~DataEstadistica();
-}
+};
 
 #endif
