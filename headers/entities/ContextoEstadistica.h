@@ -7,9 +7,12 @@ class ContextoEstadistica {
     private:
         InterfazEstadistica estrategia;
 
-    public: 
+    public:
+        ContextoEstadistica();
+        ContextoEstadistica(InterfazEstadistica est); // constructor con estrategia por paránmetro
         void setEstadistica(InterfazEstadistica est);  // <- this.estrategia = est
         float consultarEstadistica(Videojuego vj);
+        ~ContextoEstadistica();
 };
 
 #endif
