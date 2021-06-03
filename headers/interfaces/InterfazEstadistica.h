@@ -8,4 +8,19 @@ class InterfazEstadistica {
         ~InterfazEstadistica();
 };
 
+class CantidadSuscritos: public InterfazEstadistica {
+    public:
+        float calcularEstadistica(Videojuego vj);
+};
+
+class TotalHorasJugadas: public InterfazEstadistica {
+    public:
+        float calcularEstadistica(Videojuego vj);
+};
+
+class PromedioRating: public InterfazEstadistica {
+    public:
+        float calcularEstadistica(Videojuego vj);
+};
+
 #endif
