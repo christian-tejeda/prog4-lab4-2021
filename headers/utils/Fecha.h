@@ -32,7 +32,7 @@ public:
 
     bool operator==(DataFecha opFecha);
 
-    friend std::ostream &operator<<(std::ostream &os, DtFecha f);
+    friend std::ostream &operator<<(std::ostream &os, DataFecha f);
 };
 
 #endif
