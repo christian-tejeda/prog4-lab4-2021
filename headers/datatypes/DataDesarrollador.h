@@ -16,8 +16,8 @@ using namespace std;
 class DataDesarrollador : public DataUsuario
 {
 private:
-    string email;
-    string password;
+    //string email;
+    //string password;
     string nombreEmpresa;
     string descripcion;
 
