@@ -8,6 +8,9 @@
 
 #include "../datatypes/DataUsuario.h"
 #include "../entities/Usuario.h"
+//#include "../entities/Partida.h"
+//#include "../entities/Individual.h"
+//#include "../entities/Multijugador.h"
 //#include "../entities/ContratoSuscripcion.h"
 //#include "../entities/Videojuego.h"
 
@@ -37,9 +40,14 @@ public:
     contratarSuscripcion(Videojuego vj, Suscripcion susc, TipoMetodoPago m);
     set<Partida> obtenerPartidasSinFinalizar();
     finalizarPartida(idPartida id);
-    obte()
-
-        ~Usuario();
+    set<Videojuego> obtenerVIdeojuegos();
+    eliminarContratosDeVideojuego(Videojuego vj);
+    eliminarPartidasDeVideojuego(Videojuego vj);
+    DataUsuario getData();
+    set<Individual> obtenerPartidasFinalizadas();
+    Individual obtenerPartida(string id);
+    bool tieneSuscripcionActiva(Videojuego vj);
+    ~Usuario();
 };
 
 #endif

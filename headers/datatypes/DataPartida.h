@@ -6,9 +6,9 @@
 #include <set>
 #include <utility>
 
-#include "../enums.h"
+#include "../utils/enums.h"
 #include "../datatypes/DataVideojuego.h"
-//#include "../datatypes/DataFecha.h"
+#include "../utils/Fecha.h"
 
 using namespace std;
 
@@ -17,18 +17,18 @@ class DataPartida
 private:
     int id;
     DataVideojuego videojuego;
-    //DataFecha fechaInicio;
-    //DataFecha fechaFin;
+    Fecha fechaInicio;
+    Fecha fechaFin;
     float DuracionTotal;
 
 public:
     DataPartida();
-    DataPartida(int id, DataVideojuego videojuego, /*DataFecha fechaInicio, DataFecha fechaFin,*/ float DuracionTotal);
+    DataPartida(int id, DataVideojuego videojuego, Fecha fechaInicio, Fecha fechaFin, float DuracionTotal);
     //Getters
     int getId();
     DataVideojuego getVideojuego();
-    //DataFecha getFechaInicio();
-    //DataFecha getFechaFin();
+    Fecha getFechaInicio();
+    Fecha getFechaFin();
     float getDuracionTotal();
     //Setters
 

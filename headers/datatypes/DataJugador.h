@@ -6,10 +6,10 @@
 #include <set>
 #include <utility>
 
-#include "../enums.h"
+#include "../utils/enums.h"
 #include "../datatypes/DataVideojuego.h"
 #include "../datatypes/DataUsuario.h"
-//#include "../datatypes/DataFecha.h"
+#include "../utils/Fecha.h"
 
 using namespace std;
 

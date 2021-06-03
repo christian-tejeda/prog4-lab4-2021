@@ -1,12 +1,12 @@
 
 
-#ifndef DT_FECHA_H
-#define DT_FECHA_H
+#ifndef DATA_FECHA_H
+#define DATA_FECHA_H
 
 #include <iostream>
 using namespace std;
 
-class DtFecha
+class DataFecha
 {
 private:
     int dia;
@@ -16,11 +16,11 @@ private:
     int minuto;
 
 public:
-    DtFecha();
+    DataFecha();
 
-    DtFecha(const DtFecha &fecha);
+    DataFecha(const DataFecha &fecha);
 
-    DtFecha(int dia, int mes, int anio, int hora, int minuto);
+    DataFecha(int dia, int mes, int anio, int hora, int minuto);
 
     int getDia();
     int getMes();
@@ -28,9 +28,9 @@ public:
     int getHora();
     int getMinuto();
 
-    ~DtFecha();
+    ~DataFecha();
 
-    bool operator==(DtFecha opFecha);
+    bool operator==(DataFecha opFecha);
 
     friend std::ostream &operator<<(std::ostream &os, DtFecha f);
 };

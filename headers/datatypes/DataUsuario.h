@@ -6,9 +6,8 @@
 #include <set>
 #include <utility>
 
-#include "../enums.h"
+#include "../utils/enums.h"
 #include "../datatypes/DataVideojuego.h"
-//#include "../datatypes/DataFecha.h"
 
 using namespace std;
 
