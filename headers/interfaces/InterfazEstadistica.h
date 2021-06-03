@@ -7,26 +7,26 @@ class InterfazEstadistica
 {
 public:
     InterfazEstadistica();
-    virtual float calcularEstadistica(Videojuego vj); // no puede ser virtual pura si es un paránetro del contexto?
+    virtual float calcularEstadistica(Videojuego *vj) = 0; // no puede ser virtual pura si es un paránetro del contexto?
     virtual ~InterfazEstadistica();
 };
 
 class CantidadSuscritos : public InterfazEstadistica
 {
 public:
-    float calcularEstadistica(Videojuego vj);
+    float calcularEstadistica(Videojuego *vj) override;
 };
 
 class TotalHorasJugadas : public InterfazEstadistica
 {
 public:
-    float calcularEstadistica(Videojuego vj);
+    float calcularEstadistica(Videojuego *vj) override;
 };
 
 class PromedioRating : public InterfazEstadistica
 {
 public:
-    float calcularEstadistica(Videojuego vj);
+    float calcularEstadistica(Videojuego *vj) override;
 };
 
 #endif

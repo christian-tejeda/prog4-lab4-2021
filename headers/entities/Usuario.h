@@ -29,7 +29,7 @@ public:
     //Operaciones
     virtual DataUsuario getData() = 0;
 
-    ~Usuario();
+    virtual ~Usuario();
 };
 
 #endif
