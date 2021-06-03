@@ -12,9 +12,11 @@
 
 using namespace std;
 
-class Genero : public Categoria{
+class Genero : public Categoria
+{
 private:
     TipoGenero tipo;
+
 public:
     Genero();
     void setTipoGenero(TipoGenero tipoGenero);

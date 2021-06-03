@@ -16,8 +16,8 @@ using namespace std;
 class DataJugador : public DataUsuario
 {
 private:
-    string email;
-    string password;
+    //string email;
+    //string password;
     string nickname;
     string descripcion;
 
