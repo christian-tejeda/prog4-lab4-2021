@@ -6,7 +6,9 @@
 #include <set>
 #include <utility>
 
+#include "../utils/enums.h"
 #include "../datatypes/DataUsuario.h"
+#include "../datatypes/DataJugador.h"
 #include "../entities/Usuario.h"
 //#include "../entities/Partida.h"
 //#include "../entities/Individual.h"
@@ -23,6 +25,9 @@ private:
     string password;
     string nickname;
     string descripcion;
+    set<Jugador> *sigue;
+    //set<Partida> *juega;
+    //set<ContratoSuscripcion> * contratos;
 
 public:
     //Constructores
@@ -36,17 +41,17 @@ public:
     //Setters
     //Operaciones
     //set<ContratoSuscripcion> obtenerSuscripociones(EstadoSuscripcion estado);
-    cancelarSuscripcionActiva(Videojuego vj);
-    contratarSuscripcion(Videojuego vj, Suscripcion susc, TipoMetodoPago m);
+    cancelarSuscripcionActiva(Videojuego *vj);
+    contratarSuscripcion(Videojuego *vj, Suscripcion susc, TipoMetodoPago m);
     set<Partida> obtenerPartidasSinFinalizar();
-    finalizarPartida(idPartida id);
+    finalizarPartida(int idPartida);
     set<Videojuego> obtenerVIdeojuegos();
-    eliminarContratosDeVideojuego(Videojuego vj);
-    eliminarPartidasDeVideojuego(Videojuego vj);
-    DataUsuario getData();
+    eliminarContratosDeVideojuego(Videojuego *vj);
+    eliminarPartidasDeVideojuego(Videojuego *vj);
+    DataJugador getData();
     set<Individual> obtenerPartidasFinalizadas();
     Individual obtenerPartida(string id);
-    bool tieneSuscripcionActiva(Videojuego vj);
+    bool tieneSuscripcionActiva(Videojuego *vj);
     ~Usuario();
 };
 
