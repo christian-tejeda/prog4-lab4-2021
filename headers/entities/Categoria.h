@@ -6,7 +6,7 @@
 #include <set>
 #include <utility>
 
-#include "../enums.h"
+#include "../utils/enums.h"
 #include "../datatypes/DataCategoria.h"
 
 using namespace std;
@@ -19,8 +19,8 @@ public:
     Categoria();
     string getNombre();
     string getDescripcion();
-    setNombre(string nombre);
-    setDescipcion(string descripcion);
+    void setNombre(string nombre);
+    void setDescipcion(string descripcion);
     DataCategoria getData();
     ~Categoria();
 };

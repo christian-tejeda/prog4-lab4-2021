@@ -6,9 +6,10 @@
 #include <set>
 #include <utility>
 
-#include "../enums.h"
+#include "../utils/enums.h"
 #include "../datatypes/DataPartida.h"
 #include "../datatypes/DataVideojuego.h"
+#include "../utils/Fecha.h"
 
 using namespace std;
 
@@ -21,12 +22,12 @@ private:
 
 public:
     DataPartidaMultijugador();
-    DataPartidaMultijugador(int id, DataVideojuego videojuego, /*DataFecha fechaInicio, DataFecha fechaFin,*/ float DuracionTotal);
+    DataPartidaMultijugador(int id, DataVideojuego videojuego, Fecha fechaInicio, Fecha fechaFin, float DuracionTotal);
     //Getters
-    int getId() const;
+    int getId();
     DataVideojuego getVideojuego();
-    //DataFecha getFechaInicio();
-    //DataFecha getFechaFin();
+    Fecha getFechaInicio();
+    Fecha getFechaFin();
     float getDuracionTotal();
     bool getTramistida();
     //DataJugador getCreador();

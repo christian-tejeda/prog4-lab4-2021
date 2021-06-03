@@ -6,17 +6,19 @@
 #include <set>
 #include <utility>
 
-#include "../enums.h"
-#include "../headers/DataCategoria.h"
+#include "../utils/enums.h"
+#include "../datatypes/DataCategoria.h"
+#include "../entities/Categoria.h"
+
 
 using namespace std;
 
-class Plataforma : public Cateogria{
+class Plataforma : public Categoria{
 private:
     TipoPlataforma tipoPlataforma;
 public:
-    Plataforma()
-    setTipoPlataforma(TipoPlataforma tipoPlataforma);
+    Plataforma();
+    void setTipoPlataforma(TipoPlataforma tipoPlataforma);
     TipoPlataforma getTipoPlataforma();
     ~Plataforma();
 };

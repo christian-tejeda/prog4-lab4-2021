@@ -6,18 +6,19 @@
 #include <set>
 #include <utility>
 
-#include "../enums.h"
-#include "../headers/DataCategoria.h"
+#include "../utils/enums.h"
+#include "../datatypes/DataCategoria.h"
+#include "../entities/Categoria.h"
 
 using namespace std;
 
-class Genero : public Cateogria{
+class Genero : public Categoria{
 private:
     TipoGenero tipo;
 public:
     Genero();
-    setTipoGenero(TipoGenero tipoGenero);
-    getTipoGenero();
+    void setTipoGenero(TipoGenero tipoGenero);
+    TipoGenero getTipoGenero();
     ~Genero();
 };
 
