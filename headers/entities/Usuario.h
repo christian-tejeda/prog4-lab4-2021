@@ -13,7 +13,7 @@ using namespace std;
 class Usuario
 {
 private:
-    string nombre;
+    string email;
     string password;
     //string nombre;
     //string nombre;
@@ -23,7 +23,7 @@ public:
     Usuario();
     Usuario(string nombre, string password);
     //Getters
-    string getNombre();
+    string getEmail();
     string getPassword();
     //Setters
     //Operaciones

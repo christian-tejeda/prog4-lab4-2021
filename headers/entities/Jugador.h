@@ -32,8 +32,8 @@ public:
     Jugador();
     Jugador(string nombre, string password, string nickname, string descripcion);
     //Getters
-    string getNombre();
-    string getPassword();
+    //string getNombre();
+    //string getPassword();
     string getNickname();
     string getDescripcion();
     //Setters
