@@ -17,11 +17,15 @@ using namespace std;
 
 class CategoriaHandler{
 
+protected:
+    static CategoriaHandler* singleCH;
+    CategoriaHandler();
+
 private:
-    
     set<Categoria*> cats;
 
 public:
+    static CategoriaHandler* GetCategoriaHandler();
     set<Categoria*> obtenerCategorias();
     Categoria* obtenerCategoriaPorId(string nom);
     Plataforma* obtenerPlataformaPorId(string plat);
