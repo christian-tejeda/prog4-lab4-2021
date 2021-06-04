@@ -11,28 +11,30 @@
 #include "../entities/Genero.h"
 #include "../entities/Plataforma.h"
 
-
-
 using namespace std;
 
-class CategoriaHandler{
-
-protected:
-    static CategoriaHandler* singleCH;
-    CategoriaHandler();
+class CategoriaHandler
+{ //singleton
 
 private:
-    set<Categoria*> cats;
+    static CategoriaHandler *instancia;
+    map<string, Categoria *> cats;
+    CategoriaHandler();
 
 public:
-    static CategoriaHandler* GetCategoriaHandler();
-    set<Categoria*> obtenerCategorias();
+
+    //op de singleton
+    static CategoriaHandler* getInstance();
+
+    //ops del manejador
+    map<string, Categoria* > obtenerCategorias();
     Categoria* obtenerCategoriaPorId(string nom);
     Plataforma* obtenerPlataformaPorId(string plat);
     Genero* obtenerGeneroPorId(string genero);
-    void agregarCategoria(Categoria * categoria);
-    void actualizarCategoria(Categoria * categoria);
-    void eliminarCategoria(Categoria * categoria);
+    void agregarCategoria(Categoria* categoria);
+    void actualizarCategoria(Categoria* categoria);
+    void eliminarCategoria(Categoria* categoria);
+
     ~CategoriaHandler();
 };
 
