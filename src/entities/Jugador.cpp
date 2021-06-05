@@ -14,7 +14,7 @@ using namespace std;
 
 Jugador::Jugador() {}
 
-Jugador::Jugador(std::string email, std::string password,std::string nickname, std::string descripcion) : Usuario(email,password)
+Jugador::Jugador(std::string email, std::string password, std::string nickname, std::string descripcion) : Usuario(email, password)
 {
     this->nickname = nickname;
     this->descripcion = descripcion;
@@ -29,61 +29,54 @@ std::string Jugador::getDescripcion()
     return this->descripcion;
 }
 
-//Jugador::set<ContratoSuscripcion> obtenerSuscripociones(EstadoSuscripcion estado);
+//Jugador::set<ContratoSuscripcion> obtenerSuscripciones(EstadoSuscripcion estado);
 
-void Jugador::cancelarSuscripcionActiva(Videojuego *vj){
-
+void Jugador::cancelarSuscripcionActiva(Videojuego *vj)
+{
 }
 
-//void Juador::contratarSuscripcion(Videojuego *vj, ContratoSuscripcion susc, TipoMetodoPago m);
-    
-set<Partida *> Jugador::obtenerPartidasSinFinalizar(){
-    return NULL;
+//void Jugador::contratarSuscripcion(Videojuego *vj, ContratoSuscripcion susc, TipoMetodoPago m);
+
+map<int, Partida *> Jugador::obtenerPartidasSinFinalizar()
+{
+    return map<int, Partida *>(); //retorna un map vacío
 }
 
-void Jugador::finalizarPartida(int idPartida){
-
+void Jugador::finalizarPartida(int idPartida)
+{
 }
 
-set<Videojuego *> Jugador::obtenerVIdeojuegos(){
-    return NULL;
-}
-    
-void Jugador::eliminarContratosDeVideojuego(Videojuego *vj){
-
+map<string, Videojuego *> Jugador::obtenerVideojuegos()
+{
+    return map<string, Videojuego *>();
 }
 
-void Jugador::eliminarPartidasDeVideojuego(Videojuego *vj){
-
-}
-    
-DataUsuario Jugador::getData(){
-    return NULL;
-}
-    
-set<PartidaIndividual *> Jugador::obtenerPartidasFinalizadas(){
-    return NULL;
-}
-    
-PartidaIndividual Jugador::obtenerPartida(string id){
-    return NULL;
+void Jugador::eliminarContratosDeVideojuego(Videojuego *vj)
+{
 }
 
-bool tieneSuscripcionActiva(Videojuego *vj){
+void Jugador::eliminarPartidasDeVideojuego(Videojuego *vj)
+{
+}
+
+DataUsuario *Jugador::getData()
+{
+    return nullptr;
+}
+
+map<int, PartidaIndividual *> Jugador::obtenerPartidasFinalizadas()
+{
+    return map<int, PartidaIndividual *>();
+}
+
+PartidaIndividual *Jugador::obtenerPartida(string id)
+{
+    return nullptr;
+}
+
+bool tieneSuscripcionActiva(Videojuego *vj)
+{
     return false;
 }
 
-Jugador::~Jugador(){
-
-}
-
-
-
-
-
 Jugador::~Jugador(){};
-
-
-
-
-    

@@ -9,18 +9,22 @@
 
 using namespace std;
 
-
-class FactoryController{
+class FactoryController
+{
     //singleton
 private:
-    static FactoryController* instancia;
-    FactoryController();
+    static FactoryController *instancia;
+
 public:
-    IUsuarioController* getUsuarioController();
-    IVideojuegoController* getVideojuegoController();
-    IPartidaController* getPartidaController();
+    FactoryController();
+    //op de singleton
+    static FactoryController *getInstance();
+    //op de factory
+    IUsuarioController *getIUsuarioController();
+    IVideojuegoController *getIVideojuegoController();
+    IPartidaController *getIPartidaController();
+
     ~FactoryController();
 };
-
 
 #endif

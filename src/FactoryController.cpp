@@ -7,11 +7,11 @@
 
 using namespace std;
 
-FactoryController* FactoryController::instancia = NULL;
+FactoryController *FactoryController::instancia = nullptr;
 
-FactoryController::FactoryController(){}
+FactoryController::FactoryController() {}
 
-IUsuarioController* FactoryController::getUsuarioController(){}
-IVideojuegoController* FactoryController::getVideojuegoController(){}
-IPartidaController* FactoryController::getPartidaController(){}
-FactoryController::~FactoryController(){}
+IUsuarioController *FactoryController::getIUsuarioController() {}
+IVideojuegoController *FactoryController::getIVideojuegoController() {}
+IPartidaController *FactoryController::getIPartidaController() {}
+FactoryController::~FactoryController() {}

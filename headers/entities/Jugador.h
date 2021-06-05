@@ -24,7 +24,7 @@ private:
     string nickname;
     string descripcion;
     //set<Jugador*> sigue;  NO HAY QUE IMPLEMENTARLO
-    set<Partida *> partidasIniciadas;
+    map<int, Partida *> partidasIniciadas;
     //set<ContratoSuscripcion*> contratos;
 
 public:
@@ -38,17 +38,17 @@ public:
     string getDescripcion();
     //Setters
     //Operaciones
-    //set<ContratoSuscripcion> obtenerSuscripociones(EstadoSuscripcion estado);
+    //set<ContratoSuscripcion> obtenerSuscripciones(EstadoSuscripcion estado);
     void cancelarSuscripcionActiva(Videojuego *vj);
     //void contratarSuscripcion(Videojuego *vj, ContratoSuscripcion susc, TipoMetodoPago m);
-    set<Partida *> obtenerPartidasSinFinalizar();
+    map<int, Partida *> obtenerPartidasSinFinalizar();
     void finalizarPartida(int idPartida);
-    set<Videojuego *> obtenerVIdeojuegos();
+    map<string, Videojuego *> obtenerVideojuegos();
     void eliminarContratosDeVideojuego(Videojuego *vj);
     void eliminarPartidasDeVideojuego(Videojuego *vj);
-    DataUsuario getData();
-    set<PartidaIndividual *> obtenerPartidasFinalizadas();
-    PartidaIndividual obtenerPartida(string id);
+    DataUsuario *getData();
+    map<int, PartidaIndividual *> obtenerPartidasFinalizadas();
+    PartidaIndividual *obtenerPartida(string id);
     bool tieneSuscripcionActiva(Videojuego *vj);
     ~Jugador();
 };

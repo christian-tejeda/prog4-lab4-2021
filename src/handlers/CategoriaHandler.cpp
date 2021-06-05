@@ -11,24 +11,24 @@
 
 using namespace std;
 
-CategoriaHandler * CategoriaHandler::instancia = NULL;
+CategoriaHandler *CategoriaHandler::instancia = nullptr;
 
-CategoriaHandler::CategoriaHandler(){}
+CategoriaHandler::CategoriaHandler() {}
 
-CategoriaHandler* CategoriaHandler::getInstance(){}
+CategoriaHandler *CategoriaHandler::getInstance() {}
 
-map<std::string,Categoria* > CategoriaHandler::obtenerCategorias(){}
+map<std::string, Categoria *> CategoriaHandler::obtenerCategorias() {}
 
-Categoria* CategoriaHandler::obtenerCategoriaPorId(std::string nom){}
+Categoria *CategoriaHandler::obtenerCategoriaPorId(std::string nom) {}
 
-Plataforma* CategoriaHandler::obtenerPlataformaPorId(std::string plat){}
+Plataforma *CategoriaHandler::obtenerPlataformaPorId(std::string plat) {}
 
-Genero * CategoriaHandler::obtenerGeneroPorId(std::string genero){}
+Genero *CategoriaHandler::obtenerGeneroPorId(std::string genero) {}
 
-void CategoriaHandler::agregarCategoria(Categoria* categoria){}
+void CategoriaHandler::agregarCategoria(Categoria *categoria) {}
 
-void CategoriaHandler::actualizarCategoria(Categoria* categoria){}
+void CategoriaHandler::actualizarCategoria(Categoria *categoria) {}
 
-void CategoriaHandler::eliminarCategoria(Categoria* categoria){}
+void CategoriaHandler::eliminarCategoria(Categoria *categoria) {}
 
-CategoriaHandler::~CategoriaHandler(){}
+CategoriaHandler::~CategoriaHandler() {}
