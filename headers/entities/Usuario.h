@@ -15,8 +15,6 @@ class Usuario
 private:
     string email;
     string password;
-    //string nombre;
-    //string nombre;
 
 public:
     //Constructores
@@ -26,10 +24,12 @@ public:
     string getEmail();
     string getPassword();
     //Setters
+    void setEmail(string email);
+    void setPassword(string pwd);
     //Operaciones
-    virtual DataUsuario getData() = 0;
+    virtual DataUsuario *getData() = 0;
 
-    virtual ~Usuario();
+    virtual ~Usuario(){};
 };
 
 #endif

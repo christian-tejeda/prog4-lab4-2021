@@ -26,18 +26,17 @@ private:
 
 public:
     //Constructores
-    Jugador();
-    Jugador(string nombre, string password, string nickname, string descripcion);
+    Desarrollador();
+    Desarrollador(string nombre, string password, string nomEmpresa);
     //Getters
-    //string getNombre();
-    //string getPassword();
     string getNombreEmpresa();
     //Setters
+    void setNombreEmpresa(string nomEmpresa);
     //Operaciones
     //set<ContratoSuscripcion> obtenerSuscripociones(EstadoSuscripcion estado);
-    DataDesarrollador getData();
-    agregarVideojuegoPublicado(Videojuego *vj);
-    ~Usuario();
+    DataUsuario *getData();
+    void agregarVideojuegoPublicado(Videojuego *vj);
+    ~Desarrollador();
 };
 
 #endif
