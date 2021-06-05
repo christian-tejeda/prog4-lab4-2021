@@ -10,33 +10,36 @@
 #include "../datatypes/DataUsuario.h"
 #include "../datatypes/DataDesarrollador.h"
 #include "../entities/Usuario.h"
-#include "../entities/Partida.h"
-#include "../entities/PartidaIndividual.h"
-#include "../entities/PartidaMultijugador.h"
-//#include "../entities/ContratoSuscripcion.h"
 #include "../entities/Videojuego.h"
+//#include "../entities/Individual.h"
+//#include "../entities/Multijugador.h"
+//#include "../entities/ContratoSuscripcion.h"
+//#include "../entities/Videojuego.h"
 
 using namespace std;
 
-class Desarrollador : public Usuario
+class Desarrolllador
 {
 private:
+    string nombre;
+    string password;
     string nombreEmpresa;
-    set<Videojuego *> juegosPublicados;
+    set<Videojuego> *publicaciones;
 
 public:
     //Constructores
-    Desarrollador();
-    Desarrollador(string nombre, string password, string nomEmpresa);
+    Desarrolllador();
+    Desarrolllador(string nombre, string password, string nombreEmpresa);
     //Getters
+    string getNombre();
+    string getPassword();
     string getNombreEmpresa();
     //Setters
-    void setNombreEmpresa(string nomEmpresa);
     //Operaciones
     //set<ContratoSuscripcion> obtenerSuscripociones(EstadoSuscripcion estado);
-    DataUsuario *getData();
+    DataDesarrollador getData();
     void agregarVideojuegoPublicado(Videojuego *vj);
-    ~Desarrollador();
+    ~Desarrolllador();
 };
 
 #endif
