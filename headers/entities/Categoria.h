@@ -8,9 +8,6 @@
 
 #include "../utils/enums.h"
 #include "../datatypes/DataCategoria.h"
-
-using namespace std;
-
 class Categoria
 {
 private:
@@ -22,8 +19,8 @@ public:
     Categoria(std::string nombre, std::string descripcion);
     std::string getNombre();
     std::string getDescripcion();
-    //void setNombre(std::string nombre);
-    //void setDescipcion(std::string descripcion);
+    void setNombre(std::string nombre);
+    void setDescipcion(std::string descripcion);
     DataCategoria getData();
     ~Categoria();
 };
