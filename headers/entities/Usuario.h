@@ -22,8 +22,8 @@ public:
     std::string getEmail();
     std::string getPassword();
     //Setters
-    void setEmail(std::string email);
-    void setPassword(std::string pwd);
+    virtual void setEmail(std::string email);
+    virtual void setPassword(std::string password);
     //Operaciones
     virtual DataUsuario getData() = 0;
 

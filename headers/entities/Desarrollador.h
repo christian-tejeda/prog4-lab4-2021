@@ -35,6 +35,9 @@ public:
     //std::string getPassword();
     std::string getNombreEmpresa();
     //Setters
+    void setEmail(std::string email);
+    void setPassword(std::string password);
+    void setNombreEmpresa(std::string nomEmpresa);
     //Operaciones
     //set<ContratoSuscripcion> obtenerSuscripociones(EstadoSuscripcion estado);
     DataUsuario getData();
