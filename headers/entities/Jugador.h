@@ -16,13 +16,11 @@
 //#include "../entities/ContratoSuscripcion.h"
 #include "../entities/Videojuego.h"
 
-using namespace std;
-
 class Jugador : public Usuario
 {
 private:
-    string nickname;
-    string descripcion;
+    std::string nickname;
+    std::string descripcion;
     //set<Jugador*> sigue;  NO HAY QUE IMPLEMENTARLO
     map<int, Partida *> partidasIniciadas;
     //set<ContratoSuscripcion*> contratos;
@@ -30,12 +28,12 @@ private:
 public:
     //Constructores
     Jugador();
-    Jugador(string nombre, string password, string nickname, string descripcion);
+    Jugador(std::string nombre, std::string password, std::string nickname, std::string descripcion);
     //Getters
-    //string getNombre();
-    //string getPassword();
-    string getNickname();
-    string getDescripcion();
+    //std::string getNombre();
+    //std::string getPassword();
+    std::string getNickname();
+    std::string getDescripcion();
     //Setters
     //Operaciones
     //set<ContratoSuscripcion> obtenerSuscripciones(EstadoSuscripcion estado);
@@ -43,12 +41,12 @@ public:
     //void contratarSuscripcion(Videojuego *vj, ContratoSuscripcion susc, TipoMetodoPago m);
     map<int, Partida *> obtenerPartidasSinFinalizar();
     void finalizarPartida(int idPartida);
-    map<string, Videojuego *> obtenerVideojuegos();
+    map<std::string, Videojuego *> obtenerVideojuegos();
     void eliminarContratosDeVideojuego(Videojuego *vj);
     void eliminarPartidasDeVideojuego(Videojuego *vj);
     DataUsuario *getData();
     map<int, PartidaIndividual *> obtenerPartidasFinalizadas();
-    PartidaIndividual *obtenerPartida(string id);
+    PartidaIndividual *obtenerPartida(std::string id);
     bool tieneSuscripcionActiva(Videojuego *vj);
     ~Jugador();
 };

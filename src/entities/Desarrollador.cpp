@@ -10,56 +10,19 @@
 #include "../../headers/datatypes/DataVideojuego.h"
 #include "../../headers/utils/Fecha.h"
 
-using namespace std;
-
 Desarrollador::Desarrollador() {}
 
 Desarrollador::Desarrollador(std::string email, std::string password, std::string nombreEmpresa) : Usuario(email, password)
 {
-    this->= nickname;
+    this->nombreEmpresa = nombreEmpresa;
 }
 
-std::string Jugador::getNickname()
+std::string Desarrollador::getNombreEmpresa()
 {
-    return this->nickname;
+    return this->nombreEmpresa;
 }
-std::string Jugador::getDescripcion()
+
+map<std::string, Videojuego *> Desarrollador::getJuegosPublicados()
 {
-    return this->descripcion;
+    return this->publicados;
 }
-
-//Jugador::set<ContratoSuscripcion> obtenerSuscripciones(EstadoSuscripcion estado);
-
-void Jugador::cancelarSuscripcionActiva(Videojuego *vj)
-{
-}
-
-//void Jugador::contratarSuscripcion(Videojuego *vj, ContratoSuscripcion susc, TipoMetodoPago m);
-
-map<int, Partida *> Jugador::obtenerPartidasSinFinalizar()
-{
-    return map<int, Partida *>(); //retorna un map vacío
-}
-
-void Jugador::finalizarPartida(int idPartida)
-{
-}
-
-Jugador::~Jugador(){};
-
-public:
-//Constructores
-Jugador();
-Jugador(string nombre, string password, string nickname, string descripcion);
-//Getters
-string getNombre();
-string getPassword();
-string getNombreEmpresa();
-//Setters
-//Operaciones
-//set<ContratoSuscripcion> obtenerSuscripociones(EstadoSuscripcion estado);
-DataDesarrollador getData();
-void agregarVideojuegoPublicado(Videojuego *vj);
-~Usuario();
-}
-;

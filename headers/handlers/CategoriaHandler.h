@@ -22,18 +22,17 @@ private:
     CategoriaHandler();
 
 public:
-
     //op de singleton
-    static CategoriaHandler* getInstance();
+    static CategoriaHandler *getInstance();
 
     //ops del manejador
-    map<string, Categoria* > obtenerCategorias();
-    Categoria* obtenerCategoriaPorId(string nom);
-    Plataforma* obtenerPlataformaPorId(string plat);
-    Genero* obtenerGeneroPorId(string genero);
-    void agregarCategoria(Categoria* categoria);
-    void actualizarCategoria(Categoria* categoria);
-    void eliminarCategoria(Categoria* categoria);
+    map<string, Categoria *> obtenerCategorias();
+    Categoria *obtenerCategoriaPorId(string nom);
+    Plataforma *obtenerPlataformaPorId(string plat);
+    Genero *obtenerGeneroPorId(string genero);
+    void agregarCategoria(Categoria *categoria);
+    void actualizarCategoria(Categoria *categoria);
+    void eliminarCategoria(Categoria *categoria);
 
     ~CategoriaHandler();
 };
