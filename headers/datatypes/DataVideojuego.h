@@ -26,7 +26,7 @@ private:
 
 public:
     DataVideojuego();
-    DataVideojuego(string nombre, string descripcion, map<TipoPeriodoValidez, float> suscripciones, set<string> nombreCategorias);
+    DataVideojuego(string nombre, string descripcion, map<TipoPeriodoValidez, float> suscripciones, set<string> nombreCategorias, pair<float, int> rating);
     //Getters
     string getNombre() const;
     string getDescripcion() const;

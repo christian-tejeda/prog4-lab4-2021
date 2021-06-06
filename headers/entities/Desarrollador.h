@@ -16,21 +16,27 @@
 //#include "../entities/ContratoSuscripcion.h"
 //#include "../entities/Videojuego.h"
 
+//using namespace std;
+
 class Desarrollador : public Usuario
 {
 private:
+    std::string email;
+    std::string password;
     std::string nombreEmpresa;
-    map<std::string, Videojuego *> publicados;
+    set<Videojuego> *publicaciones;
 
 public:
     //Constructores
     Desarrollador();
     Desarrollador(std::string nombre, std::string password, std::string nombreEmpresa);
     //Getters
+    //std::string getNombre();
+    //std::string getPassword();
     std::string getNombreEmpresa();
-    map<std::string, Videojuego *> getJuegosPublicados();
     //Setters
     //Operaciones
+    //set<ContratoSuscripcion> obtenerSuscripociones(EstadoSuscripcion estado);
     DataUsuario *getData();
     void agregarVideojuegoPublicado(Videojuego *vj);
     ~Desarrollador();

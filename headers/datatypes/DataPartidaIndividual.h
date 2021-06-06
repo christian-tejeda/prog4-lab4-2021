@@ -19,13 +19,13 @@ private:
 
 public:
     DataPartidaIndividual();
-    DataPartidaIndividual(int id, DataVideojuego videojuego, /*DataFecha fechaInicio, DataFecha fechaFin,*/ float DuracionTotal, bool continuacion);
+    DataPartidaIndividual(int id, DataVideojuego videojuego, Fecha fechaInicio, Fecha fechaFin, float DuracionTotal, bool esContinuacion);
     //Getters
-    int getId() const;
-    DataVideojuego getVideojuego();
+    //int getId() const;
+    //DataVideojuego getVideojuego();
     //DataFecha getFechaInicio();
     //DataFecha getFechaFin();
-    float getDuracionTotal();
+    //float getDuracionTotal();
     bool getContinuacion();
     //Setters
 

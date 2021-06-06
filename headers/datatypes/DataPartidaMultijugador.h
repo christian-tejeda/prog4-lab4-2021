@@ -8,6 +8,7 @@
 
 #include "../utils/enums.h"
 #include "../datatypes/DataPartida.h"
+#include "../datatypes/DataJugador.h"
 #include "../datatypes/DataVideojuego.h"
 #include "../utils/Fecha.h"
 
@@ -17,21 +18,21 @@ class DataPartidaMultijugador : public DataPartida
 {
 private:
     bool trasmitida;
-    //DataJugador creador; //PREGUNTAR!
-    //Set<DataJugador> participantes;//PREGUNTAR!
+    DataJugador creador;            //PREGUNTAR!
+    set<DataJugador> participantes; //PREGUNTAR!
 
 public:
     DataPartidaMultijugador();
-    DataPartidaMultijugador(int id, DataVideojuego videojuego, Fecha fechaInicio, Fecha fechaFin, float DuracionTotal);
+    DataPartidaMultijugador(int id, DataVideojuego videojuego, Fecha fechaInicio, Fecha fechaFin, float DuracionTotal, bool esTrasmitida, DataJugador creador, set<DataJugador> participantes);
     //Getters
-    int getId();
-    DataVideojuego getVideojuego();
-    Fecha getFechaInicio();
-    Fecha getFechaFin();
-    float getDuracionTotal();
+    //int getId();
+    //DataVideojuego getVideojuego();
+    //Fecha getFechaInicio();
+    //Fecha getFechaFin();
+    //float getDuracionTotal();
     bool getTramistida();
-    //DataJugador getCreador();
-    //set<DataJugador> getParticipantes();
+    DataJugador getCreador();
+    set<DataJugador> getParticipantes();
 
     //Setters
 

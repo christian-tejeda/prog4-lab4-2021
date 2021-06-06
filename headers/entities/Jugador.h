@@ -23,20 +23,19 @@ private:
     std::string descripcion;
     //set<Jugador*> sigue;  NO HAY QUE IMPLEMENTARLO
     map<int, Partida *> partidasIniciadas;
-    //set<ContratoSuscripcion*> contratos;
+    //set<ContratoSuscripcion *> contratos;
 
 public:
     //Constructores
     Jugador();
-    Jugador(std::string nombre, std::string password, std::string nickname, std::string descripcion);
+    Jugador(std::string nombre, std::string password, std::string nickname, std::string descripcion /*,set<ContratoSuscripcion *> contratos*/);
     //Getters
-    //std::string getNombre();
-    //std::string getPassword();
+    //string getNombre();
+    //string getPassword();
     std::string getNickname();
     std::string getDescripcion();
     //Setters
     //Operaciones
-    //set<ContratoSuscripcion> obtenerSuscripciones(EstadoSuscripcion estado);
     void cancelarSuscripcionActiva(Videojuego *vj);
     //void contratarSuscripcion(Videojuego *vj, ContratoSuscripcion susc, TipoMetodoPago m);
     map<int, Partida *> obtenerPartidasSinFinalizar();
@@ -44,7 +43,7 @@ public:
     map<std::string, Videojuego *> obtenerVideojuegos();
     void eliminarContratosDeVideojuego(Videojuego *vj);
     void eliminarPartidasDeVideojuego(Videojuego *vj);
-    DataUsuario *getData();
+    DataUsuario getData();
     map<int, PartidaIndividual *> obtenerPartidasFinalizadas();
     PartidaIndividual *obtenerPartida(std::string id);
     bool tieneSuscripcionActiva(Videojuego *vj);

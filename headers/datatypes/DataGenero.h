@@ -11,14 +11,16 @@
 
 using namespace std;
 
-class DataGenero : public DataCategoria{
+class DataGenero : public DataCategoria
+{
 private:
     TipoGenero tipoGenero;
-public: 
+
+public:
     DataGenero();
-    DataGenero(TipoGenero tipoGenero);
+    DataGenero(string nombre, string descripcion, TipoGenero tipoGenero);
     //setTipoGenero(TipoGenero tipoGenero) const;
-    TipoGenero getTipoGenero() const;
+    TipoGenero getTipoGenero();
     ~DataGenero();
 };
 

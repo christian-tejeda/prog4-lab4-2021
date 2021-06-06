@@ -1,0 +1,48 @@
+
+#include <string>
+#include <map>
+#include <set>
+#include <utility>
+
+#include "../../headers/datatypes/DataPartida.h"
+
+#include "../../headers/datatypes/DataVideojuego.h"
+#include "../../headers/utils/enums.h"
+#include "../../headers/datatypes/DataVideojuego.h"
+#include "../../headers/utils/Fecha.h"
+
+using namespace std;
+
+DataPartida::DataPartida() {}
+
+DataPartida::DataPartida(int id, DataVideojuego videojuego, Fecha fechaInicio, Fecha fechaFin, float DuracionTotal)
+{
+    this->email = email;
+    this->password = password;
+}
+
+std::string DataUsuario::getEmail()
+{
+    return this->email;
+}
+std::string DataUsuario::getPassword()
+{
+    return this->password;
+}
+DataUsuario::~DataUsuario(){};
+
+public:
+DataPartida();
+DataPartida(int id, DataVideojuego videojuego, Fecha fechaInicio, Fecha fechaFin, float DuracionTotal);
+//Getters
+int getId();
+DataVideojuego getVideojuego();
+Fecha getFechaInicio();
+Fecha getFechaFin();
+float getDuracionTotal();
+//Setters
+
+//Destructor
+~DataPartida();
+}
+;
