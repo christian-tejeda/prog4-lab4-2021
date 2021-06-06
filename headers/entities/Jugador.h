@@ -16,8 +16,11 @@
 //#include "../entities/ContratoSuscripcion.h"
 #include "../entities/Videojuego.h"
 
+<<<<<<< HEAD
 //using namespace std;
 
+=======
+>>>>>>> 166a22804ed46be14747382f2ea63c5b2f0101e6
 class Jugador : public Usuario
 {
 private:
@@ -30,10 +33,17 @@ private:
 public:
     //Constructores
     Jugador();
+<<<<<<< HEAD
     Jugador(std::string nombre, std::string password, std::string nickname, std::string descripcion /*,set<ContratoSuscripcion *> contratos*/);
     //Getters
     //string getNombre();
     //string getPassword();
+=======
+    Jugador(std::string nombre, std::string password, std::string nickname, std::string descripcion);
+    //Getters
+    //std::string getNombre();
+    //std::string getPassword();
+>>>>>>> 166a22804ed46be14747382f2ea63c5b2f0101e6
     std::string getNickname();
     std::string getDescripcion();
     //Setters
