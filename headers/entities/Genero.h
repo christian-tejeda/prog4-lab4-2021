@@ -19,7 +19,7 @@ private:
 
 public:
     Genero();
-    void setTipoGenero(TipoGenero tipoGenero);
+    Genero(std::string nombre, std::string descripcion, TipoGenero tipoGenero);
     TipoGenero getTipoGenero();
     ~Genero();
 };

@@ -57,7 +57,7 @@ void Jugador::eliminarPartidasDeVideojuego(Videojuego *vj)
 {
 }
 
-DataUsuario *Jugador::getData()
+DataUsuario *Jugador::*getData()
 {
     return nullptr;
 }

@@ -8,11 +8,6 @@
 
 #include "../datatypes/DataUsuario.h"
 
-<<<<<<< HEAD
-//using namespace std;
-
-=======
->>>>>>> 166a22804ed46be14747382f2ea63c5b2f0101e6
 class Usuario
 {
 private:
