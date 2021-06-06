@@ -37,7 +37,7 @@ public:
     //Setters
     //Operaciones
     //set<ContratoSuscripcion> obtenerSuscripociones(EstadoSuscripcion estado);
-    DataUsuario *getData();
+    DataUsuario getData();
     void agregarVideojuegoPublicado(Videojuego *vj);
     ~Desarrollador();
 };
