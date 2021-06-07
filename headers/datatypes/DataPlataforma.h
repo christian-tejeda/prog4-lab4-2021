@@ -11,16 +11,17 @@
 
 using namespace std;
 
-class DataPlataforma : public DataCategoria{
+class DataPlataforma : public DataCategoria
+{
 private:
     TipoPlataforma tipoPlataforma;
-public: 
-    DataPlataforma();
-    DataPlataforma(TipoPlataforma tipoPlataforma);
-    //setTipoPlataforma(TipoPlataforma tipoPlataforma) const;
-    TipoPlataforma getTipoPlatforma() const;
-    ~DataPlataforma();
 
+public:
+    DataPlataforma();
+    DataPlataforma(string nombre, string descripcion, TipoPlataforma tipoPlataforma);
+    //setTipoPlataforma(TipoPlataforma tipoPlataforma) const;
+    TipoPlataforma getTipoPlataforma();
+    ~DataPlataforma();
 };
 
 #endif

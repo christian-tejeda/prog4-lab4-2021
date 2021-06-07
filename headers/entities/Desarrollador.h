@@ -10,31 +10,37 @@
 #include "../datatypes/DataUsuario.h"
 #include "../datatypes/DataDesarrollador.h"
 #include "../entities/Usuario.h"
-#include "../entities/Partida.h"
-#include "../entities/PartidaIndividual.h"
-#include "../entities/PartidaMultijugador.h"
-//#include "../entities/ContratoSuscripcion.h"
 #include "../entities/Videojuego.h"
+//#include "../entities/Individual.h"
+//#include "../entities/Multijugador.h"
+//#include "../entities/ContratoSuscripcion.h"
+//#include "../entities/Videojuego.h"
 
-using namespace std;
+//using namespace std;
 
 class Desarrollador : public Usuario
 {
 private:
-    string nombreEmpresa;
-    set<Videojuego *> juegosPublicados;
+    std::string email;
+    std::string password;
+    std::string nombreEmpresa;
+    set<Videojuego> *publicaciones;
 
 public:
     //Constructores
     Desarrollador();
-    Desarrollador(string nombre, string password, string nomEmpresa);
+    Desarrollador(std::string nombre, std::string password, std::string nombreEmpresa);
     //Getters
-    string getNombreEmpresa();
+    //std::string getNombre();
+    //std::string getPassword();
+    std::string getNombreEmpresa();
     //Setters
-    void setNombreEmpresa(string nomEmpresa);
+    void setEmail(std::string email);
+    void setPassword(std::string password);
+    void setNombreEmpresa(std::string nomEmpresa);
     //Operaciones
     //set<ContratoSuscripcion> obtenerSuscripociones(EstadoSuscripcion estado);
-    DataUsuario *getData();
+    DataUsuario getData();
     void agregarVideojuegoPublicado(Videojuego *vj);
     ~Desarrollador();
 };

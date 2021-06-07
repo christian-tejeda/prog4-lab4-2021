@@ -10,15 +10,16 @@
 #include "../datatypes/DataCategoria.h"
 #include "../entities/Categoria.h"
 
-
 using namespace std;
 
-class Plataforma : public Categoria{
+class Plataforma : public Categoria
+{
 private:
     TipoPlataforma tipoPlataforma;
+
 public:
     Plataforma();
-    void setTipoPlataforma(TipoPlataforma tipoPlataforma);
+    Plataforma(string nombre, string descripion, TipoPlataforma tipoPlataforma);
     TipoPlataforma getTipoPlataforma();
     ~Plataforma();
 };

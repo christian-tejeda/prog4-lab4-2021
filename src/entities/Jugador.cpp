@@ -10,8 +10,6 @@
 #include "../../headers/datatypes/DataVideojuego.h"
 #include "../../headers/utils/Fecha.h"
 
-using namespace std;
-
 Jugador::Jugador() {}
 
 Jugador::Jugador(std::string email, std::string password, std::string nickname, std::string descripcion) : Usuario(email, password)
@@ -27,6 +25,14 @@ std::string Jugador::getNickname()
 std::string Jugador::getDescripcion()
 {
     return this->descripcion;
+}
+
+void Jugador::setNickname(std::string nick) {
+    this->nickname = nick;
+}
+
+void Jugador::setDescripcion(std::string descripcion) {
+    this->descripcion = descripcion;
 }
 
 //Jugador::set<ContratoSuscripcion> obtenerSuscripciones(EstadoSuscripcion estado);
@@ -59,7 +65,7 @@ void Jugador::eliminarPartidasDeVideojuego(Videojuego *vj)
 {
 }
 
-DataUsuario *Jugador::getData()
+DataUsuario *Jugador::*getData()
 {
     return nullptr;
 }

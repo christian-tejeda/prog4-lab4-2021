@@ -8,19 +8,19 @@
 
 #include "../utils/enums.h"
 #include "../datatypes/DataCategoria.h"
-
-using namespace std;
-
-class Categoria{
+class Categoria
+{
 private:
-    string nombre;
-    string descripcion;
+    std::string nombre;
+    std::string descripcion;
+
 public:
     Categoria();
-    string getNombre();
-    string getDescripcion();
-    void setNombre(string nombre);
-    void setDescipcion(string descripcion);
+    Categoria(std::string nombre, std::string descripcion);
+    std::string getNombre();
+    std::string getDescripcion();
+    void setNombre(std::string nombre);
+    void setDescipcion(std::string descripcion);
     DataCategoria getData();
     ~Categoria();
 };

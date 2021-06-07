@@ -8,26 +8,24 @@
 
 #include "../datatypes/DataUsuario.h"
 
-using namespace std;
-
 class Usuario
 {
 private:
-    string email;
-    string password;
+    std::string email;
+    std::string password;
 
 public:
     //Constructores
     Usuario();
-    Usuario(string nombre, string password);
+    Usuario(std::string nombre, std::string password);
     //Getters
-    string getEmail();
-    string getPassword();
+    std::string getEmail();
+    std::string getPassword();
     //Setters
-    void setEmail(string email);
-    void setPassword(string pwd);
+    virtual void setEmail(std::string email);
+    virtual void setPassword(std::string password);
     //Operaciones
-    virtual DataUsuario *getData() = 0;
+    virtual DataUsuario getData() = 0;
 
     virtual ~Usuario(){};
 };

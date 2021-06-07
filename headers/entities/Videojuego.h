@@ -14,13 +14,11 @@
 #include "Jugador.h"
 #include "ContextoEstadistica.h"
 
-using namespace std;
-
 class Videojuego
 {
 private:
-    string nombre;
-    string descripcion;
+    std::string nombre;
+    std::string descripcion;
     map<TipoPeriodoValidez, float> suscripciones;
     //rating.first = promedio
     //rating.second = totalVotos
@@ -33,8 +31,8 @@ private:
 
 public:
     Videojuego();
-    Videojuego(string nombre,
-               string descripcion,
+    Videojuego(std::string nombre,
+               std::string descripcion,
                map<TipoPeriodoValidez, float> suscripciones,
                pair<float, int> rating,
                //set<ContratoSuscripcion*> contratos,
@@ -42,8 +40,8 @@ public:
                ContextoEstadistica *ctx);
 
     //Getters
-    string getNombre();
-    string getDescripcion();
+    std::string getNombre();
+    std::string getDescripcion();
     map<TipoPeriodoValidez, float> getSuscripciones();
     pair<float, int> getRating();
     // set<ContratoSuscripcion *> getContratos();
@@ -51,8 +49,8 @@ public:
     ContextoEstadistica *getContextoEstadistica();
 
     //Setters
-    void setNombre(string nombre);
-    void setDescripcion(string desc);
+    void setNombre(std::string nombre);
+    void setDescripcion(std::string desc);
     void setSuscripciones(TipoPeriodoValidez validez, float precio);
     void setRating(float prom, int cantVotos);
     // void setContrato(ContratoSuscripcion *);
