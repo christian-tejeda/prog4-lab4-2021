@@ -27,6 +27,14 @@ std::string Jugador::getDescripcion()
     return this->descripcion;
 }
 
+void Jugador::setNickname(std::string nick) {
+    this->nickname = nick;
+}
+
+void Jugador::setDescripcion(std::string descripcion) {
+    this->descripcion = descripcion;
+}
+
 //Jugador::set<ContratoSuscripcion> obtenerSuscripciones(EstadoSuscripcion estado);
 
 void Jugador::cancelarSuscripcionActiva(Videojuego *vj)

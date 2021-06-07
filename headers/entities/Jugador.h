@@ -35,6 +35,8 @@ public:
     std::string getNickname();
     std::string getDescripcion();
     //Setters
+    void setNickname(std::string nick);
+    void setDescripcion(std::string descripcion);
     //Operaciones
     void cancelarSuscripcionActiva(Videojuego *vj);
     //void contratarSuscripcion(Videojuego *vj, ContratoSuscripcion susc, TipoMetodoPago m);
