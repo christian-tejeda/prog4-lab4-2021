@@ -16,10 +16,11 @@ private:
     bool cancelada;
     Fecha fechaSuscripcion;
     TipoMetodoPago metodoPago;
+    string nombreJugador;
 
 public:
     DataContratoSuscripcion();
-    DataContratoSuscripcion(bool activa, string nombreVideojuego, float precio, TipoPeriodoValidez periodoValidez, bool cancelada, Fecha fecha, TipoMetodoPago metodoPago);
+    DataContratoSuscripcion(bool activa, string nombreVideojuego,string nombreJugador, float precio, TipoPeriodoValidez periodoValidez, bool cancelada, Fecha fecha, TipoMetodoPago metodoPago);
 
     //Getters
     bool getActiva() const;
@@ -29,6 +30,7 @@ public:
     bool getCancelada() const;
     Fecha getFechaSuscripcion() const;
     TipoMetodoPago getMetodoPago() const;
+    string getNombreJugador() const;
 
     ~DataContratoSuscripcion();
 };
