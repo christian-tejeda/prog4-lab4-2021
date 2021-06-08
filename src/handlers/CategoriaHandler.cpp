@@ -17,17 +17,34 @@ CategoriaHandler::CategoriaHandler() {}
 
 CategoriaHandler *CategoriaHandler::getInstance() {}
 
-map<std::string, Categoria *> CategoriaHandler::obtenerCategorias() {}
+map<std::string, Categoria *> CategoriaHandler::obtenerCategorias()
+{
+    map<std::string, Categoria *> res;
+    return res;
+}
 
-Categoria *CategoriaHandler::obtenerCategoriaPorId(std::string nom) {}
+Categoria *CategoriaHandler::obtenerCategoriaPorId(std::string nom)
+{
+    return nullptr;
+}
 
-Plataforma *CategoriaHandler::obtenerPlataformaPorId(std::string plat) {}
+Plataforma *CategoriaHandler::obtenerPlataformaPorId(std::string plat)
+{
+    return nullptr;
+}
 
-Genero *CategoriaHandler::obtenerGeneroPorId(std::string genero) {}
+Genero *CategoriaHandler::obtenerGeneroPorId(std::string genero)
+{
+    return nullptr;
+}
 
-void CategoriaHandler::agregarCategoria(Categoria *categoria) {}
+void CategoriaHandler::agregarCategoria(Categoria *categoria)
+{
+}
 
-void CategoriaHandler::actualizarCategoria(Categoria *categoria) {}
+void CategoriaHandler::actualizarCategoria(Categoria *categoria)
+{
+}
 
 void CategoriaHandler::eliminarCategoria(Categoria *categoria) {}
 
