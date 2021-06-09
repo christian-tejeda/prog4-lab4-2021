@@ -2,24 +2,53 @@
 
 #include <string>
 
-ContratoSuscripcion::ContratoSuscripcion(){}
-ContratoSuscripcion::ContratoSuscripcion(Jugador *jg,Videojuego *vj,TipoMetodoPago metodoDePago,TipoPeriodoValidez validez){}
+ContratoSuscripcion::ContratoSuscripcion() {}
+ContratoSuscripcion::ContratoSuscripcion(Jugador *jg, Videojuego *vj, TipoMetodoPago metodoDePago, TipoPeriodoValidez validez)
+{
+    this->jugador = jg;
+    this->videojuego = vj;
+    this->metodoDePago = metodoDePago;
+    this->periodoValidez = validez;
+}
 
-ContratoSuscripcion ContratoSuscripcion::getContratoSuscripcion(){}
-Jugador* ContratoSuscripcion::getJugador(){}
-Videojuego* ContratoSuscripcion::getVideojuego(){}
-bool ContratoSuscripcion::getFueCancelada(){}
-Fecha ContratoSuscripcion::getFecha(){}
-TipoPeriodoValidez ContratoSuscripcion::getValidez(){}
-TipoMetodoPago ContratoSuscripcion::getMetodoDePago(){}
+Jugador *ContratoSuscripcion::getJugador()
+{
+    this->jugador;
+}
+Videojuego *ContratoSuscripcion::getVideojuego()
+{
+    this->videojuego;
+}
+bool ContratoSuscripcion::getFueCancelada()
+{
+    this->fueCancelada;
+}
+Fecha ContratoSuscripcion::getFecha()
+{
+    this->fechaSuscripcion;
+}
+TipoPeriodoValidez ContratoSuscripcion::getValidez()
+{
+    this->periodoValidez;
+}
+TipoMetodoPago ContratoSuscripcion::getMetodoDePago()
+{
+    this->metodoDePago;
+}
 
-void ContratoSuscripcion::setVideojuego(Videojuego* vj){}
-void ContratoSuscripcion::setJugador(Jugador *jg){}
-void ContratoSuscripcion::setFecha(Fecha &fe){}
-void ContratoSuscripcion::setActivo(bool activo){}
-void ContratoSuscripcion::setFueCancelada(bool fueCancelada){}
-void ContratoSuscripcion::setMetodoDePago(TipoMetodoPago metodoDePago){}
-void ContratoSuscripcion::setPeriodoDeValidez(TipoPeriodoValidez periodoValidez){}
-void ContratoSuscripcion::cancelar(){}
-bool ContratoSuscripcion::perteneceAVideojuego(Videojuego* vj){}
-bool ContratoSuscripcion::esActivo(){}
+void ContratoSuscripcion::setVideojuego(Videojuego *vj) {}
+void ContratoSuscripcion::setJugador(Jugador *jg) {}
+void ContratoSuscripcion::setFecha(Fecha &fe) {}
+void ContratoSuscripcion::setActivo(bool activo) {}
+void ContratoSuscripcion::setFueCancelada(bool fueCancelada) {}
+void ContratoSuscripcion::setMetodoDePago(TipoMetodoPago metodoDePago) {}
+void ContratoSuscripcion::setPeriodoDeValidez(TipoPeriodoValidez periodoValidez) {}
+void ContratoSuscripcion::cancelar() {}
+bool ContratoSuscripcion::perteneceAVideojuego(Videojuego *vj)
+{
+    return false;
+}
+bool ContratoSuscripcion::esActivo()
+{
+    return false;
+}

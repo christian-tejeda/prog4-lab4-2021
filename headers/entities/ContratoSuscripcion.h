@@ -6,28 +6,30 @@
 #include "../entities/Videojuego.h"
 #include "../utils/enums.h"
 
-class ContratoSuscripcion{
+class ContratoSuscripcion
+{
 private:
-    Jugador  *contratista;
+    Jugador *jugador;
     TipoMetodoPago metodoDePago;
     TipoPeriodoValidez periodoValidez;
     Videojuego *videojuego;
     Fecha fechaSuscripcion;
     bool activa;
     bool fueCancelada;
+
 public:
     ContratoSuscripcion();
-    ContratoSuscripcion(Jugador *jg,Videojuego *vj,TipoMetodoPago metodoDePago,TipoPeriodoValidez validez);
+    ContratoSuscripcion(Jugador *jg, Videojuego *vj, TipoMetodoPago metodoDePago, TipoPeriodoValidez validez);
     //getters
     ContratoSuscripcion getContratoSuscripcion();
-    Jugador* getJugador();
-    Videojuego* getVideojuego();
+    Jugador *getJugador();
+    Videojuego *getVideojuego();
     bool getFueCancelada();
     Fecha getFecha();
     TipoPeriodoValidez getValidez();
     TipoMetodoPago getMetodoDePago();
     //setters
-    void setVideojuego(Videojuego* vj);
+    void setVideojuego(Videojuego *vj);
     void setJugador(Jugador *jg);
     void setFecha(Fecha &fe);
     void setActivo(bool activo);
@@ -36,10 +38,8 @@ public:
     void setPeriodoDeValidez(TipoPeriodoValidez periodoValidez);
     //ops
     void cancelar();
-    bool perteneceAVideojuego(Videojuego* vj);
+    bool perteneceAVideojuego(Videojuego *vj);
     bool esActivo();
 };
-
-
 
 #endif
