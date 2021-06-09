@@ -19,7 +19,7 @@ DataVideojuego::DataVideojuego(string nombre, string descripcion, map<TipoPeriod
     this->nombre = nombre;
     this->descripcion = descripcion;
     this->suscripciones = suscripciones;
-    this->nombreCategorias = nombreCategorias;
+    this->categorias = nombreCategorias;
     this->rating = rating;
 }
 //Getters
@@ -37,7 +37,7 @@ map<TipoPeriodoValidez, float> DataVideojuego::getSuscripciones() const
 }
 set<string> DataVideojuego::getNombreCategorias()
 {
-    return this->nombreCategorias;
+    return this->categorias;
 }
 //Los métodos addCategoria(cat), addPlataforma(plataforma), addGenero(genero) equivalen a aplicarle el metodo insert al set
 string DataVideojuego::getNombreEmpresa()

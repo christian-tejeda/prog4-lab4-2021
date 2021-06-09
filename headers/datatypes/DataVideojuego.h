@@ -17,7 +17,7 @@ private:
     string nombre;
     string descripcion;
     map<TipoPeriodoValidez, float> suscripciones; // Datatype Suscripcion
-    set<Categoria *> categorias;
+    set<string> categorias;
     string nombreEmpresa;
 
     //Posible implementacion del datatype Rating
@@ -32,7 +32,7 @@ public:
     string getNombre() const;
     string getDescripcion() const;
     map<TipoPeriodoValidez, float> getSuscripciones() const;
-    set<Categoria *> getNombreCategorias();
+    set<string> getNombreCategorias();
     //Los métodos addCategoria(cat), addPlataforma(plataforma), addGenero(genero) equivalen a aplicarle el metodo insert al set
     string getNombreEmgetNombreCategoriaspresa();
     pair<float, int> getRating();
