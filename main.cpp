@@ -1,5 +1,6 @@
 #include "headers/FactoryController.h"
 #include "headers/entities/Usuario.h"
+#include "headers/utils/Fecha.h"
 
 #include <iostream>
 #include <stdexcept>
@@ -127,19 +128,19 @@ int main(int argc, char const *argv[])
 
         switch (prompt)
         {
-        case 1:
+        case 1: //Alta de usuario
             /* code */
             break;
-        case 2:
+        case 2: //Iniciar sesión
             /* code */
             break;
-        case 3:
+        case 3: //Modificar fecha del sistema
             /* code */
             break;
-        case 4:
+        case 4: //Cargar datos de prueba
             /* code */
             break;
-        case 5:
+        case 5: //Salir Inicial
             /* code */
             break;
 
@@ -157,25 +158,25 @@ int main(int argc, char const *argv[])
 
             switch (prompt)
             {
-            case 1:
+            case 1: //Suscribirse a videojuego
                 /* code */
                 break;
-            case 2:
+            case 2: //Asignar puntaje a videojuego
                 /* code */
                 break;
-            case 3:
+            case 3: //Iniciar partida
                 /* code */
                 break;
-            case 4:
+            case 4: //Abandonar partida multijugador
                 /* code */
                 break;
-            case 5:
+            case 5: //Finalizar partida
                 /* code */
                 break;
-            case 6:
+            case 6: //Ver información de videojuego
                 /* code */
                 break;
-            case 7:
+            case 7: // Salir Jugador
                 /* code */
                 break;
 
@@ -194,25 +195,25 @@ int main(int argc, char const *argv[])
 
             switch (prompt)
             {
-            case 1:
+            case 1: // Agregar categoría
                 /* code */
                 break;
-            case 2:
+            case 2: //Publicar videojuego
                 /* code */
                 break;
-            case 3:
+            case 3: //Eliminar videojuego
                 /* code */
                 break;
-            case 4:
+            case 4: //Seleccionar estadísticas
                 /* code */
                 break;
-            case 5:
+            case 5: //Consultar estadísticas
                 /* code */
                 break;
-            case 6:
+            case 6: //Ver información de videojuego
                 /* code */
                 break;
-            case 7:
+            case 7: //Salir Dev
                 /* code */
                 break;
 
