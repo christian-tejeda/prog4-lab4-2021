@@ -27,11 +27,13 @@ std::string Jugador::getDescripcion()
     return this->descripcion;
 }
 
-void Jugador::setNickname(std::string nick) {
+void Jugador::setNickname(std::string nick)
+{
     this->nickname = nick;
 }
 
-void Jugador::setDescripcion(std::string descripcion) {
+void Jugador::setDescripcion(std::string descripcion)
+{
     this->descripcion = descripcion;
 }
 

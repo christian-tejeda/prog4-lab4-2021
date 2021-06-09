@@ -6,15 +6,17 @@
 
 class PartidaIndividual : public Partida
 {
-
-    PartidaIndividual();
-
-    PartidaIndividual(DataPartidaIndividual dataPartidaIndividual);
-
-    PartidaIndividual(int id, Fecha fechaInicio, Fecha fechaFin, float duracionTotal);
+private:
+    PartidaIndividual *continua;
 
 public:
-    void finalizar();
+    PartidaIndividual();
+
+    //data partida ind no cumple requerimientos PartidaIndividual(DataPartidaIndividual dataPartidaIndividual);
+
+    PartidaIndividual(int id, Fecha fechaInicio, Fecha fechaFin, float duracionTotal, Videojuego *vj, set<Jugador *> jugadores, PartidaIndividual *cont);
+
+    void finalizar(Fecha f);
     void eliminarPartidasVideojuego(Videojuego videojuego);
 
     DataPartida getData();

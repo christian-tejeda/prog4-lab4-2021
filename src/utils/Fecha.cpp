@@ -2,12 +2,11 @@
 #include <iomanip>
 #include "../../headers/utils/Fecha.h"
 
-
 #include <iostream>
 
 Fecha::Fecha(){};
 
-Fecha::Fecha(const DtFechaHora &fecha)
+Fecha::Fecha(const Fecha &fecha)
 {
     this->anio = fecha.anio;
     this->mes = fecha.mes;
@@ -40,7 +39,7 @@ bool Fecha::operator==(Fecha opFecha)
     return dia == opFecha.dia && mes == opFecha.mes && anio == opFecha.anio && hora == opFecha.hora && minuto == opFecha.minuto;
 };
 
-std::ostream &operator<<(std::ostream &os, const Fecha &f)
+std::ostream &operator<<(std::ostream &os, Fecha &f)
 {
     os << std::setfill('0') << std::setw(2) << f.getDia() << '/'
        << std::setfill('0') << std::setw(2) << f.getMes() << '/'

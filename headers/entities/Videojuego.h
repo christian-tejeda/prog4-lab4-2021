@@ -13,6 +13,7 @@
 #include "Genero.h"
 #include "Jugador.h"
 #include "ContextoEstadistica.h"
+#include "ContratoSuscripcion.h"
 
 class Videojuego
 {
@@ -25,7 +26,7 @@ private:
     pair<float, int> rating;
 
     //pseudoatributos
-    //set<ContratoSuscripcion*> contratos;
+    set<ContratoSuscripcion *> contratos;
     set<Categoria *> categorias;
     ContextoEstadistica *ctx;
 
@@ -35,7 +36,7 @@ public:
                std::string descripcion,
                map<TipoPeriodoValidez, float> suscripciones,
                pair<float, int> rating,
-               //set<ContratoSuscripcion*> contratos,
+               set<ContratoSuscripcion *> contratos,
                set<Categoria *> categorias,
                ContextoEstadistica *ctx);
 
@@ -47,6 +48,7 @@ public:
     // set<ContratoSuscripcion *> getContratos();
     set<Categoria *> getCategorias();
     ContextoEstadistica *getContextoEstadistica();
+    map<TipoPeriodoValidez, float> getPeriodoValidez();
 
     //Setters
     void setNombre(std::string nombre);

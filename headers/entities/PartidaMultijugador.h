@@ -3,21 +3,23 @@
 
 #include "Partida.h"
 #include "../datatypes/DataPartidaMultijugador.h"
+#include "../entities/DuracionParticipante.h"
 
 class PartidaMultijugador : public Partida
 {
-
-    PartidaMultijugador();
-
-    PartidaMultijugador(DataPartidaMultijugador dataPartidaMultijugador);
-
-    PartidaMultijugador(int id, Fecha fechaInicio, Fecha fechaFin, float duracionTotal);
-
 private:
     bool transmitidaEnVivo;
+    set<DuracionParticipante> durpart;
 
 public:
+    PartidaMultijugador();
+
+    //no cumple req datapartidamultijugador PartidaMultijugador(DataPartidaMultijugador dataPartidaMultijugador);
+
+    PartidaMultijugador(int id, Fecha fechaInicio, Fecha fechaFin, float duracionTotal, Videojuego *vj, set<Jugador *> jugadores, bool trasmitida, set<DuracionParticipante> durpart);
+
     bool getTransmitidaEnVivo();
+    set<DuracionParticipante> getDuracionParticipantes();
 
     void setTransmitidaEnVivo(bool enVivo);
 

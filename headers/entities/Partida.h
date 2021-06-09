@@ -2,28 +2,29 @@
 #define PARTIDA_H
 
 #include "../utils/Fecha.h"
+#include "../entities/Videojuego.h"
+#include "../entities/Jugador.h"
 
 class Partida
 {
-
-    Partida::Partida();
-
-    Partida::Partida(DataPartida dataPartida);
-
-    Partida::Partida(int id, Fecha fechaInicio, Fecha fechaFin, float duracionTotal);
 
 private:
     int id;
     Fecha fechaInicio;
     Fecha fechaFin;
     float duracionTotal;
+    Videojuego *videojuego;
+    set<Jugador *> jugadores;
 
 public:
+    Partida();
+    // DATA PARTIDA NO TIENE LOS REQUERIMIENTOS NECESARIOS PARA COONSTUIR LE FALTAN INSTANCIA A VIDEOJUEGO Y A JUGADORESPartida(DataPartida dataPartida);
+    Partida(int id, Fecha fechaInicio, Fecha fechaFin, float duracionTotal, Videojuego *vj, set<Jugador *> jugadores);
     int getId();
     Fecha getFechaInicio();
     Fecha getFechaFin();
     float getDuracionTotal();
-    Videojuego getVideojuego();
+    Videojuego *getVideojuego();
 
     void setId(int id);
     void setFechaInicio(Fecha fechaInicio);
