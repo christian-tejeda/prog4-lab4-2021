@@ -11,35 +11,44 @@
 
 using namespace std;
 
-UsuarioHandler::UsuarioHandler(){}
-UsuarioHandler * UsuarioHandler::getInstance(){
+UsuarioHandler::UsuarioHandler() {}
+UsuarioHandler *UsuarioHandler::getInstance()
+{
     return nullptr;
 }
-bool UsuarioHandler::existeJugadorConNickname(string n){
+bool UsuarioHandler::existeJugadorConNickname(string n)
+{
     return false;
 }
-void UsuarioHandler::agregarUsuario(Usuario *usuario){
+void UsuarioHandler::agregarUsuario(Usuario *usuario)
+{
 }
-map<string, Usuario *> UsuarioHandler::obtenerJugadoresConSuscripcionActiva(Videojuego *vj){
+map<string, Usuario *> UsuarioHandler::obtenerJugadoresConSuscripcionActiva(Videojuego *vj)
+{
+    return map<string, Usuario *>();
+}
+Jugador *UsuarioHandler::obtenerJugadorPorNickname(string n)
+{
     return nullptr;
 }
-Jugador *UsuarioHandler::obtenerJugadorPorNickname(string n) {
-    return nullptr;
-}
-bool UsuarioHandler::tienePartidaSinFinalizar(Videojuego *vj){
+bool UsuarioHandler::tienePartidaSinFinalizar(Videojuego *vj)
+{
     return false;
 }
-map<string, Usuario *> UsuarioHandler::obtenerUsuarios(){
+map<string, Usuario *> UsuarioHandler::obtenerUsuarios()
+{
+    return map<string, Usuario *>();
+}
+void UsuarioHandler::actualizarUsuario(Usuario *usuario)
+{
+}
+Partida *UsuarioHandler::obtenerPartidaPorId(int idPartida)
+{
     return nullptr;
+    ;
 }
-void UsuarioHandler::actualizarUsuario(Usuario *usuario){
-    
-}
-Partida *UsuarioHandler::obtenerPartidaPorId(int idPartida){
-    return nullptr;;
-}
-void UsuarioHandler::eliminarUsuario(Usuario *usuario){
-
+void UsuarioHandler::eliminarUsuario(Usuario *usuario)
+{
 }
 
-UsuarioHandler::~UsuarioHandler(){}
+UsuarioHandler::~UsuarioHandler() {}

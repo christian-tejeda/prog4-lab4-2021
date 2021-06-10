@@ -14,7 +14,7 @@ using namespace std;
 DataVideojuego::DataVideojuego()
 {
 }
-DataVideojuego::DataVideojuego(string nombre, string descripcion, map<TipoPeriodoValidez, float> suscripciones, set<Categorias *> nombreCategorias, pair<float, int> rating)
+DataVideojuego::DataVideojuego(string nombre, string descripcion, map<TipoPeriodoValidez, float> suscripciones, set<string> nombreCategorias, pair<float, int> rating)
 {
     this->nombre = nombre;
     this->descripcion = descripcion;

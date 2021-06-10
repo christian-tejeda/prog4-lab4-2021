@@ -27,7 +27,7 @@ public:
     void finalizar();
     void eliminarPartidasVideojuego(Videojuego videojuego);
 
-    DataPartida getData();
+    DataPartida *getData();
 
     ~PartidaMultijugador();
 };

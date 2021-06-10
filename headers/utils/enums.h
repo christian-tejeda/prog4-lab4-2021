@@ -6,13 +6,13 @@ enum EstadoSuscripcion
     activa,
     inactiva,
     cualquiera
-}
+};
 
 enum TipoMetodoPago
 {
     tarjeta,
     paypal
-}
+};
 
 enum TipoPeriodoValidez
 {
@@ -20,7 +20,7 @@ enum TipoPeriodoValidez
     trimestral,
     anual,
     vitalicia
-}
+};
 
 enum TipoGenero
 {
@@ -28,23 +28,23 @@ enum TipoGenero
     aventura,
     estrategia,
     deporte
-}
+};
 
 enum TipoPlataforma
 {
     pc,
-    switch,
+    nintendo_switch,
     ps4,
     xboxone,
     ps5,
     xboxx
-}
+};
 
 enum TipoEstadistica
 {
     horasJugadas,
     promedioRating,
     cantidadSuscritos
-}
+};
 
 #endif

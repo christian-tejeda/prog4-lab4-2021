@@ -13,7 +13,7 @@
 #include "../entities/Partida.h"
 #include "../entities/PartidaIndividual.h"
 #include "../entities/PartidaMultijugador.h"
-//#include "../entities/ContratoSuscripcion.h"
+#include "../entities/ContratoSuscripcion.h"
 #include "../entities/Videojuego.h"
 
 class Jugador : public Usuario
@@ -28,7 +28,7 @@ private:
 public:
     //Constructores
     Jugador();
-    Jugador(std::string nombre, std::string password, std::string nickname, std::string descripcion /*,set<ContratoSuscripcion *> contratos*/);
+    Jugador(std::string nombre, std::string password, std::string nickname, std::string descripcion, set<ContratoSuscripcion *> contratos);
     //Getters
     //string getNombre();
     //string getPassword();
@@ -39,7 +39,7 @@ public:
     void setDescripcion(std::string descripcion);
     //Operaciones
     void cancelarSuscripcionActiva(Videojuego *vj);
-    //void contratarSuscripcion(Videojuego *vj, ContratoSuscripcion susc, TipoMetodoPago m);
+    void contratarSuscripcion(Videojuego *vj, ContratoSuscripcion susc, TipoMetodoPago m);
     map<int, Partida *> obtenerPartidasSinFinalizar();
     void finalizarPartida(int idPartida);
     map<std::string, Videojuego *> obtenerVideojuegos();

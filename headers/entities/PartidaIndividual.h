@@ -1,7 +1,7 @@
 #ifndef PARTIDA_INDIVIDUAL_H
 #define PARTIDA_INDIVIDUAL_H
 
-#include "./Partida.h"
+#include "Partida.h"
 #include "../datatypes/DataPartidaIndividual.h"
 
 class PartidaIndividual : public Partida
@@ -19,7 +19,7 @@ public:
     void finalizar(Fecha f);
     void eliminarPartidasVideojuego(Videojuego videojuego);
 
-    DataPartida getData();
+    DataPartida *getData();
 
     ~PartidaIndividual();
 };

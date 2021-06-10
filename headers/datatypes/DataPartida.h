@@ -9,7 +9,7 @@
 #include "../utils/enums.h"
 #include "../datatypes/DataVideojuego.h"
 #include "../utils/Fecha.h"
-#include "../entities/Videojuego.h"
+//#include "../entities/Videojuego.h"
 
 using namespace std;
 

@@ -4,6 +4,11 @@
 #include "../utils/Fecha.h"
 #include "../entities/Videojuego.h"
 #include "../entities/Jugador.h"
+#include "../datatypes/DataPartida.h"
+
+class Videojuego;  //forward declaration
+class Jugador;     //forward declaration
+class DataPartida; //forward declaration
 
 class Partida
 {
@@ -37,7 +42,7 @@ public:
     virtual void finalizar() = 0;
     virtual void eliminarPartidasVideojuego(Videojuego videojuego) = 0;
 
-    virtual DataPartida getData() = 0;
+    virtual DataPartida *getData() = 0;
 
     ~Partida();
 };

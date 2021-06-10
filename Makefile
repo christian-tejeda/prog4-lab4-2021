@@ -57,6 +57,7 @@ main: PartidaController.o
 	  VideojuegoHandler.o
 	  Fecha.o
 	  FactoryController.o
+	  main.o
 	g++ obj/PartidaController.o 
 		obj/UsuarioController.o 
 		obj/VideojuegoController.o 
@@ -89,7 +90,8 @@ main: PartidaController.o
 		obj/UsuarioHandler.o
 		obj/VideojuegoHandler.o
 		obj/Fecha.o
-		obj/FactoryController.o -o main
+		obj/FactoryController.o
+		obj/main.o -o main
 
 #------------- Objects ------------------
 
@@ -99,98 +101,98 @@ main.o: main.cpp
 PartidaController.o: $(CPP_CONTROLLERS)/PartidaController.cpp $(H_CONTROLLERS)/PartidaController.h
 	$(GCC) $(CPP_CONTROLLERS)/PartidaController.cpp -o obj/PartidaController.o
 
-UsuarioController.o: $(CPP_CONTROLLERS) $(H_CONTROLLERS)
-	$(GCC) $(CPP_CONTROLLERS) -o obj/UsuarioController.o
+UsuarioController.o: $(CPP_CONTROLLERS)/UsuarioController.cpp $(H_CONTROLLERS)/UsuarioController.h
+	$(GCC) $(CPP_CONTROLLERS)/UsuarioController.cpp -o obj/UsuarioController.o
 
-VideojuegoController.o: $(CPP_CONTROLLERS) $(H_CONTROLLERS)
-	$(GCC) $(CPP_CONTROLLERS) -o obj/VideojuegoController.o
+VideojuegoController.o: $(CPP_CONTROLLERS)/VideojuegoController.cpp $(H_CONTROLLERS)/VideojuegoController.h
+	$(GCC) $(CPP_CONTROLLERS)/VideojuegoController.cpp -o obj/VideojuegoController.o
 
-DataCategoria.o: $(CPP_DATATYPES) $(H_DATATYPES)
-	$(GCC) $(CPP_DATATYPES) -o obj/DataCategoria.o
+DataCategoria.o: $(CPP_DATATYPES)/DataCategoria.cpp $(H_DATATYPES)/DataCategoria.h
+	$(GCC) $(CPP_DATATYPES)/DataCategoria.cpp -o obj/DataCategoria.o
 
-DataContratoSuscripcion.o: $(CPP_DATATYPES) $(H_DATATYPES)
-	$(GCC) $(CPP_DATATYPES) -o obj/DataContratoSuscripcion.o
+DataContratoSuscripcion.o: $(CPP_DATATYPES)/DataContratoSuscripcion.cpp $(H_DATATYPES)/DataContratoSuscripcion.h
+	$(GCC) $(CPP_DATATYPES)/DataContratoSuscripcion.cpp -o obj/DataContratoSuscripcion.o
 
-DataDesarrollador.o: $(CPP_DATATYPES) $(H_DATATYPES)
-	$(GCC) $(CPP_DATATYPES) -o obj/DataDesarrollador.o
+DataDesarrollador.o: $(CPP_DATATYPES)/DataDesarrollador.cpp $(H_DATATYPES)/DataDesarrollador.h
+	$(GCC) $(CPP_DATATYPES)/DataDesarrollador.cpp -o obj/DataDesarrollador.o
 
-DataEstadistica.o: $(CPP_DATATYPES) $(H_DATATYPES)
-	$(GCC) $(CPP_DATATYPES) -o obj/DataEstadistica.o
+DataEstadistica.o: $(CPP_DATATYPES)/DataEstadistica.cpp $(H_DATATYPES)/DataEstadistica.h
+	$(GCC) $(CPP_DATATYPES)/DataEstadistica.cpp -o obj/DataEstadistica.o
 
-DataGenero.o: $(CPP_DATATYPES) $(H_DATATYPES)
-	$(GCC) $(CPP_DATATYPES) -o obj/DataGenero.o
+DataGenero.o: $(CPP_DATATYPES)/DataGenero.cpp $(H_DATATYPES)/DataGenero.h
+	$(GCC) $(CPP_DATATYPES)/DataGenero.cpp -o obj/DataGenero.o
 
-DataJugador.o: $(CPP_DATATYPES) $(H_DATATYPES)
-	$(GCC) $(CPP_DATATYPES) -o obj/DataJugador.o
+DataJugador.o: $(CPP_DATATYPES)/DataJugador.cpp $(H_DATATYPES)/DataJugador.h
+	$(GCC) $(CPP_DATATYPES)/DataJugador.cpp -o obj/DataJugador.o
 
-DataPartida.o: $(CPP_DATATYPES) $(H_DATATYPES)
-	$(GCC) $(CPP_DATATYPES) -o obj/DataPartida.o
+DataPartida.o: $(CPP_DATATYPES)/DataPartida.cpp $(H_DATATYPES)/DataPartida.h
+	$(GCC) $(CPP_DATATYPES)/DataPartida.cpp -o obj/DataPartida.o
 
-DataPartidaIndividual.o: $(CPP_DATATYPES) $(H_DATATYPES)
-	$(GCC) $(CPP_DATATYPES) -o obj/DataPartidaIndividual.o
+DataPartidaIndividual.o: $(CPP_DATATYPES)/DataPartida.cpp $(H_DATATYPES)/DataPartida.h
+	$(GCC) $(CPP_DATATYPES)/DataPartida.cpp -o obj/DataPartidaIndividual.o
 
-DataPartidaMultijugador.o: $(CPP_DATATYPES) $(H_DATATYPES)
-	$(GCC) $(CPP_DATATYPES) -o obj/DataPartidaMultijugador.o
+DataPartidaMultijugador.o: $(CPP_DATATYPES)/DataPartidaMultijugador.cpp $(H_DATATYPES)/DataPartidaMultijugador.h
+	$(GCC) $(CPP_DATATYPES)/DataPartidaMultijugador.cpp -o obj/DataPartidaMultijugador.o
 
-DataPlataforma.o: $(CPP_DATATYPES) $(H_DATATYPES)
-	$(GCC) $(CPP_DATATYPES) -o obj/DataPlataforma.o
+DataPlataforma.o: $(CPP_DATATYPES)/DataPlataforma.cpp $(H_DATATYPES)/DataPlataforma.h
+	$(GCC) $(CPP_DATATYPES)/DataPlataforma.cpp -o obj/DataPlataforma.o
 
-DataUsuario.o: $(CPP_DATATYPES) $(H_DATATYPES)
-	$(GCC) $(CPP_DATATYPES) -o obj/DataUsuario.o
+DataUsuario.o: $(CPP_DATATYPES)/DataUsuario.cpp $(H_DATATYPES)/DataUsuario.h
+	$(GCC) $(CPP_DATATYPES)/DataUsuario.cpp -o obj/DataUsuario.o
 
-DataVideojuego.o: $(CPP_DATATYPES) $(H_DATATYPES)
-	$(GCC) $(CPP_DATATYPES) -o obj/DataVideojuego.o
+DataVideojuego.o: $(CPP_DATATYPES)/DataVideojuego.cpp $(H_DATATYPES)/DataVideojuego.h
+	$(GCC) $(CPP_DATATYPES)/DataVideojuego.cpp -o obj/DataVideojuego.o
 
-Categoria.o: $(CPP_ENTITIES) $(H_ENTITIES)
-	$(GCC) $(CPP_ENTITIES) -o obj/Categoria.o
+Categoria.o: $(CPP_ENTITIES)/Categoria.cpp $(H_ENTITIES)/Categoria.h
+	$(GCC) $(CPP_ENTITIES)/Categoria.cpp -o obj/Categoria.o
 
-ContextoEstadistica.o: $(CPP_ENTITIES) $(H_ENTITIES)
-	$(GCC) $(CPP_ENTITIES) -o obj/ContextoEstadistica.o
+ContextoEstadistica.o: $(CPP_ENTITIES)/ContextoEstadistica.cpp $(H_ENTITIES)/ContextoEstadistica.h
+	$(GCC) $(CPP_ENTITIES)/ContextoEstadistica.cpp -o obj/ContextoEstadistica.o
 
-ContratoSuscripcion.o: $(CPP_ENTITIES) $(H_ENTITIES)
-	$(GCC) $(CPP_ENTITIES) -o obj/ContratoSuscripcion.o
+ContratoSuscripcion.o: $(CPP_ENTITIES)/ContratoSuscripcion.cpp $(H_ENTITIES)/ContratoSuscripcion.h
+	$(GCC) $(CPP_ENTITIES)/ContratoSuscripcion.cpp -o obj/ContratoSuscripcion.o
 
-Desarrollador.o: $(CPP_ENTITIES) $(H_ENTITIES)
-	$(GCC) $(CPP_ENTITIES) -o obj/Desarrollador.o
+Desarrollador.o: $(CPP_ENTITIES)/Desarrollador.cpp $(H_ENTITIES)/Desarrollador.h
+	$(GCC) $(CPP_ENTITIES)/Desarrollador.cpp -o obj/Desarrollador.o
 
-DuracionParticipante.o: $(CPP_ENTITIES) $(H_ENTITIES)
-	$(GCC) $(CPP_ENTITIES) -o obj/DuracionParticipante.o
+DuracionParticipante.o: $(CPP_ENTITIES)/DuracionParticipante.cpp $(H_ENTITIES)/DuracionParticipante.h
+	$(GCC) $(CPP_ENTITIES)/DuracionParticipante.cpp -o obj/DuracionParticipante.o
 
-Genero.o: $(CPP_ENTITIES) $(H_ENTITIES)
-	$(GCC) $(CPP_ENTITIES) -o obj/Genero.o
+Genero.o: $(CPP_ENTITIES)/Genero.cpp $(H_ENTITIES)/Genero.h
+	$(GCC) $(CPP_ENTITIES)/Genero.cpp -o obj/Genero.o
 
-Jugador.o: $(CPP_ENTITIES) $(H_ENTITIES)
-	$(GCC) $(CPP_ENTITIES) -o obj/Jugador.o
+Jugador.o: $(CPP_ENTITIES)/Jugador.cpp $(H_ENTITIES)/Jugador.h
+	$(GCC) $(CPP_ENTITIES)/Jugador.cpp -o obj/Jugador.o
 
-Partida.o: $(CPP_ENTITIES) $(H_ENTITIES)
-	$(GCC) $(CPP_ENTITIES) -o obj/Partida.o
+Partida.o: $(CPP_ENTITIES)/Partida.cpp $(H_ENTITIES)/Partida.h
+	$(GCC) $(CPP_ENTITIES)/Partida.cpp -o obj/Partida.o
 
-PartidaIndividual.o: $(CPP_ENTITIES) $(H_ENTITIES)
-	$(GCC) $(CPP_ENTITIES) -o obj/PartidaIndividual.o
+PartidaIndividual.o: $(CPP_ENTITIES)/PartidaIndividual.cpp $(H_ENTITIES)/PartidaIndividual.h
+	$(GCC) $(CPP_ENTITIES)/PartidaIndividual.cpp -o obj/PartidaIndividual.o
 
-PartidaMultijugador.o: $(CPP_ENTITIES) $(H_ENTITIES)
-	$(GCC) $(CPP_ENTITIES) -o obj/PartidaMultijugador.o
+PartidaMultijugador.o: $(CPP_ENTITIES)/PartidaMultijugador.cpp $(H_ENTITIES)/PartidaMultijugador.h
+	$(GCC) $(CPP_ENTITIES)/PartidaMultijugador.cpp -o obj/PartidaMultijugador.o
 
-Plataforma.o: $(CPP_ENTITIES) $(H_ENTITIES)
-	$(GCC) $(CPP_ENTITIES) -o obj/Plataforma.o
+Plataforma.o: $(CPP_ENTITIES)/Plataforma.cpp $(H_ENTITIES)/Plataforma.h
+	$(GCC) $(CPP_ENTITIES)/Plataforma.cpp -o obj/Plataforma.o
 
-Usuario.o: $(CPP_ENTITIES) $(H_ENTITIES)
-	$(GCC) $(CPP_ENTITIES) -o obj/Usuario.o
+Usuario.o: $(CPP_ENTITIES)/Usuario.cpp $(H_ENTITIES)/Usuario.h
+	$(GCC) $(CPP_ENTITIES)/Usuario.cpp -o obj/Usuario.o
 
-Videojuego.o: $(CPP_ENTITIES) $(H_ENTITIES)
-	$(GCC) $(CPP_ENTITIES) -o obj/Videojuego.o
+Videojuego.o: $(CPP_ENTITIES)/Videojuego.cpp $(H_ENTITIES)/Videojuego.h
+	$(GCC) $(CPP_ENTITIES)/Videojuego.cpp -o obj/Videojuego.o
 
-CategoriaHandler.o: $(CPP_HANDLERS) $(H_HANDLERS)
-	$(GCC) $(CPP_HANDLERS) -o obj/CategoriaHandler.o
+CategoriaHandler.o: $(CPP_HANDLERS)/CategoriaHandler.cpp $(H_HANDLERS)/CategoriaHandler.h
+	$(GCC) $(CPP_HANDLERS)/CategoriaHandler.cpp -o obj/CategoriaHandler.o
 
-UsuarioHandler.o: $(CPP_HANDLERS) $(H_HANDLERS)
-	$(GCC) $(CPP_HANDLERS) -o obj/UsuarioHandler.o
+UsuarioHandler.o: $(CPP_HANDLERS)/UsuarioHandler.cpp $(H_HANDLERS)/UsuarioHandler.h
+	$(GCC) $(CPP_HANDLERS)/UsuarioHandler.cpp -o obj/UsuarioHandler.o
 
-VideojuegoHandler.o: $(CPP_HANDLERS) $(H_HANDLERS)
-	$(GCC) $(CPP_HANDLERS) -o obj/VideojuegoHandler.o
+VideojuegoHandler.o: $(CPP_HANDLERS)/VideojuegoHandler.cpp $(H_HANDLERS)/VideojuegoHandler.h
+	$(GCC) $(CPP_HANDLERS)/VideojuegoHandler.cpp -o obj/VideojuegoHandler.o
 
-Fecha.o: $(CPP_UTILS) $(H_UTILS)
-	$(GCC) $(CPP_UTILS) -o obj/Fecha.o
+Fecha.o: $(CPP_UTILS)/Fecha.cpp $(H_UTILS)/Fecha.h
+	$(GCC) $(CPP_UTILS)/Fecha.cpp -o obj/Fecha.o
 
 FactoryController.o: $(CPP_FACTORY_CONTROLLER) $(H_FACTORY_CONTROLLER)
 	$(GCC) $(CPP_FACTORY_CONTROLLER) -o obj/FactoryController.o

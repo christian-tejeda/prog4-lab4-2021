@@ -11,31 +11,34 @@
 
 using namespace std;
 
-VideojuegoHandler::VideojuegoHandler(){
-
+VideojuegoHandler::VideojuegoHandler()
+{
 }
 
-static VideojuegoHandler * VideojuegoHandler::getInstance(){
+VideojuegoHandler *VideojuegoHandler::getInstance()
+{
     return nullptr;
 }
 
-void VideojuegoHandler::agregarrVideojuego(Videojuego *vj){
-
+void VideojuegoHandler::agregarrVideojuego(Videojuego *vj)
+{
 }
-map<string, Videojuego *> VideojuegoHandler::obtenerVideojuegos(){
+map<string, Videojuego *> VideojuegoHandler::obtenerVideojuegos()
+{
+    return map<string, Videojuego *>();
+}
+Videojuego *VideojuegoHandler::obtenerVideojuegoPorId(string nombre)
+{
     return nullptr;
 }
-Videojuego *VideojuegoHandler::obtenerVideojuegoPorId(string nombre){
-    return nullptr;
+void VideojuegoHandler::eliminarVideojuego(Videojuego *vj)
+{
 }
-void VideojuegoHandler::eliminarVideojuego(Videojuego *vj){
-
+void VideojuegoHandler::actualizarVideojuego(Videojuego *vj)
+{
 }
-void VideojuegoHandler::actualizarVideojuego(Videojuego *vj){
-
+map<string, Jugador *> VideojuegoHandler::obtenerJugadoresVideojuego(Videojuego *vj)
+{
+    return map<string, Jugador *>();
 }
-map<string, Jugador *> VideojuegoHandler::obtenerJugadoresVideojuego(Videojuego *vj){
-    return nullptr;
-}
-VideojuegoHandler::~VideojuegoHandler(){}
-
+VideojuegoHandler::~VideojuegoHandler() {}

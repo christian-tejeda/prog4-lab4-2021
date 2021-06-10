@@ -4,7 +4,7 @@
 #include "../interfaces/IPartidaController.h"
 #include "../entities/Usuario.h"
 #include "../entities/Videojuego.h"
-#include "../entities/PartidaIndividual.h"
+//#include "../entities/PartidaIndividual.h"
 
 class PartidaController : public IPartidaController
 { //singleton

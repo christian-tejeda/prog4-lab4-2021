@@ -4,7 +4,7 @@
 #include <set>
 #include <string>
 
-#include "../datatypes/DataPartida.h"
+//#include "../datatypes/DataPartida.h"
 #include "../datatypes/DataPartidaIndividual.h"
 #include "../datatypes/DataPartidaMultijugador.h"
 #include "../datatypes/DataJugador.h"
