@@ -24,40 +24,7 @@ GCC = g++ -c
 
 #---------- Main --------------
 
-main: PartidaController.o 
-	  UsuarioController.o 
-	  VideojuegoController.o 
-	  DataCategoria.o 
-	  DataContratoSuscripcion.o 
-	  DataDesarrollador.o 
-	  DataEstadistica.o 
-	  DataGenero.o
-	  DataJugador.o
-	  DataPartida.o
-	  DataPartidaIndividual.o
-	  DataPartidaMultijugador.o
-	  DataPlataforma.o
-	  DataUsuario.o
-	  DataVideojuego.o
-	  Categoria.o
-	  ContextoEstadistica.o
-	  ContratoSuscripcion.o
-	  Desarrollador.o
-	  DuracionParticipante.o
-	  Genero.o
-	  Jugador.o
-	  Partida.o
-	  PartidaIndividual.o
-	  PartidaMultijugador.o
-	  Plataforma.o
-	  Usuario.o
-	  Videojuego.o
-	  CategoriaHandler.o
-	  UsuarioHandler.o
-	  VideojuegoHandler.o
-	  Fecha.o
-	  FactoryController.o
-	  main.o
+main: PartidaController.o UsuarioController.o VideojuegoController.o DataCategoria.o DataContratoSuscripcion.o DataDesarrollador.o DataEstadistica.o DataGenero.o DataJugador.o DataPartida.o DataPartidaIndividual.o DataPartidaMultijugador.o DataPlataforma.o DataUsuario.o DataVideojuego.o Categoria.o ContextoEstadistica.o ContratoSuscripcion.o Desarrollador.o DuracionParticipante.o Genero.o Jugador.o Partida.o PartidaIndividual.o PartidaMultijugador.o Plataforma.o Usuario.o Videojuego.o CategoriaHandler.o UsuarioHandler.o VideojuegoHandler.o Fecha.o FactoryController.o main.o
 	g++ obj/PartidaController.o 
 		obj/UsuarioController.o 
 		obj/VideojuegoController.o 
