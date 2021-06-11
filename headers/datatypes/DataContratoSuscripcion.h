@@ -2,6 +2,8 @@
 #define DATA_CONTRATO_SUSCRIPCION_H
 
 #include "../utils/enums.h"
+#include "../utils/Fecha.h"
+
 #include <string>
 
 using namespace std;
@@ -20,7 +22,7 @@ private:
 
 public:
     DataContratoSuscripcion();
-    DataContratoSuscripcion(bool activa, string nombreVideojuego,string nombreJugador, float precio, TipoPeriodoValidez periodoValidez, bool cancelada, Fecha fecha, TipoMetodoPago metodoPago);
+    DataContratoSuscripcion(bool activa, string nombreVideojuego, string nombreJugador, float precio, TipoPeriodoValidez periodoValidez, bool cancelada, Fecha fecha, TipoMetodoPago metodoPago);
 
     //Getters
     bool getActiva() const;

@@ -1,11 +1,15 @@
 #ifndef USUARIO_CONTROLLER_H
 #define USUARIO_CONTROLLER_H
 
-#include "../interfaces/IUsuarioController.h"
+#include "../interfaces/ISeleccionarEstadisticas.h"
+#include "../interfaces/IConsultarEstadisticas.h"
+#include "../interfaces/ISuscribirseVideojuego.h"
+#include "../interfaces/IIniciarSesion.h"
+#include "../interfaces/IAltaUsuario.h"
 #include "../entities/Usuario.h"
 #include "../entities/Videojuego.h"
 
-class UsuarioController : public IUsuarioController
+class UsuarioController : public ISeleccionarEstadisticas, IConsultarEstadisticas, ISuscribirseVideojuego, IIniciarSesion, IAltaUsuario
 { //singleton
 private:
     UsuarioController *instancia;
@@ -19,8 +23,10 @@ private:
 
 public:
     UsuarioController();
+
     //op de singleton
     static UsuarioController *getInstance();
+
     //Getters
     Usuario *getSesion();
     DataDesarrollador *getDataDesarrollador();
@@ -28,21 +34,30 @@ public:
     Videojuego *getVideojuego();
     pair<TipoPeriodoValidez, float> getSuscripcion();
     TipoMetodoPago getMetodoPago();
-    //ops de interface
-    void ingresarDatosJugador(DataJugador *dataJugador);
-    void ingresarDatosDesarrollador(DataDesarrollador *dataDesarrollador);
-    void confirmarAltaUsuario(bool confirmar);
+
+    //ops de ISeleccionarEstadisticas
+    std::set<DataEstadistica *> listarEstadisticas();
+    void seleccionarEstadisticas(std::set<std::string> nombresEstadisticas);
+
+    //ops de IConsultarEstadisticas
+    set<DataVideojuego *> obtenerVideojuegosPublicadosPorDesarrollador();
+    set<DataEstadistica *> calcularEstadisticas(string nomVideojuego);
+
+    //ops de ISuscribirseVideojuego
     set<DataContratoSuscripcion *> obtenerSuscripciones();
+    void seleccionarVideojuego(string nombreVideojuego);
     void cancelarSuscripcion(bool cancelada);
     void contratarSuscripcion(pair<TipoPeriodoValidez, float> suscripcion, TipoMetodoPago m);
     void confirmarSuscripcion(bool confirmar);
-    set<DataVideojuego *> obtenerVideojuegosPublicadosPorDesarrollador();
-    set<DataEstadistica *> calcularEstadisticas(string nomVideojuego);
-    set<DataPartidaMultijugador *> obtenerPartidasMultijugadorActivasDeJugador();
-    void seleccionarPartida(int id);
-    void seleccionarVideojuego(string nombreVideojuego);
+
+    //ops de IIniciarSesion
     bool iniciarSesion(DataUsuario *dataUsuario);
     void confirmarInicioSesion(bool confirmar);
+
+    //ops de IAltaUsuario
+    void ingresarDatosJugador(DataJugador *dataJugador);
+    void ingresarDatosDesarrollador(DataDesarrollador *dataDesarrollador);
+    void confirmarAltaUsuario(bool confirmar);
 
     ~UsuarioController();
 };

@@ -11,8 +11,10 @@
 using namespace std;
 
 PartidaController::PartidaController() {}
+
 //op de singleton
-PartidaController *PartidaController::getInstance() {}
+//PartidaController *PartidaController::getInstance() {}
+
 //Getters
 Usuario *PartidaController::getJugador()
 {

@@ -1,16 +1,16 @@
 #ifndef PARTIDA_CONTROLLER_H
 #define PARTIDA_CONTROLLER_H
 
-#include "../interfaces/IPartidaController.h"
+#include "../interfaces/IIniciarPartida.h"
+#include "../interfaces/IAbandonarPartida.h"
+#include "../interfaces/IFinalizarPartida.h"
 #include "../entities/Usuario.h"
 #include "../entities/Videojuego.h"
 //#include "../entities/PartidaIndividual.h"
 
-class PartidaController : public IPartidaController
-{ //singleton
+class PartidaController : public IIniciarPartida, IAbandonarPartida, IFinalizarPartida
+{
 private:
-    PartidaController *instancia;
-
     Usuario *jg;                          //se borra la ref al final del CU
     Videojuego *vj;                       //se borra la ref al final del CU
     PartidaIndividual *partidaAContinuar; //se borra la ref al final del CU
@@ -19,16 +19,14 @@ private:
 
 public:
     PartidaController();
-    //op de singleton
-    static PartidaController *getInstance();
+
     //Getters
     Usuario *getJugador();
     Videojuego *getVideojuego();
     PartidaIndividual *getPartidaAContinuar();
     Jugador *getParticipantePorNickname(string nick);
-    //ops de interface
-    set<DataPartida *> obtenerPartidasSinFinalizarDeJugador();
-    void finalizarPartida(int idPartida);
+
+    //ops de IIniciarPartida
     void seleccionarPartidaAContinuar(int id);
     set<DataVideojuego *> obtenerVideojuegosDeJugadorConSuscripcionActiva();
     set<DataPartidaIndividual *> obtenerPartidasFinalizadasDeJugador();
@@ -37,8 +35,14 @@ public:
     void seleccionarVideojuego(string nombreVideojuego);
     void seleccionarJugador(string nickname);
     void confirmarIniciarPartida(bool confirmar);
+
+    //ops de IAbandonarPartida
     set<DataPartidaMultijugador *> obtenerPartidasMultijugadorActivasDeJugador();
     void abandonarPartida(int idPartida);
+
+    //ops de IFinalizarPartida
+    set<DataPartida *> obtenerPartidasSinFinalizarDeJugador();
+    void finalizarPartida(int idPartida);
 
     ~PartidaController();
 };

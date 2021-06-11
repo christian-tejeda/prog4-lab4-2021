@@ -11,8 +11,10 @@
 using namespace std;
 
 VideojuegoController::VideojuegoController() {}
+
 //op de singleton
-VideojuegoController::VideojuegoController *getInstance() {}
+//VideojuegoController::VideojuegoController *getInstance() {}
+
 //Getters
 DataVideojuego *VideojuegoController::getDataVideojuego() {}
 Videojuego *VideojuegoController::getVideojuego()
@@ -34,12 +36,14 @@ DataVideojuego *VideojuegoController::obtenerDataVideojuegoIngresada()
     return nullptr;
 }
 void VideojuegoController::confirmarPublicacionVideojuego(bool cancelada) {}
-set<DataContratoSuscripcion *> VideojuegoController::obtenerSuscripciones()
-{
-    set<DataContratoSuscripcion *> res;
-    res.insert(nullptr);
-    return res;
-}
+
+// set<DataContratoSuscripcion *> VideojuegoController::obtenerSuscripciones()
+// {
+//     set<DataContratoSuscripcion *> res;
+//     res.insert(nullptr);
+//     return res;
+// }
+
 set<DataVideojuego *> VideojuegoController::obtenerVideojuegosPublicadosPorDesarrolladorConPartidasFinalizadas()
 {
     set<DataVideojuego *> res;

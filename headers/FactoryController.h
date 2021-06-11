@@ -3,9 +3,9 @@
 
 #include <string>
 #include <utility>
-#include "interfaces/IUsuarioController.h"
-#include "interfaces/IPartidaController.h"
-#include "interfaces/IVideojuegoController.h"
+#include "controllers/UsuarioController.h"
+#include "controllers/PartidaController.h"
+#include "controllers/VideojuegoController.h"
 
 using namespace std;
 
@@ -19,10 +19,23 @@ public:
     FactoryController();
     //op de singleton
     static FactoryController *getInstance();
+
     //op de factory
-    IUsuarioController *getIUsuarioController();
-    IVideojuegoController *getIVideojuegoController();
-    IPartidaController *getIPartidaController();
+    ISeleccionarEstadisticas *getISeleccionarEstadisticas();
+    IConsultarEstadisticas *getIConsultarEstadisticas();
+    ISuscribirseVideojuego *getISuscribirseVideojuego();
+    IIniciarSesion *getIIniciarSesion();
+    IAltaUsuario *getIAltaUsuario();
+
+    IIniciarPartida *getIIniciarPartida();
+    IAbandonarPartida *getIAbandonarPartida();
+    IFinalizarPartida *getIFinalizarPartida();
+
+    IAgregarCategoria *getIAgregarCategoria();
+    IVerInfoVideojuego *getIVerInfoVideojuego();
+    IAsignarPuntaje *getIAsignarPuntaje();
+    IEliminarVideojuego *getIEliminarVideojuego();
+    IPublicarVideojuego *getIPublicarVideojuego();
 
     ~FactoryController();
 };
