@@ -42,7 +42,7 @@ public:
 
     //ops de IPublicarVideojuego
     void ingresarDatosVideojuego(DataVideojuego *DataV);
-    set<DataCategoria *> obtenerCategorias();
+    //set<DataCategoria *> obtenerCategorias();
     void agregarPlataformaAVideojuego(string plataforma);
     void agregarGeneroAVideojuego(string genero);
     void agregarOtraCategoriaAVideojuego(string cat);

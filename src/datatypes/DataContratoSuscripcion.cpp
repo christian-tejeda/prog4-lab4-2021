@@ -11,7 +11,7 @@ using namespace std;
 
 DataContratoSuscripcion::DataContratoSuscripcion() {}
 
-DataContratoSuscripcion::DataContratoSuscripcion(bool activa, string nombreVideojuego, float precio, TipoPeriodoValidez periodoValidez, bool cancelada, Fecha fecha, TipoMetodoPago metodoPago)
+DataContratoSuscripcion::DataContratoSuscripcion(bool activa, string nombreVideojuego, string nombreJugador, float precio, TipoPeriodoValidez periodoValidez, bool cancelada, Fecha fecha, TipoMetodoPago metodoPago)
 {
     this->activa = activa;
     this->cancelada = cancelada;

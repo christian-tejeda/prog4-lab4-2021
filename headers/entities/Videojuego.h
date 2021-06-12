@@ -15,6 +15,10 @@
 #include "ContextoEstadistica.h"
 #include "ContratoSuscripcion.h"
 
+class ContextoEstadistica; //forward declaration
+class ContratoSuscripcion; //forward declaration
+class Jugador;             //forward declaration
+
 class Videojuego
 {
 private:
@@ -27,7 +31,7 @@ private:
 
     //pseudoatributos
     set<ContratoSuscripcion *> contratos;
-    set<Categoria *> categorias;
+    map<string, Categoria *> categorias;
     ContextoEstadistica *ctx;
 
 public:
@@ -37,7 +41,7 @@ public:
                map<TipoPeriodoValidez, float> suscripciones,
                pair<float, int> rating,
                set<ContratoSuscripcion *> contratos,
-               set<Categoria *> categorias,
+               map<string, Categoria *> categorias,
                ContextoEstadistica *ctx);
 
     //Getters
@@ -45,8 +49,9 @@ public:
     std::string getDescripcion();
     map<TipoPeriodoValidez, float> getSuscripciones();
     pair<float, int> getRating();
-    // set<ContratoSuscripcion *> getContratos();
-    set<Categoria *> getCategorias();
+    set<ContratoSuscripcion *> getContratos();
+    map<string, Categoria *> getCategorias();
+    set<string> getNombreCategorias();
     ContextoEstadistica *getContextoEstadistica();
     map<TipoPeriodoValidez, float> getPeriodoValidez();
 
@@ -55,7 +60,7 @@ public:
     void setDescripcion(std::string desc);
     void setSuscripciones(TipoPeriodoValidez validez, float precio);
     void setRating(float prom, int cantVotos);
-    // void setContrato(ContratoSuscripcion *);
+    void setContrato(ContratoSuscripcion *);
     void setCategoria(Categoria *);
     void setContextoEstadistica(ContextoEstadistica *);
 

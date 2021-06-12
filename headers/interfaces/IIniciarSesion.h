@@ -17,6 +17,8 @@ public:
     // virtual void seleccionarVideojuego(string nombreVideojuego) = 0;
     virtual bool iniciarSesion(DataUsuario *dataUsuario) = 0;
     virtual void confirmarInicioSesion(bool confirmar) = 0;
+
+    virtual ~IIniciarSesion() {}
 };
 
 #endif

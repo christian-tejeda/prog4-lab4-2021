@@ -6,6 +6,9 @@
 #include "../entities/Videojuego.h"
 #include "../utils/enums.h"
 
+class Jugador;    //forward declaration
+class Videojuego; //forward declaration
+
 class ContratoSuscripcion
 {
 private:

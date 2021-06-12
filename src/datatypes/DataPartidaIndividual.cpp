@@ -14,7 +14,7 @@ using namespace std;
 
 DataPartidaIndividual::DataPartidaIndividual() {}
 
-DataPartidaIndividual::DataPartidaIndividual(int id, DataVideojuego videojuego, Fecha fechaInicio, Fecha fechaFin, float DuracionTotal, bool esContinuacion) : DataPartida(id, videojuego, fechaInicio, fechaFin, DuracionTotal)
+DataPartidaIndividual::DataPartidaIndividual(int id, DataVideojuego videojuego, Fecha fechaInicio, Fecha *fechaFin, float DuracionTotal, bool esContinuacion) : DataPartida(id, videojuego, fechaInicio, fechaFin, DuracionTotal)
 {
     this->esContinuacion = esContinuacion;
 }

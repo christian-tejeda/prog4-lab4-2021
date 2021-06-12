@@ -27,7 +27,7 @@ std::string Desarrollador::getNombreEmpresa()
 
 //Jugador::set<ContratoSuscripcion> obtenerSuscripciones(EstadoSuscripcion estado);
 
-DataUsuario Desarrollador::*getData()
+DataUsuario *Desarrollador::getData()
 {
     return nullptr;
 }
@@ -37,15 +37,18 @@ void Desarrollador::agregarVideojuegoPublicado(Videojuego *vj)
 }
 //Setters
 
-void Desarrollador::setEmail(std::string email) {
+void Desarrollador::setEmail(std::string email)
+{
     this->email = email;
 }
 
-void Desarrollador::setPassword(std::string password) {
+void Desarrollador::setPassword(std::string password)
+{
     this->password = password;
 }
 
-void Desarrollador::setNombreEmpresa(std::string nomEmpresa) {
+void Desarrollador::setNombreEmpresa(std::string nomEmpresa)
+{
     this->nombreEmpresa = nomEmpresa;
 }
 

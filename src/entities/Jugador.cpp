@@ -5,10 +5,10 @@
 #include <utility>
 
 #include "../../headers/entities/Jugador.h"
-#include "../../headers/entities/Usuario.h"
-#include "../../headers/utils/enums.h"
+// #include "../../headers/entities/Usuario.h"
+// #include "../../headers/utils/enums.h"
 #include "../../headers/datatypes/DataVideojuego.h"
-#include "../../headers/utils/Fecha.h"
+//#include "../../headers/utils/Fecha.h"
 
 Jugador::Jugador() {}
 
@@ -67,7 +67,7 @@ void Jugador::eliminarPartidasDeVideojuego(Videojuego *vj)
 {
 }
 
-DataUsuario *Jugador::*getData()
+DataUsuario *Jugador::getData()
 {
     return nullptr;
 }

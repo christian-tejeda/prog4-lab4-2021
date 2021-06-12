@@ -14,7 +14,7 @@ Videojuego::Videojuego(std::string nombre,
                        map<TipoPeriodoValidez, float> suscripciones,
                        pair<float, int> rating,
                        set<ContratoSuscripcion *> contratos,
-                       set<Categoria *> categorias,
+                       map<string, Categoria *> categorias,
                        ContextoEstadistica *ctx)
 {
     this->nombre = nombre;
@@ -25,36 +25,44 @@ Videojuego::Videojuego(std::string nombre,
     this->categorias = categorias;
     this->ctx = ctx;
 }
+
 //Getters
 std::string Videojuego::getNombre()
 {
-    this->nombre;
+    return this->nombre;
 }
 std::string Videojuego::getDescripcion()
 {
-    this->descripcion;
+    return this->descripcion;
 }
 map<TipoPeriodoValidez, float> Videojuego::getSuscripciones()
 {
-    this->suscripciones;
+    return this->suscripciones;
 }
 pair<float, int> Videojuego::getRating()
 {
-    this->rating;
+    return this->rating;
 }
 // set<ContratoSuscripcion *> getContratos();
-set<Categoria *> Videojuego::getCategorias()
+map<string, Categoria *> Videojuego::getCategorias()
 {
-    this->categorias = categorias;
+    return this->categorias;
+}
+set<string> Videojuego::getNombreCategorias()
+{
+    set<string> res;
+    //iterar sobre el map de categorias para almacenar todos los nombres
+    return res;
 }
 ContextoEstadistica *Videojuego::getContextoEstadistica()
 {
-    this->ctx;
+    return this->ctx;
 }
 map<TipoPeriodoValidez, float> Videojuego::getPeriodoValidez()
 {
-    this->suscripciones;
+    return this->suscripciones;
 }
+
 //Setters
 void Videojuego::setNombre(std::string nombre)
 {
@@ -94,6 +102,6 @@ int Videojuego::getCantidadSuscriptores()
 
 DataVideojuego Videojuego::getData()
 {
-    return DataVideojuego(this->nombre, this->descripcion, this->suscripciones, this->categorias, this->rating);
+    return DataVideojuego(this->nombre, this->descripcion, this->suscripciones, this->getNombreCategorias(), this->rating);
 }
 Videojuego::~Videojuego() {}

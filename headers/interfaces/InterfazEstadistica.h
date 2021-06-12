@@ -3,6 +3,8 @@
 
 #include "../entities/Videojuego.h"
 
+class Videojuego; //forward declaration
+
 class InterfazEstadistica
 {
 public:

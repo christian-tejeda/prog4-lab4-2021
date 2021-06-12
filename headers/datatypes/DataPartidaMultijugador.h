@@ -22,7 +22,7 @@ private:
 
 public:
     DataPartidaMultijugador();
-    DataPartidaMultijugador(int id, DataVideojuego videojuego, Fecha fechaInicio, Fecha fechaFin, float DuracionTotal, bool esTrasmitida, DataJugador creador, set<DataJugador> participantes);
+    DataPartidaMultijugador(int id, DataVideojuego videojuego, Fecha fechaInicio, Fecha *fechaFin, float DuracionTotal, bool esTrasmitida, DataJugador creador, set<DataJugador> participantes);
     //Getters
     //int getId();
     //DataVideojuego getVideojuego();

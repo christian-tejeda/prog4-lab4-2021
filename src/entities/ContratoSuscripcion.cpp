@@ -13,27 +13,27 @@ ContratoSuscripcion::ContratoSuscripcion(Jugador *jg, Videojuego *vj, TipoMetodo
 
 Jugador *ContratoSuscripcion::getJugador()
 {
-    this->jugador;
+    return this->jugador;
 }
 Videojuego *ContratoSuscripcion::getVideojuego()
 {
-    this->videojuego;
+    return this->videojuego;
 }
 bool ContratoSuscripcion::getFueCancelada()
 {
-    this->fueCancelada;
+    return this->fueCancelada;
 }
 Fecha ContratoSuscripcion::getFecha()
 {
-    this->fechaSuscripcion;
+    return this->fechaSuscripcion;
 }
 TipoPeriodoValidez ContratoSuscripcion::getValidez()
 {
-    this->periodoValidez;
+    return this->periodoValidez;
 }
 TipoMetodoPago ContratoSuscripcion::getMetodoDePago()
 {
-    this->metodoDePago;
+    return this->metodoDePago;
 }
 
 void ContratoSuscripcion::setVideojuego(Videojuego *vj) {}

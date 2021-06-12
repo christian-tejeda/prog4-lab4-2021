@@ -5,20 +5,20 @@
 #include <utility>
 
 #include "../../headers/datatypes/DataPartida.h"
-#include "../../headers/utils/enums.h"
-#include "../../headers/datatypes/DataVideojuego.h"
-#include "../../headers/utils/Fecha.h"
+//#include "../../headers/utils/enums.h"
+//#include "../../headers/datatypes/DataVideojuego.h"
+//#include "../../headers/utils/Fecha.h"
 
 using namespace std;
 
 DataPartida::DataPartida() {}
 
-DataPartida::DataPartida(int id, DataVideojuego videojuego, Fecha fechaInicio, Fecha fechaFin, float DuracionTotal)
+DataPartida::DataPartida(int id, DataVideojuego videojuego, Fecha fechaInicio, Fecha *fechaFin, float DuracionTotal)
 {
     this->id = id;
     this->videojuego = videojuego;
     this->fechaInicio = fechaInicio;
-    this->fechaInicio = fechaFin;
+    this->fechaFin = fechaFin;
     this->DuracionTotal = DuracionTotal;
 }
 
@@ -32,7 +32,7 @@ Fecha DataPartida::getFechaInicio()
     return this->fechaInicio;
 }
 
-Fecha DataPartida::getFechaFin()
+Fecha *DataPartida::getFechaFin()
 {
     return this->fechaFin;
 }
@@ -46,6 +46,4 @@ float DataPartida::getDuracionTotal()
     return this->DuracionTotal;
 }
 
-DataPartida::~DataPartida(){}
-
-;
+DataPartida::~DataPartida() {}

@@ -40,7 +40,7 @@ public:
     void setNombreEmpresa(std::string nomEmpresa);
     //Operaciones
     //set<ContratoSuscripcion> obtenerSuscripociones(EstadoSuscripcion estado);
-    DataUsuario getData();
+    DataUsuario *getData();
     void agregarVideojuegoPublicado(Videojuego *vj);
     ~Desarrollador();
 };

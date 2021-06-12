@@ -24,41 +24,9 @@ GCC = g++ -c
 
 #---------- Main --------------
 
-main: PartidaController.o UsuarioController.o VideojuegoController.o DataCategoria.o DataContratoSuscripcion.o DataDesarrollador.o DataEstadistica.o DataGenero.o DataJugador.o DataPartida.o DataPartidaIndividual.o DataPartidaMultijugador.o DataPlataforma.o DataUsuario.o DataVideojuego.o Categoria.o ContextoEstadistica.o ContratoSuscripcion.o Desarrollador.o DuracionParticipante.o Genero.o Jugador.o Partida.o PartidaIndividual.o PartidaMultijugador.o Plataforma.o Usuario.o Videojuego.o CategoriaHandler.o UsuarioHandler.o VideojuegoHandler.o Fecha.o FactoryController.o main.o
-	g++ obj/PartidaController.o 
-		obj/UsuarioController.o 
-		obj/VideojuegoController.o 
-		obj/DataCategoria.o 
-		obj/DataContratoSuscripcion.o 
-		obj/DataDesarrollador.o 
-		obj/DataEstadistica.o 
-		obj/DataGenero.o 
-		obj/DataJugador.o
-		obj/DataPartida.o
-		obj/DataPartidaIndividual.o
-		obj/DataPartidaMultijugador.o
-		obj/DataPlataforma.o
-		obj/DataUsuario.o
-		obj/DataVideojuego.o
-		obj/Categoria.o
-		obj/ContextoEstadistica.o
-		obj/ContratoSuscripcion.o
-		obj/Desarrollador.o
-		obj/DuracionParticipante.o
-		obj/Genero.o
-		obj/Jugador.o
-		obj/Partida.o
-		obj/PartidaIndividual.o
-		obj/PartidaMultijugador.o
-		obj/Plataforma.o
-		obj/Usuario.o
-		obj/Videojuego.o
-		obj/CategoriaHandler.o
-		obj/UsuarioHandler.o
-		obj/VideojuegoHandler.o
-		obj/Fecha.o
-		obj/FactoryController.o
-		obj/main.o -o main
+main: PartidaController.o UsuarioController.o VideojuegoController.o DataCategoria.o DataContratoSuscripcion.o DataDesarrollador.o DataEstadistica.o DataGenero.o DataJugador.o DataPartida.o DataPartidaIndividual.o DataPartidaMultijugador.o DataPlataforma.o DataUsuario.o DataVideojuego.o Categoria.o ContextoEstadistica.o ContratoSuscripcion.o Usuario.o Desarrollador.o DuracionParticipante.o Genero.o Jugador.o Partida.o PartidaIndividual.o PartidaMultijugador.o Plataforma.o Videojuego.o CategoriaHandler.o UsuarioHandler.o VideojuegoHandler.o Fecha.o FactoryController.o main.o
+	g++ -o main obj/PartidaController.o obj/UsuarioController.o obj/VideojuegoController.o obj/DataCategoria.o obj/DataContratoSuscripcion.o obj/DataDesarrollador.o obj/DataEstadistica.o obj/DataGenero.o obj/DataJugador.o obj/DataPartida.o obj/DataPartidaIndividual.o obj/DataPartidaMultijugador.o obj/DataPlataforma.o obj/DataUsuario.o obj/DataVideojuego.o obj/Categoria.o obj/ContextoEstadistica.o obj/ContratoSuscripcion.o obj/Desarrollador.o obj/DuracionParticipante.o obj/Genero.o obj/Jugador.o obj/Partida.o obj/PartidaIndividual.o obj/PartidaMultijugador.o obj/Plataforma.o obj/Usuario.o obj/Videojuego.o obj/CategoriaHandler.o obj/UsuarioHandler.o obj/VideojuegoHandler.o obj/Fecha.o obj/FactoryController.o	 obj/main.o 
+		
 
 #------------- Objects ------------------
 
@@ -95,8 +63,8 @@ DataJugador.o: $(CPP_DATATYPES)/DataJugador.cpp $(H_DATATYPES)/DataJugador.h
 DataPartida.o: $(CPP_DATATYPES)/DataPartida.cpp $(H_DATATYPES)/DataPartida.h
 	$(GCC) $(CPP_DATATYPES)/DataPartida.cpp -o obj/DataPartida.o
 
-DataPartidaIndividual.o: $(CPP_DATATYPES)/DataPartida.cpp $(H_DATATYPES)/DataPartida.h
-	$(GCC) $(CPP_DATATYPES)/DataPartida.cpp -o obj/DataPartidaIndividual.o
+DataPartidaIndividual.o: $(CPP_DATATYPES)/DataPartidaIndividual.cpp $(H_DATATYPES)/DataPartidaIndividual.h
+	$(GCC) $(CPP_DATATYPES)/DataPartidaIndividual.cpp -o obj/DataPartidaIndividual.o
 
 DataPartidaMultijugador.o: $(CPP_DATATYPES)/DataPartidaMultijugador.cpp $(H_DATATYPES)/DataPartidaMultijugador.h
 	$(GCC) $(CPP_DATATYPES)/DataPartidaMultijugador.cpp -o obj/DataPartidaMultijugador.o
@@ -118,6 +86,9 @@ ContextoEstadistica.o: $(CPP_ENTITIES)/ContextoEstadistica.cpp $(H_ENTITIES)/Con
 
 ContratoSuscripcion.o: $(CPP_ENTITIES)/ContratoSuscripcion.cpp $(H_ENTITIES)/ContratoSuscripcion.h
 	$(GCC) $(CPP_ENTITIES)/ContratoSuscripcion.cpp -o obj/ContratoSuscripcion.o
+
+Usuario.o: $(CPP_ENTITIES)/Usuario.cpp $(H_ENTITIES)/Usuario.h
+	$(GCC) $(CPP_ENTITIES)/Usuario.cpp -o obj/Usuario.o
 
 Desarrollador.o: $(CPP_ENTITIES)/Desarrollador.cpp $(H_ENTITIES)/Desarrollador.h
 	$(GCC) $(CPP_ENTITIES)/Desarrollador.cpp -o obj/Desarrollador.o
@@ -143,8 +114,6 @@ PartidaMultijugador.o: $(CPP_ENTITIES)/PartidaMultijugador.cpp $(H_ENTITIES)/Par
 Plataforma.o: $(CPP_ENTITIES)/Plataforma.cpp $(H_ENTITIES)/Plataforma.h
 	$(GCC) $(CPP_ENTITIES)/Plataforma.cpp -o obj/Plataforma.o
 
-Usuario.o: $(CPP_ENTITIES)/Usuario.cpp $(H_ENTITIES)/Usuario.h
-	$(GCC) $(CPP_ENTITIES)/Usuario.cpp -o obj/Usuario.o
 
 Videojuego.o: $(CPP_ENTITIES)/Videojuego.cpp $(H_ENTITIES)/Videojuego.h
 	$(GCC) $(CPP_ENTITIES)/Videojuego.cpp -o obj/Videojuego.o

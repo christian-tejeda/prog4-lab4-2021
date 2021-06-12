@@ -12,9 +12,9 @@ using namespace std;
 
 UsuarioController::UsuarioController() {}
 //op de singleton
-UsuarioController *UsuarioController::getInstance() {}
+UsuarioController *UsuarioController::getInstance() { return nullptr; }
 //Getters
-Usuario *UsuarioController::getSesion() {}
+Usuario *UsuarioController::getSesion() { return nullptr; }
 DataDesarrollador *UsuarioController::getDataDesarrollador()
 {
     return this->dataDesarrollador;
@@ -25,7 +25,7 @@ DataJugador *UsuarioController::getDataJugador()
 }
 Videojuego *UsuarioController::getVideojuego()
 {
-    this->videojuego;
+    return this->videojuego;
 }
 
 pair<TipoPeriodoValidez, float> UsuarioController::getSuscripcion()
@@ -62,14 +62,14 @@ set<DataEstadistica *> UsuarioController::calcularEstadisticas(string nomVideoju
     return res;
 }
 
-set<DataPartidaMultijugador *> UsuarioController::obtenerPartidasMultijugadorActivasDeJugador()
-{
-    set<DataPartidaMultijugador *> res;
-    res.insert(nullptr);
-    return res;
-}
-void UsuarioController::seleccionarPartida(int id) {}
+// set<DataPartidaMultijugador *> UsuarioController::obtenerPartidasMultijugadorActivasDeJugador()
+// {
+//     set<DataPartidaMultijugador *> res;
+//     res.insert(nullptr);
+//     return res;
+// }
+// void UsuarioController::seleccionarPartida(int id) {}
 void UsuarioController::seleccionarVideojuego(string nombreVideojuego) {}
-bool UsuarioController::iniciarSesion(DataUsuario *dataUsuario) {}
+bool UsuarioController::iniciarSesion(DataUsuario *dataUsuario) { return false; }
 void UsuarioController::confirmarInicioSesion(bool confirmar) {}
 UsuarioController::~UsuarioController() {}

@@ -4,6 +4,8 @@
 #include "../utils/Fecha.h"
 #include "../entities/Jugador.h"
 
+class Jugador; //fwd dec
+
 class DuracionParticipante
 {
 private:

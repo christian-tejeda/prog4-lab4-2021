@@ -19,22 +19,22 @@ private:
     int id;
     DataVideojuego videojuego;
     Fecha fechaInicio;
-    Fecha fechaFin;
+    Fecha *fechaFin;
     float DuracionTotal;
 
 public:
     DataPartida();
-    DataPartida(int id, DataVideojuego videojuego, Fecha fechaInicio, Fecha fechaFin, float DuracionTotal);
+    DataPartida(int id, DataVideojuego videojuego, Fecha fechaInicio, Fecha *fechaFin, float DuracionTotal);
     //Getters
     int getId();
     DataVideojuego getVideojuego();
     Fecha getFechaInicio();
-    Fecha getFechaFin();
+    Fecha *getFechaFin();
     float getDuracionTotal();
     //Setters
 
     //Destructor
-    ~DataPartida();
+    virtual ~DataPartida();
 };
 
 #endif

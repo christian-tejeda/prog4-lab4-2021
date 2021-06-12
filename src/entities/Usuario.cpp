@@ -27,6 +27,4 @@ std::string Usuario::getPassword()
 {
     return this->password;
 }
-Usuario::~Usuario(){};
-
-
+//Usuario::~Usuario(){};

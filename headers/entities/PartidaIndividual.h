@@ -1,8 +1,13 @@
 #ifndef PARTIDA_INDIVIDUAL_H
 #define PARTIDA_INDIVIDUAL_H
 
+class Partida; //fwd dec
+
 #include "Partida.h"
 #include "../datatypes/DataPartidaIndividual.h"
+
+class Videojuego; //fwd dec
+class Jugador;    //fwd dec
 
 class PartidaIndividual : public Partida
 {
@@ -14,10 +19,10 @@ public:
 
     //data partida ind no cumple requerimientos PartidaIndividual(DataPartidaIndividual dataPartidaIndividual);
 
-    PartidaIndividual(int id, Fecha fechaInicio, Fecha fechaFin, float duracionTotal, Videojuego *vj, set<Jugador *> jugadores, PartidaIndividual *cont);
+    PartidaIndividual(int id, Fecha fechaInicio, Fecha *fechaFin, float duracionTotal, Videojuego *vj, Jugador *host, PartidaIndividual *cont);
 
-    void finalizar(Fecha f);
-    void eliminarPartidasVideojuego(Videojuego videojuego);
+    void finalizar(Fecha *f);
+    void eliminarPartidasVideojuego(Videojuego *videojuego);
 
     DataPartida *getData();
 

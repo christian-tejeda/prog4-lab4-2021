@@ -1,31 +1,37 @@
 #ifndef PARTIDA_MULTIJUGADOR_H
 #define PARTIDA_MULTIJUGADOR_H
 
-#include "Partida.h"
+class Partida; //fwd dec
+
+#include "PartidaIndividual.h"
 #include "../datatypes/DataPartidaMultijugador.h"
-#include "../entities/DuracionParticipante.h"
+#include "DuracionParticipante.h"
+
+class DuracionParticipante; //forward declaration
+class Jugador;              //forward declaration
+class Videojuego;           //forward declaration
 
 class PartidaMultijugador : public Partida
 {
 private:
     bool transmitidaEnVivo;
-    set<DuracionParticipante> durpart;
+    set<DuracionParticipante *> durpart;
 
 public:
     PartidaMultijugador();
 
     //no cumple req datapartidamultijugador PartidaMultijugador(DataPartidaMultijugador dataPartidaMultijugador);
 
-    PartidaMultijugador(int id, Fecha fechaInicio, Fecha fechaFin, float duracionTotal, Videojuego *vj, set<Jugador *> jugadores, bool trasmitida, set<DuracionParticipante> durpart);
+    PartidaMultijugador(int id, Fecha fechaInicio, Fecha *fechaFin, float duracionTotal, Videojuego *vj, Jugador *host, bool trasmitida, set<DuracionParticipante *> durpart);
 
     bool getTransmitidaEnVivo();
-    set<DuracionParticipante> getDuracionParticipantes();
+    set<DuracionParticipante *> getDuracionParticipantes();
 
     void setTransmitidaEnVivo(bool enVivo);
 
-    void agregarParticipante(Jugador participante);
+    void agregarParticipante(Jugador *participante);
     void finalizar();
-    void eliminarPartidasVideojuego(Videojuego videojuego);
+    void eliminarPartidasVideojuego(Videojuego *videojuego);
 
     DataPartida *getData();
 

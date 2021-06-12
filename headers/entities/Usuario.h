@@ -25,7 +25,7 @@ public:
     virtual void setEmail(std::string email);
     virtual void setPassword(std::string password);
     //Operaciones
-    virtual DataUsuario getData() = 0;
+    virtual DataUsuario *getData() = 0;
 
     virtual ~Usuario(){};
 };

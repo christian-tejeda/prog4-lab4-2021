@@ -16,10 +16,8 @@ VideojuegoController::VideojuegoController() {}
 //VideojuegoController::VideojuegoController *getInstance() {}
 
 //Getters
-DataVideojuego *VideojuegoController::getDataVideojuego() {}
-Videojuego *VideojuegoController::getVideojuego()
-{
-}
+DataVideojuego *VideojuegoController::getDataVideojuego() { return nullptr; }
+Videojuego *VideojuegoController::getVideojuego() { return nullptr; }
 //ops del interface
 void VideojuegoController::ingresarDatosVideojuego(DataVideojuego *DataV) {}
 set<DataCategoria *> VideojuegoController::obtenerCategorias()
