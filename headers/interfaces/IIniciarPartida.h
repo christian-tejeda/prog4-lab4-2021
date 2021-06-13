@@ -21,7 +21,7 @@ public:
     virtual void seleccionarJugador(string nickname) = 0;
     virtual void confirmarIniciarPartida(bool confirmar) = 0;
 
-    virtual ~IIniciarPartida() {}
+    virtual ~IIniciarPartida(){};
 };
 
 #endif

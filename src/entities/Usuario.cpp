@@ -5,9 +5,9 @@
 #include <utility>
 
 #include "../../headers/entities/Usuario.h"
-#include "../../headers/utils/enums.h"
-#include "../../headers/datatypes/DataVideojuego.h"
-#include "../../headers/utils/Fecha.h"
+// #include "../../headers/utils/enums.h"
+// #include "../../headers/datatypes/DataVideojuego.h"
+// #include "../../headers/utils/Fecha.h"
 
 using namespace std;
 
@@ -26,5 +26,16 @@ std::string Usuario::getEmail()
 std::string Usuario::getPassword()
 {
     return this->password;
+}
+
+//Setters
+void Usuario::setEmail(std::string email)
+{
+    this->email = email;
+}
+
+void Usuario::setPassword(std::string password)
+{
+    this->password = password;
 }
 //Usuario::~Usuario(){};

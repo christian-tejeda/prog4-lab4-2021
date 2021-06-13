@@ -10,7 +10,7 @@ public:
     virtual void seleccionarVideojuego(string nombre) = 0;
     virtual void confirmarEliminarVideojuego(bool confirmar) = 0;
 
-    virtual ~IEliminarVideojuego() {}
+    virtual ~IEliminarVideojuego(){};
 };
 
 #endif

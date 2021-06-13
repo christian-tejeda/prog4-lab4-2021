@@ -7,7 +7,7 @@
 #include <utility>
 
 #include "../utils/enums.h"
-#include "../datatypes/DataVideojuego.h"
+//#include "../datatypes/DataVideojuego.h"
 
 using namespace std;
 
@@ -22,7 +22,7 @@ public:
     DataUsuario(string email, string password);
     string getEmail();
     string getPassword();
-    ~DataUsuario();
+    virtual ~DataUsuario(){};
 };
 
 #endif

@@ -5,18 +5,18 @@
 #include <utility>
 
 #include "../../headers/entities/Desarrollador.h"
-#include "../../headers/entities/Usuario.h"
-#include "../../headers/utils/enums.h"
-#include "../../headers/datatypes/DataUsuario.h"
-#include "../../headers/datatypes/DataDesarrollador.h"
+//#include "../../headers/entities/Usuario.h"
+//#include "../../headers/utils/enums.h"
+//#include "../../headers/datatypes/DataUsuario.h"
+//#include "../../headers/datatypes/DataDesarrollador.h"
 #include "../../headers/utils/Fecha.h"
 
-Desarrollador::Desarrollador() {}
+Desarrollador::Desarrollador() : Usuario(){};
 
 Desarrollador::Desarrollador(std::string email, std::string password, std::string nombreEmpresa) : Usuario(email, password)
 {
-    this->email = email;
-    this->password = password;
+    // this->email = email;
+    // this->password = password;
     this->nombreEmpresa = nombreEmpresa;
 }
 
@@ -36,16 +36,6 @@ void Desarrollador::agregarVideojuegoPublicado(Videojuego *vj)
 {
 }
 //Setters
-
-void Desarrollador::setEmail(std::string email)
-{
-    this->email = email;
-}
-
-void Desarrollador::setPassword(std::string password)
-{
-    this->password = password;
-}
 
 void Desarrollador::setNombreEmpresa(std::string nomEmpresa)
 {

@@ -10,7 +10,7 @@
 #include "../../headers/datatypes/DataVideojuego.h"
 //#include "../../headers/utils/Fecha.h"
 
-Jugador::Jugador() {}
+Jugador::Jugador() : Usuario(){};
 
 Jugador::Jugador(std::string email, std::string password, std::string nickname, std::string descripcion) : Usuario(email, password)
 {

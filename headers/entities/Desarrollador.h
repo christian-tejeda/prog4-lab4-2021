@@ -21,15 +21,15 @@
 class Desarrollador : public Usuario
 {
 private:
-    std::string email;
-    std::string password;
+    // std::string email;
+    // std::string password;
     std::string nombreEmpresa;
     set<Videojuego> *publicaciones;
 
 public:
     //Constructores
     Desarrollador();
-    Desarrollador(std::string nombre, std::string password, std::string nombreEmpresa);
+    Desarrollador(std::string email, std::string password, std::string nombreEmpresa);
     //Getters
     //std::string getNombre();
     //std::string getPassword();

@@ -15,7 +15,7 @@ public:
     virtual DataVideojuego *obtenerDataVideojuegoIngresada() = 0;
     virtual void confirmarPublicacionVideojuego(bool cancelada) = 0;
 
-    virtual ~IPublicarVideojuego() {}
+    virtual ~IPublicarVideojuego(){};
 };
 
 #endif

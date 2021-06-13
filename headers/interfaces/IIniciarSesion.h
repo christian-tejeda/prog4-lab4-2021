@@ -18,7 +18,7 @@ public:
     virtual bool iniciarSesion(DataUsuario *dataUsuario) = 0;
     virtual void confirmarInicioSesion(bool confirmar) = 0;
 
-    virtual ~IIniciarSesion() {}
+    virtual ~IIniciarSesion(){};
 };
 
 #endif

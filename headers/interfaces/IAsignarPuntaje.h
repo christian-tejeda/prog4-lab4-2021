@@ -9,7 +9,7 @@ public:
     virtual set<DataVideojuego *> obtenerVideojuegos() = 0;
     virtual void puntuarVideojuego(string nombre, int puntaje) = 0;
 
-    virtual ~IAsignarPuntaje() {}
+    virtual ~IAsignarPuntaje(){};
 };
 
 #endif

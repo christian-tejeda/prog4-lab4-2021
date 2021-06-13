@@ -9,7 +9,7 @@ public:
     virtual set<DataPartida *> obtenerPartidasSinFinalizarDeJugador() = 0;
     virtual void finalizarPartida(int idPartida) = 0;
 
-    virtual ~IFinalizarPartida() {}
+    virtual ~IFinalizarPartida(){};
 };
 
 #endif

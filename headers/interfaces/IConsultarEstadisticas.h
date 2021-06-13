@@ -10,7 +10,7 @@ public:
     virtual set<DataVideojuego *> obtenerVideojuegosPublicadosPorDesarrollador() = 0;
     virtual set<DataEstadistica *> calcularEstadisticas(string nomVideojuego) = 0;
 
-    virtual ~IConsultarEstadisticas() {}
+    virtual ~IConsultarEstadisticas(){};
 };
 
 #endif

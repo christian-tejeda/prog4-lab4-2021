@@ -9,7 +9,7 @@ public:
     virtual set<DataPartidaMultijugador *> obtenerPartidasMultijugadorActivasDeJugador() = 0;
     virtual void abandonarPartida(int idPartida) = 0;
 
-    virtual ~IAbandonarPartida() {}
+    virtual ~IAbandonarPartida(){};
 };
 
 #endif

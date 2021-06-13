@@ -5,9 +5,9 @@
 #include <utility>
 
 #include "../../headers/datatypes/DataUsuario.h"
-#include "../../headers/utils/enums.h"
-#include "../../headers/datatypes/DataVideojuego.h"
-#include "../../headers/utils/Fecha.h"
+// #include "../../headers/utils/enums.h"
+// #include "../../headers/datatypes/DataVideojuego.h"
+// #include "../../headers/utils/Fecha.h"
 
 using namespace std;
 
@@ -27,4 +27,4 @@ std::string DataUsuario::getPassword()
 {
     return this->password;
 }
-DataUsuario::~DataUsuario(){};
+//DataUsuario::~DataUsuario(){};

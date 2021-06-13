@@ -9,7 +9,7 @@ public:
     virtual set<DataVideojuego *> obtenerVideojuegos() = 0;
     virtual DataVideojuego *obtenerDataVideojuego(string nombre) = 0;
 
-    virtual ~IVerInfoVideojuego() {}
+    virtual ~IVerInfoVideojuego(){};
 };
 
 #endif

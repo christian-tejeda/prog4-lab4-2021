@@ -13,7 +13,7 @@ public:
     virtual void contratarSuscripcion(pair<TipoPeriodoValidez, float> suscripcion, TipoMetodoPago m) = 0;
     virtual void confirmarSuscripcion(bool confirmar) = 0;
 
-    virtual ~ISuscribirseVideojuego() {}
+    virtual ~ISuscribirseVideojuego(){};
 };
 
 #endif

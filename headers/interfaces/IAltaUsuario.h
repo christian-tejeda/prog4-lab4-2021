@@ -11,7 +11,7 @@ public:
     virtual void ingresarDatosDesarrollador(DataDesarrollador *dataDesarrollador) = 0;
     virtual void confirmarAltaUsuario(bool confirmar) = 0;
 
-    virtual ~IAltaUsuario() {}
+    virtual ~IAltaUsuario(){};
 };
 
 #endif

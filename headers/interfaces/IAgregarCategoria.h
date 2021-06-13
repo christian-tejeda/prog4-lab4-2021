@@ -15,7 +15,7 @@ public:
     virtual void agregarOtraCategoria(DataCategoria *otra) = 0;
     virtual void confirmarAgregarCategoria(bool confirmar) = 0;
 
-    virtual ~IAgregarCategoria() {}
+    virtual ~IAgregarCategoria(){};
 };
 
 #endif
