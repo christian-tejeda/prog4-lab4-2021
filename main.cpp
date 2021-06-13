@@ -122,6 +122,9 @@ int main(int argc, char const *argv[])
     while (!salirInicial)
     {
 
+        salirJugador = true;
+        salirDev = true;
+
         std::cout << ">";
         std::cin >> prompt;
         std::cout << "\n";
@@ -141,7 +144,8 @@ int main(int argc, char const *argv[])
             /* code */
             break;
         case 5: //Salir Inicial
-            /* code */
+            salirInicial = true;
+            menuSalirInicial();
             break;
 
         default:
@@ -177,7 +181,8 @@ int main(int argc, char const *argv[])
                 /* code */
                 break;
             case 7: // Salir Jugador
-                /* code */
+                salirJugador = true;
+                menuInicial();
                 break;
 
             default:
@@ -214,7 +219,8 @@ int main(int argc, char const *argv[])
                 /* code */
                 break;
             case 7: //Salir Dev
-                /* code */
+                salirDev = true;
+                menuInicial();
                 break;
 
             default:
