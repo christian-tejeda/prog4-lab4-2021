@@ -21,27 +21,26 @@
 class Desarrollador : public Usuario
 {
 private:
-    // std::string email;
-    // std::string password;
     std::string nombreEmpresa;
-    set<Videojuego> *publicaciones;
+    map<string, Videojuego *> publicaciones;
 
 public:
     //Constructores
     Desarrollador();
     Desarrollador(std::string email, std::string password, std::string nombreEmpresa);
+
     //Getters
-    //std::string getNombre();
-    //std::string getPassword();
     std::string getNombreEmpresa();
+
     //Setters
     void setEmail(std::string email);
     void setPassword(std::string password);
     void setNombreEmpresa(std::string nomEmpresa);
+
     //Operaciones
-    //set<ContratoSuscripcion> obtenerSuscripociones(EstadoSuscripcion estado);
     DataUsuario *getData();
     void agregarVideojuegoPublicado(Videojuego *vj);
+
     ~Desarrollador();
 };
 

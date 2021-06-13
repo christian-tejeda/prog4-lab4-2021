@@ -17,13 +17,16 @@ private:
 public:
     //Constructores
     Usuario();
-    Usuario(std::string nombre, std::string password);
+    Usuario(std::string email, std::string password);
+
     //Getters
     std::string getEmail();
     std::string getPassword();
+
     //Setters
-    virtual void setEmail(std::string email);
-    virtual void setPassword(std::string password);
+    void setEmail(std::string email);
+    void setPassword(std::string password);
+
     //Operaciones
     virtual DataUsuario *getData() = 0;
 

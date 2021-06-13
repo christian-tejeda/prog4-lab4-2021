@@ -4,11 +4,11 @@
 #include <set>
 #include <utility>
 
-#include "../../headers/entities/Categoria.h"
+//#include "../../headers/entities/Categoria.h"
 #include "../../headers/entities/Genero.h"
-#include "../../headers/utils/enums.h"
-#include "../../headers/datatypes/DataCategoria.h"
-#include "../../headers/utils/Fecha.h"
+//#include "../../headers/utils/enums.h"
+//#include "../../headers/datatypes/DataCategoria.h"
+//#include "../../headers/utils/Fecha.h"
 
 Genero::Genero()
 {

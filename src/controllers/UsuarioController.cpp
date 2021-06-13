@@ -11,8 +11,10 @@
 using namespace std;
 
 UsuarioController::UsuarioController() {}
+
 //op de singleton
 UsuarioController *UsuarioController::getInstance() { return nullptr; }
+
 //Getters
 Usuario *UsuarioController::getSesion() { return nullptr; }
 DataDesarrollador *UsuarioController::getDataDesarrollador()
@@ -36,19 +38,33 @@ TipoMetodoPago UsuarioController::getMetodoPago()
 {
     return this->metodoP;
 }
-//ops de interface
+
+//métodos de ISeleccionarEstadisticas
+std::set<DataEstadistica *> UsuarioController::listarEstadisticas()
+{
+    set<DataEstadistica *> res;
+    return res;
+}
+void UsuarioController::seleccionarEstadisticas(std::set<std::string> nombresEstadisticas) {}
+
+//métodos de IAltaUsuario
 void UsuarioController::ingresarDatosJugador(DataJugador *dataJugador) {}
 void UsuarioController::ingresarDatosDesarrollador(DataDesarrollador *dataDesarrollador) {}
 void UsuarioController::confirmarAltaUsuario(bool confirmar) {}
+
+//métodos de ISuscribirseVideojuego
 set<DataContratoSuscripcion *> UsuarioController::obtenerSuscripciones()
 {
     set<DataContratoSuscripcion *> res;
     res.insert(nullptr);
     return res;
 }
+void UsuarioController::seleccionarVideojuego(string nombreVideojuego) {}
 void UsuarioController::cancelarSuscripcion(bool cancelada) {}
 void UsuarioController::contratarSuscripcion(pair<TipoPeriodoValidez, float> suscripcion, TipoMetodoPago m) {}
 void UsuarioController::confirmarSuscripcion(bool confirmar) {}
+
+//métodos de IConsultarEstadisticas
 set<DataVideojuego *> UsuarioController::obtenerVideojuegosPublicadosPorDesarrollador()
 {
     set<DataVideojuego *> res;
@@ -69,7 +85,9 @@ set<DataEstadistica *> UsuarioController::calcularEstadisticas(string nomVideoju
 //     return res;
 // }
 // void UsuarioController::seleccionarPartida(int id) {}
-void UsuarioController::seleccionarVideojuego(string nombreVideojuego) {}
+
+//métodos de IIniciarSesion
 bool UsuarioController::iniciarSesion(DataUsuario *dataUsuario) { return false; }
 void UsuarioController::confirmarInicioSesion(bool confirmar) {}
+
 UsuarioController::~UsuarioController() {}
