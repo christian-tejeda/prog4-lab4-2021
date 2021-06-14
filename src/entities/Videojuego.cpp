@@ -100,8 +100,11 @@ int Videojuego::getCantidadSuscriptores()
     return 0;
 }
 
-DataVideojuego Videojuego::getData()
-{
-    return DataVideojuego(this->nombre, this->descripcion, this->suscripciones, this->getNombreCategorias(), this->rating);
+DataVideojuego * Videojuego::getData()
+{   
+    DataVideojuego data =DataVideojuego(this->nombre, this->descripcion, this->suscripciones, this->getNombreCategorias(), this->rating);
+    DataVideojuego* res;
+    *res=data;
+    return res;
 }
 Videojuego::~Videojuego() {}

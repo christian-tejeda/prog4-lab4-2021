@@ -41,4 +41,16 @@ void Desarrollador::agregarVideojuegoPublicado(Videojuego *vj)
 {
 }
 
+set<Videojuego*>  Desarrollador::getVideojuegoPublicados(){
+    map<string,Videojuego *> vjs=this->publicaciones;
+    map<string,Videojuego*>::iterator it;
+    set<Videojuego*> res;
+    for (it = vjs.begin(); it != vjs.end(); it++){
+        Videojuego* video=it->second;
+        res.insert(video);
+    }
+    return res;
+}
+
+
 Desarrollador::~Desarrollador(){};

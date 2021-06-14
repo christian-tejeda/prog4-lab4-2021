@@ -87,4 +87,18 @@ bool tieneSuscripcionActiva(Videojuego *vj)
     return false;
 }
 
+bool Jugador::tienePartidaSinFinalizar(Videojuego *vj){//operacion faltante en obtenerpartidasfinalizadas en elim videojuego
+    map<int, Partida *> partidas=this->partidasIniciadas;
+    map<int, Partida *>::iterator it;
+    it = partidas.begin();
+    PartidaIndividual*partida=dynamic_cast<PartidaIndividual *>(it->second);
+    bool tiene=(partida->getFechaFin()==nullptr);
+    while(it != partidas.end()&&!tiene){
+        it++;
+        PartidaIndividual*partida=dynamic_cast<PartidaIndividual *>(it->second);
+        tiene=(partida->getFechaFin()==nullptr);
+    }
+    return tiene;
+}
+
 Jugador::~Jugador(){};

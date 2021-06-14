@@ -65,7 +65,22 @@ Jugador *UsuarioHandler::obtenerJugadorPorNickname(string nickname)
     return nullptr;
 }
 
-bool UsuarioHandler::tienePartidaSinFinalizar(Videojuego *vj) { return false; }
+bool UsuarioHandler::tienePartidaSinFinalizar(Videojuego *vj) { 
+    
+    map<std::string, Usuario *> users = this->users;
+
+    map<std::string, Usuario *>::iterator it;
+    Jugador *jugador = dynamic_cast<Jugador *>(it->second);
+    bool tiene=jugador->tienePartidaSinFinalizar(vj);
+    while (it != users.end()&&!tiene)
+    {
+        it++;
+        Jugador *jugador = dynamic_cast<Jugador *>(it->second);
+        tiene=jugador->tienePartidaSinFinalizar(vj);
+    }
+
+    return tiene;
+}
 
 map<string, Usuario *> UsuarioHandler::obtenerUsuarios() { return this->users; }
 

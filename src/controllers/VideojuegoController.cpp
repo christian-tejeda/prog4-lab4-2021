@@ -7,6 +7,9 @@
 
 #include "../../headers/controllers/VideojuegoController.h"
 #include "../../headers/utils/Fecha.h"
+#include "../../headers/controllers/UsuarioController.h"
+#include "../../headers/entities/Desarrollador.h"
+#include "../../headers/handlers/UsuarioHandler.h"
 
 using namespace std;
 
@@ -43,9 +46,27 @@ void VideojuegoController::confirmarPublicacionVideojuego(bool cancelada) {}
 // }
 
 set<DataVideojuego *> VideojuegoController::obtenerVideojuegosPublicadosPorDesarrolladorConPartidasFinalizadas()
-{
-    set<DataVideojuego *> res;
-    res.insert(nullptr);
+{   
+    
+    UsuarioController uc;
+    uc.getInstance();
+    //Desarrollador * des = dynamic_cast<Desarrollador *>(des=dynamic_cast<uc.getSesion()>);
+    Desarrollador * des;
+    set<Videojuego*> vjs = des->getVideojuegoPublicados();
+    UsuarioHandler * uh;
+    uh->getInstance();
+    set<DataVideojuego*> res;
+    set<Videojuego*>::iterator it;
+    it=vjs.begin();
+    while (vjs.end()!=it) {
+        Videojuego *vj= *it;
+        bool tiene=uh->tienePartidaSinFinalizar(vj);
+        if (tiene) {
+            DataVideojuego* dvj= vj->getData();
+            res.insert(dvj);
+            it++;
+        }
+    }
     return res;
 }
 void VideojuegoController::seleccionarVideojuego(string nombre) {}
