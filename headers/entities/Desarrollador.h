@@ -41,6 +41,7 @@ public:
     DataUsuario *getData();
     void agregarVideojuegoPublicado(Videojuego *vj);
     set<Videojuego*> getVideojuegoPublicados();
+    void eliminarVideojuegoPublicado(Videojuego *vj);
 
     ~Desarrollador();
 };

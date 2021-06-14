@@ -10,6 +10,7 @@
 #include "../../headers/controllers/UsuarioController.h"
 #include "../../headers/entities/Desarrollador.h"
 #include "../../headers/handlers/UsuarioHandler.h"
+#include "../../headers/handlers/VideojuegoHandler.h"
 
 using namespace std;
 
@@ -50,11 +51,11 @@ set<DataVideojuego *> VideojuegoController::obtenerVideojuegosPublicadosPorDesar
     
     UsuarioController uc;
     uc.getInstance();
-    //Desarrollador * des = dynamic_cast<Desarrollador *>(des=dynamic_cast<uc.getSesion()>);
-    Desarrollador * des;
+    //Desarrollador * des = dynamic_cast<Desarrollador *>(des=dynamic_cast<uc.getSesion()>); fuerte duda de como hacer esto 
+    Desarrollador * des;//sacar cuando resolver lo de arriba
     set<Videojuego*> vjs = des->getVideojuegoPublicados();
     UsuarioHandler * uh;
-    uh->getInstance();
+    uh=uh->getInstance();
     set<DataVideojuego*> res;
     set<Videojuego*>::iterator it;
     it=vjs.begin();
@@ -69,8 +70,35 @@ set<DataVideojuego *> VideojuegoController::obtenerVideojuegosPublicadosPorDesar
     }
     return res;
 }
-void VideojuegoController::seleccionarVideojuego(string nombre) {}
-void VideojuegoController::confirmarEliminarVideojuego(bool confirmar) {}
+void VideojuegoController::seleccionarVideojuego(string nombre) {
+    VideojuegoHandler * vH;
+    vH=vH->getInstance();
+    Videojuego * res=vH->obtenerVideojuegoPorId(nombre);
+    this->videojuego=res;
+}
+void VideojuegoController::confirmarEliminarVideojuego(bool confirmar) {
+    //en proceso
+    UsuarioController uc;
+    uc.getInstance();
+    //Desarrollador * dev = dynamic_cast<Desarrollador *>(des=dynamic_cast<uc.getSesion()>); fuerte duda de como hacer esto 
+    Desarrollador * dev;//sacar cuando resolver lo de arriba
+    Videojuego * video= this->videojuego;
+    dev->eliminarVideojuegoPublicado(video);
+    UsuarioHandler * uH;
+    uH=uH->getInstance();
+    map<string,Usuario*> users=uH->obtenerUsuarios();
+    map<string,Usuario*>::iterator it;
+    for (it = users.begin(); it != users.end(); it++)
+    {
+        Jugador *user = dynamic_cast<Jugador *>(it->second);
+        user->eliminarContratosDeVideojuego(video);
+        user->eliminarPartidasDeVideojuego(video);
+    }
+    VideojuegoHandler * vH;
+    vH=vH->getInstance();
+    vH->eliminarVideojuego(video);
+    video->~Videojuego();
+}
 void VideojuegoController::puntuarVideojuego(string nombre, int puntaje) {}
 set<DataVideojuego *> VideojuegoController::obtenerVideojuegos()
 {

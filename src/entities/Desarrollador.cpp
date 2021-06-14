@@ -52,5 +52,8 @@ set<Videojuego*>  Desarrollador::getVideojuegoPublicados(){
     return res;
 }
 
+void Desarrollador::eliminarVideojuegoPublicado(Videojuego *vj){
+    this->publicaciones.erase(vj->getNombre());
+}
 
 Desarrollador::~Desarrollador(){};
