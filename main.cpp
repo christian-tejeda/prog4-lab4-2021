@@ -20,7 +20,41 @@ void menuInicial()
     std::cout << "+-----------------------------------------------------------+\n";
 }
 
-void menuAltaUsuario(FactoryController *fact) {}
+void menuAltaUsuario(FactoryController *fact)
+{
+
+    int promptUser = 0;
+
+    std::string mail = "";
+    std::string pwd = "";
+
+    std::cout << "Ingrese email: ";
+    std::cin >> mail;
+    std::cout << "\n";
+
+    std::cout << "Ingrese contraseña: ";
+    std::cin >> pwd;
+    std::cout << "\n";
+
+    std::cout << "Seleccione tipo de usuario a crear:\n";
+    std::cout << "1) Jugador\n";
+    std::cout << "2) Desarrollador\n";
+
+    std::cout << ">";
+    std::cin >> promptUser;
+    std::cout << "\n";
+
+    if (promptUser == 1) //Jugador
+    {
+    }
+    else if (promptUser == 2) //Desarrollador
+    {
+    }
+    else
+    {
+        throw std::invalid_argument("Error: Tipo de usuario no válido.");
+    }
+}
 
 void menuIniciarSesion(FactoryController *fact) {}
 
@@ -135,13 +169,12 @@ int main(int argc, char const *argv[])
 
     int prompt = 0;
 
-    menuInicial();
-
     while (!salirInicial)
     {
-
         salirJugador = true;
         salirDev = true;
+
+        menuInicial();
 
         std::cout << ">";
         std::cin >> prompt;
