@@ -374,9 +374,6 @@ int main(int argc, char const *argv[])
     }
 
     //Destruccion de singletons
-    delete uh;
-    delete ch;
-    delete vh;
     delete uc;
     delete fact;
 

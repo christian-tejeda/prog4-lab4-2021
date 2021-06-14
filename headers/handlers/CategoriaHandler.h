@@ -20,21 +20,22 @@ private:
     static CategoriaHandler *instancia;
     map<string, Categoria *> cats;
     CategoriaHandler();
+    ~CategoriaHandler();
 
 public:
-    //op de singleton
     static CategoriaHandler *getInstance();
 
-    //ops del manejador
     map<string, Categoria *> obtenerCategorias();
-    Categoria *obtenerCategoriaPorId(string nom);
-    Plataforma *obtenerPlataformaPorId(string plat);
-    Genero *obtenerGeneroPorId(string genero);
-    void agregarCategoria(Categoria *categoria);
-    void actualizarCategoria(Categoria *categoria);
-    void eliminarCategoria(Categoria *categoria);
 
-    ~CategoriaHandler();
+    Categoria *obtenerCategoriaPorId(string nombre);
+
+    // Plataforma *obtenerPlataformaPorId(string nombre);
+
+    // Genero *obtenerGeneroPorId(string nombre);
+
+    void agregarCategoria(Categoria *categoria);
+
+    void eliminarCategoria(Categoria *categoria);
 };
 
 #endif

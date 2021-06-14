@@ -19,41 +19,58 @@ UsuarioHandler *UsuarioHandler::getInstance()
 {
     if (instancia == nullptr)
         instancia = new UsuarioHandler();
+
     return instancia;
 }
-bool UsuarioHandler::existeJugadorConNickname(string n)
+
+bool UsuarioHandler::existeJugadorConNickname(string nickname)
 {
+    map<std::string, Usuario *> users = this->users;
+
+    map<std::string, Usuario *>::iterator it;
+
+    for (it = users.begin(); it != users.end(); it++)
+    {
+        Jugador *jugador = dynamic_cast<Jugador *>(it->second);
+
+        if (jugador != nullptr && jugador->getNickname() == nickname)
+            return true;
+    }
+
     return false;
 }
+
 void UsuarioHandler::agregarUsuario(Usuario *usuario)
 {
+    this->users.insert(std::pair<std::string, Usuario *>(usuario->getEmail(), usuario));
 }
-map<string, Usuario *> UsuarioHandler::obtenerJugadoresConSuscripcionActiva(Videojuego *vj)
+
+map<string, Usuario *> UsuarioHandler::obtenerJugadoresConSuscripcionActiva(Videojuego *vj) { return map<string, Usuario *>(); }
+
+Jugador *UsuarioHandler::obtenerJugadorPorNickname(string nickname)
 {
-    return map<string, Usuario *>();
-}
-Jugador *UsuarioHandler::obtenerJugadorPorNickname(string n)
-{
+
+    map<std::string, Usuario *> users = this->users;
+
+    map<std::string, Usuario *>::iterator it;
+
+    for (it = users.begin(); it != users.end(); it++)
+    {
+        Jugador *jugador = dynamic_cast<Jugador *>(it->second);
+
+        if (jugador != nullptr && jugador->getNickname() == nickname)
+            return jugador;
+    }
+
     return nullptr;
 }
-bool UsuarioHandler::tienePartidaSinFinalizar(Videojuego *vj)
-{
-    return false;
-}
-map<string, Usuario *> UsuarioHandler::obtenerUsuarios()
-{
-    return map<string, Usuario *>();
-}
-void UsuarioHandler::actualizarUsuario(Usuario *usuario)
-{
-}
-Partida *UsuarioHandler::obtenerPartidaPorId(int idPartida)
-{
-    return nullptr;
-    ;
-}
-void UsuarioHandler::eliminarUsuario(Usuario *usuario)
-{
-}
+
+bool UsuarioHandler::tienePartidaSinFinalizar(Videojuego *vj) { return false; }
+
+map<string, Usuario *> UsuarioHandler::obtenerUsuarios() { return this->users; }
+
+Partida *UsuarioHandler::obtenerPartidaPorId(int idPartida) { return nullptr; }
+
+void UsuarioHandler::eliminarUsuario(Usuario *usuario) {}
 
 UsuarioHandler::~UsuarioHandler() {}

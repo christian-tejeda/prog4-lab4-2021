@@ -19,25 +19,27 @@ class UsuarioHandler
 private:
     static UsuarioHandler *instancia;
     map<string, Usuario *> users;
+    UsuarioHandler();
+    ~UsuarioHandler();
 
 public:
-    UsuarioHandler();
-
-    //op de singleton, static para hacerla op de clase
     static UsuarioHandler *getInstance();
 
-    //ops del manejador
     bool existeJugadorConNickname(string n);
-    void agregarUsuario(Usuario *usuario);
-    map<string, Usuario *> obtenerJugadoresConSuscripcionActiva(Videojuego *vj);
-    Jugador *obtenerJugadorPorNickname(string n);
-    bool tienePartidaSinFinalizar(Videojuego *vj);
-    map<string, Usuario *> obtenerUsuarios();
-    void actualizarUsuario(Usuario *usuario);
-    Partida *obtenerPartidaPorId(int idPartida);
-    void eliminarUsuario(Usuario *usuario);
 
-    ~UsuarioHandler();
+    void agregarUsuario(Usuario *usuario);
+
+    map<string, Usuario *> obtenerJugadoresConSuscripcionActiva(Videojuego *vj);
+
+    Jugador *obtenerJugadorPorNickname(string n);
+
+    bool tienePartidaSinFinalizar(Videojuego *vj);
+
+    map<string, Usuario *> obtenerUsuarios();
+
+    Partida *obtenerPartidaPorId(int idPartida);
+
+    void eliminarUsuario(Usuario *usuario);
 };
 
 #endif

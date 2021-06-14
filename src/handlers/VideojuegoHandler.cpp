@@ -13,36 +13,29 @@ using namespace std;
 
 VideojuegoHandler *VideojuegoHandler::instancia = nullptr;
 
-VideojuegoHandler::VideojuegoHandler()
-{
-}
+VideojuegoHandler::VideojuegoHandler() {}
 
 VideojuegoHandler *VideojuegoHandler::getInstance()
 {
     if (instancia == nullptr)
+    {
         instancia = new VideojuegoHandler();
+    }
+
     return instancia;
 }
 
-void VideojuegoHandler::agregarrVideojuego(Videojuego *vj)
+void VideojuegoHandler::agregarVideojuego(Videojuego *vj)
 {
+    this->vjs.insert(std::pair<std::string, Videojuego *>(vj->getNombre(), vj));
 }
-map<string, Videojuego *> VideojuegoHandler::obtenerVideojuegos()
-{
-    return map<string, Videojuego *>();
-}
-Videojuego *VideojuegoHandler::obtenerVideojuegoPorId(string nombre)
-{
-    return nullptr;
-}
-void VideojuegoHandler::eliminarVideojuego(Videojuego *vj)
-{
-}
-void VideojuegoHandler::actualizarVideojuego(Videojuego *vj)
-{
-}
-map<string, Jugador *> VideojuegoHandler::obtenerJugadoresVideojuego(Videojuego *vj)
-{
-    return map<string, Jugador *>();
-}
+
+map<string, Videojuego *> VideojuegoHandler::obtenerVideojuegos() { return this->vjs; }
+
+Videojuego *VideojuegoHandler::obtenerVideojuegoPorId(string nombre) { return this->vjs[nombre]; }
+
+void VideojuegoHandler::eliminarVideojuego(Videojuego *vj) {}
+
+map<string, Jugador *> VideojuegoHandler::obtenerJugadoresVideojuego(Videojuego *vj) { return map<string, Jugador *>(); }
+
 VideojuegoHandler::~VideojuegoHandler() {}
