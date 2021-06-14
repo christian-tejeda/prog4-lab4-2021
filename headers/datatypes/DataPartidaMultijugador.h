@@ -17,12 +17,12 @@ class DataPartidaMultijugador : public DataPartida
 {
 private:
     bool trasmitida;
-    DataJugador creador;            //PREGUNTAR!
-    set<DataJugador> participantes; //PREGUNTAR!
+    DataJugador creador;              //PREGUNTAR!
+    set<DataJugador *> participantes; //PREGUNTAR!
 
 public:
     DataPartidaMultijugador();
-    DataPartidaMultijugador(int id, DataVideojuego videojuego, Fecha fechaInicio, Fecha *fechaFin, float DuracionTotal, bool esTrasmitida, DataJugador creador, set<DataJugador> participantes);
+    DataPartidaMultijugador(int id, DataVideojuego videojuego, Fecha fechaInicio, Fecha *fechaFin, float DuracionTotal, bool esTrasmitida, DataJugador creador, set<DataJugador *> participantes);
     //Getters
     //int getId();
     //DataVideojuego getVideojuego();
@@ -31,7 +31,7 @@ public:
     //float getDuracionTotal();
     bool getTramistida();
     DataJugador getCreador();
-    set<DataJugador> getParticipantes();
+    set<DataJugador *> getParticipantes();
 
     //Setters
 

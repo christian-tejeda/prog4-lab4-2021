@@ -17,7 +17,7 @@ class CantidadSuscritos : public InterfazEstadistica
 {
 public:
     CantidadSuscritos();
-    float calcularEstadistica(Videojuego *vj) override;
+    float calcularEstadistica(Videojuego *vj);
     ~CantidadSuscritos();
 };
 
@@ -25,7 +25,7 @@ class TotalHorasJugadas : public InterfazEstadistica
 {
 public:
     TotalHorasJugadas();
-    float calcularEstadistica(Videojuego *vj) override;
+    float calcularEstadistica(Videojuego *vj);
     ~TotalHorasJugadas();
 };
 
@@ -33,7 +33,7 @@ class PromedioRating : public InterfazEstadistica
 {
 public:
     PromedioRating();
-    float calcularEstadistica(Videojuego *vj) override;
+    float calcularEstadistica(Videojuego *vj);
     ~PromedioRating();
 };
 
