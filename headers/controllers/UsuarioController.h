@@ -9,10 +9,10 @@
 #include "../entities/Usuario.h"
 #include "../entities/Videojuego.h"
 
-class UsuarioController : public ISeleccionarEstadisticas, IConsultarEstadisticas, ISuscribirseVideojuego, IIniciarSesion, IAltaUsuario
+class UsuarioController : public ISeleccionarEstadisticas, public IConsultarEstadisticas, public ISuscribirseVideojuego, public IIniciarSesion, public IAltaUsuario
 { //singleton
 private:
-    UsuarioController *instancia;
+    static UsuarioController *instancia;
 
     Usuario *sesion;
     DataDesarrollador *dataDesarrollador; //se borra la instacnia al terminar el CU

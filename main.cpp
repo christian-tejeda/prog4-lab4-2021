@@ -1,6 +1,9 @@
 #include "headers/FactoryController.h"
 //#include "headers/entities/Usuario.h"
 #include "headers/utils/Fecha.h"
+#include "headers/handlers/UsuarioHandler.h"
+#include "headers/handlers/CategoriaHandler.h"
+#include "headers/handlers/VideojuegoHandler.h"
 
 #include <iostream>
 #include <stdexcept>
@@ -11,20 +14,19 @@ void menuInicial()
     std::cout << "|                                                           |\n";
     std::cout << "|                    1) Alta de usuario                     |\n";
     std::cout << "|                    2) Iniciar sesión                      |\n";
-    std::cout << "|              3) Modificar fecha del sistema               |\n";
-    std::cout << "|                 4) Cargar datos de prueba                 |\n";
-    std::cout << "|                        5) Salir                           |\n";
+    std::cout << "|                 3) Cargar datos de prueba                 |\n";
+    std::cout << "|                        4) Salir                           |\n";
     std::cout << "|                                                           |\n";
     std::cout << "+-----------------------------------------------------------+\n";
 }
 
-void menuAltaUsuario() {}
+void menuAltaUsuario(FactoryController *fact) {}
 
-void menuIniciarSesion() {}
+void menuIniciarSesion(FactoryController *fact) {}
 
 void menuModificarFechaSistema() {}
 
-void menuCargarDatosPrueba() {}
+void menuCargarDatosPrueba(FactoryController *fact) {}
 
 void menuSalirInicial()
 {
@@ -41,36 +43,37 @@ void menuJugador(Usuario *sesion)
     std::cout << "|            4) Abandonar partida multijugador              |\n";
     std::cout << "|                  5) Finalizar partida                     |\n";
     std::cout << "|             6) Ver información de videojuego              |\n";
-    std::cout << "|                       7) Salir                            |\n";
+    std::cout << "|              7) Modificar fecha del sistema               |\n";
+    std::cout << "|                       8) Salir                            |\n";
     std::cout << "|                                                           |\n";
     std::cout << "+-----------------------------------------------------------+\n";
 }
 
-void menuSuscribirseVideojuego()
+void menuSuscribirseVideojuego(FactoryController *fact)
 {
 }
 
-void menuAsignarPuntaje()
+void menuAsignarPuntaje(FactoryController *fact)
 {
 }
 
-void menuIniciarPartida()
+void menuIniciarPartida(FactoryController *fact)
 {
 }
 
-void menuAbandonarPartidaMulti()
+void menuAbandonarPartidaMulti(FactoryController *fact)
 {
 }
 
-void menuFinalizarPartida()
+void menuFinalizarPartida(FactoryController *fact)
 {
 }
 
-void menuVerInfoVideojuego()
+void menuVerInfoVideojuego(FactoryController *fact)
 { //Mismo para jugador y dev
 }
 
-void menuSalirUsuario(/* usuarioController */)
+void menuSalirUsuario(FactoryController *fact)
 { //Mismo para jugador y dev
 }
 
@@ -84,7 +87,8 @@ void menuDesarrollador(Usuario *sesion)
     std::cout << "|              4) Seleccionar estadísticas                  |\n";
     std::cout << "|               5) Consultar estadísticas                   |\n";
     std::cout << "|            6) Ver información de videojuego               |\n";
-    std::cout << "|                       7) Salir                            |\n";
+    std::cout << "|             7) Modificar fecha del sistema                |\n";
+    std::cout << "|                       8) Salir                            |\n";
     std::cout << "|                                                           |\n";
     std::cout << "+-----------------------------------------------------------+\n";
 }
@@ -109,8 +113,22 @@ void menuConsultarEstadisticas()
 {
 }
 
+//-------------------- Programa Principal -----------------------------
+
 int main(int argc, char const *argv[])
 {
+    //Creación de singletons
+    UsuarioHandler *uh = UsuarioHandler::getInstance();
+    CategoriaHandler *ch = CategoriaHandler::getInstance();
+    VideojuegoHandler *vh = VideojuegoHandler::getInstance();
+
+    UsuarioController *uc = UsuarioController::getInstance();
+
+    FactoryController *fact = FactoryController::getInstance();
+
+    //Creacion variables globales
+    Fecha *fechaSist = new Fecha(1, 1, 2021, 15, 30); //Fecha de ejemplo
+
     bool salirInicial = false;
     bool salirJugador = true;
     bool salirDev = true;
@@ -132,22 +150,41 @@ int main(int argc, char const *argv[])
         switch (prompt)
         {
         case 1: //Alta de usuario
-            /* code */
+            try
+            {
+                menuAltaUsuario(fact);
+            }
+            catch (const std::invalid_argument &ex)
+            {
+                std::cout << ex.what() << '\n';
+            }
+
             break;
         case 2: //Iniciar sesión
-            /* code */
+            try
+            {
+                /* code */
+            }
+            catch (const std::invalid_argument &ex)
+            {
+                std::cout << ex.what() << '\n';
+            }
+
             break;
-        case 3: //Modificar fecha del sistema
-            /* code */
+        case 3: //Cargar Datos de Prueba
+            try
+            {
+                /* code */
+            }
+            catch (const std::invalid_argument &ex)
+            {
+                std::cout << ex.what() << '\n';
+            }
             break;
-        case 4: //Cargar datos de prueba
-            /* code */
-            break;
-        case 5: //Salir Inicial
+        case 4: //Salir inicial
             salirInicial = true;
             menuSalirInicial();
             break;
-
         default:
             std::cout << "Por favor, elija un numero adecuado.\n";
             break;
@@ -163,25 +200,78 @@ int main(int argc, char const *argv[])
             switch (prompt)
             {
             case 1: //Suscribirse a videojuego
-                /* code */
+                try
+                {
+                    /* code */
+                }
+                catch (const std::invalid_argument &ex)
+                {
+                    std::cout << ex.what() << '\n';
+                }
                 break;
             case 2: //Asignar puntaje a videojuego
-                /* code */
+                try
+                {
+                    /* code */
+                }
+                catch (const std::invalid_argument &ex)
+                {
+                    std::cout << ex.what() << '\n';
+                }
                 break;
             case 3: //Iniciar partida
-                /* code */
+                try
+                {
+                    /* code */
+                }
+                catch (const std::invalid_argument &ex)
+                {
+                    std::cout << ex.what() << '\n';
+                }
                 break;
             case 4: //Abandonar partida multijugador
-                /* code */
+                try
+                {
+                    /* code */
+                }
+                catch (const std::invalid_argument &ex)
+                {
+                    std::cout << ex.what() << '\n';
+                }
                 break;
             case 5: //Finalizar partida
-                /* code */
+                try
+                {
+                    /* code */
+                }
+                catch (const std::invalid_argument &ex)
+                {
+                    std::cout << ex.what() << '\n';
+                }
                 break;
             case 6: //Ver información de videojuego
-                /* code */
+                try
+                {
+                    /* code */
+                }
+                catch (const std::invalid_argument &ex)
+                {
+                    std::cout << ex.what() << '\n';
+                }
                 break;
-            case 7: // Salir Jugador
+            case 7: // Modificar fecha del sistema
+                try
+                {
+                    /* code */
+                }
+                catch (const std::invalid_argument &ex)
+                {
+                    std::cout << ex.what() << '\n';
+                }
+                break;
+            case 8: // Salir Jugador
                 salirJugador = true;
+                menuSalirUsuario(fact);
                 menuInicial();
                 break;
 
@@ -201,25 +291,78 @@ int main(int argc, char const *argv[])
             switch (prompt)
             {
             case 1: // Agregar categoría
-                /* code */
+                try
+                {
+                    /* code */
+                }
+                catch (const std::invalid_argument &ex)
+                {
+                    std::cout << ex.what() << '\n';
+                }
                 break;
             case 2: //Publicar videojuego
-                /* code */
+                try
+                {
+                    /* code */
+                }
+                catch (const std::invalid_argument &ex)
+                {
+                    std::cout << ex.what() << '\n';
+                }
                 break;
             case 3: //Eliminar videojuego
-                /* code */
+                try
+                {
+                    /* code */
+                }
+                catch (const std::invalid_argument &ex)
+                {
+                    std::cout << ex.what() << '\n';
+                }
                 break;
             case 4: //Seleccionar estadísticas
-                /* code */
+                try
+                {
+                    /* code */
+                }
+                catch (const std::invalid_argument &ex)
+                {
+                    std::cout << ex.what() << '\n';
+                }
                 break;
             case 5: //Consultar estadísticas
-                /* code */
+                try
+                {
+                    /* code */
+                }
+                catch (const std::invalid_argument &ex)
+                {
+                    std::cout << ex.what() << '\n';
+                }
                 break;
             case 6: //Ver información de videojuego
-                /* code */
+                try
+                {
+                    /* code */
+                }
+                catch (const std::invalid_argument &ex)
+                {
+                    std::cout << ex.what() << '\n';
+                }
                 break;
-            case 7: //Salir Dev
+            case 7: // Modificar fecha del sistema
+                try
+                {
+                    /* code */
+                }
+                catch (const std::invalid_argument &ex)
+                {
+                    std::cout << ex.what() << '\n';
+                }
+                break;
+            case 8: //Salir Dev
                 salirDev = true;
+                menuSalirUsuario(fact);
                 menuInicial();
                 break;
 
@@ -229,6 +372,16 @@ int main(int argc, char const *argv[])
             }
         }
     }
+
+    //Destruccion de singletons
+    delete uh;
+    delete ch;
+    delete vh;
+    delete uc;
+    delete fact;
+
+    //Destruccion variables globales
+    delete fechaSist;
 
     return 0;
 }

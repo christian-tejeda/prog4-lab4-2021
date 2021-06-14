@@ -8,7 +8,7 @@
 #include "../entities/Videojuego.h"
 //#include "../entities/PartidaIndividual.h"
 
-class PartidaController : public IIniciarPartida, IAbandonarPartida, IFinalizarPartida
+class PartidaController : public IIniciarPartida, public IAbandonarPartida, public IFinalizarPartida
 {
 private:
     Usuario *jg;                          //se borra la ref al final del CU

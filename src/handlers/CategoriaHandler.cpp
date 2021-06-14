@@ -15,7 +15,12 @@ CategoriaHandler *CategoriaHandler::instancia = nullptr;
 
 CategoriaHandler::CategoriaHandler() {}
 
-CategoriaHandler *CategoriaHandler::getInstance() { return nullptr; }
+CategoriaHandler *CategoriaHandler::getInstance()
+{
+    if (instancia == nullptr)
+        instancia = new CategoriaHandler();
+    return instancia;
+}
 
 map<std::string, Categoria *> CategoriaHandler::obtenerCategorias()
 {

@@ -10,10 +10,17 @@
 
 using namespace std;
 
+UsuarioController *UsuarioController::instancia = nullptr;
+
 UsuarioController::UsuarioController() {}
 
 //op de singleton
-UsuarioController *UsuarioController::getInstance() { return nullptr; }
+UsuarioController *UsuarioController::getInstance()
+{
+    if (instancia == nullptr)
+        instancia = new UsuarioController();
+    return instancia;
+}
 
 //Getters
 Usuario *UsuarioController::getSesion() { return nullptr; }

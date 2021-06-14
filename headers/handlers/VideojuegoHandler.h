@@ -11,7 +11,7 @@ using namespace std;
 class VideojuegoHandler
 { //singleton
 private:
-    VideojuegoHandler *instancia;
+    static VideojuegoHandler *instancia;
     map<string, Videojuego *> vjs;
 
 public:

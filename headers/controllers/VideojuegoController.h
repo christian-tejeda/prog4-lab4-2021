@@ -8,7 +8,7 @@
 #include "../interfaces/IPublicarVideojuego.h"
 #include "../entities/Videojuego.h"
 
-class VideojuegoController : public IAgregarCategoria, IVerInfoVideojuego, IAsignarPuntaje, IEliminarVideojuego, IPublicarVideojuego
+class VideojuegoController : public IAgregarCategoria, public IVerInfoVideojuego, public IAsignarPuntaje, public IEliminarVideojuego, public IPublicarVideojuego
 { //singleton
 private:
     DataVideojuego *dataVideojuego; //se borra la instancia al terminar el CU

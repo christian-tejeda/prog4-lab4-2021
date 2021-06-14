@@ -17,7 +17,7 @@ using namespace std;
 class UsuarioHandler
 { //singleton
 private:
-    UsuarioHandler *instancia;
+    static UsuarioHandler *instancia;
     map<string, Usuario *> users;
 
 public:

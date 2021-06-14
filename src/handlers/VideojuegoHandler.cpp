@@ -11,13 +11,17 @@
 
 using namespace std;
 
+VideojuegoHandler *VideojuegoHandler::instancia = nullptr;
+
 VideojuegoHandler::VideojuegoHandler()
 {
 }
 
 VideojuegoHandler *VideojuegoHandler::getInstance()
 {
-    return nullptr;
+    if (instancia == nullptr)
+        instancia = new VideojuegoHandler();
+    return instancia;
 }
 
 void VideojuegoHandler::agregarrVideojuego(Videojuego *vj)

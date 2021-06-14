@@ -11,20 +11,30 @@ FactoryController *FactoryController::instancia = nullptr;
 
 FactoryController::FactoryController() {}
 
-ISeleccionarEstadisticas *FactoryController::getISeleccionarEstadisticas() { return nullptr; }
-IConsultarEstadisticas *FactoryController::getIConsultarEstadisticas() { return nullptr; }
-ISuscribirseVideojuego *FactoryController::getISuscribirseVideojuego() { return nullptr; }
-IIniciarSesion *FactoryController::getIIniciarSesion() { return nullptr; }
-IAltaUsuario *FactoryController::getIAltaUsuario() { return nullptr; }
+FactoryController *FactoryController::getInstance()
+{
+    if (instancia == nullptr)
+        instancia = new FactoryController();
+    return instancia;
+}
 
-IIniciarPartida *FactoryController::getIIniciarPartida() { return nullptr; }
-IAbandonarPartida *FactoryController::getIAbandonarPartida() { return nullptr; }
-IFinalizarPartida *FactoryController::getIFinalizarPartida() { return nullptr; }
+//Usuario Controller
+ISeleccionarEstadisticas *FactoryController::getISeleccionarEstadisticas() { return UsuarioController::getInstance(); }
+IConsultarEstadisticas *FactoryController::getIConsultarEstadisticas() { return UsuarioController::getInstance(); }
+ISuscribirseVideojuego *FactoryController::getISuscribirseVideojuego() { return UsuarioController::getInstance(); }
+IIniciarSesion *FactoryController::getIIniciarSesion() { return UsuarioController::getInstance(); }
+IAltaUsuario *FactoryController::getIAltaUsuario() { return UsuarioController::getInstance(); }
 
-IAgregarCategoria *FactoryController::getIAgregarCategoria() { return nullptr; }
-IVerInfoVideojuego *FactoryController::getIVerInfoVideojuego() { return nullptr; }
-IAsignarPuntaje *FactoryController::getIAsignarPuntaje() { return nullptr; }
-IEliminarVideojuego *FactoryController::getIEliminarVideojuego() { return nullptr; }
-IPublicarVideojuego *FactoryController::getIPublicarVideojuego() { return nullptr; }
+//Partida Controller
+IIniciarPartida *FactoryController::getIIniciarPartida() { return new PartidaController(); }
+IAbandonarPartida *FactoryController::getIAbandonarPartida() { return new PartidaController(); }
+IFinalizarPartida *FactoryController::getIFinalizarPartida() { return new PartidaController(); }
+
+//Videojuego Controller
+IAgregarCategoria *FactoryController::getIAgregarCategoria() { return new VideojuegoController(); }
+IVerInfoVideojuego *FactoryController::getIVerInfoVideojuego() { return new VideojuegoController(); }
+IAsignarPuntaje *FactoryController::getIAsignarPuntaje() { return new VideojuegoController(); }
+IEliminarVideojuego *FactoryController::getIEliminarVideojuego() { return new VideojuegoController(); }
+IPublicarVideojuego *FactoryController::getIPublicarVideojuego() { return new VideojuegoController(); }
 
 FactoryController::~FactoryController() {}

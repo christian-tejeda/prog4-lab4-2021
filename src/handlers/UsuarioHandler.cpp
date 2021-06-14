@@ -11,10 +11,15 @@
 
 using namespace std;
 
+UsuarioHandler *UsuarioHandler::instancia = nullptr;
+
 UsuarioHandler::UsuarioHandler() {}
+
 UsuarioHandler *UsuarioHandler::getInstance()
 {
-    return nullptr;
+    if (instancia == nullptr)
+        instancia = new UsuarioHandler();
+    return instancia;
 }
 bool UsuarioHandler::existeJugadorConNickname(string n)
 {
