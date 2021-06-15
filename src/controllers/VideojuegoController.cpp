@@ -51,8 +51,7 @@ set<DataVideojuego *> VideojuegoController::obtenerVideojuegosPublicadosPorDesar
     
     UsuarioController uc;
     uc.getInstance();
-    //Desarrollador * des = dynamic_cast<Desarrollador *>(des=dynamic_cast<uc.getSesion()>);// fuerte duda de como hacer esto 
-    Desarrollador * des;//sacar cuando resolver lo de arriba
+    Desarrollador * des = dynamic_cast<Desarrollador *>(uc.getSesion());   
     set<Videojuego*> vjs = des->getVideojuegoPublicados();
     UsuarioHandler * uh;
     uh=uh->getInstance();
@@ -80,8 +79,7 @@ void VideojuegoController::confirmarEliminarVideojuego(bool confirmar) {
     //en proceso
     UsuarioController uc;
     uc.getInstance();
-    //Desarrollador * dev = dynamic_cast<Desarrollador *>(des=dynamic_cast<uc.getSesion()>); fuerte duda de como hacer esto 
-    Desarrollador * dev;//sacar cuando resolver lo de arriba
+    Desarrollador * dev = dynamic_cast<Desarrollador *>(uc.getSesion());    
     Videojuego * video= this->videojuego;
     dev->eliminarVideojuegoPublicado(video);
     UsuarioHandler * uH;
