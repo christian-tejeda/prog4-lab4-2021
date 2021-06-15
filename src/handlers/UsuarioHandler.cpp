@@ -8,6 +8,7 @@
 #include "../../headers/entities/Genero.h"
 #include "../../headers/entities/Plataforma.h"
 #include "../../headers/handlers/UsuarioHandler.h"
+#include "../../headers/entities/Desarrollador.h"
 
 using namespace std;
 
@@ -40,9 +41,21 @@ bool UsuarioHandler::existeJugadorConNickname(string nickname)
     return false;
 }
 
-void UsuarioHandler::agregarUsuario(Usuario *usuario)
+void UsuarioHandler::agregarUsuario(DataUsuario *usuario)
 {
-    this->users.insert(std::pair<std::string, Usuario *>(usuario->getEmail(), usuario));
+    Usuario *user;
+    DataJugador *dtJg = dynamic_cast<DataJugador *>(usuario);
+    DataDesarrollador *dtDev = dynamic_cast<DataDesarrollador *>(usuario);
+    if (dtJg)
+    {
+        user = new Jugador(dtJg->getEmail(), dtJg->getPassword(), dtJg->getNickname(), dtJg->getDescripcion());
+    }
+    else
+    {
+        user = new Desarrollador(dtDev->getEmail(), dtDev->getPassword(), dtDev->getNombreEmpresa());
+    }
+
+    this->users.insert(std::pair<std::string, Usuario *>(user->getEmail(), user));
 }
 
 map<string, Usuario *> UsuarioHandler::obtenerJugadoresConSuscripcionActiva(Videojuego *vj) { return map<string, Usuario *>(); }

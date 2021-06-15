@@ -19,14 +19,14 @@ private:
     //string email;
     //string password;
     string nombreEmpresa;
-    string descripcion;
+    //string descripcion;
 
 public:
     DataDesarrollador();
     DataDesarrollador(string email, string password, string nombreEmpresa);
     //getters
-    string getEmail();
-    string getPassword();
+    //string getEmail();
+    //string getPassword();
     string getNombreEmpresa();
     //descripcion
     ~DataDesarrollador();

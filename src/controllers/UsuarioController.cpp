@@ -13,7 +13,13 @@ using namespace std;
 
 UsuarioController *UsuarioController::instancia = nullptr;
 
-UsuarioController::UsuarioController() {}
+UsuarioController::UsuarioController()
+{
+    this->dataDesarrollador = nullptr;
+    this->dataJugador = nullptr;
+    this->sesion = nullptr;
+    this->videojuego = nullptr;
+}
 
 //op de singleton
 UsuarioController *UsuarioController::getInstance()
@@ -77,7 +83,37 @@ void UsuarioController::ingresarDatosDesarrollador(DataDesarrollador *dataDesarr
     this->dataDesarrollador = dataDesarrollador;
 }
 
-void UsuarioController::confirmarAltaUsuario(bool confirmar) {}
+void UsuarioController::confirmarAltaUsuario(bool confirmar)
+{
+    try
+    {
+        if (confirmar)
+        {
+            UsuarioHandler *uh = UsuarioHandler::getInstance();
+            DataUsuario *dtUser = nullptr;
+            if (this->dataJugador != nullptr)
+            {
+                dtUser = this->dataJugador;
+            }
+            else
+            {
+                dtUser = this->dataDesarrollador;
+            }
+
+            uh->agregarUsuario(dtUser);
+            std::cout << "¡Usuario agregado correctamente!";
+        }
+    }
+    catch (const std::invalid_argument &ex)
+    {
+        std::cout << ex.what() << '\n';
+    }
+
+    if (this->dataJugador != nullptr)
+        delete this->dataJugador;
+    if (this->dataDesarrollador != nullptr)
+        delete this->dataDesarrollador;
+}
 
 //métodos de ISuscribirseVideojuego
 set<DataContratoSuscripcion *> UsuarioController::obtenerSuscripciones()

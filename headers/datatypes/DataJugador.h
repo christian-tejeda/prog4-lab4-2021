@@ -25,8 +25,8 @@ public:
     DataJugador();
     DataJugador(string email, string password, string nickname, string descripcion);
     //getters
-    string getEmail();
-    string getPassword();
+    //string getEmail();
+    //string getPassword();
     string getNickname();
     string getDescripcion();
     //descripcion

@@ -27,7 +27,7 @@ public:
 
     bool existeJugadorConNickname(string n);
 
-    void agregarUsuario(Usuario *usuario);
+    void agregarUsuario(DataUsuario *usuario);
 
     map<string, Usuario *> obtenerJugadoresConSuscripcionActiva(Videojuego *vj);
 
