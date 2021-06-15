@@ -14,7 +14,7 @@
 //#include "../entities/Individual.h"
 //#include "../entities/Multijugador.h"
 //#include "../entities/ContratoSuscripcion.h"
-//#include "../entities/Videojuego.h"
+#include "../entities/Videojuego.h"
 
 //using namespace std;
 
@@ -40,6 +40,8 @@ public:
     //Operaciones
     DataUsuario *getData();
     void agregarVideojuegoPublicado(Videojuego *vj);
+    set<Videojuego*> getVideojuegoPublicados();
+    void eliminarVideojuegoPublicado(Videojuego *vj);
 
     ~Desarrollador();
 };

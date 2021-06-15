@@ -70,7 +70,7 @@ public:
     void agregarOtraCategoria(Categoria o);
     set<Jugador *> getSuscriptores();
     int getCantidadSuscriptores();
-    DataVideojuego getData();
+    DataVideojuego *getData();
 
     ~Videojuego();
 };

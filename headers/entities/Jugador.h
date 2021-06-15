@@ -54,6 +54,8 @@ public:
     map<int, PartidaIndividual *> obtenerPartidasFinalizadas();
     PartidaIndividual *obtenerPartida(std::string id);
     bool tieneSuscripcionActiva(Videojuego *vj);
+    
+    bool tienePartidaSinFinalizar(Videojuego *vj);//operacion faltante en obtenerpartidasfinalizadas en elim videojuego
 
     ~Jugador();
 };

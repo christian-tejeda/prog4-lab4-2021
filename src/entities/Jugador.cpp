@@ -61,10 +61,33 @@ map<string, Videojuego *> Jugador::obtenerVideojuegos()
 
 void Jugador::eliminarContratosDeVideojuego(Videojuego *vj)
 {
+    set<ContratoSuscripcion*> cont=this->contratos;
+    set<ContratoSuscripcion*>::iterator it;
+    for (it = cont.begin(); it != cont.end(); it++)
+    {
+        ContratoSuscripcion* contr=*it;
+        bool pertenece=contr->perteneceAVideojuego(vj);
+        if (pertenece) {
+            this->contratos.erase(*it);
+            delete contr;
+        }
+    }
 }
 
 void Jugador::eliminarPartidasDeVideojuego(Videojuego *vj)
 {
+    map<int,Partida*> partidas=this->partidasIniciadas;
+    map<int,Partida*>::iterator it;
+    for (it = partidas.begin(); it != partidas.end(); it++)
+    {
+        Partida * par=(it->second);
+        Videojuego * video=par->getVideojuego();
+        if (vj==video) {
+            par->eliminarPartidasVideojuego(vj);
+            this->partidasIniciadas.erase(it->first);
+            delete par;
+        }
+    }
 }
 
 DataUsuario *Jugador::getData()
@@ -85,6 +108,20 @@ PartidaIndividual *Jugador::obtenerPartida(string id)
 bool tieneSuscripcionActiva(Videojuego *vj)
 {
     return false;
+}
+
+bool Jugador::tienePartidaSinFinalizar(Videojuego *vj){//operacion faltante en obtenerpartidasfinalizadas en elim videojuego
+    map<int, Partida *> partidas=this->partidasIniciadas;
+    map<int, Partida *>::iterator it;
+    it = partidas.begin();
+    PartidaIndividual*partida=dynamic_cast<PartidaIndividual *>(it->second);
+    bool tiene=(partida->getFechaFin()==nullptr);
+    while(it != partidas.end()&&!tiene){
+        it++;
+        PartidaIndividual*partida=dynamic_cast<PartidaIndividual *>(it->second);
+        tiene=(partida->getFechaFin()==nullptr);
+    }
+    return tiene;
 }
 
 Jugador::~Jugador(){};
