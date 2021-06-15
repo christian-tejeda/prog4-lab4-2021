@@ -1,5 +1,8 @@
 #include "headers/FactoryController.h"
 //#include "headers/entities/Usuario.h"
+#include "headers/controllers/VideojuegoController.h"
+#include "headers/datatypes/DataVideojuego.h"
+#include "headers/interfaces/IEliminarVideojuego.h"
 #include "headers/utils/Fecha.h"
 #include "headers/handlers/UsuarioHandler.h"
 #include "headers/handlers/CategoriaHandler.h"
@@ -184,8 +187,46 @@ void menuPublicarVideojuego()
 {
 }
 
-void menuEliminarVideojuego()
+void menuEliminarVideojuego(FactoryController *fact)
 {
+    IEliminarVideojuego *ev = fact->getIEliminarVideojuego();
+
+ 
+    std::string nombre = "";
+    int conf;
+
+    std::cout << "Seleccione el Videojuego a Eliminar:  \n";
+    
+    VideojuegoController * vc;
+    set<DataVideojuego *> data= vc->obtenerVideojuegosPublicadosPorDesarrolladorConPartidasFinalizadas();
+    set<DataVideojuego *>::iterator it;
+    for (it = data.begin(); it != data.end(); it++)
+    {
+        DataVideojuego * imprimir=*it;
+        std::cout << imprimir->getNombre() << "    -+\n";  
+    }
+    
+    std::cin >> nombre;
+    std::cout << "\n";
+    vc->seleccionarVideojuego(nombre);
+    bool confirmar = false;
+
+    std::cout << "Esta seguo de eliminar: " << nombre << "?\n";
+    std::cout << "seleccione el numero correspondiente\n";
+    std::cout << "1-Si\n";
+    std::cout << "2-No\n";
+
+    std::cin >> conf;
+    while(conf!=1||conf!=2){
+        std::cout << "Ups! Hubo un error, seleccione un numero correcto por favor \n";
+        std::cin >> conf;
+    }
+    confirmar = conf == 1 ? true : false;
+
+    vc->confirmarAgregarCategoria(confirmar);
+   if (conf==1){
+        std::cout << "El videojuego "<< nombre << " ha sido eliminado?\n";
+    }
 }
 
 void menuSeleccionarEstadisticas()
@@ -395,7 +436,7 @@ int main(int argc, char const *argv[])
             case 3: //Eliminar videojuego
                 try
                 {
-                    /* code */
+                    menuEliminarVideojuego(fact)
                 }
                 catch (const std::invalid_argument &ex)
                 {
