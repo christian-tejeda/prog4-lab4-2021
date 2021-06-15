@@ -23,6 +23,8 @@ void menuInicial()
 void menuAltaUsuario(FactoryController *fact)
 {
 
+    IAltaUsuario *au = fact->getIAltaUsuario();
+
     int promptUser = 0;
 
     std::string mail = "";
@@ -46,14 +48,61 @@ void menuAltaUsuario(FactoryController *fact)
 
     if (promptUser == 1) //Jugador
     {
+        bool existeNick = true;
+        std::string nick, desc;
+
+        std::cout << "Ingrese una descripción: ";
+        std::cin >> desc;
+        std::cout << "\n";
+
+        while (existeNick)
+        {
+            std::cout << "Ingrese nickname: ";
+            std::cin >> nick;
+            std::cout << "\n";
+
+            DataJugador *dtJg = new DataJugador(mail, pwd, nick, desc);
+            try
+            {
+                au->ingresarDatosJugador(dtJg);
+                existeNick = false;
+            }
+            catch (const std::invalid_argument &ex)
+            {
+                std::cout << ex.what() << '\n';
+                existeNick = true;
+                delete dtJg;
+            }
+        }
     }
     else if (promptUser == 2) //Desarrollador
     {
+        std::string nomEmpresa = "";
+        std::cout << "Ingrese nombre de empresa: ";
+        std::cin >> nomEmpresa;
+        std::cout << "\n";
+
+        DataDesarrollador *dtDev = new DataDesarrollador(mail, pwd, nomEmpresa);
+        au->ingresarDatosDesarrollador(dtDev);
     }
     else
     {
         throw std::invalid_argument("Error: Tipo de usuario no válido.");
     }
+
+    bool confirmar;
+    char promptConfirm = '\0';
+
+    while (promptConfirm != 'y' && promptConfirm != 'n')
+    {
+        std::cout << "¿Confirmar alta de usuario? (y/n): ";
+        std::cin >> promptConfirm;
+        std::cout << "\n";
+    }
+
+    confirmar = promptConfirm == 'y' ? true : false;
+
+    au->confirmarAltaUsuario(confirmar);
 }
 
 void menuIniciarSesion(FactoryController *fact) {}
