@@ -20,7 +20,90 @@ void menuInicial()
     std::cout << "+-----------------------------------------------------------+\n";
 }
 
-void menuAltaUsuario(FactoryController *fact) {}
+void menuAltaUsuario(FactoryController *fact)
+{
+
+    IAltaUsuario *au = fact->getIAltaUsuario();
+
+    int promptUser = 0;
+
+    std::string mail = "";
+    std::string pwd = "";
+
+    std::cout << "Ingrese email: ";
+    std::cin >> mail;
+    std::cout << "\n";
+
+    std::cout << "Ingrese contraseña: ";
+    std::cin >> pwd;
+    std::cout << "\n";
+
+    std::cout << "Seleccione tipo de usuario a crear:\n";
+    std::cout << "1) Jugador\n";
+    std::cout << "2) Desarrollador\n";
+
+    std::cout << ">";
+    std::cin >> promptUser;
+    std::cout << "\n";
+
+    if (promptUser == 1) //Jugador
+    {
+        bool existeNick = true;
+        std::string nick, desc;
+
+        std::cout << "Ingrese una descripción: ";
+        std::cin >> desc;
+        std::cout << "\n";
+
+        while (existeNick)
+        {
+            std::cout << "Ingrese nickname: ";
+            std::cin >> nick;
+            std::cout << "\n";
+
+            DataJugador *dtJg = new DataJugador(mail, pwd, nick, desc);
+            try
+            {
+                au->ingresarDatosJugador(dtJg);
+                existeNick = false;
+            }
+            catch (const std::invalid_argument &ex)
+            {
+                std::cout << ex.what() << '\n';
+                existeNick = true;
+                delete dtJg;
+            }
+        }
+    }
+    else if (promptUser == 2) //Desarrollador
+    {
+        std::string nomEmpresa = "";
+        std::cout << "Ingrese nombre de empresa: ";
+        std::cin >> nomEmpresa;
+        std::cout << "\n";
+
+        DataDesarrollador *dtDev = new DataDesarrollador(mail, pwd, nomEmpresa);
+        au->ingresarDatosDesarrollador(dtDev);
+    }
+    else
+    {
+        throw std::invalid_argument("Error: Tipo de usuario no válido.");
+    }
+
+    bool confirmar;
+    char promptConfirm = '\0';
+
+    while (promptConfirm != 'y' && promptConfirm != 'n')
+    {
+        std::cout << "¿Confirmar alta de usuario? (y/n): ";
+        std::cin >> promptConfirm;
+        std::cout << "\n";
+    }
+
+    confirmar = promptConfirm == 'y' ? true : false;
+
+    au->confirmarAltaUsuario(confirmar);
+}
 
 void menuIniciarSesion(FactoryController *fact) {}
 
@@ -135,13 +218,12 @@ int main(int argc, char const *argv[])
 
     int prompt = 0;
 
-    menuInicial();
-
     while (!salirInicial)
     {
-
         salirJugador = true;
         salirDev = true;
+
+        menuInicial();
 
         std::cout << ">";
         std::cin >> prompt;
