@@ -46,7 +46,8 @@ void ContratoSuscripcion::setPeriodoDeValidez(TipoPeriodoValidez periodoValidez)
 void ContratoSuscripcion::cancelar() {}
 bool ContratoSuscripcion::perteneceAVideojuego(Videojuego *vj)
 {
-    return false;
+    Videojuego * video= this->videojuego;
+    return (video==vj);
 }
 bool ContratoSuscripcion::esActivo()
 {

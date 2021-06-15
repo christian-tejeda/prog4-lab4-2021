@@ -61,10 +61,33 @@ map<string, Videojuego *> Jugador::obtenerVideojuegos()
 
 void Jugador::eliminarContratosDeVideojuego(Videojuego *vj)
 {
+    set<ContratoSuscripcion*> cont=this->contratos;
+    set<ContratoSuscripcion*>::iterator it;
+    for (it = cont.begin(); it != cont.end(); it++)
+    {
+        ContratoSuscripcion* contr=*it;
+        bool pertenece=contr->perteneceAVideojuego(vj);
+        if (pertenece) {
+            this->contratos.erase(*it);
+            delete contr;
+        }
+    }
 }
 
 void Jugador::eliminarPartidasDeVideojuego(Videojuego *vj)
 {
+    map<int,Partida*> partidas=this->partidasIniciadas;
+    map<int,Partida*>::iterator it;
+    for (it = partidas.begin(); it != partidas.end(); it++)
+    {
+        Partida * par=(it->second);
+        Videojuego * video=par->getVideojuego();
+        if (vj==video) {
+            par->eliminarPartidasVideojuego(vj);
+            this->partidasIniciadas.erase(it->first);
+            delete par;
+        }
+    }
 }
 
 DataUsuario *Jugador::getData()

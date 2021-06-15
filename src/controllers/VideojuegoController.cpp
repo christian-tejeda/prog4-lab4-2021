@@ -51,7 +51,7 @@ set<DataVideojuego *> VideojuegoController::obtenerVideojuegosPublicadosPorDesar
     
     UsuarioController uc;
     uc.getInstance();
-    //Desarrollador * des = dynamic_cast<Desarrollador *>(des=dynamic_cast<uc.getSesion()>); fuerte duda de como hacer esto 
+    //Desarrollador * des = dynamic_cast<Desarrollador *>(des=dynamic_cast<uc.getSesion()>);// fuerte duda de como hacer esto 
     Desarrollador * des;//sacar cuando resolver lo de arriba
     set<Videojuego*> vjs = des->getVideojuegoPublicados();
     UsuarioHandler * uh;
