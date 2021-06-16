@@ -42,6 +42,8 @@ public:
     void eliminarUsuario(Usuario *usuario);
 
     static void releaseInstance();
+    
+    int obtenerHoras(Videojuego* vj);
 };
 
 #endif

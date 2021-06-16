@@ -36,6 +36,8 @@ public:
     string getNombreEmpresa();
     pair<float, int> getRating();
 
+    void setNombreEmpresa(std::string nombreEmpresa);
+
     ~DataVideojuego();
 };
 

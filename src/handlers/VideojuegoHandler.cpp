@@ -43,6 +43,16 @@ void VideojuegoHandler::eliminarVideojuego(Videojuego *vj)
 
 map<string, Jugador *> VideojuegoHandler::obtenerJugadoresVideojuego(Videojuego *vj) { return map<string, Jugador *>(); }
 
+set<std::string> VideojuegoHandler::obtenerNombresVideojuegos(){
+    map<string, Videojuego *>::iterator it;
+    set<std::string> res;
+    for (it = this->vjs.begin(); it != this->vjs.end(); it++)
+    {
+        res.insert(it->second->getNombre());
+    }
+    return res;
+}
+
 VideojuegoHandler::~VideojuegoHandler() {}
 
 void VideojuegoHandler::releaseInstance()

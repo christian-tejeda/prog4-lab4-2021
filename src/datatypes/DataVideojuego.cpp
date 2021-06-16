@@ -49,4 +49,8 @@ pair<float, int> DataVideojuego::getRating()
     return this->rating;
 }
 
+void DataVideojuego::setNombreEmpresa(std::string nombreEmpresa){
+    this->nombreEmpresa=nombreEmpresa;
+}
+
 DataVideojuego::~DataVideojuego() {}

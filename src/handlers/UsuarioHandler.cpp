@@ -126,3 +126,18 @@ void UsuarioHandler::releaseInstance()
         instancia = nullptr;
     }
 }
+UsuarioHandler::~UsuarioHandler() {}
+
+
+int UsuarioHandler::obtenerHoras(Videojuego* vj){
+    map<string,Usuario*> coleccion=this->users;
+    map<string,Usuario*>::iterator it;
+    int res=0;
+    for (it = coleccion.begin(); it != coleccion.end(); it++)
+    {
+        Jugador *jugador = dynamic_cast<Jugador *>(it->second);
+        int duracion =jugador->obtenerDuracionPartida(vj);
+        res=res+duracion;
+    }
+    return res;
+}

@@ -80,9 +80,10 @@ void VideojuegoController::seleccionarVideojuego(string nombre)
 void VideojuegoController::confirmarEliminarVideojuego(bool confirmar)
 {
     //en proceso
-    UsuarioController *uc = UsuarioController::getInstance();
-    Desarrollador *dev = dynamic_cast<Desarrollador *>(uc->getSesion());
-    Videojuego *video = this->videojuego;
+    UsuarioController * uc;
+    uc=uc->getInstance();
+    Desarrollador * dev = dynamic_cast<Desarrollador *>(uc->getSesion());    
+    Videojuego * video= this->videojuego;
     dev->eliminarVideojuegoPublicado(video);
     UsuarioHandler *uH;
     uH = uH->getInstance();
@@ -100,6 +101,7 @@ void VideojuegoController::confirmarEliminarVideojuego(bool confirmar)
     video->~Videojuego();
 }
 void VideojuegoController::puntuarVideojuego(string nombre, int puntaje) {}
+
 set<DataVideojuego *> VideojuegoController::obtenerVideojuegos()
 {
     set<DataVideojuego *> res;
@@ -115,3 +117,18 @@ void VideojuegoController::agregarGenero(DataGenero *genero) {}
 void VideojuegoController::agregarOtraCategoria(DataCategoria *otra) {}
 void VideojuegoController::confirmarAgregarCategoria(bool confirmar) {}
 VideojuegoController::~VideojuegoController() {}
+
+
+int VideojuegoController::obtenerHoras(){
+    Videojuego * vj=this->videojuego;
+    UsuarioHandler * uH;
+    uH=uH->getInstance();
+    int res=uH->obtenerHoras(vj);  
+    return res;
+}
+
+set<std::string> VideojuegoController::obtenerNombreVideojuegos(){
+    VideojuegoHandler * vH;
+    vH=vH->getInstance();
+    return vH->obtenerNombresVideojuegos();
+}
