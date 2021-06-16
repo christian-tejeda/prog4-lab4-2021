@@ -36,6 +36,8 @@ public:
     void agregarCategoria(Categoria *categoria);
 
     void eliminarCategoria(Categoria *categoria);
+
+    static void releaseInstance();
 };
 
 #endif

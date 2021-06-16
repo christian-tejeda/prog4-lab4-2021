@@ -39,3 +39,12 @@ void CategoriaHandler::agregarCategoria(Categoria *categoria)
 void CategoriaHandler::eliminarCategoria(Categoria *categoria) {}
 
 CategoriaHandler::~CategoriaHandler() {}
+
+void CategoriaHandler::releaseInstance()
+{
+    if (instancia != nullptr)
+    {
+        delete instancia;
+        instancia = nullptr;
+    }
+}

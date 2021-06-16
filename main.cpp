@@ -51,8 +51,9 @@ void menuAltaUsuario(FactoryController *fact)
         bool existeNick = true;
         std::string nick, desc;
 
+        std::cin.ignore();
         std::cout << "Ingrese una descripción: ";
-        std::cin >> desc;
+        std::getline(std::cin, desc);
         std::cout << "\n";
 
         while (existeNick)
@@ -109,7 +110,49 @@ void menuIniciarSesion(FactoryController *fact) {}
 
 void menuModificarFechaSistema() {}
 
-void menuCargarDatosPrueba(FactoryController *fact) {}
+void menuCargarDatosPrueba(UsuarioHandler *uh, VideojuegoHandler *vh, CategoriaHandler *ch)
+{
+
+    //Carga de usuarios
+    DataUsuario *d1 = new DataDesarrollador("ironhide@mail.com", "123", "Ironhide Game Studio");
+    DataUsuario *d2 = new DataDesarrollador("epic@mail.com", "123", "Epic Games");
+    DataUsuario *d3 = new DataDesarrollador("mojang@mail.com", "123", "Mojang Studios");
+    DataUsuario *d4 = new DataDesarrollador("ea@mail.com", "123", "EA Sports");
+
+    DataUsuario *j1 = new DataJugador("gamer@mail.com", "123", "gamer", "Descripcion de gamer");
+    DataUsuario *j2 = new DataJugador("ari@mail.com", "123", "ari", "Descripcion de ari");
+    DataUsuario *j3 = new DataJugador("ibai@mail.com", "123", "ibai", "Descripcion de ibai");
+    DataUsuario *j4 = new DataJugador("camila@mail.com", "123", "camila", "Descripcion de camila");
+
+    uh->agregarUsuario(d1);
+    uh->agregarUsuario(d2);
+    uh->agregarUsuario(d3);
+    uh->agregarUsuario(d4);
+    uh->agregarUsuario(j1);
+    uh->agregarUsuario(j2);
+    uh->agregarUsuario(j3);
+    uh->agregarUsuario(j4);
+
+    map<string, Usuario *> colUsers = uh->obtenerUsuarios();
+    map<std::string, Usuario *>::iterator it;
+    for (it = colUsers.begin(); it != colUsers.end(); ++it)
+    {
+        std::cout << it->second->getEmail() << "\n";
+    }
+
+    delete d1;
+    delete d2;
+    delete d3;
+    delete d4;
+    delete j1;
+    delete j2;
+    delete j3;
+    delete j4;
+
+    //Carga de categorias
+    //Carga de videojuegos
+    std::cout << "¡Datos cargados correctamente!\n";
+}
 
 void menuSalirInicial()
 {
@@ -256,7 +299,7 @@ int main(int argc, char const *argv[])
         case 3: //Cargar Datos de Prueba
             try
             {
-                /* code */
+                menuCargarDatosPrueba(uh, vh, ch);
             }
             catch (const std::invalid_argument &ex)
             {
@@ -456,8 +499,12 @@ int main(int argc, char const *argv[])
     }
 
     //Destruccion de singletons
-    delete uc;
-    delete fact;
+    vh->releaseInstance();
+    uc->releaseInstance();
+    uh->releaseInstance();
+    ch->releaseInstance();
+
+    fact;
 
     //Destruccion variables globales
     delete fechaSist;

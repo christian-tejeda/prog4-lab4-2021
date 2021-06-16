@@ -78,18 +78,19 @@ Jugador *UsuarioHandler::obtenerJugadorPorNickname(string nickname)
     return nullptr;
 }
 
-bool UsuarioHandler::tienePartidaSinFinalizar(Videojuego *vj) { 
-    
+bool UsuarioHandler::tienePartidaSinFinalizar(Videojuego *vj)
+{
+
     map<std::string, Usuario *> users = this->users;
 
     map<std::string, Usuario *>::iterator it;
     Jugador *jugador = dynamic_cast<Jugador *>(it->second);
-    bool tiene=jugador->tienePartidaSinFinalizar(vj);
-    while (it != users.end()&&!tiene)
+    bool tiene = jugador->tienePartidaSinFinalizar(vj);
+    while (it != users.end() && !tiene)
     {
         it++;
         Jugador *jugador = dynamic_cast<Jugador *>(it->second);
-        tiene=jugador->tienePartidaSinFinalizar(vj);
+        tiene = jugador->tienePartidaSinFinalizar(vj);
     }
 
     return tiene;
@@ -101,4 +102,27 @@ Partida *UsuarioHandler::obtenerPartidaPorId(int idPartida) { return nullptr; }
 
 void UsuarioHandler::eliminarUsuario(Usuario *usuario) {}
 
-UsuarioHandler::~UsuarioHandler() {}
+UsuarioHandler::~UsuarioHandler()
+{
+    map<std::string, Usuario *>::iterator it;
+    Usuario *toDelete = nullptr;
+
+    for (it = users.begin(); it != users.end(); ++it)
+    {
+        //toDelete = it->second;
+        //this->users.erase(it->first);
+        delete it->second;
+        it->second = nullptr;
+    }
+
+    this->users.clear();
+}
+
+void UsuarioHandler::releaseInstance()
+{
+    if (instancia != nullptr)
+    {
+        delete instancia;
+        instancia = nullptr;
+    }
+}

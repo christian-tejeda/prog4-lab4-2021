@@ -38,3 +38,12 @@ IEliminarVideojuego *FactoryController::getIEliminarVideojuego() { return new Vi
 IPublicarVideojuego *FactoryController::getIPublicarVideojuego() { return new VideojuegoController(); }
 
 FactoryController::~FactoryController() {}
+
+void FactoryController::releaseInstance()
+{
+    if (instancia != nullptr)
+    {
+        delete instancia;
+        instancia = nullptr;
+    }
+}

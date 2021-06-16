@@ -101,7 +101,7 @@ void UsuarioController::confirmarAltaUsuario(bool confirmar)
             }
 
             uh->agregarUsuario(dtUser);
-            std::cout << "¡Usuario agregado correctamente!";
+            std::cout << "¡Usuario agregado correctamente!\n";
         }
     }
     catch (const std::invalid_argument &ex)
@@ -153,4 +153,16 @@ set<DataEstadistica *> UsuarioController::calcularEstadisticas(string nomVideoju
 bool UsuarioController::iniciarSesion(DataUsuario *dataUsuario) { return false; }
 void UsuarioController::confirmarInicioSesion(bool confirmar) {}
 
-UsuarioController::~UsuarioController() {}
+UsuarioController::~UsuarioController()
+{
+    this->sesion = nullptr;
+}
+
+void UsuarioController::releaseInstance()
+{
+    if (instancia != nullptr)
+    {
+        delete instancia;
+        instancia = nullptr;
+    }
+}

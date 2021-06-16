@@ -34,8 +34,9 @@ map<string, Videojuego *> VideojuegoHandler::obtenerVideojuegos() { return this-
 
 Videojuego *VideojuegoHandler::obtenerVideojuegoPorId(string nombre) { return this->vjs[nombre]; }
 
-void VideojuegoHandler::eliminarVideojuego(Videojuego *vj) {
-    string clave=vj->getNombre();
+void VideojuegoHandler::eliminarVideojuego(Videojuego *vj)
+{
+    string clave = vj->getNombre();
     this->vjs.erase(clave);
     delete vj;
 }
@@ -43,3 +44,12 @@ void VideojuegoHandler::eliminarVideojuego(Videojuego *vj) {
 map<string, Jugador *> VideojuegoHandler::obtenerJugadoresVideojuego(Videojuego *vj) { return map<string, Jugador *>(); }
 
 VideojuegoHandler::~VideojuegoHandler() {}
+
+void VideojuegoHandler::releaseInstance()
+{
+    if (instancia != nullptr)
+    {
+        delete instancia;
+        instancia = nullptr;
+    }
+}
