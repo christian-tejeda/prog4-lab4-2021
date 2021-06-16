@@ -133,13 +133,6 @@ void menuCargarDatosPrueba(UsuarioHandler *uh, VideojuegoHandler *vh, CategoriaH
     uh->agregarUsuario(j3);
     uh->agregarUsuario(j4);
 
-    map<string, Usuario *> colUsers = uh->obtenerUsuarios();
-    map<std::string, Usuario *>::iterator it;
-    for (it = colUsers.begin(); it != colUsers.end(); ++it)
-    {
-        std::cout << it->second->getEmail() << "\n";
-    }
-
     delete d1;
     delete d2;
     delete d3;
