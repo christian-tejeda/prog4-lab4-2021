@@ -15,7 +15,8 @@ Videojuego::Videojuego(std::string nombre,
                        pair<float, int> rating,
                        set<ContratoSuscripcion *> contratos,
                        map<string, Categoria *> categorias,
-                       ContextoEstadistica *ctx)
+                       ContextoEstadistica *ctx,
+                       std::string nombreEmpresa)
 {
     this->nombre = nombre;
     this->descripcion = descripcion;
@@ -24,6 +25,7 @@ Videojuego::Videojuego(std::string nombre,
     this->contratos = contratos;
     this->categorias = categorias;
     this->ctx = ctx;
+    this->nombreEmpresa=nombreEmpresa;
 }
 
 //Getters
@@ -103,6 +105,7 @@ int Videojuego::getCantidadSuscriptores()
 DataVideojuego * Videojuego::getData()
 {   
     DataVideojuego data =DataVideojuego(this->nombre, this->descripcion, this->suscripciones, this->getNombreCategorias(), this->rating);
+    data.setNombreEmpresa(this->nombreEmpresa);
     DataVideojuego* res;
     *res=data;
     return res;

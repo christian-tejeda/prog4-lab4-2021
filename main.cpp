@@ -2,11 +2,12 @@
 //#include "headers/entities/Usuario.h"
 #include "headers/controllers/VideojuegoController.h"
 #include "headers/datatypes/DataVideojuego.h"
-#include "headers/interfaces/IEliminarVideojuego.h"
+//#include "headers/interfaces/IEliminarVideojuego.h"
 #include "headers/utils/Fecha.h"
 #include "headers/handlers/UsuarioHandler.h"
 #include "headers/handlers/CategoriaHandler.h"
 #include "headers/handlers/VideojuegoHandler.h"
+#include "headers/entities/Desarrollador.h"
 
 #include <iostream>
 #include <stdexcept>
@@ -156,8 +157,76 @@ void menuFinalizarPartida(FactoryController *fact)
 }
 
 void menuVerInfoVideojuego(FactoryController *fact)
-{ //Mismo para jugador y dev
+{
+    IVerInfoVideojuego *iviv = fact->getIVerInfoVideojuego();
+
+    std::string nombre = "";
+    int conf;
+    std::cout << "Seleccione el Videojuego que desea ver la informacion:  \n";
+    
+    VideojuegoController * vc;
+    set<DataVideojuego *> data= vc->obtenerVideojuegos();
+    set<DataVideojuego *>::iterator it;
+    for (it = data.begin(); it != data.end(); it++)
+    {
+        DataVideojuego * imprimir=*it;
+        std::cout << imprimir->getNombre() << "    -+\n";  
+    }
+    std::cin >> nombre;
+    std::cout << "\n";
+    DataVideojuego * datav = vc->obtenerDataVideojuego(nombre);
+    
+    float mens=datav->getSuscripciones().find(mensual)->second;
+    float tri=datav->getSuscripciones().find(trimestral)->second;
+    float anu=datav->getSuscripciones().find(anual)->second;
+    float vit=datav->getSuscripciones().find(vitalicia)->second;
+    std::string empresa=datav->getNombreEmpresa();
+    float puntaje=datav->getRating().first;
+    set<std::string> nombrescat=datav->getNombreCategorias();
+
+    
+    //float horas=datav->getCantidadHoras();//hay que pedirle a partida controller.. es un poco largo para desarrollador.
+    set<std::string>::iterator nuevo;
+    std::cout << "+---------------- Datos Videojuego-----------------------+\n";
+    std::cout << "\n";
+    std::cout << "\n";
+    std::cout << "     Nombre        :"<<datav->getNombre() <<"\n";
+    std::cout << "     Descripcion   :"<<datav->getDescripcion() << "\n";
+    std::cout << "     Costos Suscrip:\n";
+    std::cout << "      -mensual      :"<<mens<< "\n";
+    std::cout << "      -trimensual   :"<<tri<< "\n";
+    std::cout << "      -anual        :"<<anu<< "\n";
+    std::cout << "      -vitalicia    :"<<vit<< "\n";
+    std::cout << "     Categorias:\n";
+    for (nuevo = nombrescat.begin(); nuevo != nombrescat.end(); nuevo++){
+        std::string print= *nuevo;
+        std::cout << "      -"<<print<< "\n";
+    }
+    std::cout << "     Desarrollador  :\n"<<empresa<< "\n";
+    std::cout << "     PuntajePromedio:\n"<<puntaje<< "\n";
+
+
+    //solo si es desarrollador:
+    UsuarioController * uc;
+    uc=uc->getInstance();
+    Desarrollador* des= dynamic_cast<Desarrollador*>(uc->getSesion());
+    if (des!=nullptr){
+        vc->seleccionarVideojuego(nombre);//busco el videojuego y lo dejo en el controller
+        int horas=vc->obtenerHoras();
+        std::cout << "     HorasTotales   :\n"<<puntaje<< "\n";
+    }std::cout << "\n";
+    std::cout << "\n";
+
+
+    
+    std::cout << "+---------------- Datos Videojuego-----------------------+\n";
+    
+    //float horas=datav->getCantidadHoras();
+    
+    
 }
+
+    
 
 void menuSalirUsuario(FactoryController *fact)
 { //Mismo para jugador y dev
@@ -218,14 +287,14 @@ void menuEliminarVideojuego(FactoryController *fact)
 
     std::cin >> conf;
     while(conf!=1||conf!=2){
-        std::cout << "Ups! Hubo un error, seleccione un numero correcto por favor \n";
+        std::cout << "Ups! Hubo un error, seleccione un numero correcto por favor! \n";
         std::cin >> conf;
     }
     confirmar = conf == 1 ? true : false;
 
     vc->confirmarAgregarCategoria(confirmar);
    if (conf==1){
-        std::cout << "El videojuego "<< nombre << " ha sido eliminado?\n";
+        std::cout << "El videojuego "<< nombre << " ha sido eliminado... \n";
     }
 }
 
@@ -375,7 +444,7 @@ int main(int argc, char const *argv[])
             case 6: //Ver información de videojuego
                 try
                 {
-                    /* code */
+                    menuVerInfoVideojuego(fact);
                 }
                 catch (const std::invalid_argument &ex)
                 {
@@ -436,7 +505,7 @@ int main(int argc, char const *argv[])
             case 3: //Eliminar videojuego
                 try
                 {
-                    menuEliminarVideojuego(fact)
+                    menuEliminarVideojuego(fact);
                 }
                 catch (const std::invalid_argument &ex)
                 {
@@ -466,7 +535,7 @@ int main(int argc, char const *argv[])
             case 6: //Ver información de videojuego
                 try
                 {
-                    /* code */
+                    menuVerInfoVideojuego(fact);
                 }
                 catch (const std::invalid_argument &ex)
                 {

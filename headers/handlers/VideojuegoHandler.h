@@ -28,6 +28,8 @@ public:
     void eliminarVideojuego(Videojuego *vj);
 
     map<string, Jugador *> obtenerJugadoresVideojuego(Videojuego *vj);
+
+    set<std::string> obtenerNombresVideojuegos();
 };
 
 #endif

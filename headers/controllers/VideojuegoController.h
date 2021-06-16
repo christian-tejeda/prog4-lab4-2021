@@ -31,6 +31,8 @@ public:
     //ops de IVerInfoVideojuego
     set<DataVideojuego *> obtenerVideojuegos();
     DataVideojuego *obtenerDataVideojuego(string nombre);
+    int obtenerHoras();
+    set<std::string> obtenerNombreVideojuegos();
 
     //ops de IAsignarPuntaje
     void puntuarVideojuego(string nombre, int puntaje);

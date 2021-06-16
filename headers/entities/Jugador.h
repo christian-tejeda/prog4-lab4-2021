@@ -57,6 +57,7 @@ public:
     
     bool tienePartidaSinFinalizar(Videojuego *vj);//operacion faltante en obtenerpartidasfinalizadas en elim videojuego
 
+    int obtenerDuracionPartida(Videojuego *vj);
     ~Jugador();
 };
 

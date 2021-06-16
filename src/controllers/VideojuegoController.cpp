@@ -49,9 +49,9 @@ void VideojuegoController::confirmarPublicacionVideojuego(bool cancelada) {}
 set<DataVideojuego *> VideojuegoController::obtenerVideojuegosPublicadosPorDesarrolladorConPartidasFinalizadas()
 {   
     
-    UsuarioController uc;
-    uc.getInstance();
-    Desarrollador * des = dynamic_cast<Desarrollador *>(uc.getSesion());   
+    UsuarioController * uc;
+    uc=uc->getInstance();
+    Desarrollador * des = dynamic_cast<Desarrollador *>(uc->getSesion());   
     set<Videojuego*> vjs = des->getVideojuegoPublicados();
     UsuarioHandler * uh;
     uh=uh->getInstance();
@@ -77,9 +77,9 @@ void VideojuegoController::seleccionarVideojuego(string nombre) {
 }
 void VideojuegoController::confirmarEliminarVideojuego(bool confirmar) {
     //en proceso
-    UsuarioController uc;
-    uc.getInstance();
-    Desarrollador * dev = dynamic_cast<Desarrollador *>(uc.getSesion());    
+    UsuarioController * uc;
+    uc=uc->getInstance();
+    Desarrollador * dev = dynamic_cast<Desarrollador *>(uc->getSesion());    
     Videojuego * video= this->videojuego;
     dev->eliminarVideojuegoPublicado(video);
     UsuarioHandler * uH;
@@ -98,6 +98,7 @@ void VideojuegoController::confirmarEliminarVideojuego(bool confirmar) {
     video->~Videojuego();
 }
 void VideojuegoController::puntuarVideojuego(string nombre, int puntaje) {}
+
 set<DataVideojuego *> VideojuegoController::obtenerVideojuegos()
 {
     set<DataVideojuego *> res;
@@ -113,3 +114,18 @@ void VideojuegoController::agregarGenero(DataGenero *genero) {}
 void VideojuegoController::agregarOtraCategoria(DataCategoria *otra) {}
 void VideojuegoController::confirmarAgregarCategoria(bool confirmar) {}
 VideojuegoController::~VideojuegoController() {}
+
+
+int VideojuegoController::obtenerHoras(){
+    Videojuego * vj=this->videojuego;
+    UsuarioHandler * uH;
+    uH=uH->getInstance();
+    int res=uH->obtenerHoras(vj);  
+    return res;
+}
+
+set<std::string> VideojuegoController::obtenerNombreVideojuegos(){
+    VideojuegoHandler * vH;
+    vH=vH->getInstance();
+    return vH->obtenerNombresVideojuegos();
+}

@@ -33,6 +33,7 @@ private:
     set<ContratoSuscripcion *> contratos;
     map<string, Categoria *> categorias;
     ContextoEstadistica *ctx;
+    std::string nombreEmpresa;
 
 public:
     Videojuego();
@@ -42,7 +43,8 @@ public:
                pair<float, int> rating,
                set<ContratoSuscripcion *> contratos,
                map<string, Categoria *> categorias,
-               ContextoEstadistica *ctx);
+               ContextoEstadistica *ctx,
+               std::string nombreEmpresa);
 
     //Getters
     std::string getNombre();

@@ -40,6 +40,8 @@ public:
     Partida *obtenerPartidaPorId(int idPartida);
 
     void eliminarUsuario(Usuario *usuario);
+
+    int obtenerHoras(Videojuego* vj);
 };
 
 #endif
