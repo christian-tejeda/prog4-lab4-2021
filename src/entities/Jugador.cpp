@@ -74,17 +74,39 @@ DataUsuario *Jugador::getData()
 
 map<int, PartidaIndividual *> Jugador::obtenerPartidasFinalizadas()
 {
-    return map<int, PartidaIndividual *>();
+    map<int,Partida *>::iterator it;
+    map<int,PartidaIndividual*> res;
+    for(it = partidasIniciadas.begin();it != partidasIniciadas.end(); it++){
+        if(it->second->esFinalizada()){
+            PartidaIndividual* testpartida = dynamic_cast<PartidaIndividual*>(it->second);
+            if(testpartida != nullptr){
+                res.insert({it->first,dynamic_cast<PartidaIndividual*>(it->second)});
+            }
+        }   
+    }
+    return res;
 }
 
-PartidaIndividual *Jugador::obtenerPartida(string id)
+PartidaIndividual *Jugador::obtenerPartida(int id)
 {
-    return nullptr;
+    return dynamic_cast<PartidaIndividual*>(partidasIniciadas.find(id)->second);
 }
 
 bool tieneSuscripcionActiva(Videojuego *vj)
 {
     return false;
 }
+
+map<std::string,Videojuego*> Jugador::obtenerVideojuegosConSuscripcionActiva(){
+    map<std::string,Videojuego*> res;
+    set<ContratoSuscripcion*>::iterator it;
+    for(it = contratos.begin();it!= contratos.end(); it++){
+        if((*it)->esActivo()){
+            res.insert({(*it)->getVideojuego()->getNombre(),(*it)->getVideojuego()});
+        }
+    }
+    return res;
+}
+
 
 Jugador::~Jugador(){};

@@ -25,7 +25,6 @@ class Jugador : public Usuario
 private:
     std::string nickname;
     std::string descripcion;
-    //set<Jugador*> sigue;  NO HAY QUE IMPLEMENTARLO
     map<int, Partida *> partidasIniciadas;
     set<ContratoSuscripcion *> contratos;
 
@@ -52,8 +51,9 @@ public:
     void eliminarPartidasDeVideojuego(Videojuego *vj);
     DataUsuario *getData();
     map<int, PartidaIndividual *> obtenerPartidasFinalizadas();
-    PartidaIndividual *obtenerPartida(std::string id);
+    PartidaIndividual *obtenerPartida(int id);
     bool tieneSuscripcionActiva(Videojuego *vj);
+    map<std::string,Videojuego*> obtenerVideojuegosConSuscripcionActiva();
 
     ~Jugador();
 };
