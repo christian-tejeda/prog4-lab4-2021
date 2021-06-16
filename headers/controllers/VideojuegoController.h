@@ -13,6 +13,7 @@ class VideojuegoController : public IAgregarCategoria, public IVerInfoVideojuego
 private:
     DataVideojuego *dataVideojuego; //se borra la instancia al terminar el CU
     Videojuego *videojuego;         //se borra la referencia
+    DataCategoria *dataCategoria;
 
 public:
     VideojuegoController();

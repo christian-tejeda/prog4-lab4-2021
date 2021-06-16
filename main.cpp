@@ -1,8 +1,10 @@
 #include "headers/FactoryController.h"
 //#include "headers/entities/Usuario.h"
 #include "headers/controllers/VideojuegoController.h"
+#include "headers/datatypes/DataCategoria.h"
 #include "headers/datatypes/DataVideojuego.h"
 //#include "headers/interfaces/IEliminarVideojuego.h"
+#include "headers/interfaces/IAgregarCategoria.h"
 #include "headers/utils/Fecha.h"
 #include "headers/handlers/UsuarioHandler.h"
 #include "headers/handlers/CategoriaHandler.h"
@@ -200,8 +202,8 @@ void menuVerInfoVideojuego(FactoryController *fact)
     int conf;
     std::cout << "Seleccione el Videojuego que desea ver la informacion:  \n";
     
-    VideojuegoController * vc;
-    set<DataVideojuego *> data= vc->obtenerVideojuegos();
+    //VideojuegoController * vc;
+    set<DataVideojuego *> data= iviv->obtenerVideojuegos();
     set<DataVideojuego *>::iterator it;
     for (it = data.begin(); it != data.end(); it++)
     {
@@ -210,7 +212,7 @@ void menuVerInfoVideojuego(FactoryController *fact)
     }
     std::cin >> nombre;
     std::cout << "\n";
-    DataVideojuego * datav = vc->obtenerDataVideojuego(nombre);
+    DataVideojuego * datav = iviv->obtenerDataVideojuego(nombre);
     
     float mens=datav->getSuscripciones().find(mensual)->second;
     float tri=datav->getSuscripciones().find(trimestral)->second;
@@ -243,6 +245,7 @@ void menuVerInfoVideojuego(FactoryController *fact)
 
 
     //solo si es desarrollador:
+    VideojuegoController * vc;
     UsuarioController * uc;
     uc=uc->getInstance();
     Desarrollador* des= dynamic_cast<Desarrollador*>(uc->getSesion());
@@ -252,9 +255,7 @@ void menuVerInfoVideojuego(FactoryController *fact)
         std::cout << "     HorasTotales   :\n"<<puntaje<< "\n";
     }std::cout << "\n";
     std::cout << "\n";
-
-
-    
+ 
     std::cout << "+---------------- Datos Videojuego-----------------------+\n";
     
     //float horas=datav->getCantidadHoras();
@@ -284,8 +285,45 @@ void menuDesarrollador(Usuario *sesion)
     std::cout << "+-----------------------------------------------------------+\n";
 }
 
-void menuAgregarCategoria()
+void menuAgregarCategoria(FactoryController *fact)
 {
+    IAgregarCategoria *ac=fact->getIAgregarCategoria();
+
+    set<DataCategoria*> cats=ac->obtenerCategorias();
+    set<DataCategoria*>::iterator it;
+    std::cout << "----------------------------------------------------\n";
+    for (it = cats.begin(); it != cats.end(); it++){
+        DataCategoria * print= *it;
+        std::cout << "Nombre   |"<<print->getNombre()<< "   -\n";
+        std::cout << "----------------------------------------------------\n";
+    }
+    std::cout << "+------------Que tipo de Categoria desea agregar?-----------+n";
+    std::cout << "|                                                           |\n";
+    std::cout << "|                    1) Plataforma                          |\n";
+    std::cout << "|                      2) Genero                            |\n";
+    std::cout << "|                  3) Otras Categorias                      |\n";
+    std::cout << "|                                                           |\n";
+    std::cout << "+-----------------------------------------------------------+\n";
+    int opcion;
+    std::cin >> opcion;
+    while(opcion>3||opcion<1){
+         std::cout << "Seleccione una opcion correcta, por favor\n";
+         std::cin >> opcion;
+    }
+    std::string agregar;
+    std::string desc;
+    if(opcion==1){
+         std::cout << "Introduzca el nombre de la cateogria agregar\n";
+         std::cin >> agregar;
+         std::cout << "Introduzca la descripcion de la cateogria agregar\n";
+         std::cin >> desc;
+         std::cout << "Introduzca el tipo de plataforma asociado\n";/*
+         enum TipoPlataforma {
+            nombre,
+         }
+         DataPlataforma * dataplat = new DataPlataforma(agregar,desc,nombre);
+        ac->agregarPlataforma(agregar);*/
+    }
 }
 
 void menuPublicarVideojuego()
