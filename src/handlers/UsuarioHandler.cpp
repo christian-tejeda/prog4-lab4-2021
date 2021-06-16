@@ -126,7 +126,6 @@ void UsuarioHandler::releaseInstance()
         instancia = nullptr;
     }
 }
-UsuarioHandler::~UsuarioHandler() {}
 
 
 int UsuarioHandler::obtenerHoras(Videojuego* vj){
