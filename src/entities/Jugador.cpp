@@ -108,5 +108,16 @@ map<std::string,Videojuego*> Jugador::obtenerVideojuegosConSuscripcionActiva(){
     return res;
 }
 
+PartidaIndividual * Jugador::crearPartidaIndividual(int idPartida,Fecha fechaActual,Videojuego * vj,Jugador *host,PartidaIndividual * cont){
+    PartidaIndividual * parti =new PartidaIndividual(idPartida,fechaActual,nullptr,0,vj,this,nullptr);
+    this->partidasIniciadas.insert({idPartida,parti});
+    return parti;
+}
+
+PartidaMultijugador * Jugador::crearPartidaMultijugador(int idPartida, Fecha fechaActual, Fecha *fechaFin, Videojuego * vj, bool transmitida, Jugador * host, set<DuracionParticipante *> durpart){
+    PartidaMultijugador * partim = new PartidaMultijugador(idPartida, fechaActual, nullptr,0,vj,host,transmitida, durpart );
+    this->partidasIniciadas.insert({idPartida,partim});
+    return partim;
+}
 
 Jugador::~Jugador(){};

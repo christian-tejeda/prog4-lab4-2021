@@ -21,7 +21,7 @@ public:
 
     PartidaIndividual(int id, Fecha fechaInicio, Fecha *fechaFin, float duracionTotal, Videojuego *vj, Jugador *host, PartidaIndividual *cont);
 
-    void finalizar(Fecha *f);
+    void finalizar(Fecha* fecha);
     void eliminarPartidasVideojuego(Videojuego *videojuego);
 
     DataPartida *getData();

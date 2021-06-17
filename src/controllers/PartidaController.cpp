@@ -107,9 +107,17 @@ void PartidaController::seleccionarVideojuego(string nombreVideojuego)
 }
 void PartidaController::seleccionarJugador(string nickname)
 {
+    UsuarioHandler* uH = uH->getInstance();
+    this->jg = uH->obtenerJugadorPorNickname(nickname);
 }
 void PartidaController::confirmarIniciarPartida(bool confirmar)
 {
+    if(confirmar){
+    int idPartidaPilla = generarIdPartida();
+    Fecha  fechaDeIinicio = Fecha(1,1,1,1,1);
+    Fecha * fechaFin = nullptr;
+    
+    }
 }
 set<DataPartidaMultijugador *> PartidaController::obtenerPartidasMultijugadorActivasDeJugador()
 {
@@ -121,3 +129,9 @@ void PartidaController::abandonarPartida(int idPartida)
 {
 }
 PartidaController::~PartidaController() {}
+
+
+int PartidaController::generarIdPartida(){
+    idPartida = idPartida + 1;
+    return idPartida - 1;
+}

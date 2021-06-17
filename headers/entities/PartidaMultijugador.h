@@ -30,7 +30,7 @@ public:
     void setTransmitidaEnVivo(bool enVivo);
 
     void agregarParticipante(Jugador *participante);
-    void finalizar();
+    void finalizar(Fecha * fecha);
     void eliminarPartidasVideojuego(Videojuego *videojuego);
 
     DataPartida *getData();
