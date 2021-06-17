@@ -331,7 +331,6 @@ int main(int argc, char const *argv[])
             try
             {
                 menuIniciarSesion(fact, salirJugador, salirDev);
-                std::cout << "                       Bienvenid@, " << uc->getSesion()->getEmail() << "\n\n";
             }
             catch (const std::invalid_argument &ex)
             {

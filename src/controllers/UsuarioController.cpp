@@ -152,13 +152,14 @@ set<DataEstadistica *> UsuarioController::calcularEstadisticas(string nomVideoju
 //métodos de IIniciarSesion
 bool UsuarioController::iniciarSesion(string mail, string password)
 {
-
     UsuarioHandler *uh = UsuarioHandler::getInstance();
-    if (uh->obtenerUsuarioPorId(mail)->getPassword() == password)
+    Usuario *user = uh->obtenerUsuarioPorId(mail);
+    if (user != nullptr && user->getPassword() == password)
         return true;
     else
         return false;
 }
+
 void UsuarioController::confirmarInicioSesion(bool confirmar, string mail, bool &jg, bool &dev)
 {
     if (confirmar)
@@ -173,6 +174,7 @@ void UsuarioController::confirmarInicioSesion(bool confirmar, string mail, bool 
             dev = false;
 
         std::cout << "¡Sesión iniciada correctamente!\n\n";
+        std::cout << "                Bienvenid@, " << this->sesion->getEmail() << "\n\n";
     }
 }
 

@@ -78,9 +78,15 @@ Jugador *UsuarioHandler::obtenerJugadorPorNickname(string nickname)
     return nullptr;
 }
 
+//Retorna un puntero a la instancia Usuario.
+//En caso de no encontrarla, retorna nullptr.
 Usuario *UsuarioHandler::obtenerUsuarioPorId(string mail)
 {
-    return this->users[mail];
+    std::map<string, Usuario *>::iterator iter = this->users.find(mail);
+    if (iter != this->users.end())
+        return iter->second;
+    else
+        return nullptr;
 }
 
 bool UsuarioHandler::tienePartidaSinFinalizar(Videojuego *vj)
