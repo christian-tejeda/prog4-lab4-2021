@@ -47,11 +47,19 @@ void Jugador::cancelarSuscripcionActiva(Videojuego *vj)
 
 map<int, Partida *> Jugador::obtenerPartidasSinFinalizar()
 {
-    return map<int, Partida *>(); //retorna un map vacío
+    map<int, Partida*> sinFinalizar = this->partidasIniciadas;
+    map<int, Partida *>::iterator it;
+    for (it = sinFinalizar.begin(); it != sinFinalizar.end(); it++) {
+        if (it->second->esFinalizada()) {
+            sinFinalizar.insert(pair<int, Partida *>(it->first, it->second));
+        }
+    }
+    return sinFinalizar;
 }
 
 void Jugador::finalizarPartida(int idPartida)
 {
+
 }
 
 map<string, Videojuego *> Jugador::obtenerVideojuegos()
@@ -76,7 +84,7 @@ void Jugador::eliminarContratosDeVideojuego(Videojuego *vj)
 
 void Jugador::eliminarPartidasDeVideojuego(Videojuego *vj)
 {
-    map<int,Partida*> partidas=this->partidasIniciadas;
+    map<int,Partida*> partidas = this->partidasIniciadas;
     map<int,Partida*>::iterator it;
     for (it = partidas.begin(); it != partidas.end(); it++)
     {

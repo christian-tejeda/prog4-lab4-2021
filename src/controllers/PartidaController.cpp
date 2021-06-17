@@ -36,11 +36,16 @@ Jugador *PartidaController::getParticipantePorNickname(string nick)
 //ops de interface
 set<DataPartida *> PartidaController::obtenerPartidasSinFinalizarDeJugador()
 {
-    set<DataPartida *> sinFinalizar;
-    UsuarioController uc;
-    uc->getInstance();
-
-    return sinFinalizar;
+    UsuarioController *uc;
+    uc = uc->getInstance();
+    Jugador *jg = dynamic_cast<Jugador*>(uc->getSesion());
+    map<int, Partida *> sinFinalizar = jg->obtenerPartidasSinFinalizar();
+    map<int, Partida *>::iterator it;
+    set<DataPartida *> dataSinFinalizar;
+    for (it = sinFinalizar.begin(); it != sinFinalizar.end(); it++ ) {
+        dataSinFinalizar.insert(it->second->getData());
+    }
+    return dataSinFinalizar;
 }
 void PartidaController::finalizarPartida(int idPartida)
 {
