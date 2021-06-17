@@ -43,7 +43,7 @@ public:
 
     static void releaseInstance();
     
-    int obtenerHoras(Videojuego* vj);
+    float obtenerHoras(Videojuego* vj);
 };
 
 #endif

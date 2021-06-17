@@ -2,6 +2,7 @@
 #define I_VER_INFO_VIDEOJUEGO_H
 
 #include "../datatypes/DataVideojuego.h"
+#include "../entities/Usuario.h"
 
 class IVerInfoVideojuego
 {

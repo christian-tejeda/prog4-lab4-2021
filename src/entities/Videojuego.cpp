@@ -47,13 +47,18 @@ pair<float, int> Videojuego::getRating()
 }
 // set<ContratoSuscripcion *> getContratos();
 map<string, Categoria *> Videojuego::getCategorias()
-{
+{   
     return this->categorias;
 }
 set<string> Videojuego::getNombreCategorias()
 {
     set<string> res;
-    //iterar sobre el map de categorias para almacenar todos los nombres
+        map<string, Categoria *>::iterator it;
+    for (it = this->categorias.begin(); it != this->categorias.end(); it++)
+    {
+        string agregar=it->first;
+        res.insert(agregar);
+    }
     return res;
 }
 ContextoEstadistica *Videojuego::getContextoEstadistica()

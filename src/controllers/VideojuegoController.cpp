@@ -20,7 +20,9 @@ VideojuegoController::VideojuegoController() {}
 //VideojuegoController::VideojuegoController *getInstance() {}
 
 //Getters
-DataVideojuego *VideojuegoController::getDataVideojuego() { return nullptr; }
+DataVideojuego *VideojuegoController::getDataVideojuego() { 
+    DataVideojuego res;
+    return nullptr; }
 Videojuego *VideojuegoController::getVideojuego() { return nullptr; }
 //ops del interface
 void VideojuegoController::ingresarDatosVideojuego(DataVideojuego *DataV) {}
@@ -110,7 +112,21 @@ set<DataVideojuego *> VideojuegoController::obtenerVideojuegos()
 }
 DataVideojuego *VideojuegoController::obtenerDataVideojuego(string nombre)
 {
-    return nullptr;
+    Videojuego* este=this->videojuego;//string nombre, string descripcion, map<TipoPeriodoValidez, float> suscripciones, set<string> nombreCategorias, pair<float, int> rating);
+    DataVideojuego res=DataVideojuego(este->getNombre(),este->getDescripcion(),este->getSuscripciones(),este->getNombreCategorias(),este->getRating());
+    UsuarioController * uc;
+    uc=uc->getInstance();
+    Desarrollador* des= dynamic_cast<Desarrollador*>(uc->getSesion());
+    //res.setNombreEmpresa(des->getNombreEmpresa()); ESTO IMPORTANTE VER COMO SE HACE CUANDO SE PUBLICA...
+    if (des!=nullptr){
+        UsuarioHandler * uH;
+        uH=uH->getInstance();
+        res.setHorasTotales(uH->obtenerHoras(este));
+    }else{
+        res.setHorasTotales(-1);
+    }
+    DataVideojuego * punter= &res;
+    return punter;
 }
 void VideojuegoController::agregarPlataforma(DataPlataforma *plataforma) {}
 void VideojuegoController::agregarGenero(DataGenero *genero) {}
@@ -118,14 +134,14 @@ void VideojuegoController::agregarOtraCategoria(DataCategoria *otra) {}
 void VideojuegoController::confirmarAgregarCategoria(bool confirmar) {}
 VideojuegoController::~VideojuegoController() {}
 
-
+/*ESTO SI QUEDA COMENTADO EL 18062021 A LAS 1500 SE PUEDE BORRAR
 int VideojuegoController::obtenerHoras(){
     Videojuego * vj=this->videojuego;
     UsuarioHandler * uH;
     uH=uH->getInstance();
     int res=uH->obtenerHoras(vj);  
     return res;
-}
+}*/
 
 set<std::string> VideojuegoController::obtenerNombreVideojuegos(){
     VideojuegoHandler * vH;
