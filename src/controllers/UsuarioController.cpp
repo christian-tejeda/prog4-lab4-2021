@@ -30,7 +30,7 @@ UsuarioController *UsuarioController::getInstance()
 }
 
 //Getters
-Usuario *UsuarioController::getSesion() { return nullptr; }
+Usuario *UsuarioController::getSesion() { return this->sesion; }
 DataDesarrollador *UsuarioController::getDataDesarrollador()
 {
     return this->dataDesarrollador;
@@ -150,8 +150,31 @@ set<DataEstadistica *> UsuarioController::calcularEstadisticas(string nomVideoju
 // void UsuarioController::seleccionarPartida(int id) {}
 
 //métodos de IIniciarSesion
-bool UsuarioController::iniciarSesion(DataUsuario *dataUsuario) { return false; }
-void UsuarioController::confirmarInicioSesion(bool confirmar) {}
+bool UsuarioController::iniciarSesion(string mail, string password)
+{
+
+    UsuarioHandler *uh = UsuarioHandler::getInstance();
+    if (uh->obtenerUsuarioPorId(mail)->getPassword() == password)
+        return true;
+    else
+        return false;
+}
+void UsuarioController::confirmarInicioSesion(bool confirmar, string mail, bool &jg, bool &dev)
+{
+    if (confirmar)
+    {
+        UsuarioHandler *uh = UsuarioHandler::getInstance();
+        this->sesion = uh->obtenerUsuarioPorId(mail);
+
+        Jugador *sesionJg = dynamic_cast<Jugador *>(this->sesion);
+        if (sesionJg)
+            jg = false;
+        else
+            dev = false;
+
+        std::cout << "¡Sesión iniciada correctamente!\n\n";
+    }
+}
 
 UsuarioController::~UsuarioController()
 {

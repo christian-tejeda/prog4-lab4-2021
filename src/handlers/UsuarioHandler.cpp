@@ -78,6 +78,11 @@ Jugador *UsuarioHandler::obtenerJugadorPorNickname(string nickname)
     return nullptr;
 }
 
+Usuario *UsuarioHandler::obtenerUsuarioPorId(string mail)
+{
+    return this->users[mail];
+}
+
 bool UsuarioHandler::tienePartidaSinFinalizar(Videojuego *vj)
 {
 

@@ -33,6 +33,8 @@ public:
 
     Jugador *obtenerJugadorPorNickname(string n);
 
+    Usuario *obtenerUsuarioPorId(string mail);
+
     bool tienePartidaSinFinalizar(Videojuego *vj);
 
     map<string, Usuario *> obtenerUsuarios();

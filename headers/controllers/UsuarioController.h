@@ -51,8 +51,8 @@ public:
     void confirmarSuscripcion(bool confirmar);
 
     //ops de IIniciarSesion
-    bool iniciarSesion(DataUsuario *dataUsuario);
-    void confirmarInicioSesion(bool confirmar);
+    bool iniciarSesion(string mail, string password);
+    void confirmarInicioSesion(bool confirmar, string mail, bool &jg, bool &dev);
 
     //ops de IAltaUsuario
     void ingresarDatosJugador(DataJugador *dataJugador);
