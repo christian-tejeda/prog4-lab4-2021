@@ -6,6 +6,7 @@
 #include <utility>
 
 #include "../../headers/controllers/PartidaController.h"
+#include "../../headers/controllers/UsuarioController.h"
 #include "../../headers/utils/Fecha.h"
 
 using namespace std;
@@ -35,9 +36,11 @@ Jugador *PartidaController::getParticipantePorNickname(string nick)
 //ops de interface
 set<DataPartida *> PartidaController::obtenerPartidasSinFinalizarDeJugador()
 {
-    set<DataPartida *> res;
-    res.insert(nullptr);
-    return res;
+    set<DataPartida *> sinFinalizar;
+    UsuarioController uc;
+    uc->getInstance();
+
+    return sinFinalizar;
 }
 void PartidaController::finalizarPartida(int idPartida)
 {

@@ -23,13 +23,37 @@ VideojuegoController::VideojuegoController() {}
 DataVideojuego *VideojuegoController::getDataVideojuego() { return nullptr; }
 Videojuego *VideojuegoController::getVideojuego() { return nullptr; }
 //ops del interface
-void VideojuegoController::ingresarDatosVideojuego(DataVideojuego *DataV) {}
-set<DataCategoria *> VideojuegoController::obtenerCategorias()
-{
-    set<DataCategoria *> res;
-    res.insert(nullptr);
-    return res;
+void VideojuegoController::ingresarDatosVideojuego(DataVideojuego *DataV) {
+    this->dataVideojuego = DataV;
+
+    // VideojuegoHandler *vh;
+    // vh = vh->getInstance();
+    // std::pair<float, int> rating;
+    // std::set<ContratoSuscripcion *> contratos;
+    // std::map<string, Categoria *> categorias;
+    // ContextoEstadistica contexto = nullptr;
+    // Videojuego *vj = new Videojuego(
+    //     DataV->getNombre(),
+    //     DataV->getDescripcion(),
+    //     DataV->getSuscripciones(),
+    //     DataV->getRating(),
+    //     contratos,
+    //     categorias,
+    //     &contexto);
+    // vh->agregarVideojuego(vj);
 }
+
+void VideojuegoController::agregarGeneroAVideojuego(string genero) {
+
+}
+
+// set<DataCategoria *> VideojuegoController::obtenerCategorias()
+// {
+//     set<DataCategoria *> res;
+//     res.insert(nullptr);
+//     return res;
+// }
+
 void VideojuegoController::agregarPlataformaAVideojuego(string plataforma) {}
 void VideojuegoController::agregarGeneroAVideojuego(string genero) {}
 void VideojuegoController::agregarOtraCategoriaAVideojuego(string cat) {}
@@ -47,8 +71,7 @@ void VideojuegoController::confirmarPublicacionVideojuego(bool cancelada) {}
 // }
 
 set<DataVideojuego *> VideojuegoController::obtenerVideojuegosPublicadosPorDesarrolladorConPartidasFinalizadas()
-{   
-    
+{
     UsuarioController uc;
     uc.getInstance();
     Desarrollador * des = dynamic_cast<Desarrollador *>(uc.getSesion());   
@@ -69,12 +92,14 @@ set<DataVideojuego *> VideojuegoController::obtenerVideojuegosPublicadosPorDesar
     }
     return res;
 }
+
 void VideojuegoController::seleccionarVideojuego(string nombre) {
     VideojuegoHandler * vH;
     vH=vH->getInstance();
     Videojuego * res=vH->obtenerVideojuegoPorId(nombre);
     this->videojuego=res;
 }
+
 void VideojuegoController::confirmarEliminarVideojuego(bool confirmar) {
     //en proceso
     UsuarioController uc;
