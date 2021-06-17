@@ -24,9 +24,9 @@ public:
 
     //ops de IAgregarCategoria
     set<DataCategoria *> obtenerCategorias();
-    void agregarPlataforma(DataPlataforma *plataforma);
-    void agregarGenero(DataGenero *genero);
-    void agregarOtraCategoria(DataCategoria *otra);
+    void agregarCategoria(std::string nombre,std::string descripcion, TipoCategoria tipo);
+    //void agregarGenero(DataGenero *genero);
+    //void agregarOtraCategoria(DataCategoria *otra);
     void confirmarAgregarCategoria(bool confirmar);
 
     //ops de IVerInfoVideojuego

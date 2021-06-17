@@ -139,6 +139,22 @@ void menuCargarDatosPrueba(UsuarioHandler *uh, VideojuegoHandler *vh, CategoriaH
     uh->agregarUsuario(j3);
     uh->agregarUsuario(j4);
 
+    ch->crearNuevaCategoria("Accion", "", genero);
+    ch->crearNuevaCategoria("Aventura", "", genero);
+    ch->crearNuevaCategoria("Estrategia", "", genero);
+    ch->crearNuevaCategoria("Deporte", "", genero);
+    ch->crearNuevaCategoria("Supervivencia", "", genero);
+
+    ch->crearNuevaCategoria("PC", "", plataforma);
+    ch->crearNuevaCategoria("PS4", "", plataforma);
+    ch->crearNuevaCategoria("XBox One", "", plataforma);
+    ch->crearNuevaCategoria("Switch", "", plataforma);
+    ch->crearNuevaCategoria("Xbox X", "", plataforma);
+    ch->crearNuevaCategoria("PS5", "", plataforma);
+
+    ch->crearNuevaCategoria("TTeen", "Su contenido esta dirigido a jovenes de 13 anos en adelante", otrasCategorias);
+    ch->crearNuevaCategoria("E", "Su contenido esta dirigido para todo publico", otrasCategorias);
+
     delete d1;
     delete d2;
     delete d3;
@@ -304,6 +320,16 @@ void menuAgregarCategoria(FactoryController *fact)
          std::cout << "Seleccione una opcion correcta, por favor\n";
          std::cin >> opcion;
     }
+    TipoCategoria tipo;
+    if (opcion==1){
+        tipo=plataforma;
+    }else if (opcion==2){
+        tipo=genero;
+    }
+    else {
+        tipo=otrasCategorias;
+    }
+
     std::string agregar;
     std::string desc;
     std::cout << "Introduzca el nombre de la cateogria agregar\n";
@@ -322,8 +348,9 @@ void menuAgregarCategoria(FactoryController *fact)
          std::cin >> op2;
     }
     std::cin >> op2;
-    //if (op2=1){    
-    //ac->agregarNuevaCategoria(agregar,desc,opcion); PENDIENTE A RESOLUCION CON CHRISTIAN
+    ac->agregarCategoria(agregar,desc,tipo);
+    ac->confirmarAgregarCategoria(op2==2);
+    std::cout << "\n";
 }
 
 void menuPublicarVideojuego()

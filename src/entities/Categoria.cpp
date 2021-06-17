@@ -17,7 +17,12 @@ Categoria::Categoria(std::string nombre, std::string descripcion)
     this->nombre = nombre;
     this->descripcion = descripcion;
 }
-
+Categoria::Categoria(std::string nombre, std::string descripcion,TipoCategoria cat)
+{
+    this->nombre = nombre;
+    this->descripcion = descripcion;
+    this->tipo=cat;
+}
 //Getters
 std::string Categoria::getNombre()
 {
@@ -28,7 +33,10 @@ std::string Categoria::getDescripcion()
 {
     return this->descripcion;
 }
-
+TipoCategoria Categoria::getTipo()
+{
+    return this->tipo;
+}
 //Setters
 void Categoria::setNombre(std::string nombre)
 {

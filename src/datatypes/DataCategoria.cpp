@@ -16,7 +16,12 @@ DataCategoria::DataCategoria(string nombre, string descripcion)
     this->nombre = nombre;
     this->descripcion = descripcion;
 }
-
+DataCategoria::DataCategoria(string nombre, string descripcion,TipoCategoria tipo)
+{
+    this->nombre = nombre;
+    this->descripcion = descripcion;
+    this->tipo=tipo;
+}
 std::string DataCategoria::getNombre() const
 {
     return this->nombre;
@@ -25,6 +30,10 @@ std::string DataCategoria::getNombre() const
 std::string DataCategoria::getDescripcion() const
 {
     return this->descripcion;
+}
+TipoCategoria DataCategoria::getTipo() const
+{
+    return this->tipo;
 }
 
 DataCategoria::~DataCategoria() {}

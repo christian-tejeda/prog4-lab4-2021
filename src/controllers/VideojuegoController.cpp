@@ -11,6 +11,7 @@
 #include "../../headers/entities/Desarrollador.h"
 #include "../../headers/handlers/UsuarioHandler.h"
 #include "../../headers/handlers/VideojuegoHandler.h"
+#include "../../headers/handlers/CategoriaHandler.h"
 
 using namespace std;
 
@@ -128,10 +129,20 @@ DataVideojuego *VideojuegoController::obtenerDataVideojuego(string nombre)
     DataVideojuego * punter= &res;
     return punter;
 }
-void VideojuegoController::agregarPlataforma(DataPlataforma *plataforma) {}
-void VideojuegoController::agregarGenero(DataGenero *genero) {}
-void VideojuegoController::agregarOtraCategoria(DataCategoria *otra) {}
-void VideojuegoController::confirmarAgregarCategoria(bool confirmar) {}
+void VideojuegoController::agregarCategoria(std::string nombre,std::string descripcion, TipoCategoria tipo) {
+    this->dataCategoria=new DataCategoria(nombre,descripcion,tipo);
+}
+//void VideojuegoController::agregarGenero(DataGenero *genero) {}
+//void VideojuegoController::agregarOtraCategoria(DataCategoria *otra) {}
+
+void VideojuegoController::confirmarAgregarCategoria(bool confirmar) {
+    if (confirmar){
+        CategoriaHandler * ch;
+        ch=ch->getInstance();
+        ch->crearNuevaCategoria(this->dataCategoria->getNombre(), this->dataCategoria->getDescripcion(),this->dataCategoria->getTipo());
+    }
+    delete this->dataCategoria;
+}
 VideojuegoController::~VideojuegoController() {}
 
 /*ESTO SI QUEDA COMENTADO EL 18062021 A LAS 1500 SE PUEDE BORRAR

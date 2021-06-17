@@ -22,6 +22,14 @@ enum TipoPeriodoValidez
     vitalicia
 };
 
+enum TipoCategoria
+{
+    plataforma,
+    genero,
+    otrasCategorias,
+};
+
+/*
 enum TipoGenero
 {
     accion,
@@ -38,7 +46,7 @@ enum TipoPlataforma
     xboxone,
     ps5,
     xboxx
-};
+};*/
 
 enum TipoEstadistica
 {

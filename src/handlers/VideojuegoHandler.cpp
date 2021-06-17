@@ -5,8 +5,8 @@
 
 #include "../../headers/utils/enums.h"
 #include "../../headers/entities/Categoria.h"
-#include "../../headers/entities/Genero.h"
-#include "../../headers/entities/Plataforma.h"
+//#include "../../headers/entities/Genero.h"
+//#include "../../headers/entities/Plataforma.h"
 #include "../../headers/handlers/VideojuegoHandler.h"
 
 using namespace std;
