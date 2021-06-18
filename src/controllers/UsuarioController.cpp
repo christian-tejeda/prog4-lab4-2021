@@ -172,7 +172,12 @@ std::set<DataSuscripcionJugador *> UsuarioController::obtenerSuscripciones() {
   return res;
 }
 
-void UsuarioController::seleccionarVideojuego(string nombreVideojuego) {}
+void UsuarioController::seleccionarVideojuego(string nombreVideojuego) {
+  VideojuegoHandler *vH = VideojuegoHandler::getInstance();
+
+  this->videojuego = vH->obtenerVideojuegoPorId(nombreVideojuego);
+}
+
 void UsuarioController::cancelarSuscripcion(bool cancelada) {}
 void UsuarioController::contratarSuscripcion(
     pair<TipoPeriodoValidez, float> suscripcion, TipoMetodoPago m) {}
