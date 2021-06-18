@@ -32,9 +32,8 @@ void Desarrollador::setNombreEmpresa(std::string nomEmpresa)
 
 //Operaciones
 
-DataUsuario *Desarrollador::getData()
-{
-    return nullptr;
+DataUsuario *Desarrollador::getData() {
+    return new DataDesarrollador(this->getEmail(), this->getPassword(), this->getNombreEmpresa());
 }
 
 void Desarrollador::agregarVideojuegoPublicado(Videojuego *vj)
