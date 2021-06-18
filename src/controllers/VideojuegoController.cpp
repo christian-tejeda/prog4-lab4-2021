@@ -29,8 +29,18 @@ Videojuego *VideojuegoController::getVideojuego() { return nullptr; }
 void VideojuegoController::ingresarDatosVideojuego(DataVideojuego *DataV) {}
 set<DataCategoria *> VideojuegoController::obtenerCategorias()
 {
+    CategoriaHandler * cH;
+    cH=cH->getInstance();
+    map<std::string, Categoria*> cats= cH->obtenerCategorias();
     set<DataCategoria *> res;
-    res.insert(nullptr);
+    map<std::string, Categoria*>::iterator it;
+    for(it = cats.begin(); it != cats.end(); it++){
+        Categoria * cat=it->second;
+
+        DataCategoria* data= new DataCategoria(cat->getNombre(),cat->getDescripcion(),cat->getTipo());
+        res.insert(data);
+        //delete data;
+    }
     return res;
 }
 void VideojuegoController::agregarPlataformaAVideojuego(string plataforma) {}
@@ -141,9 +151,13 @@ void VideojuegoController::confirmarAgregarCategoria(bool confirmar) {
         ch=ch->getInstance();
         ch->crearNuevaCategoria(this->dataCategoria->getNombre(), this->dataCategoria->getDescripcion(),this->dataCategoria->getTipo());
     }
-    delete this->dataCategoria;
+    //delete this->dataCategoria;
 }
-VideojuegoController::~VideojuegoController() {}
+VideojuegoController::~VideojuegoController() {
+    delete dataVideojuego;
+    delete dataCategoria;
+    this->videojuego=nullptr;
+}
 
 /*ESTO SI QUEDA COMENTADO EL 18062021 A LAS 1500 SE PUEDE BORRAR
 int VideojuegoController::obtenerHoras(){

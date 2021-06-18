@@ -25,7 +25,14 @@ CategoriaHandler *CategoriaHandler::getInstance()
 
 map<std::string, Categoria *> CategoriaHandler::obtenerCategorias() { return this->cats; }
 
-Categoria *CategoriaHandler::obtenerCategoriaPorId(std::string nombre) { return this->cats[nombre]; }
+Categoria *CategoriaHandler::obtenerCategoriaPorId(std::string nombre) { 
+    if (this->cats.find(nombre)!=this->cats.end())
+    return this->cats.find(nombre)->second;
+    else
+    {
+        return nullptr;
+    }
+}
 
 // Plataforma *CategoriaHandler::obtenerPlataformaPorId(std::string nombre) { return this->cats[nombre]; }
 

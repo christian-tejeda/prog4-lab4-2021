@@ -179,6 +179,10 @@ void menuCargarDatosPrueba(UsuarioHandler *uh, VideojuegoHandler *vh, CategoriaH
     DataUsuario *j3 = new DataJugador("ibai@mail.com", "123", "ibai", "Descripcion de ibai");
     DataUsuario *j4 = new DataJugador("camila@mail.com", "123", "camila", "Descripcion de camila");
 
+    DataUsuario *j5 = new DataJugador("1", "1", "1", "Descripcion de 1");
+    DataUsuario *d5 = new DataDesarrollador("2", "2", "2");
+
+
     uh->agregarUsuario(d1);
     uh->agregarUsuario(d2);
     uh->agregarUsuario(d3);
@@ -187,6 +191,8 @@ void menuCargarDatosPrueba(UsuarioHandler *uh, VideojuegoHandler *vh, CategoriaH
     uh->agregarUsuario(j2);
     uh->agregarUsuario(j3);
     uh->agregarUsuario(j4);
+    uh->agregarUsuario(j5);
+    uh->agregarUsuario(d5);
 
     ch->crearNuevaCategoria("Accion", "", genero);
     ch->crearNuevaCategoria("Aventura", "", genero);
@@ -212,6 +218,9 @@ void menuCargarDatosPrueba(UsuarioHandler *uh, VideojuegoHandler *vh, CategoriaH
     delete j2;
     delete j3;
     delete j4;
+    delete j5;
+    delete d5;
+
 
     //Carga de categorias
     //Carga de videojuegos
@@ -350,11 +359,12 @@ void menuAgregarCategoria(FactoryController *fact)
 
     set<DataCategoria*> cats=ac->obtenerCategorias();
     set<DataCategoria*>::iterator it;
-    std::cout << "----------------------------------------------------\n\n";
-    for (it = cats.begin(); it != cats.end(); it++){
-        DataCategoria * print= *it;
-        std::cout << "Nombre   |"<<print->getNombre()<< "   -\n\n";
-        std::cout << "----------------------------------------------------\n\n";
+    std::cout << "----------------------------------------------------\n";
+    for (it = cats.begin(); it != cats.end(); ++it){
+        DataCategoria*hola=*it;
+        std::string print= hola->getNombre();
+        std::cout << "\t Nombre   | \t"<<print<< "   -\n";
+        std::cout << "----------------------------------------------------\n";
     }
     std::cout << "+------------Que tipo de Categoria desea agregar?-----------+n";
     std::cout << "|                                                           |\n";
@@ -396,10 +406,11 @@ void menuAgregarCategoria(FactoryController *fact)
          std::cout << "Seleccione una opcion correcta, por favor\n";
          std::cin >> op2;
     }
-    std::cin >> op2;
+    //std::cin >> op2;
     ac->agregarCategoria(agregar,desc,tipo);
     ac->confirmarAgregarCategoria(op2==2);
     std::cout << "\n";
+    ac->~IAgregarCategoria();
 }
 
 void menuPublicarVideojuego()
@@ -636,7 +647,7 @@ int main(int argc, char const *argv[])
             case 1: // Agregar categoría
                 try
                 {
-                    /* code */
+                   menuAgregarCategoria(fact);
                 }
                 catch (const std::invalid_argument &ex)
                 {
