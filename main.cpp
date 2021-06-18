@@ -461,7 +461,7 @@ int main(int argc, char const *argv[])
             case 3: //Iniciar partida
                 try
                 {
-                    /* code */
+                    menuIniciarPartida();
                 }
                 catch (const std::invalid_argument &ex)
                 {
