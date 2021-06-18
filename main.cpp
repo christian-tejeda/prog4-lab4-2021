@@ -461,7 +461,7 @@ int main(int argc, char const *argv[])
             case 3: //Iniciar partida
                 try
                 {
-                    menuIniciarPartida();
+                    menuIniciarPartida(fact);
                 }
                 catch (const std::invalid_argument &ex)
                 {
@@ -600,7 +600,15 @@ int main(int argc, char const *argv[])
             case 7: // Modificar fecha del sistema
                 try
                 {
-                    /* code */
+                    int dia = 0;
+                    int mes = 0;
+                    int anio = 0;
+                    int hora = 0;
+                    int minuto = 0;
+                    void menuModificarFechaSistema(int dia, int mes, int anio,int hora,int minuto);
+                    delete fechaSist;
+                    fechaSist = new Fecha(dia,mes,anio,hora,minuto);
+
                 }
                 catch (const std::invalid_argument &ex)
                 {
