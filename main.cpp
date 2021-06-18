@@ -112,7 +112,56 @@ void menuAltaUsuario(FactoryController *fact)
     au->confirmarAltaUsuario(confirmar);
 }
 
-void menuIniciarSesion(FactoryController *fact) {}
+void menuIniciarSesion(FactoryController *fact, bool &jg, bool &dev)
+{
+
+    IIniciarSesion *iis = fact->getIIniciarSesion();
+
+    std::string mail, pwd = "";
+
+    std::cout << "Email: ";
+    std::cin >> mail;
+    std::cout << "\n";
+
+    std::cout << "Contraseña: ";
+    std::cin >> pwd;
+    std::cout << "\n";
+
+    bool cancelar = false;
+    bool iniciada = iis->iniciarSesion(mail, pwd);
+    char failedLogin = '\0';
+
+    while (!iniciada && !cancelar)
+    {
+        std::cout << "Credenciales incorrectas. ¿Qué desea hacer?\n";
+        std::cout << "1) Reintentar\n";
+        std::cout << "2) Cancelar\n";
+
+        while (failedLogin != '1' && failedLogin != '2')
+        {
+            std::cout << ">";
+            std::cin >> failedLogin;
+        }
+
+        if (failedLogin == '1')
+        {
+            std::cout << "Email: ";
+            std::cin >> mail;
+            std::cout << "\n";
+
+            std::cout << "Contraseña: ";
+            std::cin >> pwd;
+            std::cout << "\n";
+
+            iniciada = iis->iniciarSesion(mail, pwd);
+        }
+        else
+        {
+            break;
+        }
+    }
+    iis->confirmarInicioSesion(iniciada, mail, jg, dev);
+}
 
 void menuModificarFechaSistema() {}
 
@@ -176,16 +225,16 @@ void menuSalirInicial()
 
 void menuJugador(Usuario *sesion)
 {
-    std::cout << "+--------------------- Bienvenidx, " << sesion->getEmail() << " -+\n";
+    std::cout << "+----------------------- Menú Jugador  ---------------------+\n";
     std::cout << "|                                                           |\n";
-    std::cout << "|               1) Suscribirse a videojuego                 |\n";
-    std::cout << "|             2) Asignar puntaje a videojuego               |\n";
-    std::cout << "|                   3) Iniciar partida                      |\n";
-    std::cout << "|            4) Abandonar partida multijugador              |\n";
-    std::cout << "|                  5) Finalizar partida                     |\n";
-    std::cout << "|             6) Ver información de videojuego              |\n";
-    std::cout << "|              7) Modificar fecha del sistema               |\n";
-    std::cout << "|                       8) Salir                            |\n";
+    std::cout << "|                 1) Suscribirse a videojuego               |\n";
+    std::cout << "|               2) Asignar puntaje a videojuego             |\n";
+    std::cout << "|                     3) Iniciar partida                    |\n";
+    std::cout << "|              4) Abandonar partida multijugador            |\n";
+    std::cout << "|                    5) Finalizar partida                   |\n";
+    std::cout << "|               6) Ver información de videojuego            |\n";
+    std::cout << "|                7) Modificar fecha del sistema             |\n";
+    std::cout << "|                         8) Salir                          |\n";
     std::cout << "|                                                           |\n";
     std::cout << "+-----------------------------------------------------------+\n";
 }
@@ -281,16 +330,16 @@ void menuSalirUsuario(FactoryController *fact)
 
 void menuDesarrollador(Usuario *sesion)
 {
-    std::cout << "+--------------------- Bienvenidx, " << sesion->getEmail() << " -+\n";
+    std::cout << "+-------------------- Menú Desarrollador -------------------+\n";
     std::cout << "|                                                           |\n";
-    std::cout << "|                 1) Agregar categoría                      |\n";
-    std::cout << "|                2) Publicar videojuego                     |\n";
-    std::cout << "|                3) Eliminar videojuego                     |\n";
-    std::cout << "|              4) Seleccionar estadísticas                  |\n";
-    std::cout << "|               5) Consultar estadísticas                   |\n";
-    std::cout << "|            6) Ver información de videojuego               |\n";
-    std::cout << "|             7) Modificar fecha del sistema                |\n";
-    std::cout << "|                       8) Salir                            |\n";
+    std::cout << "|                   1) Agregar categoría                    |\n";
+    std::cout << "|                  2) Publicar videojuego                   |\n";
+    std::cout << "|                  3) Eliminar videojuego                   |\n";
+    std::cout << "|                4) Seleccionar estadísticas                |\n";
+    std::cout << "|                 5) Consultar estadísticas                 |\n";
+    std::cout << "|              6) Ver información de videojuego             |\n";
+    std::cout << "|               7) Modificar fecha del sistema              |\n";
+    std::cout << "|                         8) Salir                          |\n";
     std::cout << "|                                                           |\n";
     std::cout << "+-----------------------------------------------------------+\n";
 }
@@ -455,7 +504,7 @@ int main(int argc, char const *argv[])
         case 2: //Iniciar sesión
             try
             {
-                /* code */
+                menuIniciarSesion(fact, salirJugador, salirDev);
             }
             catch (const std::invalid_argument &ex)
             {
@@ -484,6 +533,8 @@ int main(int argc, char const *argv[])
 
         while (!salirJugador)
         {
+
+            menuJugador(uc->getSesion());
 
             std::cout << ">";
             std::cin >> prompt;
@@ -563,8 +614,7 @@ int main(int argc, char const *argv[])
                 break;
             case 8: // Salir Jugador
                 salirJugador = true;
-                menuSalirUsuario(fact);
-                menuInicial();
+                //menuSalirUsuario(fact);
                 break;
 
             default:
@@ -575,6 +625,7 @@ int main(int argc, char const *argv[])
 
         while (!salirDev)
         {
+            menuDesarrollador(uc->getSesion());
 
             std::cout << ">";
             std::cin >> prompt;
@@ -654,8 +705,7 @@ int main(int argc, char const *argv[])
                 break;
             case 8: //Salir Dev
                 salirDev = true;
-                menuSalirUsuario(fact);
-                menuInicial();
+                //menuSalirUsuario(fact);
                 break;
 
             default:
