@@ -113,12 +113,23 @@ void VideojuegoController::confirmarEliminarVideojuego(bool confirmar)
     vH->eliminarVideojuego(video);
     video->~Videojuego();
 }
-void VideojuegoController::puntuarVideojuego(string nombre, int puntaje) {}
+void VideojuegoController::puntuarVideojuego(int puntaje) {
+    this->videojuego->agregarPuntaje(puntaje);
+}
 
 set<DataVideojuego *> VideojuegoController::obtenerVideojuegos()
-{
+{   
+    VideojuegoHandler *vH;
+    vH = vH->getInstance();
+    map<std::string, Videojuego*> vjs =vH->obtenerVideojuegos();
+    map<std::string, Videojuego*>::iterator it;
     set<DataVideojuego *> res;
-    res.insert(nullptr);
+    for (it = vjs.begin(); it != vjs.end(); it++)
+    {
+        Videojuego * video = it->second;
+        DataVideojuego * data = new DataVideojuego(video->getNombre(),video->getDescripcion(),video->getSuscripciones(),video->getNombreCategorias(),video->getRating());
+        res.insert(data);
+    }
     return res;
 }
 DataVideojuego *VideojuegoController::obtenerDataVideojuego(string nombre)
@@ -154,8 +165,9 @@ void VideojuegoController::confirmarAgregarCategoria(bool confirmar) {
     //delete this->dataCategoria;
 }
 VideojuegoController::~VideojuegoController() {
-    delete dataVideojuego;
-    delete dataCategoria;
+    if (this->dataVideojuego!=nullptr) delete this->dataVideojuego;
+    
+    if (this->dataCategoria!=nullptr) delete this->dataCategoria;
     this->videojuego=nullptr;
 }
 
