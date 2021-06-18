@@ -23,7 +23,11 @@ VideojuegoController::VideojuegoController() {}
 DataVideojuego *VideojuegoController::getDataVideojuego() { return nullptr; }
 Videojuego *VideojuegoController::getVideojuego() { return nullptr; }
 //ops del interface
-void VideojuegoController::ingresarDatosVideojuego(DataVideojuego *DataV) {}
+void VideojuegoController::ingresarDatosVideojuego(DataVideojuego *DataV) {
+
+   DataVideojuego *nuevoDataVdj = DataV;
+   this->dataVideojuego = nuevoDataVdj;
+}
 set<DataCategoria *> VideojuegoController::obtenerCategorias()
 {
     set<DataCategoria *> res;
