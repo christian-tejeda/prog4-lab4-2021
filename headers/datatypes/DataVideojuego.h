@@ -39,8 +39,9 @@ public:
     pair<float, int> getRating();
 
     void setNombreEmpresa(std::string nombreEmpresa);
-
     void setHorasTotales(float horas);
+
+    void agregarCategoria(std::string categoria) {}
     ~DataVideojuego();
 };
 

@@ -27,7 +27,6 @@ DataVideojuego *VideojuegoController::getDataVideojuego() {
 Videojuego *VideojuegoController::getVideojuego() { return nullptr; }
 //ops del interface
 void VideojuegoController::ingresarDatosVideojuego(DataVideojuego *DataV) {
-
    DataVideojuego *nuevoDataVdj = DataV;
    this->dataVideojuego = nuevoDataVdj;
 }
@@ -37,14 +36,24 @@ set<DataCategoria *> VideojuegoController::obtenerCategorias()
     res.insert(nullptr);
     return res;
 }
-void VideojuegoController::agregarPlataformaAVideojuego(string plataforma) {}
-void VideojuegoController::agregarGeneroAVideojuego(string genero) {}
-void VideojuegoController::agregarOtraCategoriaAVideojuego(string cat) {}
+
+void VideojuegoController::agregarPlataformaAVideojuego(string plataforma) {
+    this->dataVideojuego->agregarCategoria(plataforma);
+}
+void VideojuegoController::agregarGeneroAVideojuego(string genero) {
+    this->dataVideojuego->agregarCategoria(genero);
+}
+void VideojuegoController::agregarOtraCategoriaAVideojuego(string cat) {
+    this->dataVideojuego->agregarCategoria(cat);
+}
+
 DataVideojuego *VideojuegoController::obtenerDataVideojuegoIngresada()
 {
-    return nullptr;
+    return this->dataVideojuego;
 }
-void VideojuegoController::confirmarPublicacionVideojuego(bool cancelada) {}
+void VideojuegoController::confirmarPublicacionVideojuego(bool cancelada) {
+    
+}
 
 // set<DataContratoSuscripcion *> VideojuegoController::obtenerSuscripciones()
 // {
