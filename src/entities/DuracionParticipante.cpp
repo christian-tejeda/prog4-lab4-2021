@@ -12,7 +12,7 @@
 #include "../../headers/utils/Fecha.h"
 
 DuracionParticipante::DuracionParticipante() {}
-DuracionParticipante::DuracionParticipante(Fecha &he, Fecha &hs, Jugador *jg)
+DuracionParticipante::DuracionParticipante(Fecha *he, Fecha *hs, Jugador *jg)
 {
     this->horaEntrada = he;
     this->horaSalida = hs;
@@ -20,11 +20,11 @@ DuracionParticipante::DuracionParticipante(Fecha &he, Fecha &hs, Jugador *jg)
 }
 
 //Getters
-Fecha DuracionParticipante::getHoraEntrada()
+Fecha* DuracionParticipante::getHoraEntrada()
 {
     return this->horaEntrada;
 }
-Fecha DuracionParticipante::getHoraSalida()
+Fecha* DuracionParticipante::getHoraSalida()
 {
     return this->horaSalida;
 }
@@ -33,11 +33,11 @@ Jugador *DuracionParticipante::getParticipante()
     return this->participante;
 }
 //Setters
-void DuracionParticipante::setHoraEntrada(Fecha &f)
+void DuracionParticipante::setHoraEntrada(Fecha *f)
 {
     this->horaEntrada = f;
 }
-void DuracionParticipante::setHoraSalida(Fecha &f)
+void DuracionParticipante::setHoraSalida(Fecha *f)
 {
     this->horaSalida = f;
 }
@@ -45,8 +45,12 @@ void DuracionParticipante::setParticipante(Jugador *prt)
 {
     this->participante = prt;
 }
-void DuracionParticipante::terminarParticipacion(Fecha &f)
+void DuracionParticipante::terminarParticipacion(Fecha *f)
 {
     this->horaSalida = f;
 }
-DuracionParticipante::~DuracionParticipante() {}
+DuracionParticipante::~DuracionParticipante() {
+    this->participante = nullptr;
+    delete this->horaEntrada;
+    delete this->horaSalida;
+}

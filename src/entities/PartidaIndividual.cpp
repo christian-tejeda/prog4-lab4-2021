@@ -33,4 +33,5 @@ DataPartida *PartidaIndividual::getData()
                            this->getDuracionTotal());
 }
 
+
 PartidaIndividual::~PartidaIndividual() {}

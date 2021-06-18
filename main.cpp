@@ -163,7 +163,26 @@ void menuIniciarSesion(FactoryController *fact, bool &jg, bool &dev)
     iis->confirmarInicioSesion(iniciada, mail, jg, dev);
 }
 
-void menuModificarFechaSistema() {}
+void menuModificarFechaSistema(int &dia, int &mes, int &anio,int &hora,int &minuto) {
+        std::cout << "Todos los valores deben ser enteros.";
+        std::cout << "\n";
+        std::cout << "Ingrese el anio: ";
+        std::cin >> anio;
+        std::cout << "\n";
+        std::cout << "Ingrese mes: ";
+        std::cin >> mes;
+        std::cout << "\n";
+        std::cout << "Ingrese el dia: ";
+        std::cin >> dia;
+        std::cout << "\n";
+        std::cout << "Ingrese la hora: ";
+        std::cin >> hora;
+        std::cout << "\n";
+        std::cout << "Ingrese el minuto: ";
+        std::cin >> minuto;
+        std::cout << "\n";
+
+}
 
 void menuCargarDatosPrueba(UsuarioHandler *uh, VideojuegoHandler *vh, CategoriaHandler *ch)
 {
@@ -258,6 +277,144 @@ void menuAsignarPuntaje(FactoryController *fact)
 
 void menuIniciarPartida(FactoryController *fact)
 {
+    IIniciarPartida *ip = fact->getIIniciarPartida();
+    set<DataVideojuego*> videojuegosDeJgConSus = ip->obtenerVideojuegosDeJugadorConSuscripcionActiva();
+    std::cout << "Videojuegos con Suscripcion: \n";
+    set<DataVideojuego*>::iterator it;
+    for(it = videojuegosDeJgConSus.begin();it != videojuegosDeJgConSus.end(); it++){
+        std::cout << "Nombre videojuego: " << (*it)->getNombre() << "\n";
+    }
+    bool juegoValido = false;
+    if(videojuegosDeJgConSus.size() != 0){
+    while (!juegoValido){
+        std::string nombreJueguito;
+        std::cout << "Ingrese el nombre del videojuego que desea iniciar partida: ";
+        std::cin >> nombreJueguito;
+        try{
+            juegoValido = true;
+            ip->seleccionarVideojuego(nombreJueguito);
+        }
+        catch (const std::invalid_argument &ex){
+            std::cout << ex.what() << '\n';
+            juegoValido = false;
+        }
+    }
+    char tipoPartida = '3';
+    while(tipoPartida != '1' || tipoPartida != '2'){
+        std::cout <<"Que tipo de partida desea iniciar?  \n  \n";
+        std::cout <<"1 Partida Individual  \n";
+        std::cout <<"2 Partida Multijugador \n";
+        std::cin >> tipoPartida;
+        if(tipoPartida != '1' && tipoPartida != '2' ){
+            std::cout <<"Ingrese un numero valido  \n";
+        }
+    }
+    if(tipoPartida == 1){//partida individual
+        char continuaa = 'r';
+        while(continuaa != 'y' || continuaa != 'n'){
+            std::cout << "Desea continuar una partida? ";
+            std::cin >> continuaa;
+            std::cout << " \n";
+        }
+        if(continuaa == 'y'){//va a continuar una partida
+            set<DataPartidaIndividual*> partidasfin = ip->obtenerPartidasFinalizadasDeJugador();
+            if(partidasfin.size() != 0){//hay partidas para continuar
+                std::cout << "Partidas finalizadas: \n";
+                set<DataPartidaIndividual*>::iterator it;
+                for(it = partidasfin.begin();it != partidasfin.end(); it++){
+                    std::cout << "Nombre videojuego: " << (*it)->getVideojuego().getNombre();
+                    std::cout << "  Id partida: " << (*it)->getId()<< " \n ";
+                }
+                int numeroPartida = -1;
+                bool partidaValida = false;
+                while(!partidaValida){//vamo a ver que meta un buen id
+                    std::cout << "Ingrese el id de la partida: ";
+                    std::cin >> numeroPartida;
+                    try{
+                        partidaValida = true;
+                        ip->seleccionarPartidaAContinuar(numeroPartida);
+                    }
+                    catch (const std::invalid_argument &ex){
+                    std::cout << ex.what() << '\n';
+                    partidaValida = false;
+                    }
+                }
+            }
+            else{//no hay partidas para continuar
+                std::cout << "No hay partidas finalizadas, se va a iniciar una nueva \n";
+            }   
+        }
+        char confirmar = 'r';
+        while(confirmar != 'y' || confirmar != 'n'){
+            std::cout << "Desea confirmar el inicio de partida? (y/n) ";
+            std::cin >> confirmar;
+            std::cout << " \n";
+        }
+        bool confirmamo = false;
+        if(confirmar == 'y')confirmamo = true;
+        ip->confirmarIniciarPartida(confirmamo);
+    }
+    else{//partida multijugador
+        char transmitir = 'r';
+        while(transmitir != 'y' || transmitir != 'n'){
+            std::cout << "Desea que su partida sea transmitida en vivo? (y/n) ";
+            std::cin >> transmitir;
+            std::cout << " \n";
+        }
+        bool transmitimo = false;
+        if(transmitir == 'y')transmitimo = true;
+        std::cout << "Jugadores con suscripcion activa \n";
+        set<DataJugador*> jugadores = ip->obtenerJugadoresConSuscripcionActiva();
+        set<DataJugador*>::iterator it;
+        set<std::string> nombreJugadoresConSus;
+        for(it = jugadores.begin();it != jugadores.end(); it++){
+            std::cout << "Nickname: " << (*it)->getNickname() << "\n";
+            nombreJugadoresConSus.insert((*it)->getNickname());
+            }
+        char masJugadores = 'r';
+        std::cout << "Desea agregar un jugador a la partida? (y/n) ";
+        std::cin >> masJugadores;
+        std:cout << "\n";
+        while(masJugadores == 'y'){//agregando jugadores
+            set<std::string>::iterator it2;
+            std::string jugadorAgregar;
+            std::cout << "Ingrese el nickname del jugador: ";
+            std::cin >> jugadorAgregar;
+            it2->find(jugadorAgregar);
+            if(it2 == nombreJugadoresConSus.end()){
+                std::cout <<"Jugador con ese nombre y suscripcion no encontrado, intente con otro \n";
+            }
+            else{
+                std::cout <<"Jugador ingresado \n";
+                ip->seleccionarJugador(jugadorAgregar);
+            }
+            char seguirAgregando = 'r';
+            while(seguirAgregando != 'y' && seguirAgregando != 'n'){
+                std::cout << "Desea agregar otro jugador a la partida? (y/n) \n";
+                std::cin >> seguirAgregando;
+            }
+            if(seguirAgregando == 'y'){
+                masJugadores = 'y';
+            }
+            else masJugadores = 'n';
+        }
+        char confirmar = 'r';
+        while(confirmar != 'y' || confirmar != 'n'){
+            std::cout << "Desea confirmar el inicio de partida? (y/n) ";
+            std::cin >> confirmar;
+            std::cout << " \n";
+        }
+        bool confirmamo = false;
+        if(confirmar == 'y')confirmamo = true;
+        ip->confirmarIniciarPartida(confirmamo);
+
+    }
+
+}
+    else {
+        std::cout << "No tenes juegos :( \n";
+    }
+
 }
 
 void menuAbandonarPartidaMulti(FactoryController *fact)
@@ -576,7 +733,7 @@ int main(int argc, char const *argv[])
             case 3: //Iniciar partida
                 try
                 {
-                    /* code */
+                    menuIniciarPartida(fact);
                 }
                 catch (const std::invalid_argument &ex)
                 {
@@ -616,7 +773,15 @@ int main(int argc, char const *argv[])
             case 7: // Modificar fecha del sistema
                 try
                 {
-                    /* code */
+                    int dia = 0;
+                    int mes = 0;
+                    int anio = 0;
+                    int hora = 0;
+                    int minuto = 0;
+                    void menuModificarFechaSistema(int dia, int mes, int anio,int hora,int minuto);
+                    delete fechaSist;
+                    fechaSist = new Fecha(dia,mes,anio,hora,minuto);
+
                 }
                 catch (const std::invalid_argument &ex)
                 {
@@ -707,7 +872,15 @@ int main(int argc, char const *argv[])
             case 7: // Modificar fecha del sistema
                 try
                 {
-                    /* code */
+                    int dia = 0;
+                    int mes = 0;
+                    int anio = 0;
+                    int hora = 0;
+                    int minuto = 0;
+                    void menuModificarFechaSistema(int dia, int mes, int anio,int hora,int minuto);
+                    delete fechaSist;
+                    fechaSist = new Fecha(dia,mes,anio,hora,minuto);
+
                 }
                 catch (const std::invalid_argument &ex)
                 {

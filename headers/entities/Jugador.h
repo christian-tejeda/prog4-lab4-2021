@@ -25,7 +25,6 @@ class Jugador : public Usuario
 private:
     std::string nickname;
     std::string descripcion;
-    //set<Jugador*> sigue;  NO HAY QUE IMPLEMENTARLO
     map<int, Partida *> partidasIniciadas;
     set<ContratoSuscripcion *> contratos;
 
@@ -43,6 +42,8 @@ public:
     void setDescripcion(std::string descripcion);
 
     //Operaciones
+    void crearPartidaIndividual(int idPartida,Fecha fechaActual,Videojuego * vj,Jugador *host,PartidaIndividual * cont);
+    void crearPartidaMultijugador(int idPartida, Fecha fechaActual, Fecha *fechaFin, Videojuego * vj, bool transmitida, Jugador * host, map<string, Jugador *> participantes);
     void cancelarSuscripcionActiva(Videojuego *vj);
     void contratarSuscripcion(Videojuego *vj, ContratoSuscripcion susc, TipoMetodoPago m);
     map<int, Partida *> obtenerPartidasSinFinalizar();
@@ -52,10 +53,11 @@ public:
     void eliminarPartidasDeVideojuego(Videojuego *vj);
     DataUsuario *getData();
     map<int, PartidaIndividual *> obtenerPartidasFinalizadas();
-    PartidaIndividual *obtenerPartida(std::string id);
+    PartidaIndividual *obtenerPartida(int id);
     bool tieneSuscripcionActiva(Videojuego *vj);
     
     bool tienePartidaSinFinalizar(Videojuego *vj);//operacion faltante en obtenerpartidasfinalizadas en elim videojuego
+    map<std::string,Videojuego*> obtenerVideojuegosConSuscripcionActiva();
 
     int obtenerDuracionPartida(Videojuego *vj);
     ~Jugador();

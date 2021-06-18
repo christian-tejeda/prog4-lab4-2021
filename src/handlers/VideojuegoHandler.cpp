@@ -32,7 +32,14 @@ void VideojuegoHandler::agregarVideojuego(Videojuego *vj)
 
 map<string, Videojuego *> VideojuegoHandler::obtenerVideojuegos() { return this->vjs; }
 
-Videojuego *VideojuegoHandler::obtenerVideojuegoPorId(string nombre) { return this->vjs[nombre]; }
+Videojuego *VideojuegoHandler::obtenerVideojuegoPorId(string nombre) {
+    map<string,Videojuego*>::iterator it;
+    it = this->vjs.find(nombre);
+    if(it == this->vjs.end()){
+        return nullptr;
+    }
+    else return it->second;
+     }
 
 void VideojuegoHandler::eliminarVideojuego(Videojuego *vj)
 {

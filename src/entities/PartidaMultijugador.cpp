@@ -36,7 +36,7 @@ void PartidaMultijugador::setTransmitidaEnVivo(bool enVivo)
 void PartidaMultijugador::agregarParticipante(Jugador *participante)
 {
 }
-void PartidaMultijugador::finalizar()
+void PartidaMultijugador::finalizar(Fecha * fecha)
 {
 }
 void PartidaMultijugador::eliminarPartidasVideojuego(Videojuego *videojuego)
