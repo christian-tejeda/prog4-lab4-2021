@@ -69,6 +69,8 @@ void VideojuegoController::confirmarPublicacionVideojuego(bool cancelada) {
             nuevasCategorias,
             nullptr,
             this->dataVideojuego->getNombreEmpresa());
+        vjh = vjh->getInstance();
+        vjh->agregarVideojuego(vdj);
     }
 }
 
