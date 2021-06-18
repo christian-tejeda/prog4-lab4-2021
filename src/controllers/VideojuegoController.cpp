@@ -15,7 +15,9 @@
 
 using namespace std;
 
-VideojuegoController::VideojuegoController() {}
+VideojuegoController::VideojuegoController() {
+
+}
 
 //op de singleton
 //VideojuegoController::VideojuegoController *getInstance() {}
@@ -37,22 +39,37 @@ set<DataCategoria *> VideojuegoController::obtenerCategorias()
     return res;
 }
 
-void VideojuegoController::agregarPlataformaAVideojuego(string plataforma) {
-    this->dataVideojuego->agregarCategoria(plataforma);
+void VideojuegoController::agregarCategoriaAVideojuego(string plataforma, TipoCategoria tipoCat) {
+    this->dataCategoria = new DataCategoria();
 }
-void VideojuegoController::agregarGeneroAVideojuego(string genero) {
-    this->dataVideojuego->agregarCategoria(genero);
-}
-void VideojuegoController::agregarOtraCategoriaAVideojuego(string cat) {
-    this->dataVideojuego->agregarCategoria(cat);
-}
+
 
 DataVideojuego *VideojuegoController::obtenerDataVideojuegoIngresada()
 {
     return this->dataVideojuego;
 }
 void VideojuegoController::confirmarPublicacionVideojuego(bool cancelada) {
-    
+    if (!cancelada) {
+        set<ContratoSuscripcion *> nuevoContratos;
+        CategoriaHandler *ch;
+        VideojuegoHandler *vjh;
+        ch = ch->getInstance();
+        std::map<string, Categoria *> nuevasCategorias;
+        std::map<string, Categoria *>::iterator iter;
+        for (iter = nuevasCategorias.begin(); iter != nuevasCategorias.end(); iter++) {
+            Categoria *nuevaCat = ch->obtenerCategoriaPorId(iter->first);
+            nuevasCategorias.insert();
+        };
+        Videojuego *vdj = new Videojuego(
+            this->dataVideojuego->getNombre(),
+            this->dataVideojuego->getDescripcion(),
+            this->dataVideojuego->getSuscripciones(),
+            this->dataVideojuego->getRating(),
+            nuevoContratos,
+            nuevasCategorias,
+            nullptr,
+            this->dataVideojuego->getNombreEmpresa());
+    }
 }
 
 // set<DataContratoSuscripcion *> VideojuegoController::obtenerSuscripciones()
