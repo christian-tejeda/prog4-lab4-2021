@@ -50,7 +50,7 @@ public:
   // ops de ISuscribirseVideojuego
   std::set<DataSuscripcionJugador *> obtenerSuscripciones();
   void seleccionarVideojuego(string nombreVideojuego);
-  void cancelarSuscripcion(bool cancelada);
+  void cancelarSuscripcion();
   void contratarSuscripcion(pair<TipoPeriodoValidez, float> suscripcion,
                             TipoMetodoPago m);
   void confirmarSuscripcion(bool confirmar);

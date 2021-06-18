@@ -31,7 +31,21 @@ void Jugador::setDescripcion(std::string descripcion) {
 // Jugador::set<ContratoSuscripcion> obtenerSuscripciones(EstadoSuscripcion
 // estado);
 
-void Jugador::cancelarSuscripcionActiva(Videojuego *vj) {}
+void Jugador::cancelarSuscripcionActiva(Videojuego *vj) {
+  std::set<ContratoSuscripcion *> contratos = this->contratos;
+  std::set<ContratoSuscripcion *>::iterator it;
+
+  bool cancelado = false;
+  for (it = contratos.begin(); it != contratos.end() && !cancelado; it++) {
+    ContratoSuscripcion *contrato = (*it);
+    if (contrato->perteneceAVideojuego(vj)) {
+      if (contrato->esActivo()) {
+        contrato->cancelar();
+        cancelado = true;
+      }
+    }
+  }
+}
 
 // void Jugador::contratarSuscripcion(Videojuego *vj, ContratoSuscripcion susc,
 // TipoMetodoPago m);

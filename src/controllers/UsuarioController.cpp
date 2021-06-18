@@ -178,7 +178,13 @@ void UsuarioController::seleccionarVideojuego(string nombreVideojuego) {
   this->videojuego = vH->obtenerVideojuegoPorId(nombreVideojuego);
 }
 
-void UsuarioController::cancelarSuscripcion(bool cancelada) {}
+void UsuarioController::cancelarSuscripcion() {
+  UsuarioController *uc = UsuarioController::getInstance();
+  Jugador *jugador = dynamic_cast<Jugador *>(uc->getSesion());
+
+  jugador->cancelarSuscripcionActiva(this->videojuego);
+}
+
 void UsuarioController::contratarSuscripcion(
     pair<TipoPeriodoValidez, float> suscripcion, TipoMetodoPago m) {}
 void UsuarioController::confirmarSuscripcion(bool confirmar) {}

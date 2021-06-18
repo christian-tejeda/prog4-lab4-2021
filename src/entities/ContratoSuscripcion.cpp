@@ -3,37 +3,24 @@
 #include <string>
 
 ContratoSuscripcion::ContratoSuscripcion() {}
-ContratoSuscripcion::ContratoSuscripcion(Jugador *jg, Videojuego *vj, TipoMetodoPago metodoDePago, TipoPeriodoValidez validez)
-{
-    this->jugador = jg;
-    this->videojuego = vj;
-    this->metodoDePago = metodoDePago;
-    this->periodoValidez = validez;
+ContratoSuscripcion::ContratoSuscripcion(Jugador *jg, Videojuego *vj,
+                                         TipoMetodoPago metodoDePago,
+                                         TipoPeriodoValidez validez) {
+  this->jugador = jg;
+  this->videojuego = vj;
+  this->metodoDePago = metodoDePago;
+  this->periodoValidez = validez;
 }
 
-Jugador *ContratoSuscripcion::getJugador()
-{
-    return this->jugador;
+Jugador *ContratoSuscripcion::getJugador() { return this->jugador; }
+Videojuego *ContratoSuscripcion::getVideojuego() { return this->videojuego; }
+bool ContratoSuscripcion::getFueCancelada() { return this->fueCancelada; }
+Fecha ContratoSuscripcion::getFecha() { return this->fechaSuscripcion; }
+TipoPeriodoValidez ContratoSuscripcion::getValidez() {
+  return this->periodoValidez;
 }
-Videojuego *ContratoSuscripcion::getVideojuego()
-{
-    return this->videojuego;
-}
-bool ContratoSuscripcion::getFueCancelada()
-{
-    return this->fueCancelada;
-}
-Fecha ContratoSuscripcion::getFecha()
-{
-    return this->fechaSuscripcion;
-}
-TipoPeriodoValidez ContratoSuscripcion::getValidez()
-{
-    return this->periodoValidez;
-}
-TipoMetodoPago ContratoSuscripcion::getMetodoDePago()
-{
-    return this->metodoDePago;
+TipoMetodoPago ContratoSuscripcion::getMetodoDePago() {
+  return this->metodoDePago;
 }
 
 void ContratoSuscripcion::setVideojuego(Videojuego *vj) {}
@@ -42,14 +29,31 @@ void ContratoSuscripcion::setFecha(Fecha &fe) {}
 void ContratoSuscripcion::setActivo(bool activo) {}
 void ContratoSuscripcion::setFueCancelada(bool fueCancelada) {}
 void ContratoSuscripcion::setMetodoDePago(TipoMetodoPago metodoDePago) {}
-void ContratoSuscripcion::setPeriodoDeValidez(TipoPeriodoValidez periodoValidez) {}
-void ContratoSuscripcion::cancelar() {}
-bool ContratoSuscripcion::perteneceAVideojuego(Videojuego *vj)
-{
-    Videojuego * video= this->videojuego;
-    return (video==vj);
+void ContratoSuscripcion::setPeriodoDeValidez(
+    TipoPeriodoValidez periodoValidez) {}
+
+void ContratoSuscripcion::cancelar() { this->fueCancelada = true; }
+
+bool ContratoSuscripcion::perteneceAVideojuego(Videojuego *vj) {
+  Videojuego *video = this->videojuego;
+  return (video == vj);
 }
-bool ContratoSuscripcion::esActivo()
-{
+bool ContratoSuscripcion::esActivo() {
+  if (this->fueCancelada)
     return false;
+
+  bool esActivo;
+  //   Fecha difference = fechaActual.difference(this->fechaSuscripcion);
+  switch (this->periodoValidez) {
+  case vitalicia:
+    return true;
+  //   case anual:
+  //     return difference.getAnio() > 1;
+  //   case mensual:
+  //    return difference.getMes() < 1;
+  //   case trimestral:
+  //     return difference.getMes() < 3;
+  default:
+    return false;
+  }
 }
