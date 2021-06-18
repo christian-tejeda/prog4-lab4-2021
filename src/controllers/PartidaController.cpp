@@ -16,17 +16,17 @@ PartidaController::PartidaController() {}
 //PartidaController *PartidaController::getInstance() {}
 
 //Getters
-Usuario *PartidaController::getJugador()
+Jugador *PartidaController::getJugador()
 {
-    return nullptr;
+    return this->jg;
 }
 Videojuego *PartidaController::getVideojuego()
 {
-    return nullptr;
+    return this->vj;
 }
 PartidaIndividual *PartidaController::getPartidaAContinuar()
 {
-    return nullptr;
+    return this->partidaAContinuar;
 }
 Jugador *PartidaController::getParticipantePorNickname(string nick)
 {

@@ -11,7 +11,7 @@
 class PartidaController : public IIniciarPartida, public IAbandonarPartida, public IFinalizarPartida
 {
 private:
-    Usuario *jg;                          //se borra la ref al final del CU
+    Jugador *jg;                          //se borra la ref al final del CU
     Videojuego *vj;                       //se borra la ref al final del CU
     PartidaIndividual *partidaAContinuar; //se borra la ref al final del CU
     bool transmitida;
@@ -21,7 +21,7 @@ public:
     PartidaController();
 
     //Getters
-    Usuario *getJugador();
+    Jugador *getJugador();
     Videojuego *getVideojuego();
     PartidaIndividual *getPartidaAContinuar();
     Jugador *getParticipantePorNickname(string nick);
