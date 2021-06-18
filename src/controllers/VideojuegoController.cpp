@@ -58,7 +58,7 @@ void VideojuegoController::confirmarPublicacionVideojuego(bool cancelada) {
         std::map<string, Categoria *>::iterator iter;
         for (iter = nuevasCategorias.begin(); iter != nuevasCategorias.end(); iter++) {
             Categoria *nuevaCat = ch->obtenerCategoriaPorId(iter->first);
-            nuevasCategorias.insert();
+            nuevasCategorias.insert(pair<string, Categoria *>(iter->first, iter->second));
         };
         Videojuego *vdj = new Videojuego(
             this->dataVideojuego->getNombre(),
