@@ -39,8 +39,10 @@ set<DataPartida *> PartidaController::obtenerPartidasSinFinalizarDeJugador()
     UsuarioController *uc;
     uc = uc->getInstance();
     Jugador *jg = dynamic_cast<Jugador*>(uc->getSesion());
+
     map<int, Partida *> sinFinalizar = jg->obtenerPartidasSinFinalizar();
     map<int, Partida *>::iterator it;
+    
     set<DataPartida *> dataSinFinalizar;
     for (it = sinFinalizar.begin(); it != sinFinalizar.end(); it++ ) {
         dataSinFinalizar.insert(it->second->getData());
