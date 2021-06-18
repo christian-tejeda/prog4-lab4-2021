@@ -1,24 +1,21 @@
 
-#include <string>
 #include <map>
 #include <set>
+#include <string>
 #include <utility>
 
-#include "../../headers/utils/enums.h"
 #include "../../headers/datatypes/DataEstadistica.h"
+#include "../../headers/utils/enums.h"
 
 DataEstadistica::DataEstadistica() {}
 
-DataEstadistica::DataEstadistica(std::string nombre, std::string descripcion, float valor)
-{
-    this->nombre = nombre;
-    this->descripcion = descripcion;
-    this->valor = valor;
+DataEstadistica::DataEstadistica(TipoEstadistica estadistica, float resultado) {
+  this->estadistica = estadistica;
+  this->resultado = resultado;
 }
-// DataEstadistica::TipoEstadistica getEstadistica(); <- tipo de retorno?
 
-float DataEstadistica::getResultado()
-{
-    return 0;
-}
+TipoEstadistica DataEstadistica::getEstadistica() { return this->estadistica; }
+
+float DataEstadistica::getResultado() { return this->resultado; }
+
 DataEstadistica::~DataEstadistica() {}

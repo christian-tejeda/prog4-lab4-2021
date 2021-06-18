@@ -5,19 +5,19 @@
 
 #include "../utils/enums.h"
 
-class DataEstadistica
-{
+class DataEstadistica {
 private:
-    std::string nombre;
-    std::string descripcion;
-    float valor;
+  TipoEstadistica estadistica;
+  float resultado;
 
 public:
-    DataEstadistica();
-    DataEstadistica(std::string nombre, std::string descripcion, float valor);
-    // TipoEstadistica getEstadistica(); <- tipo de retorno?
-    float getResultado();
-    ~DataEstadistica();
+  DataEstadistica();
+  DataEstadistica(TipoEstadistica estadistica, float resultado);
+
+  TipoEstadistica getEstadistica();
+  float getResultado();
+
+  ~DataEstadistica();
 };
 
 #endif

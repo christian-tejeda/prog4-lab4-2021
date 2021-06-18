@@ -8,6 +8,7 @@
 #include "../../headers/controllers/UsuarioController.h"
 #include "../../headers/entities/Desarrollador.h"
 #include "../../headers/handlers/UsuarioHandler.h"
+#include "../../headers/handlers/VideojuegoHandler.h"
 #include "../../headers/utils/Fecha.h"
 
 using namespace std;
@@ -124,8 +125,27 @@ UsuarioController::obtenerVideojuegosPublicadosPorDesarrollador() {
 
 set<DataEstadistica *>
 UsuarioController::calcularEstadisticas(string nomVideojuego) {
-  set<DataEstadistica *> res;
-  res.insert(nullptr);
+  std::set<DataEstadistica *> res = std::set<DataEstadistica *>();
+
+  VideojuegoHandler *vH = VideojuegoHandler::getInstance();
+  Videojuego *videojuego = vH->obtenerVideojuegoPorId(nomVideojuego);
+
+  UsuarioController *uc = UsuarioController::getInstance();
+  Desarrollador *des = dynamic_cast<Desarrollador *>(uc->getSesion());
+
+  std::set<TipoEstadistica> estadisticasDeInteres =
+      des->getEstadisticasDeInteres();
+
+  std::set<TipoEstadistica>::iterator it;
+
+  for (it = estadisticasDeInteres.begin(); it != estadisticasDeInteres.end();
+       it++) {
+    TipoEstadistica estadistica = (*it);
+    float resultado = videojuego->calcularEstadistica(estadistica);
+
+    res.insert(new DataEstadistica(estadistica, resultado));
+  }
+
   return res;
 }
 
