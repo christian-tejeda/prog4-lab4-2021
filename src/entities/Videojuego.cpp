@@ -15,7 +15,8 @@ Videojuego::Videojuego(std::string nombre,
                        pair<float, int> rating,
                        set<ContratoSuscripcion *> contratos,
                        map<string, Categoria *> categorias,
-                       ContextoEstadistica *ctx)
+                       ContextoEstadistica *ctx,
+                       std::string nombreEmpresa)
 {
     this->nombre = nombre;
     this->descripcion = descripcion;
@@ -24,6 +25,7 @@ Videojuego::Videojuego(std::string nombre,
     this->contratos = contratos;
     this->categorias = categorias;
     this->ctx = ctx;
+    this->nombreEmpresa=nombreEmpresa;
 }
 
 //Getters
@@ -45,13 +47,18 @@ pair<float, int> Videojuego::getRating()
 }
 // set<ContratoSuscripcion *> getContratos();
 map<string, Categoria *> Videojuego::getCategorias()
-{
+{   
     return this->categorias;
 }
 set<string> Videojuego::getNombreCategorias()
 {
     set<string> res;
-    //iterar sobre el map de categorias para almacenar todos los nombres
+        map<string, Categoria *>::iterator it;
+    for (it = this->categorias.begin(); it != this->categorias.end(); it++)
+    {
+        string agregar=it->first;
+        res.insert(agregar);
+    }
     return res;
 }
 ContextoEstadistica *Videojuego::getContextoEstadistica()
@@ -86,9 +93,10 @@ void Videojuego::setContextoEstadistica(ContextoEstadistica *)
 {
 }
 //Ops
-void Videojuego::agregarGenero(Genero g) {}
-void Videojuego::agregarPlataforma(Plataforma p) {}
-void Videojuego::agregarOtraCategoria(Categoria o) {}
+//void Videojuego::agregarGenero(Genero g) {}
+//void Videojuego::agregarPlataforma(Plataforma p) {}
+//void Videojuego::agregarOtraCategoria(Categoria o) {}
+void Videojuego::agregarCategoria(Categoria o){}
 set<Jugador *> Videojuego::getSuscriptores()
 {
     set<Jugador *> res;
@@ -103,6 +111,7 @@ int Videojuego::getCantidadSuscriptores()
 DataVideojuego *Videojuego::getData()
 {   
     DataVideojuego data =DataVideojuego(this->nombre, this->descripcion, this->suscripciones, this->getNombreCategorias(), this->rating);
+    data.setNombreEmpresa(this->nombreEmpresa);
     DataVideojuego* res;
     *res=data;
     return res;

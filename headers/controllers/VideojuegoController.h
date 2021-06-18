@@ -13,6 +13,7 @@ class VideojuegoController : public IAgregarCategoria, public IVerInfoVideojuego
 private:
     DataVideojuego *dataVideojuego; //se borra la instancia al terminar el CU
     Videojuego *videojuego;         //se borra la referencia
+    DataCategoria *dataCategoria;
 
 public:
     VideojuegoController();
@@ -23,15 +24,16 @@ public:
 
     //ops de IAgregarCategoria
     set<DataCategoria *> obtenerCategorias();
-    void agregarPlataforma(DataPlataforma *plataforma);
-    void agregarGenero(DataGenero *genero);
-    void agregarOtraCategoria(DataCategoria *otra);
+    void agregarCategoria(std::string nombre,std::string descripcion, TipoCategoria tipo);
+    //void agregarGenero(DataGenero *genero);
+    //void agregarOtraCategoria(DataCategoria *otra);
     void confirmarAgregarCategoria(bool confirmar);
 
     //ops de IVerInfoVideojuego
     set<DataVideojuego *> obtenerVideojuegos();
     DataVideojuego *obtenerDataVideojuego(string nombre);
-
+    //int obtenerHoras();
+    set<std::string> obtenerNombreVideojuegos();
     //ops de IAsignarPuntaje
     void puntuarVideojuego(string nombre, int puntaje);
 

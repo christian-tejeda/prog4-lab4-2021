@@ -20,10 +20,10 @@ private:
     Videojuego *videojuego;               //se borra la referencia
     pair<TipoPeriodoValidez, float> suscripcion;
     TipoMetodoPago metodoP;
+    UsuarioController();
+    ~UsuarioController();
 
 public:
-    UsuarioController();
-
     //op de singleton
     static UsuarioController *getInstance();
 
@@ -51,15 +51,15 @@ public:
     void confirmarSuscripcion(bool confirmar);
 
     //ops de IIniciarSesion
-    bool iniciarSesion(DataUsuario *dataUsuario);
-    void confirmarInicioSesion(bool confirmar);
+    bool iniciarSesion(string mail, string password);
+    void confirmarInicioSesion(bool confirmar, string mail, bool &jg, bool &dev);
 
     //ops de IAltaUsuario
     void ingresarDatosJugador(DataJugador *dataJugador);
     void ingresarDatosDesarrollador(DataDesarrollador *dataDesarrollador);
     void confirmarAltaUsuario(bool confirmar);
 
-    ~UsuarioController();
+    static void releaseInstance();
 };
 
 #endif

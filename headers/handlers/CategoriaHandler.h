@@ -8,8 +8,8 @@
 
 #include "../utils/enums.h"
 #include "../entities/Categoria.h"
-#include "../entities/Genero.h"
-#include "../entities/Plataforma.h"
+//#include "../entities/Genero.h"
+//#include "../entities/Plataforma.h"
 
 using namespace std;
 
@@ -36,6 +36,10 @@ public:
     void agregarCategoria(Categoria *categoria);
 
     void eliminarCategoria(Categoria *categoria);
+
+    void crearNuevaCategoria(std::string nombre,std::string descripcion, TipoCategoria tipo);
+
+    static void releaseInstance();
 };
 
 #endif

@@ -5,8 +5,8 @@
 
 #include "../../headers/utils/enums.h"
 #include "../../headers/entities/Categoria.h"
-#include "../../headers/entities/Genero.h"
-#include "../../headers/entities/Plataforma.h"
+//#include "../../headers/entities/Genero.h"
+//#include "../../headers/entities/Plataforma.h"
 #include "../../headers/handlers/CategoriaHandler.h"
 
 using namespace std;
@@ -38,4 +38,19 @@ void CategoriaHandler::agregarCategoria(Categoria *categoria)
 
 void CategoriaHandler::eliminarCategoria(Categoria *categoria) {}
 
+
+void CategoriaHandler::crearNuevaCategoria(std::string nombre,std::string descripcion, TipoCategoria tipo){
+    Categoria * cat = new Categoria(nombre,descripcion,tipo);
+    this->cats.insert(std::pair<std::string, Categoria *>(nombre, cat));
+}
+
 CategoriaHandler::~CategoriaHandler() {}
+
+void CategoriaHandler::releaseInstance()
+{
+    if (instancia != nullptr)
+    {
+        delete instancia;
+        instancia = nullptr;
+    }
+}

@@ -28,6 +28,9 @@ public:
     void eliminarVideojuego(Videojuego *vj);
 
     map<string, Jugador *> obtenerJugadoresVideojuego(Videojuego *vj);
+
+    static void releaseInstance();
+    set<std::string> obtenerNombresVideojuegos();
 };
 
 #endif

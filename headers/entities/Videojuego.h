@@ -9,8 +9,8 @@
 #include "../utils/enums.h"
 #include "../datatypes/DataVideojuego.h"
 #include "Categoria.h"
-#include "Plataforma.h"
-#include "Genero.h"
+//#include "Plataforma.h"
+//#include "Genero.h"
 #include "Jugador.h"
 #include "ContextoEstadistica.h"
 #include "ContratoSuscripcion.h"
@@ -33,6 +33,7 @@ private:
     set<ContratoSuscripcion *> contratos;
     map<string, Categoria *> categorias;
     ContextoEstadistica *ctx;
+    std::string nombreEmpresa;
 
 public:
     Videojuego();
@@ -42,7 +43,8 @@ public:
                pair<float, int> rating,
                set<ContratoSuscripcion *> contratos,
                map<string, Categoria *> categorias,
-               ContextoEstadistica *ctx);
+               ContextoEstadistica *ctx,
+               std::string nombreEmpresa);
 
     //Getters
     std::string getNombre();
@@ -65,9 +67,9 @@ public:
     void setContextoEstadistica(ContextoEstadistica *);
 
     //Ops
-    void agregarGenero(Genero g);
-    void agregarPlataforma(Plataforma p);
-    void agregarOtraCategoria(Categoria o);
+    //void agregarGenero(Genero g);
+    //void agregarPlataforma(Plataforma p);
+    void agregarCategoria(Categoria o);
     set<Jugador *> getSuscriptores();
     int getCantidadSuscriptores();
     DataVideojuego *getData();

@@ -15,8 +15,8 @@ public:
     // virtual set<DataPartidaMultijugador *> obtenerPartidasMultijugadorActivasDeJugador() = 0;
     // virtual void seleccionarPartida(int id) = 0;
     // virtual void seleccionarVideojuego(string nombreVideojuego) = 0;
-    virtual bool iniciarSesion(DataUsuario *dataUsuario) = 0;
-    virtual void confirmarInicioSesion(bool confirmar) = 0;
+    virtual bool iniciarSesion(string mail, string password) = 0;
+    virtual void confirmarInicioSesion(bool confirmar, string mail, bool &jg, bool &dev) = 0;
 
     virtual ~IIniciarSesion(){};
 };

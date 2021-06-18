@@ -23,6 +23,7 @@ private:
     //rating.first = promedio
     //rating.second = totalVotos
     pair<float, int> rating;
+    float horastotales;
 
 public:
     DataVideojuego();
@@ -34,8 +35,12 @@ public:
     set<string> getNombreCategorias();
     //Los métodos addCategoria(cat), addPlataforma(plataforma), addGenero(genero) equivalen a aplicarle el metodo insert al set
     string getNombreEmpresa();
+    float getHorasTotales();
     pair<float, int> getRating();
 
+    void setNombreEmpresa(std::string nombreEmpresa);
+
+    void setHorasTotales(float horas);
     ~DataVideojuego();
 };
 

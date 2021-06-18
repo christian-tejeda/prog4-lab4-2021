@@ -124,4 +124,21 @@ bool Jugador::tienePartidaSinFinalizar(Videojuego *vj){//operacion faltante en o
     return tiene;
 }
 
+int Jugador::obtenerDuracionPartida(Videojuego *vj){
+    map<int,Partida*> partidas= this->partidasIniciadas;
+    map<int,Partida*>::iterator it;
+    int res=0;
+    for (it = partidas.begin(); it != partidas.end(); it++)
+    {
+        Partida *partida=it->second;
+        //PartidaIndividual*partida=dynamic_cast<PartidaIndividual *>(it->second);
+        Videojuego * video=partida->getVideojuego();
+        if(vj==video){
+            int sumar=partida->getDuracionTotal();
+            res=res+sumar;
+        }
+    }
+    return res;
+}
+
 Jugador::~Jugador(){};

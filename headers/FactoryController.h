@@ -14,9 +14,10 @@ class FactoryController
     //singleton
 private:
     static FactoryController *instancia;
+    FactoryController();
+    ~FactoryController();
 
 public:
-    FactoryController();
     //op de singleton
     static FactoryController *getInstance();
 
@@ -37,7 +38,7 @@ public:
     IEliminarVideojuego *getIEliminarVideojuego();
     IPublicarVideojuego *getIPublicarVideojuego();
 
-    ~FactoryController();
+    static void releaseInstance();
 };
 
 #endif
