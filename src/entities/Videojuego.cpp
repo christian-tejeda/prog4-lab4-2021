@@ -108,6 +108,13 @@ int Videojuego::getCantidadSuscriptores()
     return 0;
 }
 
+
+void Videojuego::agregarPuntaje(float puntaje){
+    this->rating.first=puntaje+this->rating.first;
+    this->rating.second++;
+    
+}
+
 DataVideojuego * Videojuego::getData()
 {   
     DataVideojuego data =DataVideojuego(this->nombre, this->descripcion, this->suscripciones, this->getNombreCategorias(), this->rating);

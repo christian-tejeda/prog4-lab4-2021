@@ -25,7 +25,7 @@ private:
     std::string nombre;
     std::string descripcion;
     map<TipoPeriodoValidez, float> suscripciones;
-    //rating.first = promedio
+    //rating.first = totalPuntos
     //rating.second = totalVotos
     pair<float, int> rating;
 
@@ -72,6 +72,7 @@ public:
     void agregarCategoria(Categoria o);
     set<Jugador *> getSuscriptores();
     int getCantidadSuscriptores();
+    void agregarPuntaje(float puntaje);
     DataVideojuego *getData();
 
     ~Videojuego();

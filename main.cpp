@@ -5,6 +5,7 @@
 #include "headers/datatypes/DataVideojuego.h"
 //#include "headers/interfaces/IEliminarVideojuego.h"
 #include "headers/interfaces/IAgregarCategoria.h"
+#include "headers/interfaces/IAsignarPuntaje.h"
 #include "headers/utils/Fecha.h"
 #include "headers/handlers/UsuarioHandler.h"
 #include "headers/handlers/CategoriaHandler.h"
@@ -273,6 +274,36 @@ void menuSuscribirseVideojuego(FactoryController *fact)
 
 void menuAsignarPuntaje(FactoryController *fact)
 {
+    IAsignarPuntaje * ap=fact->getIAsignarPuntaje();
+    std::string nombre = "";
+    int conf;
+    std::cout << "Seleccione el Videojuego que desea ver la informacion:  \n";
+    
+    //VideojuegoController * vc;
+    set<DataVideojuego *> data= ap->obtenerVideojuegos();
+    set<DataVideojuego *>::iterator it;
+    for (it = data.begin(); it != data.end(); it++)
+    {
+        DataVideojuego * imprimir=*it;
+        std::cout << "\tNombre: "<< imprimir->getNombre() << "\t | \t" << "Descripcion:"<< imprimir->getDescripcion() << "    \n";  
+    }
+    std::cin >> nombre;
+    std::cout << "\n";
+    int punt;
+    std::cout << "Seleccione un numero del 1 al 5 para puntuar al videojuego \n";
+    std::cin >> punt;
+    while(punt>5||punt<0){
+         std::cout << "Seleccione un puntaje corrcto o  dijite cero(0) si desea cancelar\n";
+         std::cin >> punt;
+    }
+    if(punt!=0) {
+        ap->seleccionarVideojuego(nombre);
+        ap->puntuarVideojuego(punt);
+        std::cout << "El puntaje ha sido asignado\n";
+    } else{
+        std::cout << "Cancelacion satisfactoria\n";
+    }
+    ap->~IAsignarPuntaje();
 }
 
 void menuIniciarPartida(FactoryController *fact)
@@ -450,7 +481,9 @@ void menuVerInfoVideojuego(FactoryController *fact)
     float anu=datav->getSuscripciones().find(anual)->second;
     float vit=datav->getSuscripciones().find(vitalicia)->second;
     std::string empresa=datav->getNombreEmpresa();
-    float puntaje=datav->getRating().first;
+    float puntaje=0;
+    if(datav->getRating().second!=0)
+        float puntaje=datav->getRating().first/datav->getRating().second;
     set<std::string> nombrescat=datav->getNombreCategorias();
 
     
@@ -483,7 +516,7 @@ void menuVerInfoVideojuego(FactoryController *fact)
     std::cout << "+---------------- Datos Videojuego-----------------------+\n";
     
     //float horas=datav->getCantidadHoras();
-
+    iviv->~IVerInfoVideojuego();
     
     
 }
@@ -723,7 +756,7 @@ int main(int argc, char const *argv[])
             case 2: //Asignar puntaje a videojuego
                 try
                 {
-                    /* code */
+                    menuAsignarPuntaje(fact);
                 }
                 catch (const std::invalid_argument &ex)
                 {
