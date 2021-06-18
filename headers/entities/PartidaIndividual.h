@@ -26,6 +26,7 @@ public:
 
     DataPartida *getData();
 
+
     ~PartidaIndividual();
 };
 

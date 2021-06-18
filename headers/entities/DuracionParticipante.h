@@ -9,25 +9,25 @@ class Jugador; //fwd dec
 class DuracionParticipante
 {
 private:
-    Fecha horaEntrada;
-    Fecha horaSalida;
+    Fecha *horaEntrada;
+    Fecha *horaSalida;
     Jugador *participante;
 
 public:
     DuracionParticipante();
-    DuracionParticipante(Fecha &he, Fecha &hs, Jugador *jg);
+    DuracionParticipante(Fecha *he, Fecha *hs, Jugador *jg);//hora entrada/ hora salida
 
     //Getters
-    Fecha getHoraEntrada();
-    Fecha getHoraSalida();
+    Fecha* getHoraEntrada();
+    Fecha* getHoraSalida();
     Jugador *getParticipante();
 
     //Setters
-    void setHoraEntrada(Fecha &f);
-    void setHoraSalida(Fecha &f);
+    void setHoraEntrada(Fecha *f);
+    void setHoraSalida(Fecha *f);
     void setParticipante(Jugador *prt);
 
-    void terminarParticipacion(Fecha &f);
+    void terminarParticipacion(Fecha *f);
 
     ~DuracionParticipante();
 };
