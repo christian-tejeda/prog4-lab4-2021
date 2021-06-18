@@ -36,10 +36,7 @@ DataDesarrollador *UsuarioController::getDataDesarrollador() {
 DataJugador *UsuarioController::getDataJugador() { return this->dataJugador; }
 Videojuego *UsuarioController::getVideojuego() { return this->videojuego; }
 
-pair<TipoPeriodoValidez, float> UsuarioController::getSuscripcion() {
-  return this->suscripcion;
-}
-TipoMetodoPago UsuarioController::getMetodoPago() { return this->metodoP; }
+TipoMetodoPago UsuarioController::getMetodoPago() { return this->metodoPago; }
 
 // métodos de ISeleccionarEstadisticas
 std::set<DataEstadistica *> UsuarioController::listarEstadisticas() {
@@ -186,12 +183,18 @@ void UsuarioController::cancelarSuscripcion() {
 }
 
 void UsuarioController::contratarSuscripcion(
-    pair<TipoPeriodoValidez, float> suscripcion, TipoMetodoPago m) {
-  this->suscripcion = suscripcion;
-  this->metodoP = m;
+    TipoPeriodoValidez validezSuscripcion, TipoMetodoPago metodoPago) {
+  this->validezSuscripcion = validezSuscripcion;
+  this->metodoPago = metodoPago;
 }
 
-void UsuarioController::confirmarSuscripcion(bool confirmar) {}
+void UsuarioController::confirmarSuscripcion(bool confirmar) {
+  UsuarioController *uc = UsuarioController::getInstance();
+  Jugador *jugador = dynamic_cast<Jugador *>(uc->getSesion());
+
+  jugador->contratarSuscripcion(this->videojuego, this->validezSuscripcion,
+                                this->metodoPago);
+}
 
 // métodos de IConsultarEstadisticas
 set<DataVideojuego *>

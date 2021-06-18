@@ -47,8 +47,11 @@ void Jugador::cancelarSuscripcionActiva(Videojuego *vj) {
   }
 }
 
-// void Jugador::contratarSuscripcion(Videojuego *vj, ContratoSuscripcion susc,
-// TipoMetodoPago m);
+void Jugador::contratarSuscripcion(Videojuego *vj, TipoPeriodoValidez validez,
+                                   TipoMetodoPago metodoPago) {
+  this->contratos.insert(
+      new ContratoSuscripcion(this, vj, metodoPago, validez));
+}
 
 map<int, Partida *> Jugador::obtenerPartidasSinFinalizar() {
   return map<int, Partida *>(); // retorna un map vacío

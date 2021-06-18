@@ -10,8 +10,8 @@ public:
   virtual set<DataSuscripcionJugador *> obtenerSuscripciones() = 0;
   virtual void seleccionarVideojuego(string nombreVideojuego) = 0;
   virtual void cancelarSuscripcion() = 0;
-  virtual void contratarSuscripcion(pair<TipoPeriodoValidez, float> suscripcion,
-                                    TipoMetodoPago m) = 0;
+  virtual void contratarSuscripcion(TipoPeriodoValidez validezSuscripcion,
+                                    TipoMetodoPago metodoPago) = 0;
   virtual void confirmarSuscripcion(bool confirmar) = 0;
 
   virtual ~ISuscribirseVideojuego(){};

@@ -22,8 +22,8 @@ private:
       *dataDesarrollador;   // se borra la instacnia al terminar el CU
   DataJugador *dataJugador; // se borra la instacnia al terminar el CU
   Videojuego *videojuego;   // se borra la referencia
-  pair<TipoPeriodoValidez, float> suscripcion;
-  TipoMetodoPago metodoP;
+  TipoPeriodoValidez validezSuscripcion;
+  TipoMetodoPago metodoPago;
   UsuarioController();
   ~UsuarioController();
 
@@ -36,7 +36,6 @@ public:
   DataDesarrollador *getDataDesarrollador();
   DataJugador *getDataJugador();
   Videojuego *getVideojuego();
-  pair<TipoPeriodoValidez, float> getSuscripcion();
   TipoMetodoPago getMetodoPago();
 
   // ops de ISeleccionarEstadisticas
@@ -51,8 +50,8 @@ public:
   std::set<DataSuscripcionJugador *> obtenerSuscripciones();
   void seleccionarVideojuego(string nombreVideojuego);
   void cancelarSuscripcion();
-  void contratarSuscripcion(pair<TipoPeriodoValidez, float> suscripcion,
-                            TipoMetodoPago m);
+  void contratarSuscripcion(TipoPeriodoValidez validez,
+                            TipoMetodoPago metodoPago);
   void confirmarSuscripcion(bool confirmar);
 
   // ops de IIniciarSesion

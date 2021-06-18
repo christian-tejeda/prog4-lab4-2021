@@ -6,10 +6,13 @@ ContratoSuscripcion::ContratoSuscripcion() {}
 ContratoSuscripcion::ContratoSuscripcion(Jugador *jg, Videojuego *vj,
                                          TipoMetodoPago metodoDePago,
                                          TipoPeriodoValidez validez) {
+
+  // TODO: Settear fecha del sistema cuando se crea el contrato
   this->jugador = jg;
   this->videojuego = vj;
   this->metodoDePago = metodoDePago;
   this->periodoValidez = validez;
+  this->activa = true;
 }
 
 Jugador *ContratoSuscripcion::getJugador() { return this->jugador; }

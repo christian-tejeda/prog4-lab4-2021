@@ -44,8 +44,8 @@ public:
 
   // Operaciones
   void cancelarSuscripcionActiva(Videojuego *vj);
-  void contratarSuscripcion(Videojuego *vj, ContratoSuscripcion susc,
-                            TipoMetodoPago m);
+  void contratarSuscripcion(Videojuego *vj, TipoPeriodoValidez validez,
+                            TipoMetodoPago metodoPago);
   map<int, Partida *> obtenerPartidasSinFinalizar();
   void finalizarPartida(int idPartida);
   map<std::string, Videojuego *> obtenerVideojuegos();
