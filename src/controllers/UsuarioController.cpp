@@ -186,7 +186,11 @@ void UsuarioController::cancelarSuscripcion() {
 }
 
 void UsuarioController::contratarSuscripcion(
-    pair<TipoPeriodoValidez, float> suscripcion, TipoMetodoPago m) {}
+    pair<TipoPeriodoValidez, float> suscripcion, TipoMetodoPago m) {
+  this->suscripcion = suscripcion;
+  this->metodoP = m;
+}
+
 void UsuarioController::confirmarSuscripcion(bool confirmar) {}
 
 // métodos de IConsultarEstadisticas
