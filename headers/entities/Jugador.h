@@ -1,27 +1,26 @@
 #ifndef JUGADOR_H
 #define JUGADOR_H
 
-#include <string>
 #include <map>
 #include <set>
+#include <string>
 #include <utility>
 
-class Partida; //fwd dec
+class Partida; // fwd dec
 
 #include "../utils/enums.h"
 //#include "../datatypes/DataUsuario.h"
 #include "../datatypes/DataJugador.h"
-#include "../entities/Usuario.h"
-//#include "../entities/Partida.h"
+#include "../entities/ContratoSuscripcion.h"
 #include "../entities/PartidaIndividual.h"
 #include "../entities/PartidaMultijugador.h"
-#include "../entities/ContratoSuscripcion.h"
+#include "../entities/Usuario.h"
 #include "../entities/Videojuego.h"
 
-class Videojuego; //fwd dec
+class Videojuego;
+class ContratoSuscripcion;
 
-class Jugador : public Usuario
-{
+class Jugador : public Usuario {
 private:
     std::string nickname;
     std::string descripcion;
@@ -55,12 +54,12 @@ public:
     map<int, PartidaIndividual *> obtenerPartidasFinalizadas();
     PartidaIndividual *obtenerPartida(int id);
     bool tieneSuscripcionActiva(Videojuego *vj);
-    
+    float calcularTotalHorasPartidasIniciadas(Videojuego *vj);
     bool tienePartidaSinFinalizar(Videojuego *vj);//operacion faltante en obtenerpartidasfinalizadas en elim videojuego
     map<std::string,Videojuego*> obtenerVideojuegosConSuscripcionActiva();
-
     int obtenerDuracionPartida(Videojuego *vj);
     ~Jugador();
+  //PartidaIndividual *obtenerPartida(std::string id);
 };
 
 #endif

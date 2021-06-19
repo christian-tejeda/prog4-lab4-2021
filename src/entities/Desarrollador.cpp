@@ -1,7 +1,7 @@
 
-#include <string>
 #include <map>
 #include <set>
+#include <string>
 #include <utility>
 
 #include "../../headers/entities/Desarrollador.h"
@@ -13,47 +13,63 @@
 
 Desarrollador::Desarrollador() : Usuario(){};
 
-Desarrollador::Desarrollador(std::string email, std::string password, std::string nombreEmpresa) : Usuario(email, password)
-{
-    this->nombreEmpresa = nombreEmpresa;
+Desarrollador::Desarrollador(std::string email, std::string password,
+                             std::string nombreEmpresa)
+    : Usuario(email, password) {
+  this->nombreEmpresa = nombreEmpresa;
+  this->estadisticasDeInteres = std::set<TipoEstadistica>();
 }
 
-//Getters
-string Desarrollador::getNombreEmpresa()
-{
-    return this->nombreEmpresa;
+// Getters
+string Desarrollador::getNombreEmpresa() { return this->nombreEmpresa; }
+
+// Setters
+void Desarrollador::setNombreEmpresa(std::string nomEmpresa) {
+  this->nombreEmpresa = nomEmpresa;
 }
 
-//Setters
-void Desarrollador::setNombreEmpresa(std::string nomEmpresa)
-{
-    this->nombreEmpresa = nomEmpresa;
+// Operaciones
+
+DataUsuario *Desarrollador::getData() { return nullptr; }
+
+std::set<TipoEstadistica> Desarrollador::getEstadisticasDeInteres() {
+  return this->estadisticasDeInteres;
 }
 
-//Operaciones
-
-DataUsuario *Desarrollador::getData()
-{
-    return nullptr;
+void Desarrollador::agregarEstadisticaDeInteres(TipoEstadistica estadistica) {
+  this->estadisticasDeInteres.insert(estadistica);
 }
 
-void Desarrollador::agregarVideojuegoPublicado(Videojuego *vj)
-{
-}
+void Desarrollador::removerEstadisticaDeInteres(TipoEstadistica estadistica) {
+  std::set<TipoEstadistica>::iterator it;
 
-set<Videojuego*>  Desarrollador::getVideojuegoPublicados(){
-    map<string,Videojuego *> vjs=this->publicaciones;
-    map<string,Videojuego*>::iterator it;
-    set<Videojuego*> res;
-    for (it = vjs.begin(); it != vjs.end(); it++){
-        Videojuego* video=it->second;
-        res.insert(video);
+  bool removido = false;
+  std::set<TipoEstadistica> estadisticas = this->estadisticasDeInteres;
+  for (it = estadisticas.begin(); it != estadisticas.end(); it++) {
+    TipoEstadistica tipoEs = (*it);
+
+    if (tipoEs == estadistica) {
+      this->estadisticasDeInteres.erase(it);
+      removido = true;
     }
-    return res;
+  }
 }
 
-void Desarrollador::eliminarVideojuegoPublicado(Videojuego *vj){
-    this->publicaciones.erase(vj->getNombre());
+void Desarrollador::agregarVideojuegoPublicado(Videojuego *vj) {}
+
+set<Videojuego *> Desarrollador::getVideojuegoPublicados() {
+  map<string, Videojuego *> vjs = this->publicaciones;
+  map<string, Videojuego *>::iterator it;
+  set<Videojuego *> res;
+  for (it = vjs.begin(); it != vjs.end(); it++) {
+    Videojuego *video = it->second;
+    res.insert(video);
+  }
+  return res;
+}
+
+void Desarrollador::eliminarVideojuegoPublicado(Videojuego *vj) {
+  this->publicaciones.erase(vj->getNombre());
 }
 
 Desarrollador::~Desarrollador(){};
