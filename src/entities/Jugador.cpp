@@ -41,10 +41,26 @@ void Jugador::contratarSuscripcion(Videojuego *vj, TipoPeriodoValidez validez,
 }
 
 map<int, Partida *> Jugador::obtenerPartidasSinFinalizar() {
-  return map<int, Partida *>();
+  map<int, Partida *> res;
+  map<int, Partida *>::iterator it;
+  for (it = this->partidasIniciadas.begin(); it != this->partidasIniciadas.end(); it++) {
+    if (it->second->getFechaFin()==nullptr){
+        res.insert(*it);
+    }
+  }
+  return res;
 }
 
-void Jugador::finalizarPartida(int idPartida) {}
+void Jugador::finalizarPartida(int idPartida) {
+    //map<int,Partida*> part= this->partidasIniciadas;
+    //PartidaIndividual* indi = dynamic_cast<PartidaIndividual*>(this->partidasIniciadas.find(idPartida)->second);
+    //PartidaMultijugador* multi = dynamic_cast<PartidaMultijugador*>(this->partidasIniciadas.find(idPartida)->second);
+    //if(indi!=nullptr){
+    //  indi->terminar;
+    Fecha* fecha;
+    Partida * terminar=partidasIniciadas.find(idPartida)->second;
+    terminar->finalizar(fecha);
+}
 
 map<string, Videojuego *> Jugador::obtenerVideojuegos() {
   return map<string, Videojuego *>();
