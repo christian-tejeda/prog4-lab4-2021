@@ -65,8 +65,8 @@ set<DataVideojuego *> PartidaController::obtenerVideojuegosDeJugadorConSuscripci
     map<std::string, Videojuego*>::iterator it;
     for(it = vjs.begin();it !=vjs.end(); it++){
         Videojuego* vj= it->second;
-        DataVideojuego dvj2 = vj->getData();
-        DataVideojuego *dvj = &dvj2;
+        DataVideojuego *dvj = vj->getData();
+        //DataVideojuego *dvj = &dvj2;
         res.insert(dvj);
     }
     vjs.clear();

@@ -79,10 +79,6 @@ void Jugador::eliminarPartidasDeVideojuego(Videojuego *vj) {
 
 DataUsuario *Jugador::getData() { return nullptr; }
 
-map<int, PartidaIndividual *> Jugador::obtenerPartidasFinalizadas() {
-  return map<int, PartidaIndividual *>();
-}
-
 //PartidaIndividual *Jugador::obtenerPartida(string id) { return nullptr; }
 
 bool tieneSuscripcionActiva(Videojuego *vj) { return false; }
@@ -178,7 +174,7 @@ bool Jugador::tieneSuscripcionActiva(Videojuego *vj)
     }
     return false;
 }
-
+/*
 bool Jugador::tienePartidaSinFinalizar(Videojuego *vj){//operacion faltante en obtenerpartidasfinalizadas en elim videojuego
     map<int, Partida *> partidas=this->partidasIniciadas;
     map<int, Partida *>::iterator it;
@@ -190,7 +186,7 @@ bool Jugador::tienePartidaSinFinalizar(Videojuego *vj){//operacion faltante en o
         PartidaIndividual*partida=dynamic_cast<PartidaIndividual *>(it->second);
         tiene=(partida->getFechaFin()==nullptr);
     }
-  }
+  }*///QUEDO REDEFINDA ABAJO, BORRAR SI SE NECEISTA.. VER
 
 map<std::string,Videojuego*> Jugador::obtenerVideojuegosConSuscripcionActiva(){
     map<std::string,Videojuego*> res;
