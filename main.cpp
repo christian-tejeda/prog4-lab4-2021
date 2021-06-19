@@ -960,7 +960,7 @@ int main(int argc, char const *argv[])
                     int anio = 0;
                     int hora = 0;
                     int minuto = 0;
-                    void menuModificarFechaSistema(int dia, int mes, int anio,int hora,int minuto);
+                    menuModificarFechaSistema(dia,mes, anio,hora,minuto);
                     delete fechaSist;
                     fechaSist = new Fecha(dia,mes,anio,hora,minuto);
 
