@@ -11,38 +11,33 @@ class Partida; // fwd dec
 #include "../utils/enums.h"
 //#include "../datatypes/DataUsuario.h"
 #include "../datatypes/DataJugador.h"
-#include "../entities/Usuario.h"
-//#include "../entities/Partida.h"
 #include "../entities/ContratoSuscripcion.h"
 #include "../entities/PartidaIndividual.h"
 #include "../entities/PartidaMultijugador.h"
+#include "../entities/Usuario.h"
 #include "../entities/Videojuego.h"
 
-class Videojuego; // fwd dec
+class Videojuego;
+class ContratoSuscripcion;
 
 class Jugador : public Usuario {
 private:
   std::string nickname;
   std::string descripcion;
-  // set<Jugador*> sigue;  NO HAY QUE IMPLEMENTARLO
   map<int, Partida *> partidasIniciadas;
   std::set<ContratoSuscripcion *> contratos;
 
 public:
-  // Constructores
   Jugador();
   Jugador(std::string email, std::string password, std::string nickname,
           std::string descripcion);
 
-  // Getters
   std::string getNickname();
   std::string getDescripcion();
 
-  // Setters
   void setNickname(std::string nick);
   void setDescripcion(std::string descripcion);
 
-  // Operaciones
   void cancelarSuscripcionActiva(Videojuego *vj);
   void contratarSuscripcion(Videojuego *vj, ContratoSuscripcion *susc,
                             TipoMetodoPago m);

@@ -2,10 +2,15 @@
 #define FACTORY_STRATEGY_ESTADISTICA_H
 
 #include "interfaces/IStrategyEstadistica.h"
+#include "utils/enums.h"
+#include <utility>
 
 class FactoryStrategyEstadistica {
+private:
   static FactoryStrategyEstadistica *instancia;
+
   FactoryStrategyEstadistica();
+
   ~FactoryStrategyEstadistica();
 
 public:

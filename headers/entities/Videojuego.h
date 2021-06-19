@@ -9,7 +9,6 @@
 #include "../datatypes/DataVideojuego.h"
 #include "../utils/enums.h"
 #include "Categoria.h"
-#include "ContratoSuscripcion.h"
 #include "Jugador.h"
 
 class ContratoSuscripcion;
@@ -53,6 +52,7 @@ public:
   void agregarCategoria(Categoria o);
   set<Jugador *> getSuscriptores();
   int getCantidadSuscriptores();
+  void agregarPuntaje(float puntaje);
   DataVideojuego *getData();
 
   float calcularEstadistica(TipoEstadistica tipoEstadistica);

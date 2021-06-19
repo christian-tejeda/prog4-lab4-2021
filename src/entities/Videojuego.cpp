@@ -30,10 +30,11 @@ map<TipoPeriodoValidez, float> Videojuego::getSuscripciones() {
   return this->suscripciones;
 }
 pair<float, int> Videojuego::getRating() { return this->rating; }
-// set<ContratoSuscripcion *> getContratos();
+
 map<string, Categoria *> Videojuego::getCategorias() {
   return this->categorias;
 }
+
 set<string> Videojuego::getNombreCategorias() {
   set<string> res;
   map<string, Categoria *>::iterator it;
@@ -53,7 +54,7 @@ void Videojuego::setNombre(std::string nombre) { this->nombre = nombre; }
 void Videojuego::setDescripcion(std::string desc) { this->descripcion = desc; }
 void Videojuego::setSuscripciones(TipoPeriodoValidez validez, float precio) {}
 void Videojuego::setRating(float prom, int cantVotos) {}
-// void setContrato(ContratoSuscripcion *);
+
 void Videojuego::setCategoria(Categoria *) {}
 
 void Videojuego::agregarCategoria(Categoria o) {}
@@ -62,7 +63,7 @@ set<Jugador *> Videojuego::getSuscriptores() {
   res.insert(nullptr);
   return res;
 }
-int Videojuego::getCantidadSuscriptores() { return this->suscripciones.size; }
+int Videojuego::getCantidadSuscriptores() { return this->suscripciones.size(); }
 
 float Videojuego::calcularEstadistica(TipoEstadistica tipoEstadistica) {
   FactoryStrategyEstadistica *factoryEst =
@@ -71,6 +72,11 @@ float Videojuego::calcularEstadistica(TipoEstadistica tipoEstadistica) {
   IStrategyIEstadistica *strategy = factoryEst->getStrategy(tipoEstadistica);
 
   return strategy->calcularEstadistica(this);
+}
+
+void Videojuego::agregarPuntaje(float puntaje) {
+  this->rating.first += puntaje;
+  this->rating.second++;
 }
 
 DataVideojuego *Videojuego::getData() {
@@ -82,4 +88,5 @@ DataVideojuego *Videojuego::getData() {
   *res = data;
   return res;
 }
+
 Videojuego::~Videojuego() {}

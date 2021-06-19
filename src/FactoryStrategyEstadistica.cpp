@@ -1,6 +1,7 @@
-#include "../../headers/FactoryStrategyEstadistica.h"
-
-using namespace std;
+#include "../headers/FactoryStrategyEstadistica.h"
+#include "../headers/entities/CantidadSuscritosStrategy.h"
+#include "../headers/entities/PromedioRatingStrategy.h"
+#include "../headers/entities/TotalHorasJugadasStrategy.h"
 
 FactoryStrategyEstadistica *FactoryStrategyEstadistica::instancia = nullptr;
 
@@ -16,12 +17,12 @@ IStrategyIEstadistica *
 FactoryStrategyEstadistica::getStrategy(TipoEstadistica tipoEstadistica) {
   switch (tipoEstadistica) {
   case horasJugadas:
-    return new TotalHorasJugadasStrategy();
+    return TotalHorasJugadasStrategy::getInstance();
   case promedioRating:
-    return new PromedioRatingStrategy();
+    return PromedioRatingStrategy::getInstance();
   case cantidadSuscritos:
-    return new CantidadSuscritosStrategy();
+    return CantidadSuscritosStrategy::getInstance();
   default:
-    return;
+    throw "ERROR: Invalid TipoEstadistica in IStrategyIEstadistica.getStrategy";
   }
 }

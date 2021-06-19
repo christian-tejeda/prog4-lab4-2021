@@ -115,6 +115,21 @@ int Jugador::obtenerDuracionPartida(Videojuego *vj) {
   return res;
 }
 
-float Jugador::calcularTotalHorasPartidasIniciadas(Videojuego *vj) { return 0; }
+float Jugador::calcularTotalHorasPartidasIniciadas(Videojuego *videojuego) {
+  float res = 0;
+  map<int, Partida *> partidasIniciadas = this->partidasIniciadas;
+
+  map<int, Partida *>::iterator it;
+  for (it = partidasIniciadas.begin(); it != partidasIniciadas.end(); it++) {
+    Partida *partida = (it->second);
+    Videojuego *currentVideojuego = partida->getVideojuego();
+
+    if (currentVideojuego == videojuego) {
+      res += partida->getDuracionTotal();
+    }
+  }
+
+  return res;
+}
 
 Jugador::~Jugador(){};

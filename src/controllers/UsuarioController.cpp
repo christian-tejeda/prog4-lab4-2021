@@ -131,10 +131,10 @@ UsuarioController::calcularEstadisticas(string nomVideojuego) {
   Videojuego *videojuego = vH->obtenerVideojuegoPorId(nomVideojuego);
 
   UsuarioController *uc = UsuarioController::getInstance();
-  Desarrollador *des = dynamic_cast<Desarrollador *>(uc->getSesion());
+  Desarrollador *dev = dynamic_cast<Desarrollador *>(uc->getSesion());
 
   std::set<TipoEstadistica> estadisticasDeInteres =
-      des->getEstadisticasDeInteres();
+      dev->getEstadisticasDeInteres();
 
   std::set<TipoEstadistica>::iterator it;
 
