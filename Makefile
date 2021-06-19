@@ -26,8 +26,8 @@ GCC = g++ -c
 
 #---------- Main --------------
 
-main: PartidaController.o UsuarioController.o VideojuegoController.o DataCategoria.o DataContratoSuscripcion.o DataDesarrollador.o DataEstadistica.o DataJugador.o DataPartida.o DataPartidaIndividual.o DataPartidaMultijugador.o DataUsuario.o DataVideojuego.o Categoria.o ContratoSuscripcion.o Usuario.o Desarrollador.o DuracionParticipante.o Jugador.o Partida.o PartidaIndividual.o PartidaMultijugador.o Videojuego.o CategoriaHandler.o UsuarioHandler.o VideojuegoHandler.o Fecha.o FactoryController.o FactoryStrategyEstadistica.o CantidadSuscritosStrategy.o PromedioRatingStrategy.o TotalHorasJugadasStrategy.o main.o
-	g++ -o main obj/PartidaController.o obj/UsuarioController.o obj/VideojuegoController.o obj/DataCategoria.o obj/DataContratoSuscripcion.o obj/DataDesarrollador.o obj/DataEstadistica.o obj/DataJugador.o obj/DataPartida.o obj/DataPartidaIndividual.o obj/DataPartidaMultijugador.o obj/DataUsuario.o obj/DataVideojuego.o obj/Categoria.o obj/ContratoSuscripcion.o obj/Desarrollador.o obj/DuracionParticipante.o obj/Jugador.o obj/Partida.o obj/PartidaIndividual.o obj/PartidaMultijugador.o obj/Usuario.o obj/Videojuego.o obj/CategoriaHandler.o obj/UsuarioHandler.o obj/VideojuegoHandler.o obj/Fecha.o obj/FactoryController.o obj/FactoryStrategyEstadistica.o obj/CantidadSuscritosStrategy.o obj/PromedioRatingStrategy.o obj/TotalHorasJugadasStrategy.o obj/main.o 
+main: PartidaController.o UsuarioController.o VideojuegoController.o DataCategoria.o DataContratoSuscripcion.o DataSuscripcionJugador.o  DataDesarrollador.o DataEstadistica.o DataJugador.o DataPartida.o DataPartidaIndividual.o DataPartidaMultijugador.o DataUsuario.o DataVideojuego.o Categoria.o ContratoSuscripcion.o Usuario.o Desarrollador.o DuracionParticipante.o Jugador.o Partida.o PartidaIndividual.o PartidaMultijugador.o Videojuego.o CategoriaHandler.o UsuarioHandler.o VideojuegoHandler.o Fecha.o FactoryController.o FactoryStrategyEstadistica.o CantidadSuscritosStrategy.o PromedioRatingStrategy.o TotalHorasJugadasStrategy.o main.o
+	g++ -o main obj/PartidaController.o obj/UsuarioController.o obj/VideojuegoController.o obj/DataCategoria.o obj/DataContratoSuscripcion.o obj/DataSuscripcionJugador.o obj/DataDesarrollador.o obj/DataEstadistica.o obj/DataJugador.o obj/DataPartida.o obj/DataPartidaIndividual.o obj/DataPartidaMultijugador.o obj/DataUsuario.o obj/DataVideojuego.o obj/Categoria.o obj/ContratoSuscripcion.o obj/Desarrollador.o obj/DuracionParticipante.o obj/Jugador.o obj/Partida.o obj/PartidaIndividual.o obj/PartidaMultijugador.o obj/Usuario.o obj/Videojuego.o obj/CategoriaHandler.o obj/UsuarioHandler.o obj/VideojuegoHandler.o obj/Fecha.o obj/FactoryController.o obj/FactoryStrategyEstadistica.o obj/CantidadSuscritosStrategy.o obj/PromedioRatingStrategy.o obj/TotalHorasJugadasStrategy.o obj/main.o 
 		
 
 #------------- Objects ------------------
@@ -73,6 +73,9 @@ DataUsuario.o: $(CPP_DATATYPES)/DataUsuario.cpp $(H_DATATYPES)/DataUsuario.h
 
 DataVideojuego.o: $(CPP_DATATYPES)/DataVideojuego.cpp $(H_DATATYPES)/DataVideojuego.h
 	$(GCC) $(CPP_DATATYPES)/DataVideojuego.cpp -o obj/DataVideojuego.o
+
+DataSuscripcionJugador.o: $(CPP_DATATYPES)/DataSuscripcionJugador.cpp $(H_DATATYPES)/DataSuscripcionJugador.h
+	$(GCC) $(CPP_DATATYPES)/DataSuscripcionJugador.cpp -o obj/DataSuscripcionJugador.o	
 
 Categoria.o: $(CPP_ENTITIES)/Categoria.cpp $(H_ENTITIES)/Categoria.h
 	$(GCC) $(CPP_ENTITIES)/Categoria.cpp -o obj/Categoria.o

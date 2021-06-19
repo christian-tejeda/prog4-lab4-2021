@@ -1,14 +1,4 @@
-
-#include <map>
-#include <set>
-#include <string>
-#include <utility>
-
 #include "../../headers/entities/Jugador.h"
-// #include "../../headers/entities/Usuario.h"
-// #include "../../headers/utils/enums.h"
-#include "../../headers/datatypes/DataVideojuego.h"
-//#include "../../headers/utils/Fecha.h"
 
 Jugador::Jugador() : Usuario(){};
 
@@ -28,16 +18,30 @@ void Jugador::setDescripcion(std::string descripcion) {
   this->descripcion = descripcion;
 }
 
-// Jugador::set<ContratoSuscripcion> obtenerSuscripciones(EstadoSuscripcion
-// estado);
+void Jugador::cancelarSuscripcionActiva(Videojuego *vj) {
+  std::set<ContratoSuscripcion *> contratos = this->contratos;
+  std::set<ContratoSuscripcion *>::iterator it;
 
-void Jugador::cancelarSuscripcionActiva(Videojuego *vj) {}
+  bool cancelado = false;
+  for (it = contratos.begin(); it != contratos.end() && !cancelado; it++) {
+    ContratoSuscripcion *contrato = (*it);
+    if (contrato->perteneceAVideojuego(vj)) {
+      if (contrato->esActivo()) {
+        contrato->cancelar();
+        cancelado = true;
+      }
+    }
+  }
+}
 
-// void Jugador::contratarSuscripcion(Videojuego *vj, ContratoSuscripcion susc,
-// TipoMetodoPago m);
+void Jugador::contratarSuscripcion(Videojuego *vj, TipoPeriodoValidez validez,
+                                   TipoMetodoPago metodoPago) {
+  this->contratos.insert(
+      new ContratoSuscripcion(this, vj, metodoPago, validez));
+}
 
 map<int, Partida *> Jugador::obtenerPartidasSinFinalizar() {
-  return map<int, Partida *>(); // retorna un map vacío
+  return map<int, Partida *>();
 }
 
 void Jugador::finalizarPartida(int idPartida) {}
@@ -83,9 +87,7 @@ map<int, PartidaIndividual *> Jugador::obtenerPartidasFinalizadas() {
 
 bool tieneSuscripcionActiva(Videojuego *vj) { return false; }
 
-bool Jugador::tienePartidaSinFinalizar(
-    Videojuego *vj) { // operacion faltante en obtenerpartidasfinalizadas en
-                      // elim videojuego
+bool Jugador::tienePartidaSinFinalizar(Videojuego *vj) {
   map<int, Partida *> partidas = this->partidasIniciadas;
   map<int, Partida *>::iterator it;
   it = partidas.begin();
@@ -109,10 +111,24 @@ int Jugador::obtenerDuracionPartida(Videojuego *vj) {
     Videojuego *video = partida->getVideojuego();
     if (vj == video) {
       int sumar = partida->getDuracionTotal();
-      res = res + sumar;
+      res += sumar;
     }
   }
   return res;
+}
+
+std::set<ContratoSuscripcion *> Jugador::obtenerContratosActivos() {
+  std::set<ContratoSuscripcion *> activos = std::set<ContratoSuscripcion *>();
+
+  std::set<ContratoSuscripcion *>::iterator it;
+  for (it = this->contratos.begin(); it != this->contratos.end(); it++) {
+    ContratoSuscripcion *contrato = (*it);
+    if (contrato->esActivo()) {
+      activos.insert(contrato);
+    }
+  }
+
+  return activos;
 }
 
 float Jugador::calcularTotalHorasPartidasIniciadas(Videojuego *videojuego) {

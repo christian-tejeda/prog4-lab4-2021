@@ -6,17 +6,16 @@
 #include <string>
 #include <utility>
 
-class Partida; // fwd dec
-
-#include "../utils/enums.h"
-//#include "../datatypes/DataUsuario.h"
+#include "../../headers/datatypes/DataVideojuego.h"
 #include "../datatypes/DataJugador.h"
 #include "../entities/ContratoSuscripcion.h"
 #include "../entities/PartidaIndividual.h"
 #include "../entities/PartidaMultijugador.h"
 #include "../entities/Usuario.h"
 #include "../entities/Videojuego.h"
+#include "../utils/enums.h"
 
+class Partida;
 class Videojuego;
 class ContratoSuscripcion;
 
@@ -41,6 +40,9 @@ public:
     void setDescripcion(std::string descripcion);
 
     //Operaciones
+    std::set<ContratoSuscripcion *> obtenerContratosActivos();
+    void contratarSuscripcion(Videojuego *vj, TipoPeriodoValidez validez,
+                                   TipoMetodoPago metodoPago);
     void crearPartidaIndividual(int idPartida,Fecha fechaActual,Videojuego * vj,Jugador *host,PartidaIndividual * cont);
     void crearPartidaMultijugador(int idPartida, Fecha fechaActual, Fecha *fechaFin, Videojuego * vj, bool transmitida, Jugador * host, map<string, Jugador *> participantes);
     void cancelarSuscripcionActiva(Videojuego *vj);
