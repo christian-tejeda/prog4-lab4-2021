@@ -44,9 +44,19 @@ string DataVideojuego::getNombreEmpresa()
 {
     return this->nombreEmpresa;
 }
+float DataVideojuego::getHorasTotales(){
+    return this->horastotales;
+}
 pair<float, int> DataVideojuego::getRating()
 {
     return this->rating;
+}
+
+void DataVideojuego::setNombreEmpresa(std::string nombreEmpresa){
+    this->nombreEmpresa=nombreEmpresa;
+}
+void DataVideojuego::setHorasTotales(float horas){
+    this->horastotales=horas;
 }
 
 DataVideojuego::~DataVideojuego() {}

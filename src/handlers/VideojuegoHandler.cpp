@@ -5,8 +5,8 @@
 
 #include "../../headers/utils/enums.h"
 #include "../../headers/entities/Categoria.h"
-#include "../../headers/entities/Genero.h"
-#include "../../headers/entities/Plataforma.h"
+//#include "../../headers/entities/Genero.h"
+//#include "../../headers/entities/Plataforma.h"
 #include "../../headers/handlers/VideojuegoHandler.h"
 
 using namespace std;
@@ -41,8 +41,32 @@ Videojuego *VideojuegoHandler::obtenerVideojuegoPorId(string nombre) {
     else return it->second;
      }
 
-void VideojuegoHandler::eliminarVideojuego(Videojuego *vj) {}
+void VideojuegoHandler::eliminarVideojuego(Videojuego *vj)
+{
+    string clave = vj->getNombre();
+    this->vjs.erase(clave);
+    delete vj;
+}
 
 map<string, Jugador *> VideojuegoHandler::obtenerJugadoresVideojuego(Videojuego *vj) { return map<string, Jugador *>(); }
 
+set<std::string> VideojuegoHandler::obtenerNombresVideojuegos(){
+    map<string, Videojuego *>::iterator it;
+    set<std::string> res;
+    for (it = this->vjs.begin(); it != this->vjs.end(); it++)
+    {
+        res.insert(it->second->getNombre());
+    }
+    return res;
+}
+
 VideojuegoHandler::~VideojuegoHandler() {}
+
+void VideojuegoHandler::releaseInstance()
+{
+    if (instancia != nullptr)
+    {
+        delete instancia;
+        instancia = nullptr;
+    }
+}

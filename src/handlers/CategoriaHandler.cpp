@@ -5,8 +5,8 @@
 
 #include "../../headers/utils/enums.h"
 #include "../../headers/entities/Categoria.h"
-#include "../../headers/entities/Genero.h"
-#include "../../headers/entities/Plataforma.h"
+//#include "../../headers/entities/Genero.h"
+//#include "../../headers/entities/Plataforma.h"
 #include "../../headers/handlers/CategoriaHandler.h"
 
 using namespace std;
@@ -25,7 +25,14 @@ CategoriaHandler *CategoriaHandler::getInstance()
 
 map<std::string, Categoria *> CategoriaHandler::obtenerCategorias() { return this->cats; }
 
-Categoria *CategoriaHandler::obtenerCategoriaPorId(std::string nombre) { return this->cats[nombre]; }
+Categoria *CategoriaHandler::obtenerCategoriaPorId(std::string nombre) { 
+    if (this->cats.find(nombre)!=this->cats.end())
+    return this->cats.find(nombre)->second;
+    else
+    {
+        return nullptr;
+    }
+}
 
 // Plataforma *CategoriaHandler::obtenerPlataformaPorId(std::string nombre) { return this->cats[nombre]; }
 
@@ -38,4 +45,19 @@ void CategoriaHandler::agregarCategoria(Categoria *categoria)
 
 void CategoriaHandler::eliminarCategoria(Categoria *categoria) {}
 
+
+void CategoriaHandler::crearNuevaCategoria(std::string nombre,std::string descripcion, TipoCategoria tipo){
+    Categoria * cat = new Categoria(nombre,descripcion,tipo);
+    this->cats.insert(std::pair<std::string, Categoria *>(nombre, cat));
+}
+
 CategoriaHandler::~CategoriaHandler() {}
+
+void CategoriaHandler::releaseInstance()
+{
+    if (instancia != nullptr)
+    {
+        delete instancia;
+        instancia = nullptr;
+    }
+}

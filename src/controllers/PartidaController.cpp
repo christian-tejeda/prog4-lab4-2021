@@ -64,9 +64,15 @@ set<DataVideojuego *> PartidaController::obtenerVideojuegosDeJugadorConSuscripci
     map<std::string, Videojuego*> vjs = dynamic_cast<Jugador*>(jg)->obtenerVideojuegosConSuscripcionActiva();
     map<std::string, Videojuego*>::iterator it;
     for(it = vjs.begin();it !=vjs.end(); it++){
+<<<<<<< HEAD
         Videojuego* vj = it->second;
         DataVideojuego dvj2 = vj->getData();
         DataVideojuego *dvj = &dvj2;
+=======
+        Videojuego* vj= it->second;
+        DataVideojuego *dvj = vj->getData();
+        //DataVideojuego *dvj = &dvj2;
+>>>>>>> feature/seleccionar-Estadistica
         res.insert(dvj);
     }
     vjs.clear();

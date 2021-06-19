@@ -8,6 +8,7 @@ H_HANDLERS = headers/handlers
 INTERFACES = headers/interfaces
 H_UTILS = headers/utils
 H_FACTORY_CONTROLLER = headers/FactoryController.h
+H_FACTORY_STRATEGY_ESTADISTICA = headers/FactoryStrategyEstadistica.h
 
 #---------- Source -----------
 
@@ -17,6 +18,7 @@ CPP_ENTITIES = src/entities
 CPP_HANDLERS = src/handlers
 CPP_UTILS = src/utils
 CPP_FACTORY_CONTROLLER = src/FactoryController.cpp
+CPP_FACTORY_STRATEGY_ESTADISTICA = src/FactoryStrategyEstadistica.cpp
 
 #---------- GCC --------------
 
@@ -24,8 +26,8 @@ GCC = g++ -c
 
 #---------- Main --------------
 
-main: PartidaController.o UsuarioController.o VideojuegoController.o DataCategoria.o DataContratoSuscripcion.o DataDesarrollador.o DataEstadistica.o DataGenero.o DataJugador.o DataPartida.o DataPartidaIndividual.o DataPartidaMultijugador.o DataPlataforma.o DataUsuario.o DataVideojuego.o Categoria.o ContextoEstadistica.o ContratoSuscripcion.o Usuario.o Desarrollador.o DuracionParticipante.o Genero.o Jugador.o Partida.o PartidaIndividual.o PartidaMultijugador.o Plataforma.o Videojuego.o CategoriaHandler.o UsuarioHandler.o VideojuegoHandler.o Fecha.o FactoryController.o main.o
-	g++ -o main obj/PartidaController.o obj/UsuarioController.o obj/VideojuegoController.o obj/DataCategoria.o obj/DataContratoSuscripcion.o obj/DataDesarrollador.o obj/DataEstadistica.o obj/DataGenero.o obj/DataJugador.o obj/DataPartida.o obj/DataPartidaIndividual.o obj/DataPartidaMultijugador.o obj/DataPlataforma.o obj/DataUsuario.o obj/DataVideojuego.o obj/Categoria.o obj/ContextoEstadistica.o obj/ContratoSuscripcion.o obj/Desarrollador.o obj/DuracionParticipante.o obj/Genero.o obj/Jugador.o obj/Partida.o obj/PartidaIndividual.o obj/PartidaMultijugador.o obj/Plataforma.o obj/Usuario.o obj/Videojuego.o obj/CategoriaHandler.o obj/UsuarioHandler.o obj/VideojuegoHandler.o obj/Fecha.o obj/FactoryController.o	 obj/main.o 
+main: PartidaController.o UsuarioController.o VideojuegoController.o DataCategoria.o DataContratoSuscripcion.o DataSuscripcionJugador.o  DataDesarrollador.o DataEstadistica.o DataJugador.o DataPartida.o DataPartidaIndividual.o DataPartidaMultijugador.o DataUsuario.o DataVideojuego.o Categoria.o ContratoSuscripcion.o Usuario.o Desarrollador.o DuracionParticipante.o Jugador.o Partida.o PartidaIndividual.o PartidaMultijugador.o Videojuego.o CategoriaHandler.o UsuarioHandler.o VideojuegoHandler.o Fecha.o FactoryController.o FactoryStrategyEstadistica.o CantidadSuscritosStrategy.o PromedioRatingStrategy.o TotalHorasJugadasStrategy.o main.o
+	g++ -o main obj/PartidaController.o obj/UsuarioController.o obj/VideojuegoController.o obj/DataCategoria.o obj/DataContratoSuscripcion.o obj/DataSuscripcionJugador.o obj/DataDesarrollador.o obj/DataEstadistica.o obj/DataJugador.o obj/DataPartida.o obj/DataPartidaIndividual.o obj/DataPartidaMultijugador.o obj/DataUsuario.o obj/DataVideojuego.o obj/Categoria.o obj/ContratoSuscripcion.o obj/Desarrollador.o obj/DuracionParticipante.o obj/Jugador.o obj/Partida.o obj/PartidaIndividual.o obj/PartidaMultijugador.o obj/Usuario.o obj/Videojuego.o obj/CategoriaHandler.o obj/UsuarioHandler.o obj/VideojuegoHandler.o obj/Fecha.o obj/FactoryController.o obj/FactoryStrategyEstadistica.o obj/CantidadSuscritosStrategy.o obj/PromedioRatingStrategy.o obj/TotalHorasJugadasStrategy.o obj/main.o 
 		
 
 #------------- Objects ------------------
@@ -54,9 +56,6 @@ DataDesarrollador.o: $(CPP_DATATYPES)/DataDesarrollador.cpp $(H_DATATYPES)/DataD
 DataEstadistica.o: $(CPP_DATATYPES)/DataEstadistica.cpp $(H_DATATYPES)/DataEstadistica.h
 	$(GCC) $(CPP_DATATYPES)/DataEstadistica.cpp -o obj/DataEstadistica.o
 
-DataGenero.o: $(CPP_DATATYPES)/DataGenero.cpp $(H_DATATYPES)/DataGenero.h
-	$(GCC) $(CPP_DATATYPES)/DataGenero.cpp -o obj/DataGenero.o
-
 DataJugador.o: $(CPP_DATATYPES)/DataJugador.cpp $(H_DATATYPES)/DataJugador.h
 	$(GCC) $(CPP_DATATYPES)/DataJugador.cpp -o obj/DataJugador.o
 
@@ -69,20 +68,17 @@ DataPartidaIndividual.o: $(CPP_DATATYPES)/DataPartidaIndividual.cpp $(H_DATATYPE
 DataPartidaMultijugador.o: $(CPP_DATATYPES)/DataPartidaMultijugador.cpp $(H_DATATYPES)/DataPartidaMultijugador.h
 	$(GCC) $(CPP_DATATYPES)/DataPartidaMultijugador.cpp -o obj/DataPartidaMultijugador.o
 
-DataPlataforma.o: $(CPP_DATATYPES)/DataPlataforma.cpp $(H_DATATYPES)/DataPlataforma.h
-	$(GCC) $(CPP_DATATYPES)/DataPlataforma.cpp -o obj/DataPlataforma.o
-
 DataUsuario.o: $(CPP_DATATYPES)/DataUsuario.cpp $(H_DATATYPES)/DataUsuario.h
 	$(GCC) $(CPP_DATATYPES)/DataUsuario.cpp -o obj/DataUsuario.o
 
 DataVideojuego.o: $(CPP_DATATYPES)/DataVideojuego.cpp $(H_DATATYPES)/DataVideojuego.h
 	$(GCC) $(CPP_DATATYPES)/DataVideojuego.cpp -o obj/DataVideojuego.o
 
+DataSuscripcionJugador.o: $(CPP_DATATYPES)/DataSuscripcionJugador.cpp $(H_DATATYPES)/DataSuscripcionJugador.h
+	$(GCC) $(CPP_DATATYPES)/DataSuscripcionJugador.cpp -o obj/DataSuscripcionJugador.o	
+
 Categoria.o: $(CPP_ENTITIES)/Categoria.cpp $(H_ENTITIES)/Categoria.h
 	$(GCC) $(CPP_ENTITIES)/Categoria.cpp -o obj/Categoria.o
-
-ContextoEstadistica.o: $(CPP_ENTITIES)/ContextoEstadistica.cpp $(H_ENTITIES)/ContextoEstadistica.h
-	$(GCC) $(CPP_ENTITIES)/ContextoEstadistica.cpp -o obj/ContextoEstadistica.o
 
 ContratoSuscripcion.o: $(CPP_ENTITIES)/ContratoSuscripcion.cpp $(H_ENTITIES)/ContratoSuscripcion.h
 	$(GCC) $(CPP_ENTITIES)/ContratoSuscripcion.cpp -o obj/ContratoSuscripcion.o
@@ -96,9 +92,6 @@ Desarrollador.o: $(CPP_ENTITIES)/Desarrollador.cpp $(H_ENTITIES)/Desarrollador.h
 DuracionParticipante.o: $(CPP_ENTITIES)/DuracionParticipante.cpp $(H_ENTITIES)/DuracionParticipante.h
 	$(GCC) $(CPP_ENTITIES)/DuracionParticipante.cpp -o obj/DuracionParticipante.o
 
-Genero.o: $(CPP_ENTITIES)/Genero.cpp $(H_ENTITIES)/Genero.h
-	$(GCC) $(CPP_ENTITIES)/Genero.cpp -o obj/Genero.o
-
 Jugador.o: $(CPP_ENTITIES)/Jugador.cpp $(H_ENTITIES)/Jugador.h
 	$(GCC) $(CPP_ENTITIES)/Jugador.cpp -o obj/Jugador.o
 
@@ -111,12 +104,17 @@ PartidaIndividual.o: $(CPP_ENTITIES)/PartidaIndividual.cpp $(H_ENTITIES)/Partida
 PartidaMultijugador.o: $(CPP_ENTITIES)/PartidaMultijugador.cpp $(H_ENTITIES)/PartidaMultijugador.h
 	$(GCC) $(CPP_ENTITIES)/PartidaMultijugador.cpp -o obj/PartidaMultijugador.o
 
-Plataforma.o: $(CPP_ENTITIES)/Plataforma.cpp $(H_ENTITIES)/Plataforma.h
-	$(GCC) $(CPP_ENTITIES)/Plataforma.cpp -o obj/Plataforma.o
-
-
 Videojuego.o: $(CPP_ENTITIES)/Videojuego.cpp $(H_ENTITIES)/Videojuego.h
 	$(GCC) $(CPP_ENTITIES)/Videojuego.cpp -o obj/Videojuego.o
+
+CantidadSuscritosStrategy.o: $(CPP_ENTITIES)/CantidadSuscritosStrategy.cpp $(H_ENTITIES)/CantidadSuscritosStrategy.h
+	$(GCC) $(CPP_ENTITIES)/CantidadSuscritosStrategy.cpp -o obj/CantidadSuscritosStrategy.o
+
+PromedioRatingStrategy.o: $(CPP_ENTITIES)/PromedioRatingStrategy.cpp $(H_ENTITIES)/PromedioRatingStrategy.h
+	$(GCC) $(CPP_ENTITIES)/PromedioRatingStrategy.cpp -o obj/PromedioRatingStrategy.o
+
+TotalHorasJugadasStrategy.o: $(CPP_ENTITIES)/TotalHorasJugadasStrategy.cpp $(H_ENTITIES)/TotalHorasJugadasStrategy.h
+	$(GCC) $(CPP_ENTITIES)/TotalHorasJugadasStrategy.cpp -o obj/TotalHorasJugadasStrategy.o	
 
 CategoriaHandler.o: $(CPP_HANDLERS)/CategoriaHandler.cpp $(H_HANDLERS)/CategoriaHandler.h
 	$(GCC) $(CPP_HANDLERS)/CategoriaHandler.cpp -o obj/CategoriaHandler.o
@@ -132,6 +130,9 @@ Fecha.o: $(CPP_UTILS)/Fecha.cpp $(H_UTILS)/Fecha.h
 
 FactoryController.o: $(CPP_FACTORY_CONTROLLER) $(H_FACTORY_CONTROLLER)
 	$(GCC) $(CPP_FACTORY_CONTROLLER) -o obj/FactoryController.o
+
+FactoryStrategyEstadistica.o: $(CPP_FACTORY_STRATEGY_ESTADISTICA) $(H_FACTORY_STRATEGY_ESTADISTICA)
+	$(GCC) $(CPP_FACTORY_STRATEGY_ESTADISTICA) -o obj/FactoryStrategyEstadistica.o
 
 #--------- Extra --------------
 

@@ -41,6 +41,13 @@ void PartidaMultijugador::finalizar(Fecha * fecha)
 }
 void PartidaMultijugador::eliminarPartidasVideojuego(Videojuego *videojuego)
 {
+    set<DuracionParticipante*> dur=this->durpart;
+    set<DuracionParticipante*>::iterator it;
+    for (it = dur.begin(); it != dur.end(); it++){
+        DuracionParticipante* cuestion=*it;
+        dur.erase(*it);
+        delete cuestion;
+    }
 }
 
 DataPartida *PartidaMultijugador::getData()
