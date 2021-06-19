@@ -159,7 +159,7 @@ void menuAsignarPuntaje(FactoryController *fact)
 {
 }
 
-void menuIniciarPartida(FactoryController *fact)
+void menuIniciarPartida(FactoryController *fact,Fecha fechainicio)
 {
     IIniciarPartida *ip = fact->getIIniciarPartida();
     set<DataVideojuego*> videojuegosDeJgConSus = ip->obtenerVideojuegosDeJugadorConSuscripcionActiva();
@@ -236,7 +236,7 @@ void menuIniciarPartida(FactoryController *fact)
         }
         bool confirmamo = false;
         if(confirmar == 'y')confirmamo = true;
-        ip->confirmarIniciarPartida(confirmamo);
+        ip->confirmarIniciarPartida(confirmamo,&fechainicio);
     }
     else{//partida multijugador
         char transmitir = 'r';
@@ -290,7 +290,7 @@ void menuIniciarPartida(FactoryController *fact)
         }
         bool confirmamo = false;
         if(confirmar == 'y')confirmamo = true;
-        ip->confirmarIniciarPartida(confirmamo);
+        ip->confirmarIniciarPartida(confirmamo,&fechainicio);
 
     }
 
@@ -461,7 +461,7 @@ int main(int argc, char const *argv[])
             case 3: //Iniciar partida
                 try
                 {
-                    menuIniciarPartida(fact);
+                    menuIniciarPartida(fact,*fechaSist);
                 }
                 catch (const std::invalid_argument &ex)
                 {
