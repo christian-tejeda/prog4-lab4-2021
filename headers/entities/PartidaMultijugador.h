@@ -34,6 +34,7 @@ public:
     void eliminarPartidasVideojuego(Videojuego *videojuego);
 
     DataPartida *getData();
+    bool existeParticipante(Jugador *jg);
 
     ~PartidaMultijugador();
 };

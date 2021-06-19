@@ -6,6 +6,8 @@
 #include <utility>
 
 #include "../../headers/controllers/PartidaController.h"
+#include "../../headers/controllers/UsuarioController.h"
+#include "../../headers/handlers/UsuarioHandler.h"
 #include "../../headers/utils/Fecha.h"
 
 using namespace std;
@@ -77,8 +79,11 @@ void PartidaController::confirmarIniciarPartida(bool confirmar)
 }
 set<DataPartidaMultijugador *> PartidaController::obtenerPartidasMultijugadorActivasDeJugador()
 {
-    set<DataPartidaMultijugador *> res;
-    res.insert(nullptr);
+    UsuarioController *uc = UsuarioController::getInstance();
+    this->jg = dynamic_cast<Jugador *>(uc->getSesion());
+    UsuarioHandler *uh = UsuarioHandler::getInstance();
+    set<DataPartidaMultijugador *> res = uh->obtenerPartidasMultijugadorActivasDeJugador(jg);
+
     return res;
 }
 void PartidaController::abandonarPartida(int idPartida)

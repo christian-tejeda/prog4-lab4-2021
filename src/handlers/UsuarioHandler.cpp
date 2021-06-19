@@ -138,17 +138,39 @@ void UsuarioHandler::releaseInstance()
     }
 }
 
-
-float UsuarioHandler::obtenerHoras(Videojuego* vj){
-    map<string,Usuario*> coleccion=this->users;
-    map<string,Usuario*>::iterator it;
-    float res=0;
+float UsuarioHandler::obtenerHoras(Videojuego *vj)
+{
+    map<string, Usuario *> coleccion = this->users;
+    map<string, Usuario *>::iterator it;
+    float res = 0;
     for (it = coleccion.begin(); it != coleccion.end(); it++)
     {
         Jugador *jugador = dynamic_cast<Jugador *>(it->second);
-        if (jugador!=nullptr){
-            float duracion =jugador->obtenerDuracionPartida(vj);
-            res=res+duracion;
+        if (jugador != nullptr)
+        {
+            float duracion = jugador->obtenerDuracionPartida(vj);
+            res = res + duracion;
+        }
+    }
+    return res;
+}
+
+set<DataPartidaMultijugador *> UsuarioHandler::obtenerPartidasMultijugadorActivasDeJugador(Jugador *jg)
+{
+    set<DataPartidaMultijugador *> res;
+    map<string, Usuario *>::iterator it;
+    for (it = this->users.begin(); it != this->users.end(); it++)
+    {
+        Jugador *jugador = dynamic_cast<Jugador *>(it->second);
+        if (jugador)
+        {
+            set<DataPartidaMultijugador *> colDtm = jugador->obtenerPartidasPorParticipante(jg);
+            set<DataPartidaMultijugador *>::iterator it2;
+            for (it2 = colDtm.begin(); it2 != colDtm.end(); it++)
+            {
+                res.insert((*it2));
+            }
+            colDtm.clear();
         }
     }
     return res;

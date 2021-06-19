@@ -41,10 +41,11 @@ void PartidaMultijugador::finalizar()
 }
 void PartidaMultijugador::eliminarPartidasVideojuego(Videojuego *videojuego)
 {
-    set<DuracionParticipante*> dur=this->durpart;
-    set<DuracionParticipante*>::iterator it;
-    for (it = dur.begin(); it != dur.end(); it++){
-        DuracionParticipante* cuestion=*it;
+    set<DuracionParticipante *> dur = this->durpart;
+    set<DuracionParticipante *>::iterator it;
+    for (it = dur.begin(); it != dur.end(); it++)
+    {
+        DuracionParticipante *cuestion = *it;
         dur.erase(*it);
         delete cuestion;
     }
@@ -59,4 +60,20 @@ DataPartida *PartidaMultijugador::getData()
                            this->getDuracionTotal());
 }
 
-PartidaMultijugador::~PartidaMultijugador() {}
+bool PartidaMultijugador::existeParticipante(Jugador *jg)
+{
+    set<DuracionParticipante *>::iterator it;
+    for (it = this->durpart.begin(); it != this->durpart.end(); it++)
+    {
+        if ((*it)->getParticipante() == jg)
+            break;
+    }
+    if (it != this->durpart.end())
+        return true;
+    else
+        return false;
+}
+
+PartidaMultijugador::~PartidaMultijugador()
+{
+}
