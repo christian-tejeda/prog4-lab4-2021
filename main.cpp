@@ -648,8 +648,58 @@ void menuEliminarVideojuego(FactoryController *fact)
     }
 }
 
-void menuSeleccionarEstadisticas()
+void menuSeleccionarEstadisticas(FactoryController * fact)
 {
+    std::cout << "Bienvenido al menu de seleccionar estadisticas :D \n";
+    ISeleccionarEstadisticas * se = fact->getISeleccionarEstadisticas();
+    /*set<DataEstadistica*> estadisticas = se->listarEstadisticas();
+    set<DataEstadistica*>::iterator it;
+    for(it = estadisticas.begin();it != estadisticas.end();it++){
+        std::cout << (*it)->get
+    }*/
+    bool quiereMas = true;
+    int flag = 30;
+    set<int> quiere;
+    while(quiereMas){
+        flag = 30;
+        std::cout << "Digite la categoria que desea agregar: \n";
+        std::cout << "1) Agregar total horas jugadas \n";
+        std::cout << "2) Agregar Promedio rating \n";
+        std::cout << "3) Agregar Cantidad Suscritos \n";
+        std::cin >> flag;
+        std::string aver = "q";
+
+        switch(flag){
+            case 1:
+                std::cout << "Total horas jugadas agregado exitsosamente \n";
+                quiere.insert(1);
+                break;
+            case 2:
+                std::cout << "Promedio rating agregado exitosamente \n";
+                quiere.insert(2);
+                break;
+            case 3:
+                std::cout << "Cantidad suscritos agregado exitosamente \n";
+                quiere.insert(3);
+                break;
+        }
+        bool quiereMasMas = true;
+        while(quiereMasMas){
+        std::cout << "Desea agregar mas estadisticas? (y/n) \n";
+        std::cin >> aver;
+        if(aver == "n"){
+            quiereMasMas = false;
+            quiereMas = false;
+        }
+        else if(aver == "y"){
+            quiereMasMas = false;
+        }
+        }
+
+    }
+    se->seleccionarEstadisticas(quiere);
+
+
 }
 
 void menuConsultarEstadisticas()
@@ -875,7 +925,7 @@ int main(int argc, char const *argv[])
             case 4: //Seleccionar estadísticas
                 try
                 {
-                    /* code */
+                    menuSeleccionarEstadisticas(fact);
                 }
                 catch (const std::invalid_argument &ex)
                 {

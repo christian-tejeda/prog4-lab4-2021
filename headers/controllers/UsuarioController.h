@@ -29,6 +29,7 @@ private:
   Videojuego *videojuego;
   TipoPeriodoValidez validezSuscripcion;
   TipoMetodoPago metodoPago;
+  //set<DataEstadistica *> estadisticas;
   UsuarioController();
   ~UsuarioController();
 
@@ -43,7 +44,7 @@ public:
 
   /// ISeleccionarEstadisticas
   std::set<DataEstadistica *> listarEstadisticas();
-  void seleccionarEstadisticas(std::set<std::string> nombresEstadisticas);
+  void seleccionarEstadisticas(set<int> nombresEstadisticas);
 
   /// IConsultarEstadisticas
   set<DataVideojuego *> obtenerVideojuegosPublicadosPorDesarrollador();

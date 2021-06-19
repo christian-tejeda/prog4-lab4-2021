@@ -28,10 +28,21 @@ TipoMetodoPago UsuarioController::getMetodoPago() { return this->metodoPago; }
 // métodos de ISeleccionarEstadisticas
 std::set<DataEstadistica *> UsuarioController::listarEstadisticas() {
   set<DataEstadistica *> res;
+  for(int eint = horasJugadas; eint != Last; eint++){
+    TipoEstadistica tipoest = static_cast<TipoEstadistica>(eint);
+    DataEstadistica * est = new DataEstadistica(tipoest,3.14);
+    res.insert(est);
+  }
   return res;
 }
-void UsuarioController::seleccionarEstadisticas(
-    std::set<std::string> nombresEstadisticas) {}
+void UsuarioController::seleccionarEstadisticas(set<int> numeroEstadistica) {
+  set<int>::iterator it;
+  for(it=numeroEstadistica.begin();it != numeroEstadistica.end();it++){
+    TipoEstadistica estadi = static_cast<TipoEstadistica>((*it));
+    Desarrollador * des = dynamic_cast<Desarrollador*>(this->sesion);
+    des->agregarEstadisticaDeInteres(estadi);
+  }
+}
 
 // métodos de IAltaUsuario
 void UsuarioController::ingresarDatosJugador(DataJugador *dataJugador) {
