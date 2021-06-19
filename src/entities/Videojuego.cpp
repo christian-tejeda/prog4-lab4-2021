@@ -96,7 +96,7 @@ void Videojuego::setContextoEstadistica(ContextoEstadistica *)
 //void Videojuego::agregarGenero(Genero g) {}
 //void Videojuego::agregarPlataforma(Plataforma p) {}
 //void Videojuego::agregarOtraCategoria(Categoria o) {}
-void Videojuego::agregarCategoria(Categoria o){}
+//void Videojuego::agregarCategoria(Categoria o){}
 set<Jugador *> Videojuego::getSuscriptores()
 {
     set<Jugador *> res;
