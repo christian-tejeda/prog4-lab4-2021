@@ -6,30 +6,26 @@
 #include <string>
 #include <utility>
 
-class Partida; // fwd dec
-
-#include "../utils/enums.h"
-//#include "../datatypes/DataUsuario.h"
 #include "../datatypes/DataJugador.h"
-#include "../entities/Usuario.h"
-//#include "../entities/Partida.h"
 #include "../entities/ContratoSuscripcion.h"
 #include "../entities/PartidaIndividual.h"
 #include "../entities/PartidaMultijugador.h"
+#include "../entities/Usuario.h"
 #include "../entities/Videojuego.h"
+#include "../utils/enums.h"
 
-class Videojuego; // fwd dec
+class Partida;
+class Videojuego;
+class ContratoSuscripcion;
 
 class Jugador : public Usuario {
 private:
   std::string nickname;
   std::string descripcion;
-  // set<Jugador*> sigue;  NO HAY QUE IMPLEMENTARLO
   map<int, Partida *> partidasIniciadas;
-  set<ContratoSuscripcion *> contratos;
+  std::set<ContratoSuscripcion *> contratos;
 
 public:
-  // Constructores
   Jugador();
   Jugador(std::string email, std::string password, std::string nickname,
           std::string descripcion);
@@ -55,6 +51,7 @@ public:
   map<int, PartidaIndividual *> obtenerPartidasFinalizadas();
   PartidaIndividual *obtenerPartida(std::string id);
   bool tieneSuscripcionActiva(Videojuego *vj);
+  float calcularTotalHorasPartidasIniciadas(Videojuego *vj);
 
   bool tienePartidaSinFinalizar(
       Videojuego *vj); // operacion faltante en obtenerpartidasfinalizadas en

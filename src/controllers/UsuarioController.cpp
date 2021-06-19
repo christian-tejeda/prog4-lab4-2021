@@ -1,16 +1,4 @@
-
-
-#include <map>
-#include <set>
-#include <string>
-#include <utility>
-
 #include "../../headers/controllers/UsuarioController.h"
-#include "../../headers/handlers/UsuarioHandler.h"
-#include "../../headers/handlers/VideojuegoHandler.h"
-#include "../../headers/utils/Fecha.h"
-
-using namespace std;
 
 UsuarioController *UsuarioController::instancia = nullptr;
 
@@ -28,7 +16,6 @@ UsuarioController *UsuarioController::getInstance() {
   return instancia;
 }
 
-// Getters
 Usuario *UsuarioController::getSesion() { return this->sesion; }
 DataDesarrollador *UsuarioController::getDataDesarrollador() {
   return this->dataDesarrollador;
@@ -196,28 +183,71 @@ void UsuarioController::confirmarSuscripcion(bool confirmar) {
                                 this->metodoPago);
 }
 
+// métodos de ISeleccionarEstadisticas
+std::set<DataEstadistica *> UsuarioController::listarEstadisticas() {
+  set<DataEstadistica *> res;
+  return res;
+}
+void UsuarioController::seleccionarEstadisticas(
+    std::set<std::string> nombresEstadisticas) {}
+
+// métodos de IAltaUsuario
+void UsuarioController::ingresarDatosJugador(DataJugador *dataJugador) {
+
+  UsuarioHandler *uh = UsuarioHandler::getInstance();
+  bool existeNick = uh->existeJugadorConNickname(dataJugador->getNickname());
+
+  if (existeNick) {
+    throw std::invalid_argument("Error: Ya existe un jugador con ese nickname. "
+                                "Pruebe con uno distinto.");
+  } else {
+    this->dataJugador = dataJugador;
+  }
+}
+
 // métodos de IConsultarEstadisticas
 set<DataVideojuego *>
 UsuarioController::obtenerVideojuegosPublicadosPorDesarrollador() {
-  set<DataVideojuego *> res;
-  res.insert(nullptr);
-  return res;
-}
-set<DataEstadistica *>
-UsuarioController::calcularEstadisticas(string nomVideojuego) {
-  set<DataEstadistica *> res;
-  res.insert(nullptr);
+  std::set<DataVideojuego *> res = std::set<DataVideojuego *>();
+  UsuarioController *uc = UsuarioController::getInstance();
+  Desarrollador *des = dynamic_cast<Desarrollador *>(uc->getSesion());
+  set<Videojuego *> vjs = des->getVideojuegoPublicados();
+
+  set<Videojuego *>::iterator it;
+
+  for (it = vjs.begin(); it != vjs.end(); it++) {
+    Videojuego *vj = (*it);
+    res.insert(vj->getData());
+  }
+
   return res;
 }
 
-// set<DataPartidaMultijugador *>
-// UsuarioController::obtenerPartidasMultijugadorActivasDeJugador()
-// {
-//     set<DataPartidaMultijugador *> res;
-//     res.insert(nullptr);
-//     return res;
-// }
-// void UsuarioController::seleccionarPartida(int id) {}
+set<DataEstadistica *>
+UsuarioController::calcularEstadisticas(string nomVideojuego) {
+  std::set<DataEstadistica *> res = std::set<DataEstadistica *>();
+
+  VideojuegoHandler *vH = VideojuegoHandler::getInstance();
+  Videojuego *videojuego = vH->obtenerVideojuegoPorId(nomVideojuego);
+
+  UsuarioController *uc = UsuarioController::getInstance();
+  Desarrollador *dev = dynamic_cast<Desarrollador *>(uc->getSesion());
+
+  std::set<TipoEstadistica> estadisticasDeInteres =
+      dev->getEstadisticasDeInteres();
+
+  std::set<TipoEstadistica>::iterator it;
+
+  for (it = estadisticasDeInteres.begin(); it != estadisticasDeInteres.end();
+       it++) {
+    TipoEstadistica estadistica = (*it);
+    float resultado = videojuego->calcularEstadistica(estadistica);
+
+    res.insert(new DataEstadistica(estadistica, resultado));
+  }
+
+  return res;
+}
 
 // métodos de IIniciarSesion
 bool UsuarioController::iniciarSesion(string mail, string password) {
@@ -240,10 +270,6 @@ void UsuarioController::confirmarInicioSesion(bool confirmar, string mail,
       jg = false;
     else
       dev = false;
-
-    std::cout << "¡Sesión iniciada correctamente!\n\n";
-    std::cout << "                Bienvenid@, " << this->sesion->getEmail()
-              << "\n\n";
   }
 }
 

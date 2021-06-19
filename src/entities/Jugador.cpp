@@ -1,14 +1,4 @@
-
-#include <map>
-#include <set>
-#include <string>
-#include <utility>
-
 #include "../../headers/entities/Jugador.h"
-// #include "../../headers/entities/Usuario.h"
-// #include "../../headers/utils/enums.h"
-#include "../../headers/datatypes/DataVideojuego.h"
-//#include "../../headers/utils/Fecha.h"
 
 Jugador::Jugador() : Usuario(){};
 
@@ -27,9 +17,6 @@ void Jugador::setNickname(std::string nick) { this->nickname = nick; }
 void Jugador::setDescripcion(std::string descripcion) {
   this->descripcion = descripcion;
 }
-
-// Jugador::set<ContratoSuscripcion> obtenerSuscripciones(EstadoSuscripcion
-// estado);
 
 void Jugador::cancelarSuscripcionActiva(Videojuego *vj) {
   std::set<ContratoSuscripcion *> contratos = this->contratos;
@@ -54,7 +41,7 @@ void Jugador::contratarSuscripcion(Videojuego *vj, TipoPeriodoValidez validez,
 }
 
 map<int, Partida *> Jugador::obtenerPartidasSinFinalizar() {
-  return map<int, Partida *>(); // retorna un map vacío
+  return map<int, Partida *>();
 }
 
 void Jugador::finalizarPartida(int idPartida) {}
@@ -100,9 +87,7 @@ PartidaIndividual *Jugador::obtenerPartida(string id) { return nullptr; }
 
 bool tieneSuscripcionActiva(Videojuego *vj) { return false; }
 
-bool Jugador::tienePartidaSinFinalizar(
-    Videojuego *vj) { // operacion faltante en obtenerpartidasfinalizadas en
-                      // elim videojuego
+bool Jugador::tienePartidaSinFinalizar(Videojuego *vj) {
   map<int, Partida *> partidas = this->partidasIniciadas;
   map<int, Partida *>::iterator it;
   it = partidas.begin();
@@ -126,7 +111,7 @@ int Jugador::obtenerDuracionPartida(Videojuego *vj) {
     Videojuego *video = partida->getVideojuego();
     if (vj == video) {
       int sumar = partida->getDuracionTotal();
-      res = res + sumar;
+      res += sumar;
     }
   }
   return res;
@@ -144,6 +129,23 @@ std::set<ContratoSuscripcion *> Jugador::obtenerContratosActivos() {
   }
 
   return activos;
+}
+
+float Jugador::calcularTotalHorasPartidasIniciadas(Videojuego *videojuego) {
+  float res = 0;
+  map<int, Partida *> partidasIniciadas = this->partidasIniciadas;
+
+  map<int, Partida *>::iterator it;
+  for (it = partidasIniciadas.begin(); it != partidasIniciadas.end(); it++) {
+    Partida *partida = (it->second);
+    Videojuego *currentVideojuego = partida->getVideojuego();
+
+    if (currentVideojuego == videojuego) {
+      res += partida->getDuracionTotal();
+    }
+  }
+
+  return res;
 }
 
 Jugador::~Jugador(){};
