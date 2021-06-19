@@ -183,28 +183,6 @@ void UsuarioController::confirmarSuscripcion(bool confirmar) {
                                 this->metodoPago);
 }
 
-// métodos de ISeleccionarEstadisticas
-std::set<DataEstadistica *> UsuarioController::listarEstadisticas() {
-  set<DataEstadistica *> res;
-  return res;
-}
-void UsuarioController::seleccionarEstadisticas(
-    std::set<std::string> nombresEstadisticas) {}
-
-// métodos de IAltaUsuario
-void UsuarioController::ingresarDatosJugador(DataJugador *dataJugador) {
-
-  UsuarioHandler *uh = UsuarioHandler::getInstance();
-  bool existeNick = uh->existeJugadorConNickname(dataJugador->getNickname());
-
-  if (existeNick) {
-    throw std::invalid_argument("Error: Ya existe un jugador con ese nickname. "
-                                "Pruebe con uno distinto.");
-  } else {
-    this->dataJugador = dataJugador;
-  }
-}
-
 // métodos de IConsultarEstadisticas
 set<DataVideojuego *>
 UsuarioController::obtenerVideojuegosPublicadosPorDesarrollador() {

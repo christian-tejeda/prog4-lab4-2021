@@ -6,6 +6,7 @@
 #include <string>
 #include <utility>
 
+#include "../../headers/datatypes/DataVideojuego.h"
 #include "../datatypes/DataJugador.h"
 #include "../entities/ContratoSuscripcion.h"
 #include "../entities/PartidaIndividual.h"

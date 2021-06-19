@@ -1,6 +1,12 @@
 #ifndef USUARIO_CONTROLLER_H
 #define USUARIO_CONTROLLER_H
 
+#include "../../headers/datatypes/DataSuscripcionJugador.h"
+#include "../../headers/entities/Desarrollador.h"
+#include "../../headers/handlers/UsuarioHandler.h"
+#include "../../headers/handlers/VideojuegoHandler.h"
+#include "../../headers/utils/Fecha.h"
+
 #include "../entities/Usuario.h"
 #include "../entities/Videojuego.h"
 #include "../interfaces/IAltaUsuario.h"
@@ -13,40 +19,37 @@ class UsuarioController : public ISeleccionarEstadisticas,
                           public IConsultarEstadisticas,
                           public ISuscribirseVideojuego,
                           public IIniciarSesion,
-                          public IAltaUsuario { // singleton
+                          public IAltaUsuario {
 private:
   static UsuarioController *instancia;
 
   Usuario *sesion;
-  DataDesarrollador
-      *dataDesarrollador;   // se borra la instacnia al terminar el CU
-  DataJugador *dataJugador; // se borra la instacnia al terminar el CU
-  Videojuego *videojuego;   // se borra la referencia
+  DataDesarrollador *dataDesarrollador;
+  DataJugador *dataJugador;
+  Videojuego *videojuego;
   TipoPeriodoValidez validezSuscripcion;
   TipoMetodoPago metodoPago;
   UsuarioController();
   ~UsuarioController();
 
 public:
-  // op de singleton
   static UsuarioController *getInstance();
 
-  // Getters
   Usuario *getSesion();
   DataDesarrollador *getDataDesarrollador();
   DataJugador *getDataJugador();
   Videojuego *getVideojuego();
   TipoMetodoPago getMetodoPago();
 
-  // ops de ISeleccionarEstadisticas
+  /// ISeleccionarEstadisticas
   std::set<DataEstadistica *> listarEstadisticas();
   void seleccionarEstadisticas(std::set<std::string> nombresEstadisticas);
 
-  // ops de IConsultarEstadisticas
+  /// IConsultarEstadisticas
   set<DataVideojuego *> obtenerVideojuegosPublicadosPorDesarrollador();
   set<DataEstadistica *> calcularEstadisticas(string nomVideojuego);
 
-  // ops de ISuscribirseVideojuego
+  /// ISuscribirseVideojuego
   std::set<DataSuscripcionJugador *> obtenerSuscripciones();
   void seleccionarVideojuego(string nombreVideojuego);
   void cancelarSuscripcion();
@@ -54,11 +57,11 @@ public:
                             TipoMetodoPago metodoPago);
   void confirmarSuscripcion(bool confirmar);
 
-  // ops de IIniciarSesion
+  /// IIniciarSesion
   bool iniciarSesion(string mail, string password);
   void confirmarInicioSesion(bool confirmar, string mail, bool &jg, bool &dev);
 
-  // ops de IAltaUsuario
+  /// IAltaUsuario
   void ingresarDatosJugador(DataJugador *dataJugador);
   void ingresarDatosDesarrollador(DataDesarrollador *dataDesarrollador);
   void confirmarAltaUsuario(bool confirmar);
