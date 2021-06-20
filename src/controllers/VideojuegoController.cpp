@@ -197,7 +197,7 @@ DataVideojuego *VideojuegoController::obtenerDataVideojuego(string nombre)
     UsuarioController * uc;
     uc=uc->getInstance();
     Desarrollador* des= dynamic_cast<Desarrollador*>(uc->getSesion());
-    res->setNombreEmpresa(des->getNombreEmpresa()); 
+    res->setNombreEmpresa(este->getNombreEmpresa()); 
     if (des!=nullptr){
         UsuarioHandler * uH;
         uH=uH->getInstance();

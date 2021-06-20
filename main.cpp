@@ -542,10 +542,16 @@ void menuVerInfoVideojuego(FactoryController *fact)
     float tri=suss[trimestral];
     float anu=suss[anual];
     float vit=suss[vitalicia];
+    float puntaje=-1;
+    int cantidadvotos=datav->getRating().second;
     
-    float puntaje=0;
-    if(datav->getRating().second!=0)
-        float puntaje=datav->getRating().first/datav->getRating().second;
+    //std::cout << "      -votos      :"<<cantidadvotos<< "\n";
+    if(cantidadvotos!=0){
+        float total=datav->getRating().first;
+        puntaje=total/cantidadvotos;
+        
+        //std::cout << "      -total      :"<<datav->getRating().first<< "\n";
+    }
     set<std::string> categorias=datav->getNombreCategorias();
    
     float horas=datav->getHorasTotales();//hay que pedirle a partida controller.. es un poco largo para desarrollador.

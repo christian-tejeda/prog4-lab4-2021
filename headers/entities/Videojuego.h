@@ -41,6 +41,7 @@ public:
   map<string, Categoria *> getCategorias();
   set<string> getNombreCategorias();
   map<TipoPeriodoValidez, float> getPeriodoValidez();
+  std::string getNombreEmpresa();
 
   void setNombre(std::string nombre);
   void setDescripcion(std::string desc);

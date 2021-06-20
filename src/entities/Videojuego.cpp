@@ -1,4 +1,5 @@
 
+#include <iostream>
 #include <map>
 #include <set>
 #include <string>
@@ -88,6 +89,10 @@ DataVideojuego *Videojuego::getData() {
   DataVideojuego *res;
   
   return data;
+}
+
+std::string Videojuego::getNombreEmpresa(){
+  return this->nombreEmpresa;
 }
 
 Videojuego::~Videojuego() {}
