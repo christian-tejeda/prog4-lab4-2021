@@ -31,6 +31,10 @@ Videojuego *VideojuegoController::getVideojuego() { return nullptr; }
 void VideojuegoController::ingresarDatosVideojuego(DataVideojuego *DataV) {
    DataVideojuego *nuevoDataVdj = DataV;
    this->dataVideojuego = nuevoDataVdj;
+   UsuarioController * uc;
+   uc=uc->getInstance();
+   Desarrollador *des = dynamic_cast<Desarrollador *>(uc->getSesion());
+   this->dataVideojuego->setNombreEmpresa(des->getNombreEmpresa());
 }
 
 set<DataCategoria *> VideojuegoController::obtenerCategorias()
@@ -94,7 +98,7 @@ void VideojuegoController::confirmarPublicacionVideojuego(bool confirmar) {
             this->dataVideojuego->getNombreEmpresa());
         vjh = vjh->getInstance();
         vjh->agregarVideojuego(vdj);
-        std::cout << "Videojuego publicado exitosamente.";
+        std::cout << "Videojuego publicado exitosamente.\n";
     }
 }
 
@@ -116,7 +120,7 @@ set<DataVideojuego *> VideojuegoController::obtenerVideojuegosPublicadosPorDesar
     set<DataVideojuego *> res;
     set<Videojuego *>::iterator it;
     it = vjs.begin();
-    while (vjs.end() != it)
+    for (it = vjs.begin(); it != vjs.end(); it++)
     {
         Videojuego *vj = *it;
         bool tiene = uh->tienePartidaSinFinalizar(vj);
@@ -180,21 +184,21 @@ set<DataVideojuego *> VideojuegoController::obtenerVideojuegos()
 }
 DataVideojuego *VideojuegoController::obtenerDataVideojuego(string nombre)
 {
+    this->seleccionarVideojuego(nombre);
     Videojuego* este=this->videojuego;//string nombre, string descripcion, map<TipoPeriodoValidez, float> suscripciones, set<string> nombreCategorias, pair<float, int> rating);
-    DataVideojuego res=DataVideojuego(este->getNombre(),este->getDescripcion(),este->getSuscripciones(),este->getNombreCategorias(),este->getRating());
+    DataVideojuego *res= new DataVideojuego(este->getNombre(),este->getDescripcion(),este->getSuscripciones(),este->getNombreCategorias(),este->getRating());
     UsuarioController * uc;
     uc=uc->getInstance();
     Desarrollador* des= dynamic_cast<Desarrollador*>(uc->getSesion());
-    //res.setNombreEmpresa(des->getNombreEmpresa()); ESTO IMPORTANTE VER COMO SE HACE CUANDO SE PUBLICA...
+    res->setNombreEmpresa(des->getNombreEmpresa()); 
     if (des!=nullptr){
         UsuarioHandler * uH;
         uH=uH->getInstance();
-        res.setHorasTotales(uH->obtenerHoras(este));
+        res->setHorasTotales(uH->obtenerHoras(este));
     }else{
-        res.setHorasTotales(-1);
+        res->setHorasTotales(-1);
     }
-    DataVideojuego * punter= &res;
-    return punter;
+    return res;
 }
 void VideojuegoController::agregarCategoria(std::string nombre,std::string descripcion, TipoCategoria tipo) {
     this->dataCategoria=new DataCategoria(nombre,descripcion,tipo);
@@ -211,8 +215,8 @@ void VideojuegoController::confirmarAgregarCategoria(bool confirmar) {
     //delete this->dataCategoria;
 }
 VideojuegoController::~VideojuegoController() {
-    if (this->dataVideojuego!=nullptr) delete this->dataVideojuego;
-    if (this->dataCategoria!=nullptr) delete this->dataCategoria;
+    //if (this->dataVideojuego!=nullptr) delete this->dataVideojuego;
+    //if (this->dataCategoria!=nullptr) delete this->dataCategoria;
     this->videojuego=nullptr;
 }
 

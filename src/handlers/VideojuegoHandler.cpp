@@ -30,7 +30,9 @@ void VideojuegoHandler::agregarVideojuego(Videojuego *vj)
     this->vjs.insert(std::pair<std::string, Videojuego *>(vj->getNombre(), vj));
 }
 
-map<string, Videojuego *> VideojuegoHandler::obtenerVideojuegos() { return this->vjs; }
+map<string, Videojuego *> VideojuegoHandler::obtenerVideojuegos() { 
+    return this->vjs; 
+}
 
 Videojuego *VideojuegoHandler::obtenerVideojuegoPorId(string nombre) {
     map<string,Videojuego*>::iterator it;

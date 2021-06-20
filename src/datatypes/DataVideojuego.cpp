@@ -62,4 +62,5 @@ void DataVideojuego::agregarCategoria(string categoria) {
     this->categorias.insert(categoria);
 }
 
-DataVideojuego::~DataVideojuego() {}
+DataVideojuego::~DataVideojuego() {
+}

@@ -7,6 +7,7 @@
 #include "headers/datatypes/DataPartidaMultijugador.h"
 #include "headers/datatypes/DataVideojuego.h"
 //#include "headers/interfaces/IEliminarVideojuego.h"
+#include "headers/entities/Videojuego.h"
 #include "headers/interfaces/IAgregarCategoria.h"
 #include "headers/interfaces/IAsignarPuntaje.h"
 #include "headers/utils/Fecha.h"
@@ -14,6 +15,7 @@
 #include "headers/handlers/CategoriaHandler.h"
 #include "headers/handlers/VideojuegoHandler.h"
 #include "headers/entities/Desarrollador.h"
+#include "headers/utils/enums.h"
 
 #include <bits/types/FILE.h>
 #include <iostream>
@@ -223,9 +225,9 @@ void menuCargarDatosPrueba(UsuarioHandler *uh, VideojuegoHandler *vh, CategoriaH
     DataUsuario *j4 = new DataJugador("camila@mail.com", "123", "camila", "Descripcion de camila");
 
     DataUsuario *j5 = new DataJugador("1", "1", "1", "Descripcion de 1");
-    DataUsuario *d5 = new DataDesarrollador("2", "2", "2");
-
-
+    DataUsuario *d5 = new DataDesarrollador("2", "2", "ROCKSTARS");
+    
+    
     uh->agregarUsuario(d1);
     uh->agregarUsuario(d2);
     uh->agregarUsuario(d3);
@@ -263,6 +265,7 @@ void menuCargarDatosPrueba(UsuarioHandler *uh, VideojuegoHandler *vh, CategoriaH
     delete j4;
     delete j5;
     delete d5;
+
 
 
     //Carga de categorias
@@ -530,22 +533,22 @@ void menuVerInfoVideojuego(FactoryController *fact)
     std::cin >> nombre;
     std::cout << "\n";
     DataVideojuego * datav = iviv->obtenerDataVideojuego(nombre);//controlar aca la cuestion si es Desaroollador o no 
+    std::string empresa=datav->getNombreEmpresa();    
+    map<TipoPeriodoValidez,float> suss=datav->getSuscripciones();
+    std::cout<< suss.size();
+    float mens=suss.find(mensual)->second;
+    float tri=suss[trimestral];
+    float anu=suss[anual];
+    float vit=suss[vitalicia];
     
-    float mens=datav->getSuscripciones().find(mensual)->second;
-    float tri=datav->getSuscripciones().find(trimestral)->second;
-    float anu=datav->getSuscripciones().find(anual)->second;
-    float vit=datav->getSuscripciones().find(vitalicia)->second;
-    std::string empresa=datav->getNombreEmpresa();
     float puntaje=0;
     if(datav->getRating().second!=0)
         float puntaje=datav->getRating().first/datav->getRating().second;
     set<std::string> nombrescat=datav->getNombreCategorias();
-
-    
-    //float horas=datav->getCantidadHoras();//hay que pedirle a partida controller.. es un poco largo para desarrollador.
+   
+    float horas=datav->getHorasTotales();//hay que pedirle a partida controller.. es un poco largo para desarrollador.
     set<std::string>::iterator nuevo;
     std::cout << "+---------------- Datos Videojuego-----------------------+\n";
-    std::cout << "\n";
     std::cout << "\n";
     std::cout << "     Nombre        :"<<datav->getNombre() <<"\n";
     std::cout << "     Descripcion   :"<<datav->getDescripcion() << "\n";
@@ -556,18 +559,15 @@ void menuVerInfoVideojuego(FactoryController *fact)
     std::cout << "      -vitalicia    :"<<vit<< "\n";
     std::cout << "     Categorias:\n";
     for (nuevo = nombrescat.begin(); nuevo != nombrescat.end(); nuevo++){
-        std::string print= *nuevo;
-        std::cout << "      -"<<print<< "\n";
+        std::cout << "      -"<<(*nuevo)<< "\n";
     }
-    std::cout << "     NombreEmpresa  :\n"<<empresa<< "\n";
-    std::cout << "     PuntajePromedio:\n"<<puntaje<< "\n";
+    std::cout << "     NombreEmpresa  :"<<empresa<< "\n";
+    std::cout << "     PuntajePromedio:"<<puntaje<< "\n";
 
     //solo si es desarrollador:
     if (datav->getHorasTotales()>=0){
-           std::cout << "     HorasTotales   :\n"<<datav->getHorasTotales()<< "\n";
-    }std::cout << "\n";
-    std::cout << "\n";
- 
+           std::cout << "     HorasTotales   :"<< horas << "\n";
+    } 
     std::cout << "+---------------- Datos Videojuego-----------------------+\n";
     
     //float horas=datav->getCantidadHoras();
@@ -773,6 +773,7 @@ void menuPublicarVideojuego(FactoryController *fact) {
     }
     confirmar = promptConfirm == 'y' ? true : false;
     ipv->confirmarPublicacionVideojuego(confirmar);
+    ipv->~IPublicarVideojuego();
 }
 
 void menuEliminarVideojuego(FactoryController *fact)
