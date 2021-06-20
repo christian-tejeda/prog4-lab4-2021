@@ -51,13 +51,12 @@ map<int, Partida *> Jugador::obtenerPartidasSinFinalizar() {
   return res;
 }
 
-void Jugador::finalizarPartida(int idPartida) {
+void Jugador::finalizarPartida(int idPartida,Fecha * fecha) {
     //map<int,Partida*> part= this->partidasIniciadas;
     //PartidaIndividual* indi = dynamic_cast<PartidaIndividual*>(this->partidasIniciadas.find(idPartida)->second);
     //PartidaMultijugador* multi = dynamic_cast<PartidaMultijugador*>(this->partidasIniciadas.find(idPartida)->second);
     //if(indi!=nullptr){
     //  indi->terminar;
-    Fecha* fecha;
     Partida * terminar=partidasIniciadas.find(idPartida)->second;
     terminar->finalizar(fecha);
 }

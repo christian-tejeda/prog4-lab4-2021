@@ -43,6 +43,18 @@ set<DataCategoria *> VideojuegoController::obtenerCategorias()
     }
     return res;
 }
+
+//void VideojuegoController::agregarGeneroAVideojuego(string genero) {
+
+//}
+
+// set<DataCategoria *> VideojuegoController::obtenerCategorias()
+// {
+//     set<DataCategoria *> res;
+//     res.insert(nullptr);
+//     return res;
+// }
+
 void VideojuegoController::agregarPlataformaAVideojuego(string plataforma) {}
 void VideojuegoController::agregarGeneroAVideojuego(string genero) {}
 void VideojuegoController::agregarOtraCategoriaAVideojuego(string cat) {}

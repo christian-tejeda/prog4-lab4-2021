@@ -6,6 +6,7 @@
 #include <utility>
 
 #include "../../headers/controllers/PartidaController.h"
+#include "../../headers/controllers/UsuarioController.h"
 #include "../../headers/utils/Fecha.h"
 #include "../../headers/controllers/UsuarioController.h"
 #include "../../headers/handlers/VideojuegoHandler.h"
@@ -59,12 +60,12 @@ set<DataPartida *> PartidaController::obtenerPartidasSinFinalizarDeJugador()
     return res;
 }
 
-void PartidaController::finalizarPartida(int idPartida)
+void PartidaController::finalizarPartida(int idPartida,Fecha * fecha)
 {
     //Fecha fecha=getFecha();
     Jugador * jugador = dynamic_cast<Jugador*>(this->jg);
     if (jugador!=nullptr){
-        jugador->finalizarPartida(idPartida);
+        jugador->finalizarPartida(idPartida,fecha);
     }
 }
 void PartidaController::seleccionarPartidaAContinuar(int id)

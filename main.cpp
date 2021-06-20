@@ -456,7 +456,7 @@ void menuAbandonarPartidaMulti(FactoryController *fact)
 {
 }
 
-void menuFinalizarPartida(FactoryController *fact)
+void menuFinalizarPartida(FactoryController *fact,Fecha * fecha)
 {
     IFinalizarPartida *fp= fact->getIFinalizarPartida();
     set<DataPartida*> part=fp->obtenerPartidasSinFinalizarDeJugador();
@@ -487,7 +487,7 @@ void menuFinalizarPartida(FactoryController *fact)
         }
         int seleccion;
         std::cin >>seleccion;
-        fp->finalizarPartida(seleccion);
+        fp->finalizarPartida(seleccion,fecha);
         std::cout << "La partida ha sido finalizada \n";
     }else { std::cout << "No se encontraron partidas sin finalizar\n";}
 }
@@ -822,7 +822,7 @@ int main(int argc, char const *argv[])
             case 5: //Finalizar partida
                 try
                 {
-                    menuFinalizarPartida(fact);
+                    menuFinalizarPartida(fact,fechaSist);
                 }
                 catch (const std::invalid_argument &ex)
                 {
