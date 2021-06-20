@@ -162,16 +162,12 @@ void VideojuegoController::confirmarEliminarVideojuego(bool confirmar)
         Jugador *jugador = dynamic_cast<Jugador *>(it->second);
         if (jugador!=nullptr) {
             jugador->eliminarContratosDeVideojuego(video);
-            std::cout << "Paso EliminarContratos.\n";
             jugador->eliminarPartidasDeVideojuego(video);
-            
-            std::cout << "Paso EliminarPartidas.\n";
         }
     }
     VideojuegoHandler *vH;
     vH = vH->getInstance();
     vH->eliminarVideojuego(video);
-    std::cout << "Paso EliminarJuego.\n";
     video->~Videojuego();
 }
 void VideojuegoController::puntuarVideojuego(int puntaje) {

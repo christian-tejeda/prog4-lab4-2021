@@ -520,8 +520,6 @@ void menuVerInfoVideojuego(FactoryController *fact)
 
     std::string nombre = "";
     int conf;
-    std::cout << "LISTA DE VIDEOJUEGOS SISTEMA\n";
-    
     //VideojuegoController * vc;
     set<DataVideojuego *> data= iviv->obtenerVideojuegos();
     set<DataVideojuego *>::iterator it;
@@ -585,7 +583,7 @@ void menuVerInfoVideojuego(FactoryController *fact)
 
     
 
-void menuSalirUsuario(FactoryController *fact)
+void menuSalirUsuariomake(FactoryController *fact)
 { //Mismo para jugador y dev
 }
 
