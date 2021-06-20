@@ -6,6 +6,7 @@
 #include <utility>
 
 #include "../../headers/controllers/PartidaController.h"
+#include "../../headers/controllers/UsuarioController.h"
 #include "../../headers/utils/Fecha.h"
 #include "../../headers/controllers/UsuarioController.h"
 #include "../../headers/handlers/VideojuegoHandler.h"
@@ -41,12 +42,31 @@ Jugador *PartidaController::getParticipantePorNickname(string nick)
 //ops de interface
 set<DataPartida *> PartidaController::obtenerPartidasSinFinalizarDeJugador()
 {
-    set<DataPartida *> res;
-    res.insert(nullptr);
+    UsuarioController* UC;
+    UC=UC->getInstance();
+    Jugador * jugador = dynamic_cast<Jugador*>(UC->getSesion());
+    this->jg=jugador;
+    set<DataPartida*> res;
+    if (jugador!=nullptr ){
+        map<int,Partida *> oracle = jugador->obtenerPartidasSinFinalizar();
+        map<int,Partida *>::iterator it;
+        for(it = oracle.begin();it !=oracle.end(); it++){
+            DataPartida * actual = it->second->getData();
+            //if (actual->getFechaFin()!=nullptr){ no es necesario solo devuelve finalizadas
+            res.insert(actual);
+            //}
+        }
+    }
     return res;
 }
-void PartidaController::finalizarPartida(int idPartida)
+
+void PartidaController::finalizarPartida(int idPartida,Fecha * fecha)
 {
+    //Fecha fecha=getFecha();
+    Jugador * jugador = dynamic_cast<Jugador*>(this->jg);
+    if (jugador!=nullptr){
+        jugador->finalizarPartida(idPartida,fecha);
+    }
 }
 void PartidaController::seleccionarPartidaAContinuar(int id)
 {

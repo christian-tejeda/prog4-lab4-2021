@@ -17,6 +17,8 @@ private:
 public:
     PartidaIndividual();
 
+    bool getEsContinuacion();
+
     //data partida ind no cumple requerimientos PartidaIndividual(DataPartidaIndividual dataPartidaIndividual);
 
     PartidaIndividual(int id, Fecha fechaInicio, Fecha *fechaFin, float duracionTotal, Videojuego *vj, Jugador *host, PartidaIndividual *cont);

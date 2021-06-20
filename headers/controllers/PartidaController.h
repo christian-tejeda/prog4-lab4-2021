@@ -45,7 +45,7 @@ public:
 
     //ops de IFinalizarPartida
     set<DataPartida *> obtenerPartidasSinFinalizarDeJugador();
-    void finalizarPartida(int idPartida);
+    void finalizarPartida(int idPartida,Fecha * fecha);
 
     ~PartidaController();
 };

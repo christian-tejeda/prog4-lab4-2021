@@ -2,6 +2,9 @@
 //#include "headers/entities/Usuario.h"
 #include "headers/controllers/VideojuegoController.h"
 #include "headers/datatypes/DataCategoria.h"
+#include "headers/datatypes/DataJugador.h"
+#include "headers/datatypes/DataPartida.h"
+#include "headers/datatypes/DataPartidaMultijugador.h"
 #include "headers/datatypes/DataVideojuego.h"
 //#include "headers/interfaces/IEliminarVideojuego.h"
 #include "headers/interfaces/IAgregarCategoria.h"
@@ -12,6 +15,7 @@
 #include "headers/handlers/VideojuegoHandler.h"
 #include "headers/entities/Desarrollador.h"
 
+#include <bits/types/FILE.h>
 #include <iostream>
 #include <stdexcept>
 
@@ -471,8 +475,40 @@ void menuAbandonarPartidaMulti(FactoryController *fact)
 {
 }
 
-void menuFinalizarPartida(FactoryController *fact)
+void menuFinalizarPartida(FactoryController *fact,Fecha * fecha)
 {
+    IFinalizarPartida *fp= fact->getIFinalizarPartida();
+    set<DataPartida*> part=fp->obtenerPartidasSinFinalizarDeJugador();
+    if (part.size()!=0){
+        std::cout << "Seleccione la Partida a Finalizar:  \n";
+        set<DataPartida*>::iterator it;
+        for (it = part.begin();it != part.end(); it++){
+            DataPartida * p=*it;
+            std::cout << "Id: " << p->getId() << " \nFecha Comienzo (DIA/MES/ANO) : " << p->getFechaInicio().getDia() <<"/"<< p->getFechaInicio().getMes() <<"/"<< p->getFechaInicio().getAnio() <<"   " <<" \n Nombre Videojuego :" << p->getVideojuego().getNombre();
+            DataPartidaIndividual* data = dynamic_cast<DataPartidaIndividual*>(p);
+            DataPartidaMultijugador* nacional = dynamic_cast<DataPartidaMultijugador*>(p);
+            if (data!=nullptr){
+                std::string resp = data->getContinuacion() ? "si" : "no";
+                std::cout << "Es continuacion?: " << resp << "\n";
+            }
+            else if (nacional!=nullptr){
+                std::string resp = nacional->getTramistida() ? "si" : "no";
+                std::cout << "Es trasmitida en Vivo?: " << resp << "\n";
+                set<DataJugador*> participanetes=nacional->getParticipantes();
+                set<DataJugador*>::iterator it;
+                std::cout << "Jugadores Participantes" << resp << "\n";
+                for (it = participanetes.begin();it != participanetes.end(); it++){
+                    DataJugador * jugador=*it;
+                    std::cout << "\t" << jugador->getNickname() << "\n";
+                }
+            }
+            std::cout << " \n \n";
+        }
+        int seleccion;
+        std::cin >>seleccion;
+        fp->finalizarPartida(seleccion,fecha);
+        std::cout << "La partida ha sido finalizada \n";
+    }else { std::cout << "No se encontraron partidas sin finalizar\n";}
 }
 
 void menuVerInfoVideojuego(FactoryController *fact)
@@ -855,7 +891,7 @@ int main(int argc, char const *argv[])
             case 5: //Finalizar partida
                 try
                 {
-                    /* code */
+                    menuFinalizarPartida(fact,fechaSist);
                 }
                 catch (const std::invalid_argument &ex)
                 {
