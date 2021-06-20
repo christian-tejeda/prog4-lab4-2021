@@ -170,7 +170,7 @@ void menuIniciarSesion(FactoryController *fact, bool &jg, bool &dev)
 
 void menuModificarFechaSistema(int &dia, int &mes, int &anio,int &hora,int &minuto) {
         std::cout << "Todos los valores deben ser enteros.";
-        std::cout << "\n";
+        /*std::cout << "\n";
         std::cout << "Ingrese el anio: ";
         std::cin >> anio;
         std::cout << "\n";
@@ -185,8 +185,27 @@ void menuModificarFechaSistema(int &dia, int &mes, int &anio,int &hora,int &minu
         std::cout << "\n";
         std::cout << "Ingrese el minuto: ";
         std::cin >> minuto;
-        std::cout << "\n";
-
+        std::cout << "\n";*/
+        std::cout << "Ingrese dia: ";
+        std::cin >> dia;
+        if (dia > 31 || dia < 1)
+            throw std::invalid_argument("Error: El dia ingresado no es valido.");
+        std::cout << "Ingrese mes: ";
+        std::cin >> mes;
+        if (mes > 12 || mes < 1)
+            throw std::invalid_argument("Error: El mes ingresado no es valido.");
+        std::cout << "Ingrese año: ";
+        std::cin >> anio;
+        if (anio < 0)
+            throw std::invalid_argument("Error: El año ingresado no es valido.");
+        std::cout << "Ingrese hora: ";
+        std::cin >> hora;
+        if (hora > 23 || hora < 0)
+            throw std::invalid_argument("Error: La hora ingresada no es valida.");
+        std::cout << "Ingrese minutos: ";
+        std::cin >> minuto;
+        if (minuto > 59 || minuto < 0)
+            throw std::invalid_argument("Error: La hora ingresada no es valida.");
 }
 
 void menuCargarDatosPrueba(UsuarioHandler *uh, VideojuegoHandler *vh, CategoriaHandler *ch)
@@ -310,7 +329,7 @@ void menuAsignarPuntaje(FactoryController *fact)
     ap->~IAsignarPuntaje();
 }
 
-void menuIniciarPartida(FactoryController *fact)
+void menuIniciarPartida(FactoryController *fact,Fecha fechainicio)
 {
     IIniciarPartida *ip = fact->getIIniciarPartida();
     set<DataVideojuego*> videojuegosDeJgConSus = ip->obtenerVideojuegosDeJugadorConSuscripcionActiva();
@@ -387,7 +406,7 @@ void menuIniciarPartida(FactoryController *fact)
         }
         bool confirmamo = false;
         if(confirmar == 'y')confirmamo = true;
-        ip->confirmarIniciarPartida(confirmamo);
+        ip->confirmarIniciarPartida(confirmamo,&fechainicio);
     }
     else{//partida multijugador
         char transmitir = 'r';
@@ -441,7 +460,7 @@ void menuIniciarPartida(FactoryController *fact)
         }
         bool confirmamo = false;
         if(confirmar == 'y')confirmamo = true;
-        ip->confirmarIniciarPartida(confirmamo);
+        ip->confirmarIniciarPartida(confirmamo,&fechainicio);
 
     }
 
@@ -684,8 +703,58 @@ void menuEliminarVideojuego(FactoryController *fact)
     }
 }
 
-void menuSeleccionarEstadisticas()
+void menuSeleccionarEstadisticas(FactoryController * fact)
 {
+    std::cout << "Bienvenido al menu de seleccionar estadisticas :D \n";
+    ISeleccionarEstadisticas * se = fact->getISeleccionarEstadisticas();
+    /*set<DataEstadistica*> estadisticas = se->listarEstadisticas();
+    set<DataEstadistica*>::iterator it;
+    for(it = estadisticas.begin();it != estadisticas.end();it++){
+        std::cout << (*it)->get
+    }*/
+    bool quiereMas = true;
+    int flag = 30;
+    set<int> quiere;
+    while(quiereMas){
+        flag = 30;
+        std::cout << "Digite la categoria que desea agregar: \n";
+        std::cout << "1) Agregar total horas jugadas \n";
+        std::cout << "2) Agregar Promedio rating \n";
+        std::cout << "3) Agregar Cantidad Suscritos \n";
+        std::cin >> flag;
+        std::string aver = "q";
+
+        switch(flag){
+            case 1:
+                std::cout << "Total horas jugadas agregado exitsosamente \n";
+                quiere.insert(1);
+                break;
+            case 2:
+                std::cout << "Promedio rating agregado exitosamente \n";
+                quiere.insert(2);
+                break;
+            case 3:
+                std::cout << "Cantidad suscritos agregado exitosamente \n";
+                quiere.insert(3);
+                break;
+        }
+        bool quiereMasMas = true;
+        while(quiereMasMas){
+        std::cout << "Desea agregar mas estadisticas? (y/n) \n";
+        std::cin >> aver;
+        if(aver == "n"){
+            quiereMasMas = false;
+            quiereMas = false;
+        }
+        else if(aver == "y"){
+            quiereMasMas = false;
+        }
+        }
+
+    }
+    se->seleccionarEstadisticas(quiere);
+
+
 }
 
 void menuConsultarEstadisticas()
@@ -802,7 +871,7 @@ int main(int argc, char const *argv[])
             case 3: //Iniciar partida
                 try
                 {
-                    menuIniciarPartida(fact);
+                    menuIniciarPartida(fact,*fechaSist);
                 }
                 catch (const std::invalid_argument &ex)
                 {
@@ -911,7 +980,7 @@ int main(int argc, char const *argv[])
             case 4: //Seleccionar estadísticas
                 try
                 {
-                    /* code */
+                    menuSeleccionarEstadisticas(fact);
                 }
                 catch (const std::invalid_argument &ex)
                 {
@@ -946,7 +1015,7 @@ int main(int argc, char const *argv[])
                     int anio = 0;
                     int hora = 0;
                     int minuto = 0;
-                    void menuModificarFechaSistema(int dia, int mes, int anio,int hora,int minuto);
+                    menuModificarFechaSistema(dia,mes, anio,hora,minuto);
                     delete fechaSist;
                     fechaSist = new Fecha(dia,mes,anio,hora,minuto);
 

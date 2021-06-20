@@ -19,7 +19,7 @@ public:
     virtual set<DataJugador *> obtenerJugadoresConSuscripcionActiva() = 0;
     virtual void seleccionarVideojuego(string nombreVideojuego) = 0;
     virtual void seleccionarJugador(string nickname) = 0;
-    virtual void confirmarIniciarPartida(bool confirmar) = 0;
+    virtual void confirmarIniciarPartida(bool confirmar,Fecha * fechainicio) = 0;
 
     virtual ~IIniciarPartida(){};
 };

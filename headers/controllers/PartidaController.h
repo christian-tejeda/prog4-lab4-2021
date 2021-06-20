@@ -37,7 +37,7 @@ public:
     set<DataJugador *> obtenerJugadoresConSuscripcionActiva();
     void seleccionarVideojuego(string nombreVideojuego);
     void seleccionarJugador(string nickname);
-    void confirmarIniciarPartida(bool confirmar);
+    void confirmarIniciarPartida(bool confirmar,Fecha * fechainicio);
 
     //ops de IAbandonarPartida
     set<DataPartidaMultijugador *> obtenerPartidasMultijugadorActivasDeJugador();

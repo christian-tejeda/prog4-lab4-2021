@@ -139,20 +139,19 @@ void PartidaController::seleccionarJugador(string nickname)
         this->participantes.insert({nickname,uH->obtenerJugadorPorNickname(nickname)});
     }
 }
-void PartidaController::confirmarIniciarPartida(bool confirmar)
+void PartidaController::confirmarIniciarPartida(bool confirmar,Fecha * fechainicio)
 {
     if(confirmar){
-        Fecha  fechaDeIinicio = Fecha(1,1,1,1,1);
         Fecha * fechaFin = nullptr;
         if(this->partidaAContinuar != nullptr){//va a continuar una partida indi
             dynamic_cast<Jugador*>(this->jg)->crearPartidaIndividual(this->partidaAContinuar->getId(),this->partidaAContinuar->getFechaInicio(),this->vj,dynamic_cast<Jugador*>(this->jg),this->partidaAContinuar);
         }
         else if(this->partidaAContinuar == nullptr && participantes.size() == 0) {
-            dynamic_cast<Jugador*>(this->jg)->crearPartidaIndividual(this->partidaAContinuar->getId(),fechaDeIinicio,this->vj,dynamic_cast<Jugador*>(this->jg),nullptr);
+            dynamic_cast<Jugador*>(this->jg)->crearPartidaIndividual(this->partidaAContinuar->getId(),*fechainicio,this->vj,dynamic_cast<Jugador*>(this->jg),nullptr);
             }
         else{
             int id =this->generarIdPartida();
-            dynamic_cast<Jugador*>(this->jg)->crearPartidaMultijugador(id,fechaDeIinicio,nullptr,this->vj,this->transmitida,dynamic_cast<Jugador*>(this->jg),this->participantes);
+            dynamic_cast<Jugador*>(this->jg)->crearPartidaMultijugador(id,*fechainicio,nullptr,this->vj,this->transmitida,dynamic_cast<Jugador*>(this->jg),this->participantes);
         }
     }
     this->jg = nullptr;
