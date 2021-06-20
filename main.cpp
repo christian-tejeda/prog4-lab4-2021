@@ -166,7 +166,7 @@ void menuIniciarSesion(FactoryController *fact, bool &jg, bool &dev)
 
 void menuModificarFechaSistema(int &dia, int &mes, int &anio,int &hora,int &minuto) {
         std::cout << "Todos los valores deben ser enteros.";
-        std::cout << "\n";
+        /*std::cout << "\n";
         std::cout << "Ingrese el anio: ";
         std::cin >> anio;
         std::cout << "\n";
@@ -181,8 +181,27 @@ void menuModificarFechaSistema(int &dia, int &mes, int &anio,int &hora,int &minu
         std::cout << "\n";
         std::cout << "Ingrese el minuto: ";
         std::cin >> minuto;
-        std::cout << "\n";
-
+        std::cout << "\n";*/
+        std::cout << "Ingrese dia: ";
+        std::cin >> dia;
+        if (dia > 31 || dia < 1)
+            throw std::invalid_argument("Error: El dia ingresado no es valido.");
+        std::cout << "Ingrese mes: ";
+        std::cin >> mes;
+        if (mes > 12 || mes < 1)
+            throw std::invalid_argument("Error: El mes ingresado no es valido.");
+        std::cout << "Ingrese año: ";
+        std::cin >> anio;
+        if (anio < 0)
+            throw std::invalid_argument("Error: El año ingresado no es valido.");
+        std::cout << "Ingrese hora: ";
+        std::cin >> hora;
+        if (hora > 23 || hora < 0)
+            throw std::invalid_argument("Error: La hora ingresada no es valida.");
+        std::cout << "Ingrese minutos: ";
+        std::cin >> minuto;
+        if (minuto > 59 || minuto < 0)
+            throw std::invalid_argument("Error: La hora ingresada no es valida.");
 }
 
 void menuCargarDatosPrueba(UsuarioHandler *uh, VideojuegoHandler *vh, CategoriaHandler *ch)
