@@ -48,8 +48,8 @@ public:
     //void agregarCategoriaAVideojuego(string cat);
     //void agregarGeneroAVideojuego(string genero);
     //void agregarOtraCategoriaAVideojuego(string cat);
-    void agregarCategoriaAVideojuego(string cat, TipoCategoria tipoCat);
-    DataVideojuego *obtenerDataVideojuegoIngresada();
+    void agregarCategoriaAVideojuego(string cat);
+    void obtenerDataVideojuegoIngresada();
     void confirmarPublicacionVideojuego(bool cancelada);
 
     ~VideojuegoController();

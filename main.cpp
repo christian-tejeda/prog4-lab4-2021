@@ -688,22 +688,89 @@ void menuPublicarVideojuego(FactoryController *fact) {
     
     DataVideojuego *nuevoDataVdj = new DataVideojuego(nombreVdj, descVdj, suscripciones, std::set<string>(), std::pair<float, int>(0, 0));
     ipv->ingresarDatosVideojuego(nuevoDataVdj);
+
     std::set<DataCategoria *> categorias = ipv->obtenerCategorias();
-    std::cout << ""
-    ipv->agregarCategoriaAVideojuego();
+    set<DataCategoria*>::iterator it;
+    std::cout << "----------------- Géneros --------------------------\n";
+    std::cout << "Nombre \t Descripcion \n";
+    std::cout << "----------------------------------------------------\n";
+    for (it = categorias.begin(); it != categorias.end(); it++) {
+        if ((*it)->getTipo() == genero) {
+            DataCategoria *catActual = *it;
+            std::cout << catActual->getNombre() << " \t " << catActual->getDescripcion() << "\n";
+        }
+    };
+
+    std::cout << "Ingrese el nombre del genero: ";
+    std::string nombreCat;
+    char promptConfirm = '\0';
+    bool continuaAgregar = true;
+    do {
+        std::cin >> nombreCat;
+        ipv->agregarCategoriaAVideojuego(nombreCat);
+        std::cout << "¿Desea agregar más géneros? (y/n) ";
+        std::cin >> promptConfirm;
+        continuaAgregar = promptConfirm == 'y' ? true : false;
+    } while (continuaAgregar);
+
+    std::cout << "----------------- Plataformas ------------------------\n";
+    std::cout << "Nombre \t Descripcion \n";
+    std::cout << "----------------------------------------------------\n";
+    for (it = categorias.begin(); it != categorias.end(); it++) {
+        if ((*it)->getTipo() == plataforma) {
+            DataCategoria *catActual = *it;
+            std::cout << catActual->getNombre() << " \t " << catActual->getDescripcion() << "\n";
+        }
+    }
+
+    std::cout << "Ingrese el nombre de la plataforma: ";
+    std::string nombreCat;
+    promptConfirm = '\0';
+    continuaAgregar = true;
+    do {
+        std::cin >> nombreCat;
+        ipv->agregarCategoriaAVideojuego(nombreCat);
+        std::cout << "¿Desea agregar más plataformas? (y/n) ";
+        std::cin >> promptConfirm;
+        continuaAgregar = promptConfirm == 'y' ? true : false;
+    } while (continuaAgregar);
+
+    std::cout << "----------------- Otras categorías --------------------\n";
+    std::cout << "Nombre \t Descripcion \n";
+    std::cout << "----------------------------------------------------\n";
+    for (it = categorias.begin(); it != categorias.end(); it++) {
+        if ((*it)->getTipo() == otrasCategorias) {
+            DataCategoria *catActual = *it;
+            std::cout << catActual->getNombre() << " \t " << catActual->getDescripcion() << "\n";
+        }
+    }
+    promptConfirm = '\0';
+    continuaAgregar = true;
+    std::cout << "¿Desea agregar otro tipo de categorías? (y/n) ";
+    std::cin >> promptConfirm;
+    continuaAgregar = promptConfirm == 'y' ? true : false;
+    while (continuaAgregar) {
+        std::cout << "Ingrese nombre de la categoría: ";
+        std::cin >> nombreCat;
+        ipv->agregarCategoriaAVideojuego(nombreCat);
+        std::cout << "¿Desea agregar más categorías? (y/n) ";
+        std::cin >> promptConfirm;
+        continuaAgregar = promptConfirm == 'y' ? true : false;
+    }
+
     ipv->obtenerDataVideojuegoIngresada();
 
     bool confirmar;
-    char promptConfirm = '\0';
-
-    while (promptConfirm != 'y' && promptConfirm != 'n') {
-        std::cout << "¿Confirmar publicacion de videojuego? (y/n): ";
+    promptConfirm = '\0';
+    while (promptConfirm != 'y' && promptConfirm != 'n')
+    {
+        std::cout << "¿Confirmar publicación de videojuego? (y/n): ";
         std::cin >> promptConfirm;
-        std::cout << "\n";
     }
     confirmar = promptConfirm == 'y' ? true : false;
     ipv->confirmarPublicacionVideojuego(confirmar);
-    }
+}
+
 void menuEliminarVideojuego(FactoryController *fact)
 {
     IEliminarVideojuego *ev = fact->getIEliminarVideojuego();

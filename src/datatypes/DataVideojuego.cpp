@@ -58,8 +58,8 @@ void DataVideojuego::setHorasTotales(float horas) {
     this->horastotales=horas;
 }
 
-// void DataVideojuego::agregarCategoria(string categoria) {
-//     this->categorias.insert(categoria);
-// }
+void DataVideojuego::agregarCategoria(string categoria) {
+    this->categorias.insert(categoria);
+}
 
 DataVideojuego::~DataVideojuego() {}

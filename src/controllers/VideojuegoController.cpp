@@ -50,31 +50,27 @@ set<DataCategoria *> VideojuegoController::obtenerCategorias()
     return res;
 }
 
-<<<<<<< HEAD
-void VideojuegoController::agregarCategoriaAVideojuego(string cat, TipoCategoria tipoCat) {
-    this->dataCategoria = new DataCategoria();
-}
+void VideojuegoController::agregarCategoriaAVideojuego(string cat) {
+    this->dataVideojuego->agregarCategoria(cat);
+};
 
+void VideojuegoController::obtenerDataVideojuegoIngresada() {
+    std::cout << "Datos ingresados del videojuego:\n";
+    std::cout << "Nombre: " << this->dataVideojuego->getNombre() << "\n";
+    std::cout << "Descripcion: " << this->dataVideojuego->getDescripcion() << "\n";
+    std::cout << "Costes de suscripcion:\n";
+    std::cout << "\t Mensual:" << this->dataVideojuego->getSuscripciones()[mensual] << "\n";
+    std::cout << "\t Trimestral:" << this->dataVideojuego->getSuscripciones()[trimestral] << "\n";
+    std::cout << "\t Anual:" << this->dataVideojuego->getSuscripciones()[anual] << "\n";
+    std::cout << "\t Vitalicia:" << this->dataVideojuego->getSuscripciones()[vitalicia] << "\n";
 
-=======
-//void VideojuegoController::agregarGeneroAVideojuego(string genero) {
-
-//}
-
-// set<DataCategoria *> VideojuegoController::obtenerCategorias()
-// {
-//     set<DataCategoria *> res;
-//     res.insert(nullptr);
-//     return res;
-// }
-
-void VideojuegoController::agregarPlataformaAVideojuego(string plataforma) {}
-void VideojuegoController::agregarGeneroAVideojuego(string genero) {}
-void VideojuegoController::agregarOtraCategoriaAVideojuego(string cat) {}
->>>>>>> develop
-DataVideojuego *VideojuegoController::obtenerDataVideojuegoIngresada()
-{
-    return this->dataVideojuego;
+    std::set<string> cats = this->dataVideojuego->getNombreCategorias();
+    std::set<string>::iterator it;
+    std::cout << "Categorias:";
+    for (it = cats.begin(); it != cats.end(); it++) {
+        std::cout << " " << (*it) << " ";
+    }
+    std::cout << "\n";
 }
 void VideojuegoController::confirmarPublicacionVideojuego(bool cancelada) {
     if (!cancelada) {
@@ -95,7 +91,6 @@ void VideojuegoController::confirmarPublicacionVideojuego(bool cancelada) {
             this->dataVideojuego->getRating(),
             nuevoContratos,
             nuevasCategorias,
-            nullptr,
             this->dataVideojuego->getNombreEmpresa());
         vjh = vjh->getInstance();
         vjh->agregarVideojuego(vdj);
@@ -221,13 +216,11 @@ VideojuegoController::~VideojuegoController() {
     if (this->dataCategoria!=nullptr) delete this->dataCategoria;
     this->videojuego=nullptr;
 }
-<<<<<<< HEAD
+
 VideojuegoController::~VideojuegoController() {
     delete this->dataCategoria;
     delete this->dataVideojuego;
 }
-=======
->>>>>>> develop
 
 /*ESTO SI QUEDA COMENTADO EL 18062021 A LAS 1500 SE PUEDE BORRAR
 int VideojuegoController::obtenerHoras(){
