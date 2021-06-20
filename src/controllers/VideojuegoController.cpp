@@ -32,8 +32,7 @@ void VideojuegoController::ingresarDatosVideojuego(DataVideojuego *DataV) {
    DataVideojuego *nuevoDataVdj = DataV;
    this->dataVideojuego = nuevoDataVdj;
 }
-set<DataCategoria *> VideojuegoController::obtenerCategorias()
-{
+set<DataCategoria *> VideojuegoController::obtenerCategorias() {
     set<DataCategoria *> res;
     res.insert(nullptr);
     return res;
@@ -71,6 +70,7 @@ void VideojuegoController::confirmarPublicacionVideojuego(bool cancelada) {
             this->dataVideojuego->getNombreEmpresa());
         vjh = vjh->getInstance();
         vjh->agregarVideojuego(vdj);
+        std::cout << "Videojuego publicado exitosamente.";
     }
 }
 
@@ -175,7 +175,10 @@ void VideojuegoController::confirmarAgregarCategoria(bool confirmar) {
     }
     delete this->dataCategoria;
 }
-VideojuegoController::~VideojuegoController() {}
+VideojuegoController::~VideojuegoController() {
+    delete this->dataCategoria;
+    delete this->dataVideojuego;
+}
 
 /*ESTO SI QUEDA COMENTADO EL 18062021 A LAS 1500 SE PUEDE BORRAR
 int VideojuegoController::obtenerHoras(){

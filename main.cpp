@@ -402,10 +402,51 @@ void menuAgregarCategoria(FactoryController *fact)
     std::cout << "\n";
 }
 
-void menuPublicarVideojuego()
-{
-}
+void menuPublicarVideojuego(FactoryController *fact) {
+    IPublicarVideojuego *ipv = fact->getIPublicarVideojuego();
 
+    std::string nombreVdj, descVdj;
+
+    std::cout << "Ingrese el nombre: ";
+    std::cin >> nombreVdj;
+    std::cout << "Ingrese una descripcion para el videojuego: ";
+    std::cin >> descVdj;
+    std::cout << "Ingrese el coste de cada periodo:\n";
+
+    float precioMensual, precioTrimestral, precioAnual, precioVitalicia;
+    std::cout << "Mensual: ";
+    std::cin >> precioMensual;
+    std::cout << "Trimestral: ";
+    std::cin >> precioTrimestral;
+    std::cout << "Anual: ";
+    std::cin >> precioAnual;
+    std::cout << "Vitalicia: ";
+    std::cin >> precioVitalicia;
+
+    std:map<TipoPeriodoValidez, float> suscripciones;
+    suscripciones.insert(std::pair<TipoPeriodoValidez, float>(mensual, precioMensual));
+    suscripciones.insert(std::pair<TipoPeriodoValidez, float>(trimestral, precioTrimestral));
+    suscripciones.insert(std::pair<TipoPeriodoValidez, float>(anual, precioAnual));
+    suscripciones.insert(std::pair<TipoPeriodoValidez, float>(vitalicia, precioVitalicia));
+    
+    
+    DataVideojuego *nuevoDataVdj = new DataVideojuego(nombreVdj, descVdj, suscripciones, std::set<string>(), std::pair<float, int>(0, 0));
+    ipv->ingresarDatosVideojuego(nuevoDataVdj);
+    std::set<DataCategoria *> categorias = ipv->obtenerCategorias();
+    ipv->obtenerDataVideojuegoIngresada();
+
+    bool confirmar;
+    char promptConfirm = '\0';
+
+    while (promptConfirm != 'y' && promptConfirm != 'n') {
+        std::cout << "¿Confirmar publicacion de videojuego? (y/n): ";
+        std::cin >> promptConfirm;
+        std::cout << "\n";
+    }
+    confirmar = promptConfirm == 'y' ? true : false;
+    ipv->confirmarPublicacionVideojuego(confirmar);
+    
+    }
 void menuEliminarVideojuego(FactoryController *fact)
 {
     IEliminarVideojuego *ev = fact->getIEliminarVideojuego();
