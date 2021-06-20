@@ -433,6 +433,8 @@ void menuPublicarVideojuego(FactoryController *fact) {
     DataVideojuego *nuevoDataVdj = new DataVideojuego(nombreVdj, descVdj, suscripciones, std::set<string>(), std::pair<float, int>(0, 0));
     ipv->ingresarDatosVideojuego(nuevoDataVdj);
     std::set<DataCategoria *> categorias = ipv->obtenerCategorias();
+    std::cout << ""
+    ipv->agregarCategoriaAVideojuego();
     ipv->obtenerDataVideojuegoIngresada();
 
     bool confirmar;

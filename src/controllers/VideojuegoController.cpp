@@ -38,7 +38,7 @@ set<DataCategoria *> VideojuegoController::obtenerCategorias() {
     return res;
 }
 
-void VideojuegoController::agregarCategoriaAVideojuego(string plataforma, TipoCategoria tipoCat) {
+void VideojuegoController::agregarCategoriaAVideojuego(string cat, TipoCategoria tipoCat) {
     this->dataCategoria = new DataCategoria();
 }
 
