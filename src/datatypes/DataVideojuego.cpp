@@ -11,11 +11,10 @@
 
 using namespace std;
 
-DataVideojuego::DataVideojuego()
-{
+DataVideojuego::DataVideojuego() {
 }
-DataVideojuego::DataVideojuego(string nombre, string descripcion, map<TipoPeriodoValidez, float> suscripciones, set<string> nombreCategorias, pair<float, int> rating)
-{
+
+DataVideojuego::DataVideojuego(string nombre, string descripcion, map<TipoPeriodoValidez, float> suscripciones, set<string> nombreCategorias, pair<float, int> rating) {
     this->nombre = nombre;
     this->descripcion = descripcion;
     this->suscripciones = suscripciones;
@@ -23,40 +22,45 @@ DataVideojuego::DataVideojuego(string nombre, string descripcion, map<TipoPeriod
     this->rating = rating;
 }
 //Getters
-string DataVideojuego::getNombre() const
-{
+string DataVideojuego::getNombre() const {
     return this->nombre;
 }
-string DataVideojuego::getDescripcion() const
-{
+
+string DataVideojuego::getDescripcion() const {
     return this->descripcion;
 }
-map<TipoPeriodoValidez, float> DataVideojuego::getSuscripciones() const
-{
+
+map<TipoPeriodoValidez, float> DataVideojuego::getSuscripciones() const {
     return this->suscripciones;
 }
-set<string> DataVideojuego::getNombreCategorias()
-{
+
+set<string> DataVideojuego::getNombreCategorias() {
     return this->categorias;
 }
 //Los métodos addCategoria(cat), addPlataforma(plataforma), addGenero(genero) equivalen a aplicarle el metodo insert al set
-string DataVideojuego::getNombreEmpresa()
-{
+string DataVideojuego::getNombreEmpresa() {
     return this->nombreEmpresa;
 }
-float DataVideojuego::getHorasTotales(){
+
+float DataVideojuego::getHorasTotales() {
     return this->horastotales;
 }
-pair<float, int> DataVideojuego::getRating()
-{
+
+pair<float, int> DataVideojuego::getRating() {
     return this->rating;
 }
 
-void DataVideojuego::setNombreEmpresa(std::string nombreEmpresa){
+void DataVideojuego::setNombreEmpresa(std::string nombreEmpresa) {
     this->nombreEmpresa=nombreEmpresa;
 }
-void DataVideojuego::setHorasTotales(float horas){
+
+void DataVideojuego::setHorasTotales(float horas) {
     this->horastotales=horas;
 }
 
-DataVideojuego::~DataVideojuego() {}
+void DataVideojuego::agregarCategoria(string categoria) {
+    this->categorias.insert(categoria);
+}
+
+DataVideojuego::~DataVideojuego() {
+}

@@ -103,19 +103,15 @@ Usuario *UsuarioHandler::obtenerUsuarioPorId(string mail)
 
 bool UsuarioHandler::tienePartidaSinFinalizar(Videojuego *vj)
 {
-
     map<std::string, Usuario *> users = this->users;
-
     map<std::string, Usuario *>::iterator it;
-    Jugador *jugador = dynamic_cast<Jugador *>(it->second);
-    bool tiene = jugador->tienePartidaSinFinalizar(vj);
-    while (it != users.end() && !tiene)
-    {
-        it++;
+    bool tiene = false;
+    for (it = users.begin(); it != users.end(); it++){
         Jugador *jugador = dynamic_cast<Jugador *>(it->second);
-        tiene = jugador->tienePartidaSinFinalizar(vj);
+        if(jugador!=nullptr)
+            if (!tiene) 
+                tiene = jugador->tienePartidaSinFinalizar(vj);
     }
-
     return tiene;
 }
 
