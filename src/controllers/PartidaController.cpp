@@ -116,7 +116,7 @@ void PartidaController::seleccionarJugador(string nickname)
     UsuarioHandler* uH = uH->getInstance();
     bool hayJugador = uH->existeJugadorConNickname(nickname);
     if(hayJugador){
-        this->participantes.insert({nickname,uH->obtenerJugadorPorNickname(nickname)});
+        this->participantes.insert(std::pair<string,Jugador*>(nickname,uH->obtenerJugadorPorNickname(nickname)));
     }
 }
 void PartidaController::confirmarIniciarPartida(bool confirmar,Fecha * fechainicio)
