@@ -371,40 +371,40 @@ void menuSuscribirseVideojuego(FactoryController *fact)
             return;
 
         iSuscAVj->cancelarSuscripcion();
+    }
 
-        std::cout << "Elija el tipo de suscripcion a contratar:";
-        std::cout << " \n";
-        std::cout << "1) Vitalicia";
-        std::cout << "2) Mensual";
-        std::cout << "3) Trimestral";
-        std::cout << "4) Anual";
-        std::cout << " \n";
+    std::cout << "Elija el tipo de suscripcion a contratar:";
+    std::cout << " \n";
+    std::cout << "1) Vitalicia";
+    std::cout << "2) Mensual";
+    std::cout << "3) Trimestral";
+    std::cout << "4) Anual";
+    std::cout << " \n";
 
-        int validez;
-        std::cin >> validez;
+    int validez;
+    std::cin >> validez;
 
-        std::cout << "Indique el Metodo de Pago:";
-        std::cout << " \n";
-        std::cout << "1- Tarjeta";
-        std::cout << "2- Paypal";
-        std::cout << " \n";
+    std::cout << "Indique el Metodo de Pago:";
+    std::cout << " \n";
+    std::cout << "1- Tarjeta";
+    std::cout << "2- Paypal";
+    std::cout << " \n";
 
-        int metodoPago;
-        std::cin >> metodoPago;
+    int metodoPago;
+    std::cin >> metodoPago;
 
-        std::cout << "Desea confirmar la Suscripcion?";
-        std::cout << " \n";
-        std::cout << "1- Si";
-        std::cout << "2- No";
+    std::cout << "Desea confirmar la Suscripcion?";
+    std::cout << " \n";
+    std::cout << "1- Si";
+    std::cout << "2- No";
 
-        int confirmar;
-        std::cin >> confirmar;
+    int confirmar;
+    std::cin >> confirmar;
 
-        if (confirmar == 1)
-        {
-            bool conf = confirmar == 1;
-            iSuscAVj->confirmarSuscripcion(conf);
-        }
+    if (confirmar == 1)
+    {
+        bool conf = confirmar == 1;
+        iSuscAVj->confirmarSuscripcion(conf);
     }
 }
 
@@ -853,7 +853,7 @@ void menuAgregarCategoria(FactoryController *fact)
     }
     //std::cin >> op2;
     ac->agregarCategoria(agregar, desc, tipo);
-    ac->confirmarAgregarCategoria(op2 == 2);
+    ac->confirmarAgregarCategoria(op2 == 1);
     std::cout << "\n";
     ac->~IAgregarCategoria();
 }

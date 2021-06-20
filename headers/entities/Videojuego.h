@@ -14,7 +14,8 @@
 class ContratoSuscripcion;
 class Jugador;
 
-class Videojuego {
+class Videojuego
+{
 private:
   std::string nombre;
   std::string descripcion;
@@ -48,7 +49,7 @@ public:
   void setSuscripciones(TipoPeriodoValidez validez, float precio);
   void setRating(float prom, int cantVotos);
   void setContrato(ContratoSuscripcion *);
-  void setCategoria(Categoria *);
+  void setCategoria(Categoria *cat);
 
   void agregarCategoria(Categoria o);
   set<Jugador *> getSuscriptores();
