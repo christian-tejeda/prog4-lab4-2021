@@ -50,7 +50,7 @@ public:
     //void agregarOtraCategoriaAVideojuego(string cat);
     void agregarCategoriaAVideojuego(string cat);
     void obtenerDataVideojuegoIngresada();
-    void confirmarPublicacionVideojuego(bool cancelada);
+    void confirmarPublicacionVideojuego(bool confirmar);
 
     ~VideojuegoController();
 };

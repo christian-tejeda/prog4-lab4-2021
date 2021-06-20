@@ -14,7 +14,7 @@ public:
     // virtual void agregarOtraCategoriaAVideojuego(string cat) = 0;
     virtual void agregarCategoriaAVideojuego(string cat) = 0;
     virtual void obtenerDataVideojuegoIngresada() = 0;
-    virtual void confirmarPublicacionVideojuego(bool cancelada) = 0;
+    virtual void confirmarPublicacionVideojuego(bool confirmar) = 0;
 
     virtual ~IPublicarVideojuego(){};
 };

@@ -72,8 +72,8 @@ void VideojuegoController::obtenerDataVideojuegoIngresada() {
     }
     std::cout << "\n";
 }
-void VideojuegoController::confirmarPublicacionVideojuego(bool cancelada) {
-    if (!cancelada) {
+void VideojuegoController::confirmarPublicacionVideojuego(bool confirmar) {
+    if (confirmar) {
         set<ContratoSuscripcion *> nuevoContratos;
         CategoriaHandler *ch;
         VideojuegoHandler *vjh;
@@ -167,7 +167,7 @@ set<DataVideojuego *> VideojuegoController::obtenerVideojuegos()
 {   
     VideojuegoHandler *vH;
     vH = vH->getInstance();
-    map<std::string, Videojuego*> vjs =vH->obtenerVideojuegos();
+    map<std::string, Videojuego*> vjs = vH->obtenerVideojuegos();
     map<std::string, Videojuego*>::iterator it;
     set<DataVideojuego *> res;
     for (it = vjs.begin(); it != vjs.end(); it++)
