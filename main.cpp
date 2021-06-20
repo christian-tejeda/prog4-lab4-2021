@@ -1081,8 +1081,36 @@ void menuSeleccionarEstadisticas(FactoryController *fact)
     se->seleccionarEstadisticas(quiere);
 }
 
-void menuConsultarEstadisticas()
+void menuConsultarEstadisticas(FactoryController * fact)
 {
+    IConsultarEstadisticas * ce = fact->getIConsultarEstadisticas();
+    std::set<DataVideojuego*> dtvjs = ce->obtenerVideojuegosPublicadosPorDesarrollador();
+    std::set<DataVideojuego*>::iterator it;
+    std::cout << "Seleccione un videojuego para consultar sus estadisticas  \n" ;
+    for(it = dtvjs.begin();it != dtvjs.end(); it++){
+        std::cout << (*it)->getNombre() << " \n";
+    }
+    std::string juegoName = "" ;
+    std::cout << "Escriba el nombre del videojuego: ";
+    std::cin >> juegoName;
+    std::set<DataEstadistica*> estadis = ce->calcularEstadisticas(juegoName);
+    std::set<DataEstadistica*>::iterator it2;
+    std::cout << "Estadisticas  \n" ;
+    for(it2 = estadis.begin();it2 != estadis.end(); it2++){
+        switch ((*it2)->getEstadistica())
+        {
+        case 1:
+            std::cout << "Total horas jugadas: "<< (*it2)->getResultado() << "\n";
+            break;
+        
+        case 2:
+            std::cout << "Promedio rating: "<< (*it2)->getResultado() << "\n";
+            break;
+        case 3:
+            std::cout << "Cantidad total suscritos: "<< (*it2)->getResultado() << "\n";
+            break;
+        }
+    }
 }
 
 //-------------------- Programa Principal -----------------------------
@@ -1313,7 +1341,7 @@ int main(int argc, char const *argv[])
             case 5: //Consultar estadísticas
                 try
                 {
-                    /* code */
+                    menuConsultarEstadisticas(fact);
                 }
                 catch (const std::invalid_argument &ex)
                 {
