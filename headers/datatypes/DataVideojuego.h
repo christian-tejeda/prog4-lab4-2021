@@ -41,7 +41,7 @@ public:
     void setNombreEmpresa(std::string nombreEmpresa);
     void setHorasTotales(float horas);
 
-    void agregarCategoria(std::string categoria) {}
+    void agregarCategoria(std::string categoria);
     ~DataVideojuego();
 };
 

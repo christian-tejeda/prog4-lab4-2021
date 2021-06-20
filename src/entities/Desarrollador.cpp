@@ -32,6 +32,7 @@ void Desarrollador::setNombreEmpresa(std::string nomEmpresa) {
 
 DataUsuario *Desarrollador::getData() {
     return new DataDesarrollador(this->getEmail(), this->getPassword(), this->getNombreEmpresa());
+}
 
 std::set<TipoEstadistica> Desarrollador::getEstadisticasDeInteres() {
   return this->estadisticasDeInteres;

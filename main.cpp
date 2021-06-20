@@ -663,10 +663,12 @@ void menuPublicarVideojuego(FactoryController *fact) {
 
     std::string nombreVdj, descVdj;
 
-    std::cout << "Ingrese el nombre: ";
-    std::cin >> nombreVdj;
-    std::cout << "Ingrese una descripcion para el videojuego: ";
-    std::cin >> descVdj;
+    std::cin.ignore();
+    std::cout << "Ingrese un nombre para el videojuego: ";
+    std::getline(std::cin, nombreVdj);
+    std::cin.ignore();
+    std::cout << "Ingrese una descripción para el videojuego: ";
+    std::getline(std::cin, descVdj);
     std::cout << "Ingrese el coste de cada periodo:\n";
 
     float precioMensual, precioTrimestral, precioAnual, precioVitalicia;
@@ -701,12 +703,13 @@ void menuPublicarVideojuego(FactoryController *fact) {
         }
     };
 
-    std::cout << "Ingrese el nombre del genero: ";
     std::string nombreCat;
     char promptConfirm = '\0';
     bool continuaAgregar = true;
     do {
-        std::cin >> nombreCat;
+        std::cin.ignore();
+        std::cout << "Ingrese el nombre del genero: ";
+        std::getline(std::cin, nombreCat);
         ipv->agregarCategoriaAVideojuego(nombreCat);
         std::cout << "¿Desea agregar más géneros? (y/n) ";
         std::cin >> promptConfirm;
@@ -723,12 +726,12 @@ void menuPublicarVideojuego(FactoryController *fact) {
         }
     }
 
-    std::cout << "Ingrese el nombre de la plataforma: ";
-    std::string nombreCat;
     promptConfirm = '\0';
     continuaAgregar = true;
     do {
-        std::cin >> nombreCat;
+        std::cin.ignore();
+        std::cout << "Ingrese el nombre de la plataforma: ";
+        std::getline(std::cin, nombreCat);
         ipv->agregarCategoriaAVideojuego(nombreCat);
         std::cout << "¿Desea agregar más plataformas? (y/n) ";
         std::cin >> promptConfirm;
@@ -750,8 +753,9 @@ void menuPublicarVideojuego(FactoryController *fact) {
     std::cin >> promptConfirm;
     continuaAgregar = promptConfirm == 'y' ? true : false;
     while (continuaAgregar) {
-        std::cout << "Ingrese nombre de la categoría: ";
-        std::cin >> nombreCat;
+        std::cin.ignore();
+        std::cout << "Ingrese el nombre de la categoría: ";
+        std::getline(std::cin, nombreCat);
         ipv->agregarCategoriaAVideojuego(nombreCat);
         std::cout << "¿Desea agregar más categorías? (y/n) ";
         std::cin >> promptConfirm;
@@ -1069,7 +1073,7 @@ int main(int argc, char const *argv[])
             case 2: //Publicar videojuego
                 try
                 {
-                    /* code */
+                    menuPublicarVideojuego(fact);
                 }
                 catch (const std::invalid_argument &ex)
                 {

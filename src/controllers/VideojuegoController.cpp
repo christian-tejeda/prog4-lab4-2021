@@ -212,24 +212,9 @@ void VideojuegoController::confirmarAgregarCategoria(bool confirmar) {
 }
 VideojuegoController::~VideojuegoController() {
     if (this->dataVideojuego!=nullptr) delete this->dataVideojuego;
-    
     if (this->dataCategoria!=nullptr) delete this->dataCategoria;
     this->videojuego=nullptr;
 }
-
-VideojuegoController::~VideojuegoController() {
-    delete this->dataCategoria;
-    delete this->dataVideojuego;
-}
-
-/*ESTO SI QUEDA COMENTADO EL 18062021 A LAS 1500 SE PUEDE BORRAR
-int VideojuegoController::obtenerHoras(){
-    Videojuego * vj=this->videojuego;
-    UsuarioHandler * uH;
-    uH=uH->getInstance();
-    int res=uH->obtenerHoras(vj);  
-    return res;
-}*/
 
 set<std::string> VideojuegoController::obtenerNombreVideojuegos(){
     VideojuegoHandler * vH;
