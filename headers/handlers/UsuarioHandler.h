@@ -44,8 +44,10 @@ public:
     void eliminarUsuario(Usuario *usuario);
 
     static void releaseInstance();
-    
-    float obtenerHoras(Videojuego* vj);
+
+    float obtenerHoras(Videojuego *vj);
+
+    set<DataPartidaMultijugador *> obtenerPartidasMultijugadorActivasDeJugador(Jugador *jg);
 };
 
 #endif

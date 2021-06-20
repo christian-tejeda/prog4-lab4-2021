@@ -4,7 +4,8 @@
 #include "../utils/enums.h"
 #include <string>
 
-class DataSuscripcionJugador {
+class DataSuscripcionJugador
+{
 
 private:
   std::string nombreVideojuego;
@@ -22,6 +23,8 @@ public:
   TipoPeriodoValidez getValidez();
 
   bool esSuscripcionActiva();
+
+  friend std::ostream &operator<<(std::ostream &os, const DataSuscripcionJugador &dt);
 };
 
 #endif

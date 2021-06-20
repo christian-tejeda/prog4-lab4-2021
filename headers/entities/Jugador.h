@@ -19,7 +19,8 @@ class Partida;
 class Videojuego;
 class ContratoSuscripcion;
 
-class Jugador : public Usuario {
+class Jugador : public Usuario
+{
 private:
     std::string nickname;
     std::string descripcion;
@@ -42,13 +43,13 @@ public:
     //Operaciones
     std::set<ContratoSuscripcion *> obtenerContratosActivos();
     void contratarSuscripcion(Videojuego *vj, TipoPeriodoValidez validez,
-                                   TipoMetodoPago metodoPago);
-    void crearPartidaIndividual(int idPartida,Fecha fechaActual,Videojuego * vj,Jugador *host,PartidaIndividual * cont);
-    void crearPartidaMultijugador(int idPartida, Fecha fechaActual, Fecha *fechaFin, Videojuego * vj, bool transmitida, Jugador * host, map<string, Jugador *> participantes);
+                              TipoMetodoPago metodoPago);
+    void crearPartidaIndividual(int idPartida, Fecha fechaActual, Videojuego *vj, Jugador *host, PartidaIndividual *cont);
+    void crearPartidaMultijugador(int idPartida, Fecha fechaActual, Fecha *fechaFin, Videojuego *vj, bool transmitida, Jugador *host, map<string, Jugador *> participantes);
     void cancelarSuscripcionActiva(Videojuego *vj);
     void contratarSuscripcion(Videojuego *vj, ContratoSuscripcion susc, TipoMetodoPago m);
     map<int, Partida *> obtenerPartidasSinFinalizar();
-    void finalizarPartida(int idPartida,Fecha* fecha);
+    void finalizarPartida(int idPartida, Fecha *fecha);
     map<std::string, Videojuego *> obtenerVideojuegos();
     void eliminarContratosDeVideojuego(Videojuego *vj);
     void eliminarPartidasDeVideojuego(Videojuego *vj);
@@ -57,11 +58,14 @@ public:
     PartidaIndividual *obtenerPartida(int id);
     bool tieneSuscripcionActiva(Videojuego *vj);
     float calcularTotalHorasPartidasIniciadas(Videojuego *vj);
-    bool tienePartidaSinFinalizar(Videojuego *vj);//operacion faltante en obtenerpartidasfinalizadas en elim videojuego
-    map<std::string,Videojuego*> obtenerVideojuegosConSuscripcionActiva();
+    bool tienePartidaSinFinalizar(Videojuego *vj); //operacion faltante en obtenerpartidasfinalizadas en elim videojuego
+    map<std::string, Videojuego *> obtenerVideojuegosConSuscripcionActiva();
     int obtenerDuracionPartida(Videojuego *vj);
+    set<DataPartidaMultijugador *> obtenerPartidasPorParticipante(Jugador *jg);
+    Partida *obtenerPartidaPorId(int id);
+
     ~Jugador();
-  //PartidaIndividual *obtenerPartida(std::string id);
+    //PartidaIndividual *obtenerPartida(std::string id);
 };
 
 #endif

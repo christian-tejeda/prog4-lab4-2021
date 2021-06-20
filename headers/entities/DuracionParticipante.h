@@ -15,11 +15,11 @@ private:
 
 public:
     DuracionParticipante();
-    DuracionParticipante(Fecha *he, Fecha *hs, Jugador *jg);//hora entrada/ hora salida
+    DuracionParticipante(Fecha *he, Fecha *hs, Jugador *jg); //hora entrada/ hora salida
 
     //Getters
-    Fecha* getHoraEntrada();
-    Fecha* getHoraSalida();
+    Fecha *getHoraEntrada();
+    Fecha *getHoraSalida();
     Jugador *getParticipante();
 
     //Setters
@@ -28,6 +28,7 @@ public:
     void setParticipante(Jugador *prt);
 
     void terminarParticipacion(Fecha *f);
+    float calcularDuracion();
 
     ~DuracionParticipante();
 };
