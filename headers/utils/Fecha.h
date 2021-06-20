@@ -14,6 +14,7 @@ private:
     int anio;
     int hora;
     int minuto;
+    int contarAniosBisiestos(const Fecha &f);
 
 public:
     Fecha();
@@ -29,6 +30,8 @@ public:
     ~Fecha();
 
     bool operator==(Fecha opFecha);
+    //Calcula la diferencia entre dos Fechas en horas.
+    float operator-(const Fecha &opFecha);
 
     friend std::ostream &operator<<(std::ostream &os, Fecha f);
 };

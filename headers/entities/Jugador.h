@@ -59,6 +59,7 @@ public:
 
     int obtenerDuracionPartida(Videojuego *vj);
     set<DataPartidaMultijugador *> obtenerPartidasPorParticipante(Jugador *jg);
+    Partida *obtenerPartidaPorId(int id);
 
     ~Jugador();
 };

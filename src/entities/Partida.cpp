@@ -55,9 +55,11 @@ void Partida::setFechaFin(Fecha *fechaFin)
 {
     this->fechaFin = fechaFin;
 }
+
+//Acumula las horas de los jugadores que van abandonando.
 void Partida::setDuracionTotal(float duracionTotal)
 {
-    this->duracionTotal = duracionTotal;
+    this->duracionTotal += duracionTotal;
 }
 void Partida::setHost(Jugador *host)
 {

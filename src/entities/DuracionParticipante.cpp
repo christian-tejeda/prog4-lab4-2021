@@ -49,4 +49,8 @@ void DuracionParticipante::terminarParticipacion(Fecha &f)
 {
     this->horaSalida = f;
 }
+float DuracionParticipante::calcularDuracion()
+{
+    return this->horaSalida - this->horaEntrada;
+}
 DuracionParticipante::~DuracionParticipante() {}

@@ -121,7 +121,6 @@ void menuIniciarSesion(FactoryController *fact, bool &jg, bool &dev)
 
     std::cout << "Email: ";
     std::cin >> mail;
-    std::cout << "\n";
 
     std::cout << "Contraseña: ";
     std::cin >> pwd;
@@ -133,6 +132,7 @@ void menuIniciarSesion(FactoryController *fact, bool &jg, bool &dev)
 
     while (!iniciada && !cancelar)
     {
+        failedLogin = '\0';
         std::cout << "Credenciales incorrectas. ¿Qué desea hacer?\n";
         std::cout << "1) Reintentar\n";
         std::cout << "2) Cancelar\n";
@@ -147,7 +147,6 @@ void menuIniciarSesion(FactoryController *fact, bool &jg, bool &dev)
         {
             std::cout << "Email: ";
             std::cin >> mail;
-            std::cout << "\n";
 
             std::cout << "Contraseña: ";
             std::cin >> pwd;
@@ -157,7 +156,7 @@ void menuIniciarSesion(FactoryController *fact, bool &jg, bool &dev)
         }
         else
         {
-            break;
+            cancelar = true;
         }
     }
     iis->confirmarInicioSesion(iniciada, mail, jg, dev);
@@ -251,12 +250,28 @@ void menuIniciarPartida(FactoryController *fact)
 {
 }
 
-void menuAbandonarPartidaMulti(FactoryController *fact)
+void menuAbandonarPartidaMulti(FactoryController *fact, Fecha *fs)
 {
     IAbandonarPartida *iap = fact->getIAbandonarPartida();
 
     set<DataPartidaMultijugador *> colDtMulti = iap->obtenerPartidasMultijugadorActivasDeJugador();
-    //continuar
+    set<DataPartidaMultijugador *>::iterator it;
+    std::cout << "ID \t Comienzo \t Videojuego \t Transmitida?  \n";
+    std::cout << "----------------------------------------------------------\n";
+    for (it = colDtMulti.begin(); it != colDtMulti.end(); it++)
+    {
+        std::cout << (*it)->getId() << " \t " << (*it)->getFechaInicio() << " \t " << (*it)->getVideojuego().getNombre() << " \t " << (*it)->getTramistida() << "\n";
+    }
+
+    int promptPartida;
+    std::cout << "Indique partida a abandonar\n";
+    std::cout << ">";
+    std::cin >> promptPartida;
+
+    iap->abandonarPartida(promptPartida, fs);
+    std::cout << "¡Salida de partida registrada! \n";
+
+    delete iap;
 }
 
 void menuFinalizarPartida(FactoryController *fact)
@@ -587,7 +602,7 @@ int main(int argc, char const *argv[])
             case 4: //Abandonar partida multijugador
                 try
                 {
-                    /* code */
+                    menuAbandonarPartidaMulti(fact, fechaSist);
                 }
                 catch (const std::invalid_argument &ex)
                 {

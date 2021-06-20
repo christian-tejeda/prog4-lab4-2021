@@ -38,7 +38,7 @@ public:
 
     //ops de IAbandonarPartida
     set<DataPartidaMultijugador *> obtenerPartidasMultijugadorActivasDeJugador();
-    void abandonarPartida(int idPartida);
+    void abandonarPartida(int idPartida, Fecha *f);
 
     //ops de IFinalizarPartida
     set<DataPartida *> obtenerPartidasSinFinalizarDeJugador();

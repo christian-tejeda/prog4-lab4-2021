@@ -167,4 +167,18 @@ set<DataPartidaMultijugador *> Jugador::obtenerPartidasPorParticipante(Jugador *
     return res;
 }
 
+Partida *Jugador::obtenerPartidaPorId(int id)
+{
+    map<int, Partida *>::iterator it;
+    for (it = this->partidasIniciadas.begin(); it != this->partidasIniciadas.end(); it++)
+    {
+        if (it->second->getId() == id)
+            break;
+    }
+    if (it != this->partidasIniciadas.end())
+        return it->second;
+    else
+        return nullptr;
+}
+
 Jugador::~Jugador(){};

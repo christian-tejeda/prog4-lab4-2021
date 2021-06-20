@@ -28,6 +28,7 @@ public:
     void setParticipante(Jugador *prt);
 
     void terminarParticipacion(Fecha &f);
+    float calcularDuracion();
 
     ~DuracionParticipante();
 };

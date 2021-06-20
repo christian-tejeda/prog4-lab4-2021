@@ -74,6 +74,26 @@ bool PartidaMultijugador::existeParticipante(Jugador *jg)
         return false;
 }
 
+void PartidaMultijugador::bajarParticipante(Jugador *jg, Fecha *f)
+{
+    float dur = -1;
+    set<DuracionParticipante *>::iterator it;
+    for (it = this->durpart.begin(); it != this->durpart.end(); it++)
+    {
+        if ((*it)->getParticipante() == jg)
+        {
+            (*it)->setHoraSalida(*f);
+            dur = (*it)->calcularDuracion();
+            break;
+        }
+    }
+
+    if (dur >= 0.0F)
+    {
+        this->setDuracionTotal(dur);
+    }
+}
+
 PartidaMultijugador::~PartidaMultijugador()
 {
 }

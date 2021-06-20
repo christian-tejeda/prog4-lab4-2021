@@ -109,7 +109,24 @@ bool UsuarioHandler::tienePartidaSinFinalizar(Videojuego *vj)
 
 map<string, Usuario *> UsuarioHandler::obtenerUsuarios() { return this->users; }
 
-Partida *UsuarioHandler::obtenerPartidaPorId(int idPartida) { return nullptr; }
+Partida *UsuarioHandler::obtenerPartidaPorId(int idPartida)
+{
+    Partida *res = nullptr;
+    map<string, Usuario *>::iterator it;
+    for (it = this->users.begin(); res != nullptr && it != this->users.end(); ++it)
+    {
+        Jugador *jug = dynamic_cast<Jugador *>(it->second);
+        if (jug)
+        {
+            res = jug->obtenerPartidaPorId(idPartida);
+        }
+    }
+    if (res)
+        return res;
+    else
+        throw std::invalid_argument("Error: Partida no encontrada.\n");
+    ;
+}
 
 void UsuarioHandler::eliminarUsuario(Usuario *usuario) {}
 

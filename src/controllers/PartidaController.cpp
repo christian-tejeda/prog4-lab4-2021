@@ -12,7 +12,12 @@
 
 using namespace std;
 
-PartidaController::PartidaController() {}
+PartidaController::PartidaController()
+{
+    this->jg = nullptr;
+    this->vj = nullptr;
+    this->partidaAContinuar = nullptr;
+}
 
 //op de singleton
 //PartidaController *PartidaController::getInstance() {}
@@ -86,7 +91,23 @@ set<DataPartidaMultijugador *> PartidaController::obtenerPartidasMultijugadorAct
 
     return res;
 }
-void PartidaController::abandonarPartida(int idPartida)
+
+void PartidaController::abandonarPartida(int idPartida, Fecha *f)
 {
+    UsuarioHandler *uh = UsuarioHandler::getInstance();
+    PartidaMultijugador *prt = dynamic_cast<PartidaMultijugador *>(uh->obtenerPartidaPorId(idPartida));
+    if (this->jg)
+    {
+        prt->bajarParticipante(this->jg, f);
+    }
+    else
+        throw std::invalid_argument("Ocurrió un error obteniendo el jugador.\n");
 }
-PartidaController::~PartidaController() {}
+
+PartidaController::~PartidaController()
+{
+    this->jg = nullptr;
+    this->vj = nullptr;
+    this->partidaAContinuar = nullptr;
+    this->participantes.clear();
+}
