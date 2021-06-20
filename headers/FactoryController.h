@@ -1,44 +1,44 @@
 #ifndef FACTORY_CONTROLLER_H
 #define FACTORY_CONTROLLER_H
 
+#include "controllers/PartidaController.h"
+#include "controllers/UsuarioController.h"
+#include "controllers/VideojuegoController.h"
+
+#include <map>
+#include <set>
 #include <string>
 #include <utility>
-#include "controllers/UsuarioController.h"
-#include "controllers/PartidaController.h"
-#include "controllers/VideojuegoController.h"
 
 using namespace std;
 
-class FactoryController
-{
-    //singleton
+class FactoryController {
+
 private:
-    static FactoryController *instancia;
-    FactoryController();
-    ~FactoryController();
+  static FactoryController *instancia;
+  FactoryController();
+  ~FactoryController();
 
 public:
-    //op de singleton
-    static FactoryController *getInstance();
+  static FactoryController *getInstance();
 
-    //op de factory
-    ISeleccionarEstadisticas *getISeleccionarEstadisticas();
-    IConsultarEstadisticas *getIConsultarEstadisticas();
-    ISuscribirseVideojuego *getISuscribirseVideojuego();
-    IIniciarSesion *getIIniciarSesion();
-    IAltaUsuario *getIAltaUsuario();
+  ISeleccionarEstadisticas *getISeleccionarEstadisticas();
+  IConsultarEstadisticas *getIConsultarEstadisticas();
+  ISuscribirseVideojuego *getISuscribirseVideojuego();
+  IIniciarSesion *getIIniciarSesion();
+  IAltaUsuario *getIAltaUsuario();
 
-    IIniciarPartida *getIIniciarPartida();
-    IAbandonarPartida *getIAbandonarPartida();
-    IFinalizarPartida *getIFinalizarPartida();
+  IIniciarPartida *getIIniciarPartida();
+  IAbandonarPartida *getIAbandonarPartida();
+  IFinalizarPartida *getIFinalizarPartida();
 
-    IAgregarCategoria *getIAgregarCategoria();
-    IVerInfoVideojuego *getIVerInfoVideojuego();
-    IAsignarPuntaje *getIAsignarPuntaje();
-    IEliminarVideojuego *getIEliminarVideojuego();
-    IPublicarVideojuego *getIPublicarVideojuego();
+  IAgregarCategoria *getIAgregarCategoria();
+  IVerInfoVideojuego *getIVerInfoVideojuego();
+  IAsignarPuntaje *getIAsignarPuntaje();
+  IEliminarVideojuego *getIEliminarVideojuego();
+  IPublicarVideojuego *getIPublicarVideojuego();
 
-    static void releaseInstance();
+  static void releaseInstance();
 };
 
 #endif

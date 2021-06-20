@@ -32,17 +32,46 @@ void VideojuegoController::ingresarDatosVideojuego(DataVideojuego *DataV) {
    DataVideojuego *nuevoDataVdj = DataV;
    this->dataVideojuego = nuevoDataVdj;
 }
-set<DataCategoria *> VideojuegoController::obtenerCategorias() {
+
+set<DataCategoria *> VideojuegoController::obtenerCategorias()
+{
+    CategoriaHandler * cH;
+    cH=cH->getInstance();
+    map<std::string, Categoria*> cats= cH->obtenerCategorias();
     set<DataCategoria *> res;
-    res.insert(nullptr);
+    map<std::string, Categoria*>::iterator it;
+    for(it = cats.begin(); it != cats.end(); it++){
+        Categoria * cat=it->second;
+
+        DataCategoria* data= new DataCategoria(cat->getNombre(),cat->getDescripcion(),cat->getTipo());
+        res.insert(data);
+        //delete data;
+    }
     return res;
 }
 
+<<<<<<< HEAD
 void VideojuegoController::agregarCategoriaAVideojuego(string cat, TipoCategoria tipoCat) {
     this->dataCategoria = new DataCategoria();
 }
 
 
+=======
+//void VideojuegoController::agregarGeneroAVideojuego(string genero) {
+
+//}
+
+// set<DataCategoria *> VideojuegoController::obtenerCategorias()
+// {
+//     set<DataCategoria *> res;
+//     res.insert(nullptr);
+//     return res;
+// }
+
+void VideojuegoController::agregarPlataformaAVideojuego(string plataforma) {}
+void VideojuegoController::agregarGeneroAVideojuego(string genero) {}
+void VideojuegoController::agregarOtraCategoriaAVideojuego(string cat) {}
+>>>>>>> develop
 DataVideojuego *VideojuegoController::obtenerDataVideojuegoIngresada()
 {
     return this->dataVideojuego;
@@ -135,12 +164,23 @@ void VideojuegoController::confirmarEliminarVideojuego(bool confirmar)
     vH->eliminarVideojuego(video);
     video->~Videojuego();
 }
-void VideojuegoController::puntuarVideojuego(string nombre, int puntaje) {}
+void VideojuegoController::puntuarVideojuego(int puntaje) {
+    this->videojuego->agregarPuntaje(puntaje);
+}
 
 set<DataVideojuego *> VideojuegoController::obtenerVideojuegos()
-{
+{   
+    VideojuegoHandler *vH;
+    vH = vH->getInstance();
+    map<std::string, Videojuego*> vjs =vH->obtenerVideojuegos();
+    map<std::string, Videojuego*>::iterator it;
     set<DataVideojuego *> res;
-    res.insert(nullptr);
+    for (it = vjs.begin(); it != vjs.end(); it++)
+    {
+        Videojuego * video = it->second;
+        DataVideojuego * data = new DataVideojuego(video->getNombre(),video->getDescripcion(),video->getSuscripciones(),video->getNombreCategorias(),video->getRating());
+        res.insert(data);
+    }
     return res;
 }
 DataVideojuego *VideojuegoController::obtenerDataVideojuego(string nombre)
@@ -173,12 +213,21 @@ void VideojuegoController::confirmarAgregarCategoria(bool confirmar) {
         ch=ch->getInstance();
         ch->crearNuevaCategoria(this->dataCategoria->getNombre(), this->dataCategoria->getDescripcion(),this->dataCategoria->getTipo());
     }
-    delete this->dataCategoria;
+    //delete this->dataCategoria;
 }
+VideojuegoController::~VideojuegoController() {
+    if (this->dataVideojuego!=nullptr) delete this->dataVideojuego;
+    
+    if (this->dataCategoria!=nullptr) delete this->dataCategoria;
+    this->videojuego=nullptr;
+}
+<<<<<<< HEAD
 VideojuegoController::~VideojuegoController() {
     delete this->dataCategoria;
     delete this->dataVideojuego;
 }
+=======
+>>>>>>> develop
 
 /*ESTO SI QUEDA COMENTADO EL 18062021 A LAS 1500 SE PUEDE BORRAR
 int VideojuegoController::obtenerHoras(){

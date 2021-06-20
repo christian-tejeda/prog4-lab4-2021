@@ -44,7 +44,7 @@ public:
     bool esFinalizada();
     bool perteneceAVideojuego(Videojuego *videojuego);
 
-    virtual void finalizar() = 0;
+    virtual void finalizar(Fecha * fecha) = 0;
     virtual void eliminarPartidasVideojuego(Videojuego *videojuego) = 0;
 
     virtual DataPartida *getData() = 0;

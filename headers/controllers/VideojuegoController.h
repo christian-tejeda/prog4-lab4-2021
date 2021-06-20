@@ -35,7 +35,7 @@ public:
     //int obtenerHoras();
     set<std::string> obtenerNombreVideojuegos();
     //ops de IAsignarPuntaje
-    void puntuarVideojuego(string nombre, int puntaje);
+    void puntuarVideojuego(int puntaje);
 
     //ops de IEliminarVideojuego
     set<DataVideojuego *> obtenerVideojuegosPublicadosPorDesarrolladorConPartidasFinalizadas();

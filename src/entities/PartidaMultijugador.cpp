@@ -36,8 +36,21 @@ void PartidaMultijugador::setTransmitidaEnVivo(bool enVivo)
 void PartidaMultijugador::agregarParticipante(Jugador *participante)
 {
 }
-void PartidaMultijugador::finalizar()
+void PartidaMultijugador::finalizar(Fecha * fecha)
 {
+    set<DuracionParticipante*> dur =this->durpart;
+    float d=0;
+    int con=0;
+    //d=fecha-this->fechaInicio();
+    set<DuracionParticipante*>::iterator it;
+    for (it = dur.begin(); it != dur.end(); it++){
+        DuracionParticipante* cuestion=*it;
+        //cuestion->setHoraSalida(fecha);
+        cuestion->terminarParticipacion(fecha);
+        con++;
+    }
+    this->setFechaFin(fecha);
+    this->setDuracionTotal(d*con);
 }
 void PartidaMultijugador::eliminarPartidasVideojuego(Videojuego *videojuego)
 {

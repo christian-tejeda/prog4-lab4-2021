@@ -52,7 +52,8 @@ enum TipoEstadistica
 {
     horasJugadas,
     promedioRating,
-    cantidadSuscritos
+    cantidadSuscritos,
+    Last//este siempre tiene que estar al final
 };
 
 #endif

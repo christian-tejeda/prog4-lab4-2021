@@ -11,6 +11,7 @@
 class PartidaController : public IIniciarPartida, public IAbandonarPartida, public IFinalizarPartida
 {
 private:
+    static int idPartida;
     Usuario *jg;                          //se borra la ref al final del CU
     Videojuego *vj;                       //se borra la ref al final del CU
     PartidaIndividual *partidaAContinuar; //se borra la ref al final del CU
@@ -27,6 +28,8 @@ public:
     Jugador *getParticipantePorNickname(string nick);
 
     //ops de IIniciarPartida
+    Fecha getFecha();
+    int generarIdPartida();
     void seleccionarPartidaAContinuar(int id);
     set<DataVideojuego *> obtenerVideojuegosDeJugadorConSuscripcionActiva();
     set<DataPartidaIndividual *> obtenerPartidasFinalizadasDeJugador();
@@ -34,7 +37,7 @@ public:
     set<DataJugador *> obtenerJugadoresConSuscripcionActiva();
     void seleccionarVideojuego(string nombreVideojuego);
     void seleccionarJugador(string nickname);
-    void confirmarIniciarPartida(bool confirmar);
+    void confirmarIniciarPartida(bool confirmar,Fecha * fechainicio);
 
     //ops de IAbandonarPartida
     set<DataPartidaMultijugador *> obtenerPartidasMultijugadorActivasDeJugador();
@@ -42,7 +45,7 @@ public:
 
     //ops de IFinalizarPartida
     set<DataPartida *> obtenerPartidasSinFinalizarDeJugador();
-    void finalizarPartida(int idPartida);
+    void finalizarPartida(int idPartida,Fecha * fecha);
 
     ~PartidaController();
 };

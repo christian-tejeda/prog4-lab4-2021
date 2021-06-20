@@ -17,14 +17,17 @@ private:
 public:
     PartidaIndividual();
 
+    bool getEsContinuacion();
+
     //data partida ind no cumple requerimientos PartidaIndividual(DataPartidaIndividual dataPartidaIndividual);
 
     PartidaIndividual(int id, Fecha fechaInicio, Fecha *fechaFin, float duracionTotal, Videojuego *vj, Jugador *host, PartidaIndividual *cont);
 
-    void finalizar(Fecha *f);
+    void finalizar(Fecha* fecha);
     void eliminarPartidasVideojuego(Videojuego *videojuego);
 
     DataPartida *getData();
+
 
     ~PartidaIndividual();
 };
