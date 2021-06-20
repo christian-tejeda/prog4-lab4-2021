@@ -81,13 +81,13 @@ void Videojuego::agregarPuntaje(float puntaje) {
 }
 
 DataVideojuego *Videojuego::getData() {
-  DataVideojuego data =
+  DataVideojuego * data = new
       DataVideojuego(this->nombre, this->descripcion, this->suscripciones,
                      this->getNombreCategorias(), this->rating);
-  data.setNombreEmpresa(this->nombreEmpresa);
+  data->setNombreEmpresa(this->nombreEmpresa);
   DataVideojuego *res;
-  *res = data;
-  return res;
+  
+  return data;
 }
 
 Videojuego::~Videojuego() {}

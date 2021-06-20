@@ -57,7 +57,10 @@ void Desarrollador::removerEstadisticaDeInteres(TipoEstadistica estadistica) {
   }
 }
 
-void Desarrollador::agregarVideojuegoPublicado(Videojuego *vj) {}
+void Desarrollador::agregarVideojuegoPublicado(Videojuego *vj) {
+    std::string nombre=vj->getNombre();
+    this->publicaciones.insert(pair<std::string, Videojuego *>(nombre,vj));
+}
 
 set<Videojuego *> Desarrollador::getVideojuegoPublicados() {
   map<string, Videojuego *> vjs = this->publicaciones;
@@ -67,11 +70,14 @@ set<Videojuego *> Desarrollador::getVideojuegoPublicados() {
     Videojuego *video = it->second;
     res.insert(video);
   }
+  
   return res;
 }
 
 void Desarrollador::eliminarVideojuegoPublicado(Videojuego *vj) {
-  this->publicaciones.erase(vj->getNombre());
+  map<string, Videojuego *>::iterator it;
+  it=this->publicaciones.find(vj->getNombre());
+  this->publicaciones.erase(it);
 }
 
 Desarrollador::~Desarrollador(){};

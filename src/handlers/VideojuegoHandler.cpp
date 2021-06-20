@@ -47,7 +47,7 @@ void VideojuegoHandler::eliminarVideojuego(Videojuego *vj)
 {
     string clave = vj->getNombre();
     this->vjs.erase(clave);
-    delete vj;
+    //delete vj;
 }
 
 map<string, Jugador *> VideojuegoHandler::obtenerJugadoresVideojuego(Videojuego *vj) { return map<string, Jugador *>(); }

@@ -83,10 +83,11 @@ void VideojuegoController::confirmarPublicacionVideojuego(bool confirmar) {
         VideojuegoHandler *vjh;
         ch = ch->getInstance();
         std::map<string, Categoria *> nuevasCategorias;
-        std::map<string, Categoria *>::iterator iter;
-        for (iter = nuevasCategorias.begin(); iter != nuevasCategorias.end(); iter++) {
-            Categoria *nuevaCat = ch->obtenerCategoriaPorId(iter->first);
-            nuevasCategorias.insert(pair<string, Categoria *>(iter->first, iter->second));
+        set<std::string>::iterator iter;
+        set<std::string> nombrescat=this->dataVideojuego->getNombreCategorias();
+        for (iter = nombrescat.begin(); iter != nombrescat.end(); iter++) {
+            Categoria *nuevaCat = ch->obtenerCategoriaPorId(*iter);
+            nuevasCategorias.insert(pair<string, Categoria *>(*iter,nuevaCat));            
         };
         Videojuego *vdj = new Videojuego(
             this->dataVideojuego->getNombre(),
@@ -98,6 +99,11 @@ void VideojuegoController::confirmarPublicacionVideojuego(bool confirmar) {
             this->dataVideojuego->getNombreEmpresa());
         vjh = vjh->getInstance();
         vjh->agregarVideojuego(vdj);
+        UsuarioController* uC;
+        uC=uC->getInstance();
+        Desarrollador *des = dynamic_cast<Desarrollador *>(uC->getSesion());
+        des->agregarVideojuegoPublicado(vdj);
+
         std::cout << "Videojuego publicado exitosamente.\n";
     }
 }
@@ -124,11 +130,10 @@ set<DataVideojuego *> VideojuegoController::obtenerVideojuegosPublicadosPorDesar
     {
         Videojuego *vj = *it;
         bool tiene = uh->tienePartidaSinFinalizar(vj);
-        if (tiene)
+        if (!tiene)
         {
             DataVideojuego *dvj = vj->getData();
             res.insert(dvj);
-            it++;
         }
     }
     return res;
@@ -154,13 +159,19 @@ void VideojuegoController::confirmarEliminarVideojuego(bool confirmar)
     map<string, Usuario *>::iterator it;
     for (it = users.begin(); it != users.end(); it++)
     {
-        Jugador *user = dynamic_cast<Jugador *>(it->second);
-        user->eliminarContratosDeVideojuego(video);
-        user->eliminarPartidasDeVideojuego(video);
+        Jugador *jugador = dynamic_cast<Jugador *>(it->second);
+        if (jugador!=nullptr) {
+            jugador->eliminarContratosDeVideojuego(video);
+            std::cout << "Paso EliminarContratos.\n";
+            jugador->eliminarPartidasDeVideojuego(video);
+            
+            std::cout << "Paso EliminarPartidas.\n";
+        }
     }
     VideojuegoHandler *vH;
     vH = vH->getInstance();
     vH->eliminarVideojuego(video);
+    std::cout << "Paso EliminarJuego.\n";
     video->~Videojuego();
 }
 void VideojuegoController::puntuarVideojuego(int puntaje) {
@@ -197,7 +208,7 @@ DataVideojuego *VideojuegoController::obtenerDataVideojuego(string nombre)
         res->setHorasTotales(uH->obtenerHoras(este));
     }else{
         res->setHorasTotales(-1);
-    }
+    }  
     return res;
 }
 void VideojuegoController::agregarCategoria(std::string nombre,std::string descripcion, TipoCategoria tipo) {
