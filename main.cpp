@@ -445,7 +445,6 @@ void menuPublicarVideojuego(FactoryController *fact) {
     }
     confirmar = promptConfirm == 'y' ? true : false;
     ipv->confirmarPublicacionVideojuego(confirmar);
-    
     }
 void menuEliminarVideojuego(FactoryController *fact)
 {
