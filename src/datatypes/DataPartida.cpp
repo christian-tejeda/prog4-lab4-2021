@@ -13,7 +13,7 @@ using namespace std;
 
 DataPartida::DataPartida() {}
 
-DataPartida::DataPartida(int id, DataVideojuego *videojuego, Fecha fechaInicio, Fecha *fechaFin, float DuracionTotal)
+DataPartida::DataPartida(int id, DataVideojuego videojuego, Fecha fechaInicio, Fecha *fechaFin, float DuracionTotal)
 {
     this->id = id;
     this->videojuego = videojuego;
@@ -36,7 +36,7 @@ Fecha *DataPartida::getFechaFin()
 {
     return this->fechaFin;
 }
-DataVideojuego *DataPartida::getVideojuego()
+DataVideojuego DataPartida::getVideojuego()
 {
     return this->videojuego;
 }

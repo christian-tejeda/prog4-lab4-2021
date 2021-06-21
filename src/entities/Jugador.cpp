@@ -34,10 +34,8 @@ void Jugador::cancelarSuscripcionActiva(Videojuego *vj) {
   }
 }
 
-void Jugador::contratarSuscripcion(Videojuego *vj, TipoPeriodoValidez validez,
-                                   TipoMetodoPago metodoPago) {
-  this->contratos.insert(
-      new ContratoSuscripcion(this, vj, metodoPago, validez));
+void Jugador::contratarSuscripcion(Videojuego *vj, TipoPeriodoValidez validez, TipoMetodoPago metodoPago,Fecha *f) {
+  this->contratos.insert(new ContratoSuscripcion(this, vj, metodoPago, validez));
 }
 
 map<int, Partida *> Jugador::obtenerPartidasSinFinalizar() {
@@ -49,6 +47,15 @@ map<int, Partida *> Jugador::obtenerPartidasSinFinalizar() {
     }
   }
   return res;
+}
+
+set<DataPartidaMultijugador *> Jugador::obtenerPartidasPorParticipante(Jugador *jg){
+  set<DataPartidaMultijugador *> res;
+  return res;
+}
+Partida * Jugador::obtenerPartidaPorId(int id){
+  return this->partidasIniciadas.find(id)->second;
+
 }
 
 void Jugador::finalizarPartida(int idPartida,Fecha * fecha) {
@@ -68,7 +75,7 @@ map<string, Videojuego *> Jugador::obtenerVideojuegos() {
 void Jugador::eliminarContratosDeVideojuego(Videojuego *vj) {
   set<ContratoSuscripcion *> cont = this->contratos;
   set<ContratoSuscripcion *>::iterator it;
-  while ( it != cont.end(); it++) {
+  while ( it != cont.end()) {
     ContratoSuscripcion *contr = *it;
     bool pertenece = contr->perteneceAVideojuego(vj);
     if (pertenece) {
@@ -204,7 +211,7 @@ bool Jugador::tienePartidaSinFinalizar(Videojuego *vj){//operacion faltante en o
     }
   }*///QUEDO REDEFINDA ABAJO, BORRAR SI SE NECEISTA.. VER
 
-map<std::string,Videojuego*> Jugador::obtenerVideojuegosConSuscripcionActiva(){
+map<std::string,Videojuego*> Jugador::obtenerVideojuegosConSuscripcionActiva(Fecha *fa){
     map<std::string,Videojuego*> res;
     set<ContratoSuscripcion*>::iterator it;
     for(it = this->contratos.begin();it!= this->contratos.end(); it++){

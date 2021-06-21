@@ -624,7 +624,7 @@ void menuIniciarPartida(FactoryController *fact, Fecha *fechainicio)
                     set<DataPartidaIndividual *>::iterator it;
                     for (it = partidasfin.begin(); it != partidasfin.end(); it++)
                     {
-                        std::cout << "Nombre videojuego: " << (*it)->getVideojuego()->getNombre();
+                        std::cout << "Nombre videojuego: " << (*it)->getVideojuego().getNombre();
                         std::cout << "  Id partida: " << (*it)->getId() << " \n ";
                     }
                     int numeroPartida = -1;
@@ -752,7 +752,7 @@ void menuAbandonarPartidaMulti(FactoryController *fact, Fecha *fs)
         std::cout << "----------------------------------------------------------\n";
         for (it = colDtMulti.begin(); it != colDtMulti.end(); it++)
         {
-            std::cout << (*it)->getId() << " \t " << (*it)->getFechaInicio() << " \t " << (*it)->getVideojuego()->getNombre() << " \t " << (*it)->getTramistida() << "\n";
+            std::cout << (*it)->getId() << " \t " << (*it)->getFechaInicio() << " \t " << (*it)->getVideojuego().getNombre() << " \t " << (*it)->getTramistida() << "\n";
         }
 
         int promptPartida;
@@ -781,7 +781,7 @@ void menuFinalizarPartida(FactoryController *fact, Fecha *fecha)
         {
             DataPartida *p = *it;
             std::cout << "Id: " << p->getId() << " \nFecha Comienzo (DIA/MES/AÑO) : " << p->getFechaInicio().getDia() << "/" << p->getFechaInicio().getMes() << "/" << p->getFechaInicio().getAnio() << "   "
-                      << " \n Nombre Videojuego :" << p->getVideojuego()->getNombre();
+                      << " \n Nombre Videojuego :" << p->getVideojuego().getNombre();
             DataPartidaIndividual *data = dynamic_cast<DataPartidaIndividual *>(p);
             DataPartidaMultijugador *nacional = dynamic_cast<DataPartidaMultijugador *>(p);
             if (data != nullptr)
