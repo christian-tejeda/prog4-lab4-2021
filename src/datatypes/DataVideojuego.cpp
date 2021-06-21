@@ -22,15 +22,15 @@ DataVideojuego::DataVideojuego(string nombre, string descripcion, map<TipoPeriod
     this->rating = rating;
 }
 //Getters
-string DataVideojuego::getNombre() const {
+string DataVideojuego::getNombre(){
     return this->nombre;
 }
 
-string DataVideojuego::getDescripcion() const {
+string DataVideojuego::getDescripcion(){
     return this->descripcion;
 }
 
-map<TipoPeriodoValidez, float> DataVideojuego::getSuscripciones() const {
+map<TipoPeriodoValidez, float> DataVideojuego::getSuscripciones(){
     return this->suscripciones;
 }
 

@@ -29,9 +29,9 @@ public:
     DataVideojuego();
     DataVideojuego(string nombre, string descripcion, map<TipoPeriodoValidez, float> suscripciones, set<string> categorias, pair<float, int> rating);
     //Getters
-    string getNombre() const;
-    string getDescripcion() const;
-    map<TipoPeriodoValidez, float> getSuscripciones() const;
+    string getNombre();
+    string getDescripcion();//const
+    map<TipoPeriodoValidez, float> getSuscripciones();//const
     set<string> getNombreCategorias();
     //Los métodos addCategoria(cat), addPlataforma(plataforma), addGenero(genero) equivalen a aplicarle el metodo insert al set
     string getNombreEmpresa();

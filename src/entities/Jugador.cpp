@@ -344,7 +344,7 @@ void Jugador::crearPartidaIndividual(int idPartida, Fecha fechaActual, Videojueg
   else
   {
     map<int, Partida *>::iterator it;
-    it = this->partidasIniciadas.find(idPartida);
+    it = this->partidasIniciadas.find(cont->getId());
     float duracioon = dynamic_cast<PartidaIndividual *>(it->second)->getDuracionTotal();
     this->partidasIniciadas.erase(idPartida);
     PartidaIndividual *parti = new PartidaIndividual(idPartida, fechaActual, nullptr, duracioon, vj, this, cont);

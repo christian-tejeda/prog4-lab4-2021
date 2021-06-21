@@ -68,7 +68,7 @@ void PartidaMultijugador::eliminarPartidasVideojuego(Videojuego *videojuego)
 DataPartida *PartidaMultijugador::getData()
 {
     return new DataPartida(this->getId(),
-                           DataVideojuego(this->getVideojuego()->getNombre(), this->getVideojuego()->getDescripcion(), this->getVideojuego()->getPeriodoValidez(), this->getVideojuego()->getNombreCategorias(), this->getVideojuego()->getRating()),
+                           new DataVideojuego(this->getVideojuego()->getNombre(), this->getVideojuego()->getDescripcion(), this->getVideojuego()->getPeriodoValidez(), this->getVideojuego()->getNombreCategorias(), this->getVideojuego()->getRating()),
                            this->getFechaInicio(),
                            this->getFechaFin(),
                            this->getDuracionTotal());
