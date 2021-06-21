@@ -56,6 +56,7 @@ public:
   int getCantidadSuscriptores();
   void agregarPuntaje(float puntaje);
   DataVideojuego *getData();
+  void agregarSuscriptor(ContratoSuscripcion *contrato);
 
   float calcularEstadistica(TipoEstadistica tipoEstadistica);
 

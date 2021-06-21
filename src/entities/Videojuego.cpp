@@ -39,6 +39,10 @@ map<string, Categoria *> Videojuego::getCategorias()
   return this->categorias;
 }
 
+void Videojuego::agregarSuscriptor(ContratoSuscripcion *contrato) {
+  this->contratos.insert(contrato);
+}
+
 set<string> Videojuego::getNombreCategorias()
 {
   set<string> res;
@@ -81,7 +85,7 @@ set<Jugador *> Videojuego::getSuscriptores()
   }
   return res;
 }
-int Videojuego::getCantidadSuscriptores() { return this->suscripciones.size(); }
+int Videojuego::getCantidadSuscriptores() { return this->contratos.size(); }
 
 float Videojuego::calcularEstadistica(TipoEstadistica tipoEstadistica)
 {
