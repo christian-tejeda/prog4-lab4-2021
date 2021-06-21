@@ -40,11 +40,11 @@ void Jugador::cancelarSuscripcionActiva(Videojuego *vj)
   }
 }
 
-void Jugador::contratarSuscripcion(Videojuego *vj, TipoPeriodoValidez validez,
-                                   TipoMetodoPago metodoPago)
+void Jugador::contratarSuscripcion(Videojuego *vj, TipoPeriodoValidez validez, TipoMetodoPago metodoPago, Fecha *f)
 {
-  this->contratos.insert(
-      new ContratoSuscripcion(this, vj, metodoPago, validez));
+  ContratoSuscripcion *cs = new ContratoSuscripcion(this, vj, metodoPago, validez);
+  cs->setFecha(*f);
+  this->contratos.insert(cs);
 }
 
 map<int, Partida *> Jugador::obtenerPartidasSinFinalizar()
@@ -118,7 +118,7 @@ void Jugador::eliminarPartidasDeVideojuego(Videojuego *vj)
   }
 }
 
-DataUsuario *Jugador::getData() { return nullptr; }
+DataUsuario *Jugador::getData() { return new DataJugador(this->getEmail(), this->getPassword(), this->getNickname(), this->getDescripcion()); }
 
 //PartidaIndividual *Jugador::obtenerPartida(string id) { return nullptr; }
 
@@ -280,12 +280,13 @@ bool Jugador::tienePartidaSinFinalizar(Videojuego *vj){//operacion faltante en o
   }*/
 //QUEDO REDEFINDA ABAJO, BORRAR SI SE NECEISTA.. VER
 
-map<std::string, Videojuego *> Jugador::obtenerVideojuegosConSuscripcionActiva()
+map<std::string, Videojuego *> Jugador::obtenerVideojuegosConSuscripcionActiva(Fecha *fa)
 {
   map<std::string, Videojuego *> res;
   set<ContratoSuscripcion *>::iterator it;
   for (it = this->contratos.begin(); it != this->contratos.end(); it++)
   {
+    (*it)->setActivo(fa);
     if ((*it)->esActivo())
     {
       res.insert(std::pair<string, Videojuego *>((*it)->getVideojuego()->getNombre(), (*it)->getVideojuego()));
@@ -355,8 +356,8 @@ void Jugador::crearPartidaMultijugador(int idPartida, Fecha fechaActual, Fecha *
 {
   set<DuracionParticipante *> durpart;
   map<string, Jugador *>::iterator it;
-  DuracionParticipante *durparticipantehost = new DuracionParticipante(&fechaActual, nullptr, host);
-  durpart.insert(durparticipantehost);
+  //DuracionParticipante *durparticipantehost = new DuracionParticipante(&fechaActual, nullptr, host);
+  //durpart.insert(durparticipantehost);
   for (it = participantes.begin(); it != participantes.end(); it++)
   {
     DuracionParticipante *durparticipante = new DuracionParticipante(&fechaActual, nullptr, it->second);

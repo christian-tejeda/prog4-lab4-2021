@@ -35,7 +35,7 @@ public:
     void setVideojuego(Videojuego *vj);
     void setJugador(Jugador *jg);
     void setFecha(Fecha &fe);
-    void setActivo(bool activo);
+    void setActivo(Fecha *f);
     void setFueCancelada(bool fueCancelada);
     void setMetodoDePago(TipoMetodoPago metodoDePago);
     void setPeriodoDeValidez(TipoPeriodoValidez periodoValidez);

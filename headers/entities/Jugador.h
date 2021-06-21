@@ -43,7 +43,7 @@ public:
     //Operaciones
     std::set<ContratoSuscripcion *> obtenerContratosActivos();
     void contratarSuscripcion(Videojuego *vj, TipoPeriodoValidez validez,
-                              TipoMetodoPago metodoPago);
+                              TipoMetodoPago metodoPago, Fecha *f);
     void crearPartidaIndividual(int idPartida, Fecha fechaActual, Videojuego *vj, Jugador *host, PartidaIndividual *cont);
     void crearPartidaMultijugador(int idPartida, Fecha fechaActual, Fecha *fechaFin, Videojuego *vj, bool transmitida, Jugador *host, map<string, Jugador *> participantes);
     void cancelarSuscripcionActiva(Videojuego *vj);
@@ -59,7 +59,7 @@ public:
     bool tieneSuscripcionActiva(Videojuego *vj);
     float calcularTotalHorasPartidasIniciadas(Videojuego *vj);
     bool tienePartidaSinFinalizar(Videojuego *vj); //operacion faltante en obtenerpartidasfinalizadas en elim videojuego
-    map<std::string, Videojuego *> obtenerVideojuegosConSuscripcionActiva();
+    map<std::string, Videojuego *> obtenerVideojuegosConSuscripcionActiva(Fecha *fa);
     int obtenerDuracionPartida(Videojuego *vj);
     set<DataPartidaMultijugador *> obtenerPartidasPorParticipante(Jugador *jg);
     Partida *obtenerPartidaPorId(int id);

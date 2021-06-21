@@ -81,13 +81,13 @@ void PartidaController::seleccionarPartidaAContinuar(int id)
         throw std::invalid_argument("Error. Id de partida no valido, intente con otro ");
     }
 }
-set<DataVideojuego *> PartidaController::obtenerVideojuegosDeJugadorConSuscripcionActiva() //pronta, sin compilar
+set<DataVideojuego *> PartidaController::obtenerVideojuegosDeJugadorConSuscripcionActiva(Fecha *f) //pronta, sin compilar
 {
     set<DataVideojuego *> res;
     UsuarioController *uc;
     uc = uc->getInstance();
     jg = dynamic_cast<Jugador *>(uc->getSesion());
-    map<std::string, Videojuego *> vjs = dynamic_cast<Jugador *>(jg)->obtenerVideojuegosConSuscripcionActiva();
+    map<std::string, Videojuego *> vjs = jg->obtenerVideojuegosConSuscripcionActiva(f);
     map<std::string, Videojuego *>::iterator it;
     for (it = vjs.begin(); it != vjs.end(); it++)
     {
@@ -154,18 +154,18 @@ void PartidaController::confirmarIniciarPartida(bool confirmar, Fecha *fechainic
 {
     if (confirmar)
     {
+        int id = this->generarIdPartida();
         Fecha *fechaFin = nullptr;
         if (this->partidaAContinuar != nullptr)
         { //va a continuar una partida indi
-            dynamic_cast<Jugador *>(this->jg)->crearPartidaIndividual(this->partidaAContinuar->getId(), this->partidaAContinuar->getFechaInicio(), this->vj, dynamic_cast<Jugador *>(this->jg), this->partidaAContinuar);
+            dynamic_cast<Jugador *>(this->jg)->crearPartidaIndividual(id, this->partidaAContinuar->getFechaInicio(), this->vj, dynamic_cast<Jugador *>(this->jg), this->partidaAContinuar);
         }
         else if (this->partidaAContinuar == nullptr && participantes.size() == 0)
         {
-            dynamic_cast<Jugador *>(this->jg)->crearPartidaIndividual(this->partidaAContinuar->getId(), *fechainicio, this->vj, dynamic_cast<Jugador *>(this->jg), nullptr);
+            dynamic_cast<Jugador *>(this->jg)->crearPartidaIndividual(id, *fechainicio, this->vj, dynamic_cast<Jugador *>(this->jg), nullptr);
         }
         else
         {
-            int id = this->generarIdPartida();
             dynamic_cast<Jugador *>(this->jg)->crearPartidaMultijugador(id, *fechainicio, nullptr, this->vj, this->transmitida, dynamic_cast<Jugador *>(this->jg), this->participantes);
         }
     }

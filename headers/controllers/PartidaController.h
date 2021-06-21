@@ -32,7 +32,7 @@ public:
     Fecha getFecha();
     int generarIdPartida();
     void seleccionarPartidaAContinuar(int id);
-    set<DataVideojuego *> obtenerVideojuegosDeJugadorConSuscripcionActiva();
+    set<DataVideojuego *> obtenerVideojuegosDeJugadorConSuscripcionActiva(Fecha *f);
     set<DataPartidaIndividual *> obtenerPartidasFinalizadasDeJugador();
     void esTransmitidaEnVivo(bool transmitidaEnVivo);
     set<DataJugador *> obtenerJugadoresConSuscripcionActiva();
