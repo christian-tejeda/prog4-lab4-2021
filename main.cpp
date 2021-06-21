@@ -17,7 +17,7 @@
 #include "headers/entities/Desarrollador.h"
 #include "headers/utils/enums.h"
 
-#include <bits/types/FILE.h>
+//#include <bits/types/FILE.h>
 #include <iostream>
 #include <stdexcept>
 
@@ -171,23 +171,7 @@ void menuIniciarSesion(FactoryController *fact, bool &jg, bool &dev)
 
 void menuModificarFechaSistema(int &dia, int &mes, int &anio, int &hora, int &minuto)
 {
-    std::cout << "Todos los valores deben ser enteros.";
-    /*std::cout << "\n";
-        std::cout << "Ingrese el anio: ";
-        std::cin >> anio;
-        std::cout << "\n";
-        std::cout << "Ingrese mes: ";
-        std::cin >> mes;
-        std::cout << "\n";
-        std::cout << "Ingrese el dia: ";
-        std::cin >> dia;
-        std::cout << "\n";
-        std::cout << "Ingrese la hora: ";
-        std::cin >> hora;
-        std::cout << "\n";
-        std::cout << "Ingrese el minuto: ";
-        std::cin >> minuto;
-        std::cout << "\n";*/
+    std::cout << "Todos los valores deben ser enteros.\n";
     std::cout << "Ingrese dia: ";
     std::cin >> dia;
     if (dia > 31 || dia < 1)
@@ -255,6 +239,113 @@ void menuCargarDatosPrueba(UsuarioHandler *uh, VideojuegoHandler *vh, CategoriaH
     ch->crearNuevaCategoria("Teen", "Su contenido esta dirigido a jovenes de 13 anos en adelante", otrasCategorias);
     ch->crearNuevaCategoria("E", "Su contenido esta dirigido para todo publico", otrasCategorias);
 
+    //Carga de videojuegos
+    Categoria *cv1, *cv2, *cv3, *cv4, *cv5, *cv6, *cv7, *cv8;
+    cv1 = ch->obtenerCategoriaPorId("PC");
+    cv2 = ch->obtenerCategoriaPorId("PS4");
+    cv3 = ch->obtenerCategoriaPorId("XBox One");
+    cv4 = ch->obtenerCategoriaPorId("Deporte");
+    cv5 = ch->obtenerCategoriaPorId("Supervivencia");
+    cv6 = ch->obtenerCategoriaPorId("Estrategia");
+    cv7 = ch->obtenerCategoriaPorId("Teen");
+    cv8 = ch->obtenerCategoriaPorId("E");
+
+    std::map<TipoPeriodoValidez, float> susc1;
+    susc1.insert(pair<TipoPeriodoValidez, float>(mensual, 1));
+    susc1.insert(pair<TipoPeriodoValidez, float>(trimestral, 2));
+    susc1.insert(pair<TipoPeriodoValidez, float>(anual, 7));
+    susc1.insert(pair<TipoPeriodoValidez, float>(vitalicia, 14));
+    std::pair<float, int> ratings1;
+    std::map<std::string, Categoria *> cats1;
+    std::set<ContratoSuscripcion *> contratos1;
+    Videojuego *vj1 = new Videojuego("KingdomRush",
+                                     "prueba",
+                                     susc1,
+                                     ratings1,
+                                     contratos1,
+                                     cats1,
+                                     "Ironhide Game Studio");
+    vj1->agregarCategoria(*cv1);
+    vj1->agregarCategoria(*cv2);
+    vj1->agregarCategoria(*cv6);
+    vj1->agregarCategoria(*cv8);
+    vh->agregarVideojuego(vj1);
+    Desarrollador *des1 = dynamic_cast<Desarrollador *>(uh->obtenerUsuarioPorId("ironhide@mail.com"));
+    des1->agregarVideojuegoPublicado(vj1);
+
+    std::map<TipoPeriodoValidez, float> susc2;
+    susc2.insert(pair<TipoPeriodoValidez, float>(mensual, 3));
+    susc2.insert(pair<TipoPeriodoValidez, float>(trimestral, 8));
+    susc2.insert(pair<TipoPeriodoValidez, float>(anual, 30));
+    susc2.insert(pair<TipoPeriodoValidez, float>(vitalicia, 60));
+    std::pair<float, int> ratings2;
+    std::map<std::string, Categoria *> cats2;
+    std::set<ContratoSuscripcion *> contratos2;
+    Videojuego *vj2 = new Videojuego("Fortnite",
+                                     "prueba 2",
+                                     susc2,
+                                     ratings2,
+                                     contratos2,
+                                     cats2,
+                                     "Epic Games");
+
+    vj2->agregarCategoria(*cv1);
+    vj2->agregarCategoria(*cv2);
+    vj2->agregarCategoria(*cv3);
+    vj2->agregarCategoria(*cv5);
+    vj2->agregarCategoria(*cv7);
+    vh->agregarVideojuego(vj2);
+    Desarrollador *des2 = dynamic_cast<Desarrollador *>(uh->obtenerUsuarioPorId("epic@mail.com"));
+    des2->agregarVideojuegoPublicado(vj2);
+
+    std::map<TipoPeriodoValidez, float> susc3;
+    susc3.insert(pair<TipoPeriodoValidez, float>(mensual, 2));
+    susc3.insert(pair<TipoPeriodoValidez, float>(trimestral, 5));
+    susc3.insert(pair<TipoPeriodoValidez, float>(anual, 20));
+    susc3.insert(pair<TipoPeriodoValidez, float>(vitalicia, 40));
+    std::pair<float, int> ratings3;
+    std::map<std::string, Categoria *> cats3;
+    std::set<ContratoSuscripcion *> contratos3;
+    Videojuego *vj3 = new Videojuego("Minecraft",
+                                     "prueba 3",
+                                     susc3,
+                                     ratings3,
+                                     contratos3,
+                                     cats3,
+                                     "Mojang Studios");
+
+    vj3->agregarCategoria(*cv1);
+    vj3->agregarCategoria(*cv5);
+    vj3->agregarCategoria(*cv8);
+    vh->agregarVideojuego(vj3);
+    Desarrollador *des3 = dynamic_cast<Desarrollador *>(uh->obtenerUsuarioPorId("mojang@mail.com"));
+    des3->agregarVideojuegoPublicado(vj3);
+
+    std::map<TipoPeriodoValidez, float> susc4;
+    susc4.insert(pair<TipoPeriodoValidez, float>(mensual, 3));
+    susc4.insert(pair<TipoPeriodoValidez, float>(trimestral, 8));
+    susc4.insert(pair<TipoPeriodoValidez, float>(anual, 28));
+    susc4.insert(pair<TipoPeriodoValidez, float>(vitalicia, 50));
+    std::pair<float, int> ratings4;
+    std::map<std::string, Categoria *> cats4;
+    std::set<ContratoSuscripcion *> contratos4;
+    Videojuego *vj4 = new Videojuego("FIFA 21",
+                                     "prueba 4",
+                                     susc4,
+                                     ratings4,
+                                     contratos4,
+                                     cats4,
+                                     "EA Sports");
+
+    vj4->agregarCategoria(*cv1);
+    vj4->agregarCategoria(*cv2);
+    vj4->agregarCategoria(*cv3);
+    vj4->agregarCategoria(*cv4);
+    vj4->agregarCategoria(*cv8);
+    vh->agregarVideojuego(vj4);
+    Desarrollador *des4 = dynamic_cast<Desarrollador *>(uh->obtenerUsuarioPorId("ea@mail.com"));
+    des4->agregarVideojuegoPublicado(vj4);
+
     delete d1;
     delete d2;
     delete d3;
@@ -266,7 +357,6 @@ void menuCargarDatosPrueba(UsuarioHandler *uh, VideojuegoHandler *vh, CategoriaH
     delete j5;
     delete d5;
 
-    //Carga de videojuegos
     std::cout << "¡Datos cargados correctamente!\n";
 }
 
@@ -291,7 +381,7 @@ void menuJugador(Usuario *sesion)
     std::cout << "+-----------------------------------------------------------+\n";
 }
 
-void menuSuscribirseVideojuego(FactoryController *fact)
+void menuSuscribirseVideojuego(FactoryController *fact, Fecha *f)
 {
     ISuscribirseVideojuego *iSuscAVj = fact->getISuscribirseVideojuego();
 
@@ -328,12 +418,12 @@ void menuSuscribirseVideojuego(FactoryController *fact)
     }
 
     std::string nombreVideojuego;
-
+    std::cin.ignore();
     std::cout << "\n";
     std::cout << "Ingrese el nombre del Videojuego:";
     std::cout << " \n";
-
-    std::cin >> nombreVideojuego;
+    std::getline(std::cin, nombreVideojuego);
+    //std::cin >> nombreVideojuego;
 
     iSuscAVj->seleccionarVideojuego(nombreVideojuego);
 
@@ -371,40 +461,40 @@ void menuSuscribirseVideojuego(FactoryController *fact)
             return;
 
         iSuscAVj->cancelarSuscripcion();
+    }
 
-        std::cout << "Elija el tipo de suscripcion a contratar:";
-        std::cout << " \n";
-        std::cout << "1) Vitalicia";
-        std::cout << "2) Mensual";
-        std::cout << "3) Trimestral";
-        std::cout << "4) Anual";
-        std::cout << " \n";
+    std::cout << "Elija el tipo de suscripcion a contratar:";
+    std::cout << " \n";
+    std::cout << "1) Vitalicia\n";
+    std::cout << "2) Mensual\n";
+    std::cout << "3) Trimestral\n";
+    std::cout << "4) Anual\n";
+    std::cout << " \n";
 
-        int validez;
-        std::cin >> validez;
+    int validez;
+    std::cin >> validez;
 
-        std::cout << "Indique el Metodo de Pago:";
-        std::cout << " \n";
-        std::cout << "1- Tarjeta";
-        std::cout << "2- Paypal";
-        std::cout << " \n";
+    std::cout << "Indique el Metodo de Pago:";
+    std::cout << " \n";
+    std::cout << "1- Tarjeta\n";
+    std::cout << "2- Paypal\n";
+    std::cout << " \n";
 
-        int metodoPago;
-        std::cin >> metodoPago;
+    int metodoPago;
+    std::cin >> metodoPago;
 
-        std::cout << "Desea confirmar la Suscripcion?";
-        std::cout << " \n";
-        std::cout << "1- Si";
-        std::cout << "2- No";
+    std::cout << "Desea confirmar la Suscripcion?";
+    std::cout << " \n";
+    std::cout << "1- Si\n";
+    std::cout << "2- No\n";
 
-        int confirmar;
-        std::cin >> confirmar;
+    int confirmar;
+    std::cin >> confirmar;
 
-        if (confirmar == 1)
-        {
-            bool conf = confirmar == 1;
-            iSuscAVj->confirmarSuscripcion(conf);
-        }
+    if (confirmar == 1)
+    {
+        bool conf = confirmar == 1;
+        iSuscAVj->confirmarSuscripcion(conf, f);
     }
 }
 
@@ -432,7 +522,7 @@ void menuAsignarPuntaje(FactoryController *fact)
     std::cin >> punt;
     while (punt > 5 || punt < 0)
     {
-        std::cout << "Seleccione un puntaje corrcto o  dijite cero(0) si desea cancelar\n";
+        std::cout << "Seleccione un puntaje corrcto o  digite cero(0) si desea cancelar\n";
         std::cin >> punt;
     }
     if (punt != 0)
@@ -448,10 +538,10 @@ void menuAsignarPuntaje(FactoryController *fact)
     ap->~IAsignarPuntaje();
 }
 
-void menuIniciarPartida(FactoryController *fact, Fecha fechainicio)
+void menuIniciarPartida(FactoryController *fact, Fecha *fechainicio)
 {
     IIniciarPartida *ip = fact->getIIniciarPartida();
-    set<DataVideojuego *> videojuegosDeJgConSus = ip->obtenerVideojuegosDeJugadorConSuscripcionActiva();
+    set<DataVideojuego *> videojuegosDeJgConSus = ip->obtenerVideojuegosDeJugadorConSuscripcionActiva(fechainicio);
     std::cout << "Videojuegos con Suscripcion: \n";
     set<DataVideojuego *>::iterator it;
     for (it = videojuegosDeJgConSus.begin(); it != videojuegosDeJgConSus.end(); it++)
@@ -464,8 +554,9 @@ void menuIniciarPartida(FactoryController *fact, Fecha fechainicio)
         while (!juegoValido)
         {
             std::string nombreJueguito;
+            std::cin.ignore();
             std::cout << "Ingrese el nombre del videojuego que desea iniciar partida: ";
-            std::cin >> nombreJueguito;
+            std::getline(std::cin, nombreJueguito);
             try
             {
                 juegoValido = true;
@@ -478,7 +569,7 @@ void menuIniciarPartida(FactoryController *fact, Fecha fechainicio)
             }
         }
         char tipoPartida = '3';
-        while (tipoPartida != '1' || tipoPartida != '2')
+        while (tipoPartida != '1' && tipoPartida != '2')
         {
             std::cout << "Que tipo de partida desea iniciar?  \n  \n";
             std::cout << "1 Partida Individual  \n";
@@ -492,9 +583,9 @@ void menuIniciarPartida(FactoryController *fact, Fecha fechainicio)
         if (tipoPartida == '1')
         { //partida individual
             char continuaa = 'r';
-            while (continuaa != 'y' || continuaa != 'n')
+            while (continuaa != 'y' && continuaa != 'n')
             {
-                std::cout << "Desea continuar una partida? ";
+                std::cout << "Desea continuar una partida? (y/n) ";
                 std::cin >> continuaa;
                 std::cout << " \n";
             }
@@ -534,7 +625,7 @@ void menuIniciarPartida(FactoryController *fact, Fecha fechainicio)
                 }
             }
             char confirmar = 'r';
-            while (confirmar != 'y' || confirmar != 'n')
+            while (confirmar != 'y' && confirmar != 'n')
             {
                 std::cout << "Desea confirmar el inicio de partida? (y/n) ";
                 std::cin >> confirmar;
@@ -543,12 +634,12 @@ void menuIniciarPartida(FactoryController *fact, Fecha fechainicio)
             bool confirmamo = false;
             if (confirmar == 'y')
                 confirmamo = true;
-            ip->confirmarIniciarPartida(confirmamo, &fechainicio);
+            ip->confirmarIniciarPartida(confirmamo, fechainicio);
         }
         else
         { //partida multijugador
             char transmitir = 'r';
-            while (transmitir != 'y' || transmitir != 'n')
+            while (transmitir != 'y' && transmitir != 'n')
             {
                 std::cout << "Desea que su partida sea transmitida en vivo? (y/n) ";
                 std::cin >> transmitir;
@@ -561,47 +652,51 @@ void menuIniciarPartida(FactoryController *fact, Fecha fechainicio)
             set<DataJugador *> jugadores = ip->obtenerJugadoresConSuscripcionActiva();
             set<DataJugador *>::iterator it;
             set<std::string> nombreJugadoresConSus;
-            for (it = jugadores.begin(); it != jugadores.end(); it++)
+            if (jugadores.size() > 0)
             {
-                std::cout << "Nickname: " << (*it)->getNickname() << "\n";
-                nombreJugadoresConSus.insert((*it)->getNickname());
+                for (it = jugadores.begin(); it != jugadores.end(); it++)
+                {
+                    std::cout << "Nickname: " << (*it)->getNickname() << "\n";
+                    nombreJugadoresConSus.insert((*it)->getNickname());
+                }
+                char masJugadores = 'r';
+                std::cout << "Desea agregar un jugador a la partida? (y/n) ";
+                std::cin >> masJugadores;
+                std::cout << "\n";
+                while (masJugadores == 'y')
+                { //agregando jugadores
+                    set<std::string>::iterator it2;
+                    std::string jugadorAgregar;
+                    std::cout << "Ingrese el nickname del jugador: ";
+                    std::cin >> jugadorAgregar;
+                    it2 = nombreJugadoresConSus.find(jugadorAgregar);
+                    if (it2 == nombreJugadoresConSus.end())
+                    {
+                        std::cout << "Jugador con ese nombre y suscripcion no encontrado, intente con otro \n";
+                    }
+                    else
+                    {
+                        std::cout << "Jugador ingresado \n";
+                        ip->seleccionarJugador(jugadorAgregar);
+                    }
+                    char seguirAgregando = 'r';
+                    while (seguirAgregando != 'y' && seguirAgregando != 'n')
+                    {
+                        std::cout << "Desea agregar otro jugador a la partida? (y/n) \n";
+                        std::cin >> seguirAgregando;
+                    }
+                    if (seguirAgregando == 'y')
+                    {
+                        masJugadores = 'y';
+                    }
+                    else
+                        masJugadores = 'n';
+                }
             }
-            char masJugadores = 'r';
-            std::cout << "Desea agregar un jugador a la partida? (y/n) ";
-            std::cin >> masJugadores;
-        std:
-            cout << "\n";
-            while (masJugadores == 'y')
-            { //agregando jugadores
-                set<std::string>::iterator it2;
-                std::string jugadorAgregar;
-                std::cout << "Ingrese el nickname del jugador: ";
-                std::cin >> jugadorAgregar;
-                it2->find(jugadorAgregar);
-                if (it2 == nombreJugadoresConSus.end())
-                {
-                    std::cout << "Jugador con ese nombre y suscripcion no encontrado, intente con otro \n";
-                }
-                else
-                {
-                    std::cout << "Jugador ingresado \n";
-                    ip->seleccionarJugador(jugadorAgregar);
-                }
-                char seguirAgregando = 'r';
-                while (seguirAgregando != 'y' && seguirAgregando != 'n')
-                {
-                    std::cout << "Desea agregar otro jugador a la partida? (y/n) \n";
-                    std::cin >> seguirAgregando;
-                }
-                if (seguirAgregando == 'y')
-                {
-                    masJugadores = 'y';
-                }
-                else
-                    masJugadores = 'n';
-            }
+            else
+                std::cout << "No hay otros jugadores suscritos a éste juego.\n";
             char confirmar = 'r';
-            while (confirmar != 'y' || confirmar != 'n')
+            while (confirmar != 'y' && confirmar != 'n')
             {
                 std::cout << "Desea confirmar el inicio de partida? (y/n) ";
                 std::cin >> confirmar;
@@ -610,7 +705,7 @@ void menuIniciarPartida(FactoryController *fact, Fecha fechainicio)
             bool confirmamo = false;
             if (confirmar == 'y')
                 confirmamo = true;
-            ip->confirmarIniciarPartida(confirmamo, &fechainicio);
+            ip->confirmarIniciarPartida(confirmamo, fechainicio);
         }
     }
     else
@@ -624,21 +719,26 @@ void menuAbandonarPartidaMulti(FactoryController *fact, Fecha *fs)
     IAbandonarPartida *iap = fact->getIAbandonarPartida();
 
     set<DataPartidaMultijugador *> colDtMulti = iap->obtenerPartidasMultijugadorActivasDeJugador();
-    set<DataPartidaMultijugador *>::iterator it;
-    std::cout << "ID \t Comienzo \t Videojuego \t Transmitida?  \n";
-    std::cout << "----------------------------------------------------------\n";
-    for (it = colDtMulti.begin(); it != colDtMulti.end(); it++)
+    if (colDtMulti.size() > 0)
     {
-        std::cout << (*it)->getId() << " \t " << (*it)->getFechaInicio() << " \t " << (*it)->getVideojuego().getNombre() << " \t " << (*it)->getTramistida() << "\n";
+        set<DataPartidaMultijugador *>::iterator it;
+        std::cout << "ID \t Comienzo \t Videojuego \t Transmitida?  \n";
+        std::cout << "----------------------------------------------------------\n";
+        for (it = colDtMulti.begin(); it != colDtMulti.end(); it++)
+        {
+            std::cout << (*it)->getId() << " \t " << (*it)->getFechaInicio() << " \t " << (*it)->getVideojuego().getNombre() << " \t " << (*it)->getTramistida() << "\n";
+        }
+
+        int promptPartida;
+        std::cout << "Indique partida a abandonar\n";
+        std::cout << ">";
+        std::cin >> promptPartida;
+
+        iap->abandonarPartida(promptPartida, fs);
+        std::cout << "¡Salida de partida registrada! \n";
     }
-
-    int promptPartida;
-    std::cout << "Indique partida a abandonar\n";
-    std::cout << ">";
-    std::cin >> promptPartida;
-
-    iap->abandonarPartida(promptPartida, fs);
-    std::cout << "¡Salida de partida registrada! \n";
+    else
+        std::cout << "No tenés partidas activas.\n";
 
     delete iap;
 }
@@ -649,7 +749,7 @@ void menuFinalizarPartida(FactoryController *fact, Fecha *fecha)
     set<DataPartida *> part = fp->obtenerPartidasSinFinalizarDeJugador();
     if (part.size() != 0)
     {
-        std::cout << "Seleccione la Partida a Finalizar:  \n";
+        std::cout << "Ingrese ID de la Partida a Finalizar:  \n";
         set<DataPartida *>::iterator it;
         for (it = part.begin(); it != part.end(); it++)
         {
@@ -679,6 +779,7 @@ void menuFinalizarPartida(FactoryController *fact, Fecha *fecha)
             std::cout << " \n \n";
         }
         int seleccion;
+        std::cout << ">";
         std::cin >> seleccion;
         fp->finalizarPartida(seleccion, fecha);
         std::cout << "La partida ha sido finalizada \n";
@@ -708,14 +809,14 @@ void menuVerInfoVideojuego(FactoryController *fact)
             std::cout << imprimir->getNombre() << "\n";
         }
 
+        std::cin.ignore();
         std::cout << "Seleccione el Videojuego que desea ver la informacion:  \n";
         std::cout << ">";
-        std::cin >> nombre;
+        std::getline(std::cin, nombre);
         std::cout << "\n";
         DataVideojuego *datav = iviv->obtenerDataVideojuego(nombre); //controlar aca la cuestion si es Desaroollador o no
         std::string empresa = datav->getNombreEmpresa();
         map<TipoPeriodoValidez, float> suss = datav->getSuscripciones();
-        std::cout << suss.size();
         float mens = suss.find(mensual)->second;
         float tri = suss[trimestral];
         float anu = suss[anual];
@@ -837,7 +938,7 @@ void menuAgregarCategoria(FactoryController *fact)
     std::cin.ignore();
     std::getline(std::cin, agregar);
     std::cout << "Introduzca la descripcion de la cateogria agregar: ";
-    std::cin.ignore();
+    //std::cin.ignore();
     std::getline(std::cin, desc);
     std::cout << "Confirma que desea agregar esta nueva categoria?\n";
     std::cout << "    -Nombre: " << agregar << "\n";
@@ -853,7 +954,7 @@ void menuAgregarCategoria(FactoryController *fact)
     }
     //std::cin >> op2;
     ac->agregarCategoria(agregar, desc, tipo);
-    ac->confirmarAgregarCategoria(op2 == 2);
+    ac->confirmarAgregarCategoria(op2 == 1);
     std::cout << "\n";
     ac->~IAgregarCategoria();
 }
@@ -868,7 +969,7 @@ void menuPublicarVideojuego(FactoryController *fact)
     std::cout << "Ingrese un nombre para el videojuego: ";
     std::getline(std::cin, nombreVdj);
     std::cout << "Ingrese una descripción para el videojuego: ";
-    std::cin.ignore();
+    //std::cin.ignore();
     std::getline(std::cin, descVdj);
     std::cout << "Ingrese el coste de cada periodo:\n";
 
@@ -1081,33 +1182,35 @@ void menuSeleccionarEstadisticas(FactoryController *fact)
     se->seleccionarEstadisticas(quiere);
 }
 
-void menuConsultarEstadisticas(FactoryController * fact)
+void menuConsultarEstadisticas(FactoryController *fact)
 {
-    IConsultarEstadisticas * ce = fact->getIConsultarEstadisticas();
-    std::set<DataVideojuego*> dtvjs = ce->obtenerVideojuegosPublicadosPorDesarrollador();
-    std::set<DataVideojuego*>::iterator it;
-    std::cout << "Seleccione un videojuego para consultar sus estadisticas  \n" ;
-    for(it = dtvjs.begin();it != dtvjs.end(); it++){
+    IConsultarEstadisticas *ce = fact->getIConsultarEstadisticas();
+    std::set<DataVideojuego *> dtvjs = ce->obtenerVideojuegosPublicadosPorDesarrollador();
+    std::set<DataVideojuego *>::iterator it;
+    std::cout << "Seleccione un videojuego para consultar sus estadisticas  \n";
+    for (it = dtvjs.begin(); it != dtvjs.end(); it++)
+    {
         std::cout << (*it)->getNombre() << " \n";
     }
-    std::string juegoName = "" ;
+    std::string juegoName = "";
     std::cout << "Escriba el nombre del videojuego: ";
     std::cin >> juegoName;
-    std::set<DataEstadistica*> estadis = ce->calcularEstadisticas(juegoName);
-    std::set<DataEstadistica*>::iterator it2;
-    std::cout << "Estadisticas  \n" ;
-    for(it2 = estadis.begin();it2 != estadis.end(); it2++){
+    std::set<DataEstadistica *> estadis = ce->calcularEstadisticas(juegoName);
+    std::set<DataEstadistica *>::iterator it2;
+    std::cout << "Estadisticas  \n";
+    for (it2 = estadis.begin(); it2 != estadis.end(); it2++)
+    {
         switch ((*it2)->getEstadistica())
         {
         case 1:
-            std::cout << "Total horas jugadas: "<< (*it2)->getResultado() << "\n";
+            std::cout << "Total horas jugadas: " << (*it2)->getResultado() << "\n";
             break;
-        
+
         case 2:
-            std::cout << "Promedio rating: "<< (*it2)->getResultado() << "\n";
+            std::cout << "Promedio rating: " << (*it2)->getResultado() << "\n";
             break;
         case 3:
-            std::cout << "Cantidad total suscritos: "<< (*it2)->getResultado() << "\n";
+            std::cout << "Cantidad total suscritos: " << (*it2)->getResultado() << "\n";
             break;
         }
     }
@@ -1203,7 +1306,7 @@ int main(int argc, char const *argv[])
             case 1: //Suscribirse a videojuego
                 try
                 {
-                    menuSuscribirseVideojuego(fact);
+                    menuSuscribirseVideojuego(fact, fechaSist);
                 }
                 catch (const std::invalid_argument &ex)
                 {
@@ -1223,7 +1326,7 @@ int main(int argc, char const *argv[])
             case 3: //Iniciar partida
                 try
                 {
-                    menuIniciarPartida(fact, *fechaSist);
+                    menuIniciarPartida(fact, fechaSist);
                 }
                 catch (const std::invalid_argument &ex)
                 {
@@ -1268,7 +1371,7 @@ int main(int argc, char const *argv[])
                     int anio = 0;
                     int hora = 0;
                     int minuto = 0;
-                    void menuModificarFechaSistema(int dia, int mes, int anio, int hora, int minuto);
+                    menuModificarFechaSistema(dia, mes, anio, hora, minuto);
                     delete fechaSist;
                     fechaSist = new Fecha(dia, mes, anio, hora, minuto);
                 }

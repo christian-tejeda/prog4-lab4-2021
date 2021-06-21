@@ -58,14 +58,18 @@ void UsuarioHandler::agregarUsuario(DataUsuario *usuario)
     this->users.insert(std::pair<std::string, Usuario *>(user->getEmail(), user));
 }
 
-map<string, Usuario *> UsuarioHandler::obtenerJugadoresConSuscripcionActiva(Videojuego *vj) { 
-    map<string,Usuario*>::iterator it;
-    map<string,Usuario*> res;
-    for(it = this->users.begin();it != this->users.end(); it++){
-        Jugador * testJugador = dynamic_cast<Jugador*>(it->second);
-        if(testJugador != nullptr){
-            if(dynamic_cast<Jugador*>(it->second)->tieneSuscripcionActiva(vj)){
-                res.insert({it->first,it->second});
+map<string, Usuario *> UsuarioHandler::obtenerJugadoresConSuscripcionActiva(Videojuego *vj)
+{
+    map<string, Usuario *>::iterator it;
+    map<string, Usuario *> res;
+    for (it = this->users.begin(); it != this->users.end(); it++)
+    {
+        Jugador *testJugador = dynamic_cast<Jugador *>(it->second);
+        if (testJugador != nullptr)
+        {
+            if (dynamic_cast<Jugador *>(it->second)->tieneSuscripcionActiva(vj))
+            {
+                res.insert(std::pair<std::string, Usuario *>(it->first, it->second));
             }
         }
     }
@@ -106,10 +110,11 @@ bool UsuarioHandler::tienePartidaSinFinalizar(Videojuego *vj)
     map<std::string, Usuario *> users = this->users;
     map<std::string, Usuario *>::iterator it;
     bool tiene = false;
-    for (it = users.begin(); it != users.end(); it++){
+    for (it = users.begin(); it != users.end(); it++)
+    {
         Jugador *jugador = dynamic_cast<Jugador *>(it->second);
-        if(jugador!=nullptr)
-            if (!tiene) 
+        if (jugador != nullptr)
+            if (!tiene)
                 tiene = jugador->tienePartidaSinFinalizar(vj);
     }
     return tiene;

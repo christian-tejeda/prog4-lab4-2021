@@ -8,6 +8,7 @@
 //#include "../../headers/entities/Genero.h"
 //#include "../../headers/entities/Plataforma.h"
 #include "../../headers/handlers/VideojuegoHandler.h"
+#include "../../headers/controllers/VideojuegoController.h"
 
 using namespace std;
 
@@ -30,29 +31,34 @@ void VideojuegoHandler::agregarVideojuego(Videojuego *vj)
     this->vjs.insert(std::pair<std::string, Videojuego *>(vj->getNombre(), vj));
 }
 
-map<string, Videojuego *> VideojuegoHandler::obtenerVideojuegos() { 
-    return this->vjs; 
+map<string, Videojuego *> VideojuegoHandler::obtenerVideojuegos()
+{
+    return this->vjs;
 }
 
-Videojuego *VideojuegoHandler::obtenerVideojuegoPorId(string nombre) {
-    map<string,Videojuego*>::iterator it;
+Videojuego *VideojuegoHandler::obtenerVideojuegoPorId(string nombre)
+{
+    map<string, Videojuego *>::iterator it;
     it = this->vjs.find(nombre);
-    if(it == this->vjs.end()){
+    if (it == this->vjs.end())
+    {
         return nullptr;
     }
-    else return it->second;
-     }
+    else
+        return it->second;
+}
 
 void VideojuegoHandler::eliminarVideojuego(Videojuego *vj)
 {
     string clave = vj->getNombre();
     this->vjs.erase(clave);
-    //delete vj;
+    delete vj;
 }
 
 map<string, Jugador *> VideojuegoHandler::obtenerJugadoresVideojuego(Videojuego *vj) { return map<string, Jugador *>(); }
 
-set<std::string> VideojuegoHandler::obtenerNombresVideojuegos(){
+set<std::string> VideojuegoHandler::obtenerNombresVideojuegos()
+{
     map<string, Videojuego *>::iterator it;
     set<std::string> res;
     for (it = this->vjs.begin(); it != this->vjs.end(); it++)
@@ -62,7 +68,17 @@ set<std::string> VideojuegoHandler::obtenerNombresVideojuegos(){
     return res;
 }
 
-VideojuegoHandler::~VideojuegoHandler() {}
+VideojuegoHandler::~VideojuegoHandler()
+{
+    map<string, Videojuego *>::iterator it;
+    VideojuegoController *vc = new VideojuegoController;
+    for (it = this->vjs.begin(); it != this->vjs.end(); it++)
+    {
+        vc->seleccionarVideojuego(it->second->getNombre());
+        vc->confirmarEliminarVideojuego(true);
+    }
+    this->vjs.clear();
+}
 
 void VideojuegoHandler::releaseInstance()
 {

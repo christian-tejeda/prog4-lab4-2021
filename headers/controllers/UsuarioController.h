@@ -19,7 +19,8 @@ class UsuarioController : public ISeleccionarEstadisticas,
                           public IConsultarEstadisticas,
                           public ISuscribirseVideojuego,
                           public IIniciarSesion,
-                          public IAltaUsuario {
+                          public IAltaUsuario
+{
 private:
   static UsuarioController *instancia;
 
@@ -56,7 +57,7 @@ public:
   void cancelarSuscripcion();
   void contratarSuscripcion(TipoPeriodoValidez validez,
                             TipoMetodoPago metodoPago);
-  void confirmarSuscripcion(bool confirmar);
+  void confirmarSuscripcion(bool confirmar, Fecha *f);
 
   /// IIniciarSesion
   bool iniciarSesion(string mail, string password);
