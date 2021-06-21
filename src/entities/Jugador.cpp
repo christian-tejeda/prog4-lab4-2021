@@ -222,32 +222,38 @@ map<std::string,Videojuego*> Jugador::obtenerVideojuegosConSuscripcionActiva(Fec
     return res;
 }
 
-void Jugador::crearPartidaIndividual(int idPartida,Fecha fechaActual,Videojuego * vj,Jugador *host,PartidaIndividual * cont){
-    if(cont == nullptr){
-        PartidaIndividual * parti =new PartidaIndividual(idPartida,fechaActual,nullptr,0,vj,this,nullptr);
-        this->partidasIniciadas.insert({idPartida,parti});
-    }
-    else{
-        map<int,Partida*>::iterator it;
-        it = this->partidasIniciadas.find(idPartida);
-        float duracioon = dynamic_cast<PartidaIndividual *>(it->second)->getDuracionTotal();
-        this->partidasIniciadas.erase(idPartida);
-        PartidaIndividual * parti =new PartidaIndividual(idPartida,fechaActual,nullptr,duracioon,vj,this,cont);
-        this->partidasIniciadas.insert({idPartida,parti});
-    }
+void Jugador::crearPartidaIndividual(int idPartida, Fecha fechaActual, Videojuego *vj, Jugador *host, PartidaIndividual *cont)
+{
+  if (cont == nullptr)
+  {
+    PartidaIndividual *parti = new PartidaIndividual(idPartida, fechaActual, nullptr, 0, vj, this, nullptr);
+    this->partidasIniciadas.insert(std::pair<int, PartidaIndividual *>(idPartida, parti));
+  }
+  else
+  {
+    map<int, Partida *>::iterator it;
+    it = this->partidasIniciadas.find(cont->getId());
+    float duracioon = dynamic_cast<PartidaIndividual *>(it->second)->getDuracionTotal();
+    this->partidasIniciadas.erase(idPartida);
+    PartidaIndividual *parti = new PartidaIndividual(idPartida, fechaActual, nullptr, duracioon, vj, this, cont);
+    this->partidasIniciadas.insert(std::pair<int, PartidaIndividual *>(idPartida, parti));
+  }
 }
 
-void Jugador::crearPartidaMultijugador(int idPartida, Fecha fechaActual, Fecha *fechaFin, Videojuego * vj, bool transmitida, Jugador * host, map<string, Jugador *> participantes){
-    set<DuracionParticipante * > durpart;
-    map<string,Jugador*>::iterator it;
-    DuracionParticipante * durparticipantehost = new DuracionParticipante(&fechaActual,nullptr,host);
-    durpart.insert(durparticipantehost);
-    for(it = participantes.begin();it != participantes.end();it++){
-        DuracionParticipante * durparticipante = new DuracionParticipante(&fechaActual,nullptr,it->second);
-        durpart.insert(durparticipante);
-    }
-    PartidaMultijugador * partim = new PartidaMultijugador(idPartida, fechaActual, nullptr,0,vj,host,transmitida,durpart);
-    this->partidasIniciadas.insert({idPartida,partim});
+void Jugador::crearPartidaMultijugador(int idPartida, Fecha fechaActual, Fecha *fechaFin, Videojuego *vj, bool transmitida, Jugador *host, map<string, Jugador *> participantes)
+{
+  set<DuracionParticipante *> durpart;
+  map<string, Jugador *>::iterator it;
+  //DuracionParticipante *durparticipantehost = new DuracionParticipante(&fechaActual, nullptr, host);
+  //durpart.insert(durparticipantehost);
+  for (it = participantes.begin(); it != participantes.end(); it++)
+  {
+    DuracionParticipante *durparticipante = new DuracionParticipante(&fechaActual, nullptr, it->second);
+    durpart.insert(durparticipante);
+  }
+  PartidaMultijugador *partim = new PartidaMultijugador(idPartida, fechaActual, nullptr, 0, vj, host, transmitida, durpart);
+  this->partidasIniciadas.insert(std::pair<int, PartidaMultijugador *>(idPartida, partim));
 }
+
 
 Jugador::~Jugador(){};

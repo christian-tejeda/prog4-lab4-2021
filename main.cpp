@@ -616,7 +616,7 @@ void menuIniciarPartida(FactoryController *fact, Fecha *fechainicio)
                 std::cout << " \n";
             }
             if (continuaa == 'y')
-            { //va a continuar una partida
+            { //va a continuar una partida 
                 set<DataPartidaIndividual *> partidasfin = ip->obtenerPartidasFinalizadasDeJugador();
                 if (partidasfin.size() != 0)
                 { //hay partidas para continuar
@@ -624,7 +624,7 @@ void menuIniciarPartida(FactoryController *fact, Fecha *fechainicio)
                     set<DataPartidaIndividual *>::iterator it;
                     for (it = partidasfin.begin(); it != partidasfin.end(); it++)
                     {
-                        std::cout << "Nombre videojuego: " << (*it)->getVideojuego().getNombre();
+                        std::cout << "Nombre videojuego: " << (*it)->getVideojuego()->getNombre();
                         std::cout << "  Id partida: " << (*it)->getId() << " \n ";
                     }
                     int numeroPartida = -1;
@@ -678,9 +678,9 @@ void menuIniciarPartida(FactoryController *fact, Fecha *fechainicio)
             set<DataJugador *> jugadores = ip->obtenerJugadoresConSuscripcionActiva();
             set<DataJugador *>::iterator it;
             set<std::string> nombreJugadoresConSus;
-            if (jugadores.size() > 0)
+            if (jugadores.size() > 1)
             {
-                for (it = jugadores.begin(); it != jugadores.end(); it++)
+                for (it = jugadores.begin(); it != jugadores.end(); it++)//lista los jugadores
                 {
                     std::cout << "Nickname: " << (*it)->getNickname() << "\n";
                     nombreJugadoresConSus.insert((*it)->getNickname());
@@ -689,6 +689,7 @@ void menuIniciarPartida(FactoryController *fact, Fecha *fechainicio)
                 std::cout << "Desea agregar un jugador a la partida? (y/n) ";
                 std::cin >> masJugadores;
                 std::cout << "\n";
+                std::set<std::string> jugadoresAAgregar;
                 while (masJugadores == 'y')
                 { //agregando jugadores
                     set<std::string>::iterator it2;
@@ -703,7 +704,8 @@ void menuIniciarPartida(FactoryController *fact, Fecha *fechainicio)
                     else
                     {
                         std::cout << "Jugador ingresado \n";
-                        ip->seleccionarJugador(jugadorAgregar);
+                        jugadoresAAgregar.insert(jugadorAgregar);
+                        //ip->seleccionarJugador(jugadorAgregar);
                     }
                     char seguirAgregando = 'r';
                     while (seguirAgregando != 'y' && seguirAgregando != 'n')
@@ -718,18 +720,23 @@ void menuIniciarPartida(FactoryController *fact, Fecha *fechainicio)
                     else
                         masJugadores = 'n';
                 }
+                std::set<std::string>::iterator itstring;
+                for(itstring = jugadoresAAgregar.begin();itstring != jugadoresAAgregar.end();it++){
+                    ip->seleccionarJugador((*itstring));
+                }
             }
             else
                 std::cout << "No hay otros jugadores suscritos a éste juego.\n";
-            char confirmar = 'r';
-            while (confirmar != 'y' && confirmar != 'n')
+            std::string confirmar = "r";
+            while (confirmar != "y" && confirmar != "n")
             {
                 std::cout << "Desea confirmar el inicio de partida? (y/n) ";
-                std::cin >> confirmar;
+                std::getline(std::cin, confirmar);
                 std::cout << " \n";
             }
+            std::cout << "gola";
             bool confirmamo = false;
-            if (confirmar == 'y')
+            if (confirmar == "y")
                 confirmamo = true;
             ip->confirmarIniciarPartida(confirmamo, fechainicio);
         }
@@ -752,7 +759,7 @@ void menuAbandonarPartidaMulti(FactoryController *fact, Fecha *fs)
         std::cout << "----------------------------------------------------------\n";
         for (it = colDtMulti.begin(); it != colDtMulti.end(); it++)
         {
-            std::cout << (*it)->getId() << " \t " << (*it)->getFechaInicio() << " \t " << (*it)->getVideojuego().getNombre() << " \t " << (*it)->getTramistida() << "\n";
+            std::cout << (*it)->getId() << " \t " << (*it)->getFechaInicio() << " \t " << (*it)->getVideojuego()->getNombre() << " \t " << (*it)->getTramistida() << "\n";
         }
 
         int promptPartida;
@@ -781,7 +788,7 @@ void menuFinalizarPartida(FactoryController *fact, Fecha *fecha)
         {
             DataPartida *p = *it;
             std::cout << "Id: " << p->getId() << " \nFecha Comienzo (DIA/MES/AÑO) : " << p->getFechaInicio().getDia() << "/" << p->getFechaInicio().getMes() << "/" << p->getFechaInicio().getAnio() << "   "
-                      << " \n Nombre Videojuego :" << p->getVideojuego().getNombre();
+                      << " \n Nombre Videojuego :" << p->getVideojuego()->getNombre();
             DataPartidaIndividual *data = dynamic_cast<DataPartidaIndividual *>(p);
             DataPartidaMultijugador *nacional = dynamic_cast<DataPartidaMultijugador *>(p);
             if (data != nullptr)

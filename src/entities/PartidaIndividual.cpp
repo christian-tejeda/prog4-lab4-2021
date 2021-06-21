@@ -59,11 +59,11 @@ void PartidaIndividual::eliminarPartidasVideojuego(Videojuego *videojuego)
 }
 DataPartida *PartidaIndividual::getData()
 {
-    return new DataPartida(this->getId(),
-                           DataVideojuego(this->getVideojuego()->getNombre(), this->getVideojuego()->getDescripcion(), this->getVideojuego()->getPeriodoValidez(), this->getVideojuego()->getNombreCategorias(), this->getVideojuego()->getRating()),
+    return new DataPartidaIndividual(this->getId(),
+                           new DataVideojuego(this->getVideojuego()->getNombre(), this->getVideojuego()->getDescripcion(), this->getVideojuego()->getPeriodoValidez(), this->getVideojuego()->getNombreCategorias(), this->getVideojuego()->getRating()),
                            this->getFechaInicio(),
                            this->getFechaFin(),
-                           this->getDuracionTotal());
+                           this->getDuracionTotal(),this->getEsContinuacion());
 }
 
 

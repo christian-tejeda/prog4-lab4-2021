@@ -162,6 +162,7 @@ void PartidaController::confirmarIniciarPartida(bool confirmar, Fecha *fechainic
         }
         else if (this->partidaAContinuar == nullptr && participantes.size() == 0)
         {
+
             dynamic_cast<Jugador *>(this->jg)->crearPartidaIndividual(id, *fechainicio, this->vj, dynamic_cast<Jugador *>(this->jg), nullptr);
         }
         else

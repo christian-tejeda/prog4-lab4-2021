@@ -17,17 +17,17 @@ class DataPartida
 {
 private:
     int id;
-    DataVideojuego videojuego;
+    DataVideojuego * videojuego;
     Fecha fechaInicio;
     Fecha *fechaFin;
     float DuracionTotal;
 
 public:
     DataPartida();
-    DataPartida(int id, DataVideojuego videojuego, Fecha fechaInicio, Fecha *fechaFin, float DuracionTotal);
+    DataPartida(int id, DataVideojuego * videojuego, Fecha fechaInicio, Fecha *fechaFin, float DuracionTotal);
     //Getters
     int getId();
-    DataVideojuego getVideojuego();
+    DataVideojuego * getVideojuego();
     Fecha getFechaInicio();
     Fecha *getFechaFin();
     float getDuracionTotal();
