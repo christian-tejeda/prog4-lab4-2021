@@ -59,7 +59,7 @@ void UsuarioHandler::agregarUsuario(DataUsuario *usuario)
 }
 
 map<string, Usuario *> UsuarioHandler::obtenerJugadoresConSuscripcionActiva(Videojuego *vj)
-{
+{//deberia estar bien
     map<string, Usuario *>::iterator it;
     map<string, Usuario *> res;
     for (it = this->users.begin(); it != this->users.end(); it++)
@@ -69,7 +69,10 @@ map<string, Usuario *> UsuarioHandler::obtenerJugadoresConSuscripcionActiva(Vide
         {
             if (dynamic_cast<Jugador *>(it->second)->tieneSuscripcionActiva(vj))
             {
+                //std::cout << "metimos algun jugador con sus activa uh";paso
                 res.insert(std::pair<std::string, Usuario *>(it->first, it->second));
+                //std::cout << dynamic_cast<Jugador*>(it->second)->getNickname();//FUNCIONA
+                //std::cout << it->second->getEmail(); se imprimen los mail correctamente 
             }
         }
     }

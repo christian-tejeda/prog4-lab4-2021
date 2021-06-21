@@ -359,29 +359,30 @@ void menuCargarDatosPrueba(UsuarioHandler *uh, VideojuegoHandler *vh, CategoriaH
 
 
     
-    Fecha* fe= new Fecha(1,6,21,9,0);
-    Fecha* fe2= new Fecha(2,6,21,11,0);
-    Fecha* fe3= new Fecha(4,6,21,9,0);
-    Fecha* fe4= new Fecha(11,6,21,9,0);
-    Fecha* fe5= new Fecha(3,6,21,7,0);
-    Fecha* fe6= new Fecha(21,12,20,15,0);
+    Fecha* fe= new Fecha(1,6,2021,9,0);
+    Fecha* fe2= new Fecha(2,6,2021,11,0);
+    Fecha* fe3= new Fecha(4,6,2021,9,0);
+    Fecha* fe4= new Fecha(11,6,2021,9,0);
+    Fecha* fe5= new Fecha(3,6,2021,7,0);
+    Fecha* fe6= new Fecha(21,12,2020,15,0);
     gamer->contratarSuscripcion(kindom,trimestral,paypal,fe);
     gamer->contratarSuscripcion(fort,trimestral,tarjeta,fe2);
     ari->contratarSuscripcion(fort,mensual,paypal,fe3);
     ari->contratarSuscripcion(mine,anual,tarjeta,fe4);
     ibai->contratarSuscripcion(fort,mensual,tarjeta,fe5);
     ibai->contratarSuscripcion(mine,vitalicia,tarjeta,fe6);
-    Fecha* fe7= new Fecha(2,6,21,9,0);
-    Fecha* fe8= new Fecha(2,6,21,15,0);
-    Fecha* fe9= new Fecha(12,6,21,16,0);
-    Fecha* f10= new Fecha(2,6,21,10,0);
-    Fecha* f11= new Fecha(2,6,21,16,0);
+    Fecha* fe7= new Fecha(2,6,2021,9,0);
+    Fecha* fe8= new Fecha(2,6,2021,15,0);
+    Fecha* fe9= new Fecha(12,6,2021,16,0);
+    Fecha* f10= new Fecha(2,6,2021,10,0);
+    Fecha* f11= new Fecha(2,6,2021,16,0);
     kindom->agregarPuntaje(4);
     fort->agregarPuntaje(5);
     fort->agregarPuntaje(5);
     mine->agregarPuntaje(3);
     
-    gamer->crearPartidaIndividual(0,*fe7,kindom,gamer,nullptr);
+
+   /* gamer->crearPartidaIndividual(0,*fe7,kindom,gamer,nullptr);
     PartidaIndividual *part = dynamic_cast<PartidaIndividual*>(uh->obtenerPartidaPorId(0));
     gamer->crearPartidaIndividual(1,*fe8,kindom,gamer,part);
     PartidaIndividual *part1 = dynamic_cast<PartidaIndividual*>(uh->obtenerPartidaPorId(1));
@@ -389,8 +390,12 @@ void menuCargarDatosPrueba(UsuarioHandler *uh, VideojuegoHandler *vh, CategoriaH
     part1->setFechaFin(f11);
     ari->crearPartidaIndividual(2,*fe9,mine,ari,nullptr);
     
-    //gamer->crearPartidaMultijugador(3,
+    Fecha * f12 = new Fecha(5,6,2021,5,0);
+    std::map<string,Jugador*> partm1;
+    partm1.insert(std::pair<string,Jugador*>(ari,j1));
+    gamer->crearPartidaMultijugador(3,*f12,nullptr,true,gamer,);*/
     
+
 
 
 
@@ -590,6 +595,7 @@ void menuAsignarPuntaje(FactoryController *fact)
     ap->~IAsignarPuntaje();
 }
 
+
 void menuIniciarPartida(FactoryController *fact, Fecha *fechainicio)
 {
     IIniciarPartida *ip = fact->getIIniciarPartida();
@@ -642,7 +648,7 @@ void menuIniciarPartida(FactoryController *fact, Fecha *fechainicio)
                 std::cout << " \n";
             }
             if (continuaa == 'y')
-            { //va a continuar una partida 
+            { //va a continuar una partida
                 set<DataPartidaIndividual *> partidasfin = ip->obtenerPartidasFinalizadasDeJugador();
                 if (partidasfin.size() != 0)
                 { //hay partidas para continuar
@@ -704,9 +710,9 @@ void menuIniciarPartida(FactoryController *fact, Fecha *fechainicio)
             set<DataJugador *> jugadores = ip->obtenerJugadoresConSuscripcionActiva();
             set<DataJugador *>::iterator it;
             set<std::string> nombreJugadoresConSus;
-            if (jugadores.size() > 1)
+            if (jugadores.size() > 0)
             {
-                for (it = jugadores.begin(); it != jugadores.end(); it++)//lista los jugadores
+                for (it = jugadores.begin(); it != jugadores.end(); it++)
                 {
                     std::cout << "Nickname: " << (*it)->getNickname() << "\n";
                     nombreJugadoresConSus.insert((*it)->getNickname());
@@ -715,7 +721,6 @@ void menuIniciarPartida(FactoryController *fact, Fecha *fechainicio)
                 std::cout << "Desea agregar un jugador a la partida? (y/n) ";
                 std::cin >> masJugadores;
                 std::cout << "\n";
-                std::set<std::string> jugadoresAAgregar;
                 while (masJugadores == 'y')
                 { //agregando jugadores
                     set<std::string>::iterator it2;
@@ -730,8 +735,7 @@ void menuIniciarPartida(FactoryController *fact, Fecha *fechainicio)
                     else
                     {
                         std::cout << "Jugador ingresado \n";
-                        jugadoresAAgregar.insert(jugadorAgregar);
-                        //ip->seleccionarJugador(jugadorAgregar);
+                        ip->seleccionarJugador(jugadorAgregar);
                     }
                     char seguirAgregando = 'r';
                     while (seguirAgregando != 'y' && seguirAgregando != 'n')
@@ -746,23 +750,18 @@ void menuIniciarPartida(FactoryController *fact, Fecha *fechainicio)
                     else
                         masJugadores = 'n';
                 }
-                std::set<std::string>::iterator itstring;
-                for(itstring = jugadoresAAgregar.begin();itstring != jugadoresAAgregar.end();it++){
-                    ip->seleccionarJugador((*itstring));
-                }
             }
             else
                 std::cout << "No hay otros jugadores suscritos a éste juego.\n";
-            std::string confirmar = "r";
-            while (confirmar != "y" && confirmar != "n")
+            char confirmar = 'r';
+            while (confirmar != 'y' && confirmar != 'n')
             {
                 std::cout << "Desea confirmar el inicio de partida? (y/n) ";
-                std::getline(std::cin, confirmar);
+                std::cin >> confirmar;
                 std::cout << " \n";
             }
-            std::cout << "gola";
             bool confirmamo = false;
-            if (confirmar == "y")
+            if (confirmar == 'y')
                 confirmamo = true;
             ip->confirmarIniciarPartida(confirmamo, fechainicio);
         }
@@ -1218,7 +1217,7 @@ void menuSeleccionarEstadisticas(FactoryController *fact){
 
     std::cout << "Desea agregar mas estadisticas? (y/n) \n";
     std::string seguirAgregando;
-    cin >> seguirAgregando;
+    std::cin >> seguirAgregando;
 
     agregar = seguirAgregando == "y" ? 1 : 0;
   }

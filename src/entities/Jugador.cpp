@@ -102,7 +102,7 @@ void Jugador::eliminarPartidasDeVideojuego(Videojuego *vj) {
   }
 }
 
-DataUsuario *Jugador::getData() { return nullptr; }
+DataUsuario *Jugador::getData() { return new DataJugador(this->getEmail(),this->getPassword(),this->getNickname(),this->getDescripcion()); }
 
 //PartidaIndividual *Jugador::obtenerPartida(string id) { return nullptr; }
 
