@@ -489,7 +489,7 @@ void menuIniciarPartida(FactoryController *fact, Fecha fechainicio)
                 std::cout << "Ingrese un numero valido  \n";
             }
         }
-        if (tipoPartida == 1)
+        if (tipoPartida == '1')
         { //partida individual
             char continuaa = 'r';
             while (continuaa != 'y' || continuaa != 'n')
