@@ -9,7 +9,7 @@ class ISeleccionarEstadisticas
 {
 public:
     virtual std::set<DataEstadistica *> listarEstadisticas() = 0;
-    virtual void seleccionarEstadisticas(set<int> numeroEstadistica) = 0;
+    virtual void seleccionarEstadisticas(set<TipoEstadistica> numeroEstadistica) = 0;
 
     virtual ~ISeleccionarEstadisticas(){};
 };

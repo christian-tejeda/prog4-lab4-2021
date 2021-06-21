@@ -7,6 +7,7 @@
 #include "headers/datatypes/DataPartidaMultijugador.h"
 #include "headers/datatypes/DataVideojuego.h"
 //#include "headers/interfaces/IEliminarVideojuego.h"
+#include "headers/entities/ContratoSuscripcion.h"
 #include "headers/entities/Videojuego.h"
 #include "headers/interfaces/IAgregarCategoria.h"
 #include "headers/interfaces/IAsignarPuntaje.h"
@@ -328,7 +329,7 @@ void menuCargarDatosPrueba(UsuarioHandler *uh, VideojuegoHandler *vh, CategoriaH
     susc4.insert(pair<TipoPeriodoValidez, float>(vitalicia, 50));
     std::pair<float, int> ratings4;
     std::map<std::string, Categoria *> cats4;
-    std::set<ContratoSuscripcion *> contratos4;
+    std::set<ContratoSuscripcion *> contratos4=std::set<ContratoSuscripcion *>();
     Videojuego *vj4 = new Videojuego("FIFA 21",
                                      "prueba 4",
                                      susc4,
@@ -346,6 +347,30 @@ void menuCargarDatosPrueba(UsuarioHandler *uh, VideojuegoHandler *vh, CategoriaH
     Desarrollador *des4 = dynamic_cast<Desarrollador *>(uh->obtenerUsuarioPorId("ea@mail.com"));
     des4->agregarVideojuegoPublicado(vj4);
 
+
+
+    Jugador *gamer = dynamic_cast<Jugador *>(uh->obtenerUsuarioPorId("gamer@mail.com"));
+    Jugador *ari = dynamic_cast<Jugador *>(uh->obtenerUsuarioPorId("ari@mail.com"));
+    Jugador *ibai = dynamic_cast<Jugador *>(uh->obtenerUsuarioPorId("ibai@mail.com"));
+    
+    Videojuego *kindom= vh->obtenerVideojuegoPorId("KingdomRush");
+    Videojuego *fort= vh->obtenerVideojuegoPorId("Fortnite");
+    Videojuego *mine= vh->obtenerVideojuegoPorId("Minecraft");
+
+
+    
+    Fecha* fe= new Fecha(1,6,21,9,0);
+    Fecha* fe2= new Fecha(2,6,21,11,0);
+    Fecha* fe3= new Fecha(4,6,21,9,0);
+    Fecha* fe4= new Fecha(11,6,21,9,0);
+    Fecha* fe5= new Fecha(11,6,21,9,0);
+    Fecha* fe6= new Fecha(11,6,21,9,0);
+    gamer->contratarSuscripcion(kindom,trimestral,paypal,fe);
+    gamer->contratarSuscripcion(fort,trimestral,tarjeta,fe2);
+    ari->contratarSuscripcion(fort,mensual,paypal,fe3);
+    ari->contratarSuscripcion(mine,anual,tarjeta,fe4);
+    ibai->contratarSuscripcion(fort,mensual,tarjeta,fe5);
+    ibai->contratarSuscripcion(mine,vitalicia,tarjeta,fe6);
     delete d1;
     delete d2;
     delete d3;
@@ -514,7 +539,8 @@ void menuAsignarPuntaje(FactoryController *fact)
         std::cout << "\tNombre: " << imprimir->getNombre() << "\t | \t"
                   << "Descripcion:" << imprimir->getDescripcion() << "    \n";
     }
-    std::cin >> nombre;
+    std::cin.ignore();
+    std::getline(std::cin, nombre);
     std::cout << "\n";
     int punt;
     std::cout << "Seleccione un numero del 1 al 5 para puntuar al videojuego \n";
@@ -598,7 +624,7 @@ void menuIniciarPartida(FactoryController *fact, Fecha *fechainicio)
                     set<DataPartidaIndividual *>::iterator it;
                     for (it = partidasfin.begin(); it != partidasfin.end(); it++)
                     {
-                        std::cout << "Nombre videojuego: " << (*it)->getVideojuego().getNombre();
+                        std::cout << "Nombre videojuego: " << (*it)->getVideojuego()->getNombre();
                         std::cout << "  Id partida: " << (*it)->getId() << " \n ";
                     }
                     int numeroPartida = -1;
@@ -726,7 +752,7 @@ void menuAbandonarPartidaMulti(FactoryController *fact, Fecha *fs)
         std::cout << "----------------------------------------------------------\n";
         for (it = colDtMulti.begin(); it != colDtMulti.end(); it++)
         {
-            std::cout << (*it)->getId() << " \t " << (*it)->getFechaInicio() << " \t " << (*it)->getVideojuego().getNombre() << " \t " << (*it)->getTramistida() << "\n";
+            std::cout << (*it)->getId() << " \t " << (*it)->getFechaInicio() << " \t " << (*it)->getVideojuego()->getNombre() << " \t " << (*it)->getTramistida() << "\n";
         }
 
         int promptPartida;
@@ -755,7 +781,7 @@ void menuFinalizarPartida(FactoryController *fact, Fecha *fecha)
         {
             DataPartida *p = *it;
             std::cout << "Id: " << p->getId() << " \nFecha Comienzo (DIA/MES/AÑO) : " << p->getFechaInicio().getDia() << "/" << p->getFechaInicio().getMes() << "/" << p->getFechaInicio().getAnio() << "   "
-                      << " \n Nombre Videojuego :" << p->getVideojuego().getNombre();
+                      << " \n Nombre Videojuego :" << p->getVideojuego()->getNombre();
             DataPartidaIndividual *data = dynamic_cast<DataPartidaIndividual *>(p);
             DataPartidaMultijugador *nacional = dynamic_cast<DataPartidaMultijugador *>(p);
             if (data != nullptr)
@@ -821,7 +847,7 @@ void menuVerInfoVideojuego(FactoryController *fact)
         float tri = suss[trimestral];
         float anu = suss[anual];
         float vit = suss[vitalicia];
-        float puntaje = -1;
+        float puntaje = 0;
         int cantidadvotos = datav->getRating().second;
 
         //std::cout << "      -votos      :"<<cantidadvotos<< "\n";
@@ -1126,95 +1152,66 @@ void menuEliminarVideojuego(FactoryController *fact)
     }
 }
 
-void menuSeleccionarEstadisticas(FactoryController *fact)
-{
-    std::cout << "Bienvenido al menu de seleccionar estadisticas :D \n";
-    ISeleccionarEstadisticas *se = fact->getISeleccionarEstadisticas();
-    /*set<DataEstadistica*> estadisticas = se->listarEstadisticas();
-    set<DataEstadistica*>::iterator it;
-    for(it = estadisticas.begin();it != estadisticas.end();it++){
-        std::cout << (*it)->get
-    }*/
-    bool quiereMas = true;
-    int flag = 30;
-    set<int> quiere;
-    while (quiereMas)
-    {
-        flag = 30;
-        std::cout << "Digite la categoria que desea agregar: \n";
-        std::cout << "1) Agregar total horas jugadas \n";
-        std::cout << "2) Agregar Promedio rating \n";
-        std::cout << "3) Agregar Cantidad Suscritos \n";
-        std::cin >> flag;
-        std::string aver = "q";
+void menuSeleccionarEstadisticas(FactoryController *fact){
+  std::cout << "Bienvenido al menu de seleccionar estadisticas :smile: \n";
+  ISeleccionarEstadisticas *se = fact->getISeleccionarEstadisticas();
 
-        switch (flag)
-        {
-        case 1:
-            std::cout << "Total horas jugadas agregado exitsosamente \n";
-            quiere.insert(1);
-            break;
-        case 2:
-            std::cout << "Promedio rating agregado exitosamente \n";
-            quiere.insert(2);
-            break;
-        case 3:
-            std::cout << "Cantidad suscritos agregado exitosamente \n";
-            quiere.insert(3);
-            break;
-        }
-        bool quiereMasMas = true;
-        while (quiereMasMas)
-        {
-            std::cout << "Desea agregar mas estadisticas? (y/n) \n";
-            std::cin >> aver;
-            if (aver == "n")
-            {
-                quiereMasMas = false;
-                quiereMas = false;
-            }
-            else if (aver == "y")
-            {
-                quiereMasMas = false;
-            }
-        }
+  bool agregar = true;
+  set<TipoEstadistica> estadisticasDeInteres;
+  int opcion;
+
+  while (agregar) {
+    std::cout << "Digite la categoria que desea agregar: \n";
+    std::cout << "1) Agregar total horas jugadas \n";
+    std::cout << "2) Agregar Promedio rating \n";
+    std::cout << "3) Agregar Cantidad Suscritos \n";
+
+    std::cin >> opcion;
+
+    switch (opcion) {
+    case 1:
+      std::cout << "Total horas jugadas agregado exitsosamente \n";
+      estadisticasDeInteres.insert(TipoEstadistica::horasJugadas);
+      break;
+    case 2:
+      std::cout << "Promedio rating agregado exitosamente \n";
+      estadisticasDeInteres.insert(TipoEstadistica::promedioRating);
+      break;
+    case 3:
+      std::cout << "Cantidad suscritos agregado exitosamente \n";
+      estadisticasDeInteres.insert(TipoEstadistica::cantidadSuscritos);
+      break;
     }
-    se->seleccionarEstadisticas(quiere);
+
+    std::cout << "Desea agregar mas estadisticas? (y/n) \n";
+    std::string seguirAgregando;
+    cin >> seguirAgregando;
+
+    agregar = seguirAgregando == "y" ? 1 : 0;
+  }
+  se->seleccionarEstadisticas(estadisticasDeInteres);
 }
 
-void menuConsultarEstadisticas(FactoryController *fact)
-{
-    IConsultarEstadisticas *ce = fact->getIConsultarEstadisticas();
-    std::set<DataVideojuego *> dtvjs = ce->obtenerVideojuegosPublicadosPorDesarrollador();
-    std::set<DataVideojuego *>::iterator it;
-    std::cout << "Seleccione un videojuego para consultar sus estadisticas  \n";
-    for (it = dtvjs.begin(); it != dtvjs.end(); it++)
-    {
+void menuConsultarEstadisticas(FactoryController *fact){
+  IConsultarEstadisticas *ce = fact->getIConsultarEstadisticas();
+  std::set<DataVideojuego *> dtvjs =ce->obtenerVideojuegosPublicadosPorDesarrollador();
+  std::set<DataVideojuego *>::iterator it;
+  std::cout << "Seleccione un videojuego para consultar sus estadisticas  \n";
+  for (it = dtvjs.begin(); it != dtvjs.end(); it++) {
         std::cout << (*it)->getNombre() << " \n";
-    }
-    std::string juegoName = "";
-    std::cout << "Escriba el nombre del videojuego: ";
-    std::cin >> juegoName;
-    std::set<DataEstadistica *> estadis = ce->calcularEstadisticas(juegoName);
-    std::set<DataEstadistica *>::iterator it2;
-    std::cout << "Estadisticas  \n";
-    for (it2 = estadis.begin(); it2 != estadis.end(); it2++)
-    {
-        switch ((*it2)->getEstadistica())
-        {
-        case 1:
-            std::cout << "Total horas jugadas: " << (*it2)->getResultado() << "\n";
-            break;
-
-        case 2:
-            std::cout << "Promedio rating: " << (*it2)->getResultado() << "\n";
-            break;
-        case 3:
-            std::cout << "Cantidad total suscritos: " << (*it2)->getResultado() << "\n";
-            break;
-        }
-    }
+  }
+  std::string juegoName = "";
+  std::cout << "Escriba el nombre del videojuego: ";
+  std::cin >> juegoName;
+  std::set<DataEstadistica *> estadis = ce->calcularEstadisticas(juegoName);
+  std::set<DataEstadistica *>::iterator it2;
+  std::cout << "Estadisticas \n";
+  for (it2 = estadis.begin(); it2 != estadis.end(); it2++) {
+    const DataEstadistica data = (**it2);
+    cout << data << "\n";
+  }
 }
+
 
 //-------------------- Programa Principal -----------------------------
 

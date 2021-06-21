@@ -75,7 +75,8 @@ VideojuegoHandler::~VideojuegoHandler()
     for (it = this->vjs.begin(); it != this->vjs.end(); it++)
     {
         vc->seleccionarVideojuego(it->second->getNombre());
-        vc->confirmarEliminarVideojuego(true);
+        //Videojuego *vj=vc->obtenerVideojuegoG();
+        vc->eleminarVideojuegoGeneral();
     }
     this->vjs.clear();
 }

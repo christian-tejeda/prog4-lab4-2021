@@ -2,9 +2,10 @@
 #define DATA_ESTADISTICA_H
 
 #include <string>
+#include <iostream>
 
 #include "../utils/enums.h"
-
+using namespace std;
 class DataEstadistica {
 private:
   TipoEstadistica estadistica;
@@ -16,6 +17,7 @@ public:
 
   TipoEstadistica getEstadistica();
   float getResultado();
+  friend ostream &operator<<(ostream &os, const DataEstadistica &dt); 
 
   ~DataEstadistica();
 };

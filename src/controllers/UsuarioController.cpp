@@ -40,16 +40,15 @@ std::set<DataEstadistica *> UsuarioController::listarEstadisticas()
   }
   return res;
 }
-void UsuarioController::seleccionarEstadisticas(set<int> numeroEstadistica)
-{
-  set<int>::iterator it;
-  for (it = numeroEstadistica.begin(); it != numeroEstadistica.end(); it++)
-  {
-    TipoEstadistica estadi = static_cast<TipoEstadistica>((*it));
-    Desarrollador *des = dynamic_cast<Desarrollador *>(this->sesion);
-    des->agregarEstadisticaDeInteres(estadi);
-  }
+void UsuarioController::seleccionarEstadisticas(set<TipoEstadistica> estadisticas){
+    set<TipoEstadistica>::iterator it;
+    for (it = estadisticas.begin(); it != estadisticas.end(); it++) {
+      TipoEstadistica estadistica = *it;
+      Desarrollador *des = dynamic_cast<Desarrollador *>(this->sesion);
+      des->agregarEstadisticaDeInteres(estadistica);
+    }
 }
+
 
 // métodos de IAltaUsuario
 void UsuarioController::ingresarDatosJugador(DataJugador *dataJugador)

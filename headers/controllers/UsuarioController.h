@@ -45,7 +45,7 @@ public:
 
   /// ISeleccionarEstadisticas
   std::set<DataEstadistica *> listarEstadisticas();
-  void seleccionarEstadisticas(set<int> nombresEstadisticas);
+ void seleccionarEstadisticas(set<TipoEstadistica> estadisticas);
 
   /// IConsultarEstadisticas
   set<DataVideojuego *> obtenerVideojuegosPublicadosPorDesarrollador();

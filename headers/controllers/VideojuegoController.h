@@ -51,6 +51,7 @@ public:
     void agregarCategoriaAVideojuego(string cat);
     void obtenerDataVideojuegoIngresada();
     void confirmarPublicacionVideojuego(bool confirmar);
+    void eleminarVideojuegoGeneral();
 
     ~VideojuegoController();
 };

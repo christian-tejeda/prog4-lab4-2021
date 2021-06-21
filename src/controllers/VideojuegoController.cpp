@@ -252,3 +252,26 @@ set<std::string> VideojuegoController::obtenerNombreVideojuegos()
     vH = vH->getInstance();
     return vH->obtenerNombresVideojuegos();
 }
+
+void VideojuegoController::eleminarVideojuegoGeneral(){
+        //en proceso
+    UsuarioController *uc;
+    uc = uc->getInstance();
+    Videojuego *video = this->videojuego;
+    UsuarioHandler *uH;
+    uH = uH->getInstance();
+    map<string, Usuario *> users = uH->obtenerUsuarios();
+    map<string, Usuario *>::iterator it;
+    for (it = users.begin(); it != users.end(); it++)
+    {
+        Jugador *jugador = dynamic_cast<Jugador *>(it->second);
+        if (jugador != nullptr)
+        {
+            jugador->eliminarContratosDeVideojuego(video);
+            jugador->eliminarPartidasDeVideojuego(video);
+        }
+    }
+    VideojuegoHandler *vH;
+    vH = vH->getInstance();
+    vH->eliminarVideojuego(video);
+}

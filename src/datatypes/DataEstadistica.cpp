@@ -16,6 +16,29 @@ DataEstadistica::DataEstadistica(TipoEstadistica estadistica, float resultado) {
 
 TipoEstadistica DataEstadistica::getEstadistica() { return this->estadistica; }
 
+ostream &operator<<(ostream &os, const DataEstadistica &dataSuscJugador) {
+
+  string estadistica;
+
+  switch (dataSuscJugador.estadistica) {
+  case horasJugadas:
+    estadistica = "Horas jugadas: ";
+    break;
+  case promedioRating:
+    estadistica = "Promedio rating: ";
+    break;
+  case cantidadSuscritos:
+    estadistica = "Cantidad suscritos: ";
+    break;
+  }
+
+  string resultado = std::to_string(dataSuscJugador.resultado);
+
+  os << estadistica << resultado;
+
+  return os;
+}
+
 float DataEstadistica::getResultado() { return this->resultado; }
 
 DataEstadistica::~DataEstadistica() {}
