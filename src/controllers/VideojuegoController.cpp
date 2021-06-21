@@ -273,5 +273,6 @@ void VideojuegoController::eleminarVideojuegoGeneral(){
     }
     VideojuegoHandler *vH;
     vH = vH->getInstance();
-    vH->eliminarVideojuego(video);
+    delete video;
+    //vH->eliminarVideojuego(video);
 }

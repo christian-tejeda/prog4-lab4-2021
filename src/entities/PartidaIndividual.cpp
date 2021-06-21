@@ -25,33 +25,9 @@ void PartidaIndividual::finalizar(Fecha *fecha)
 {
     this->setFechaFin(fecha);
     Fecha inicio = this->getFechaInicio();
-    float f=0;
-    //f=fecha-inicio;
-    /*
-    if (fecha->getAnio()>inicio.getAnio()){
-        f=1000;
-    }
-    else{
-        if (fecha->getMes()>inicio.getMes()){
-            (fecha->getDia()>inicio.getDia()) ? (f=f+fecha->getDia()-inicio.getDia()-1) : (f=30-inicio.getDia()+fecha->getDia());
-            f=f*24+fecha->getHora();
-            f=f+((fecha->getMinuto())/60);
-            f=f+24-inicio.getHora();
-            f=f+60-((inicio.getMinuto())/60);
-        }
-        else{
-            if (fecha->getDia()>inicio.getDia()){
-                f=fecha->getDia()-inicio.getDia()-1;
-                f=f*24+fecha->getHora();
-                f=f+((fecha->getMinuto())/60);
-                f=f+24-inicio.getHora();
-                f=f+60-((inicio.getMinuto())/60);
-            }
-            else {
-                f=fecha->getHora()-inicio.getHora()+((fecha->getMinuto()-inicio.getMinuto())/60);
-            }
-        }
-    }*/
+    Fecha actual = *fecha;
+    float f;
+    f=abs(actual-inicio);
     this->setDuracionTotal(f);
 }
 void PartidaIndividual::eliminarPartidasVideojuego(Videojuego *videojuego)

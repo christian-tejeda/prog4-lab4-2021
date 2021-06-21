@@ -363,14 +363,40 @@ void menuCargarDatosPrueba(UsuarioHandler *uh, VideojuegoHandler *vh, CategoriaH
     Fecha* fe2= new Fecha(2,6,21,11,0);
     Fecha* fe3= new Fecha(4,6,21,9,0);
     Fecha* fe4= new Fecha(11,6,21,9,0);
-    Fecha* fe5= new Fecha(11,6,21,9,0);
-    Fecha* fe6= new Fecha(11,6,21,9,0);
+    Fecha* fe5= new Fecha(3,6,21,7,0);
+    Fecha* fe6= new Fecha(21,12,20,15,0);
     gamer->contratarSuscripcion(kindom,trimestral,paypal,fe);
     gamer->contratarSuscripcion(fort,trimestral,tarjeta,fe2);
     ari->contratarSuscripcion(fort,mensual,paypal,fe3);
     ari->contratarSuscripcion(mine,anual,tarjeta,fe4);
     ibai->contratarSuscripcion(fort,mensual,tarjeta,fe5);
     ibai->contratarSuscripcion(mine,vitalicia,tarjeta,fe6);
+    Fecha* fe7= new Fecha(2,6,21,9,0);
+    Fecha* fe8= new Fecha(2,6,21,15,0);
+    Fecha* fe9= new Fecha(12,6,21,16,0);
+    Fecha* f10= new Fecha(2,6,21,10,0);
+    Fecha* f11= new Fecha(2,6,21,16,0);
+    kindom->agregarPuntaje(4);
+    fort->agregarPuntaje(5);
+    fort->agregarPuntaje(5);
+    mine->agregarPuntaje(3);
+    
+    gamer->crearPartidaIndividual(0,*fe7,kindom,gamer,nullptr);
+    PartidaIndividual *part = dynamic_cast<PartidaIndividual*>(uh->obtenerPartidaPorId(0));
+    gamer->crearPartidaIndividual(1,*fe8,kindom,gamer,part);
+    PartidaIndividual *part1 = dynamic_cast<PartidaIndividual*>(uh->obtenerPartidaPorId(1));
+    part->setFechaFin(f10);    
+    part1->setFechaFin(f11);
+    ari->crearPartidaIndividual(2,*fe9,mine,ari,nullptr);
+    
+    //gamer->crearPartidaMultijugador(3,
+    
+
+
+
+
+
+
     delete d1;
     delete d2;
     delete d3;

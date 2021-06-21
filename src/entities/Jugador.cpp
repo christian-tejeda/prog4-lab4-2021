@@ -75,6 +75,7 @@ map<string, Videojuego *> Jugador::obtenerVideojuegos() {
 void Jugador::eliminarContratosDeVideojuego(Videojuego *vj) {
   set<ContratoSuscripcion *> cont = this->contratos;
   set<ContratoSuscripcion *>::iterator it;
+  it=cont.begin();
   while ( it != cont.end()) {
     ContratoSuscripcion *contr = *it;
     bool pertenece = contr->perteneceAVideojuego(vj);
@@ -83,6 +84,7 @@ void Jugador::eliminarContratosDeVideojuego(Videojuego *vj) {
       it++;
       delete contr;
     }
+    else it++;
   }
 }
 

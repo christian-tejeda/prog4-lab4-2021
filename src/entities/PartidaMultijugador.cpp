@@ -104,7 +104,7 @@ void PartidaMultijugador::bajarParticipante(Jugador *jg, Fecha *f)
 
     if (dur >= 0.0F)
     {
-        this->setDuracionTotal(dur);
+        this->setDuracionTotal(abs(dur));
     }
 }
 
