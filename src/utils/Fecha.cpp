@@ -48,19 +48,19 @@ int Fecha::contarAniosBisiestos(const Fecha &f)
   return anios / 4 - anios / 100 + anios / 400;
 }
 
-float Fecha::operator-(const Fecha &f)
+double Fecha::operator-(const Fecha &f)
 {
   //meses
   const int mesesDias[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
   //se calcula en horas el 1er argumento
-  float horas1 = anio * 365 * 24 + dia * 24 + hora + minuto * (1 / 60);
+  double horas1 = anio * 365 * 24 + dia * 24 + hora + minuto * (1 / 60);
   for (int i = 0; i < mes - 1; i++)
     horas1 += mesesDias[i] * 24;
   horas1 += contarAniosBisiestos(*this);
 
   //se calcula en horas el 2do argumento
-  float horas2 = f.anio * 365 * 24 + f.dia * 24 + f.hora + f.minuto * (1 / 60);
+  double horas2 = f.anio * 365 * 24 + f.dia * 24 + f.hora + f.minuto * (1 / 60);
   for (int i = 0; i < f.mes - 1; i++)
     horas2 += mesesDias[i] * 24;
   horas2 += contarAniosBisiestos(f);

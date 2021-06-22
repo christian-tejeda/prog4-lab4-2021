@@ -31,7 +31,7 @@ public:
 
     bool operator==(Fecha opFecha);
     //Calcula la diferencia entre dos Fechas en horas.
-    float operator-(const Fecha &opFecha);
+    double operator-(const Fecha &opFecha);
 
     friend std::ostream &operator<<(std::ostream &os, Fecha f);
 };
