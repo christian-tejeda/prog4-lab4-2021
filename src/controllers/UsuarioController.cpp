@@ -104,6 +104,8 @@ void UsuarioController::confirmarAltaUsuario(bool confirmar)
     delete this->dataJugador;
   if (this->dataDesarrollador != nullptr)
     delete this->dataDesarrollador;
+  this->dataDesarrollador = nullptr;
+  this->dataJugador = nullptr;
 }
 
 // ISuscribirseAVideojuego
