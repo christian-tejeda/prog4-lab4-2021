@@ -115,7 +115,7 @@ void Jugador::eliminarPartidasDeVideojuego(Videojuego *vj)
     if (vj == video)
     {
       par->eliminarPartidasVideojuego(vj);
-      this->partidasIniciadas.erase(it->first);
+      //this->partidasIniciadas.erase(it->first);
       delete par;
     }
   }

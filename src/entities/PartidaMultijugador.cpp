@@ -60,7 +60,7 @@ void PartidaMultijugador::eliminarPartidasVideojuego(Videojuego *videojuego)
     for (it = dur.begin(); it != dur.end(); ++it)
     {
         DuracionParticipante *cuestion = *it;
-        delete cuestion;
+        delete cuestion;//o sino hacer cuestion->~DuracionParticipante();
     }
     dur.clear();
     this->durpart.clear();

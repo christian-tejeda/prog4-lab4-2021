@@ -49,14 +49,20 @@ void DuracionParticipante::terminarParticipacion(Fecha *f)
 {
     this->horaSalida = f;
 }
-DuracionParticipante::~DuracionParticipante()
-{
-    this->participante = nullptr;
-    delete this->horaEntrada;
-    delete this->horaSalida;
-}
+
 float DuracionParticipante::calcularDuracion()
 {
     return *this->horaSalida - *this->horaEntrada;
 }
-//DuracionParticipante::~DuracionParticipante() {}
+DuracionParticipante::~DuracionParticipante() {
+    /*this->participante = nullptr;
+    if(this->horaEntrada!=nullptr) {
+        delete this->horaEntrada; 
+        this->horaEntrada=nullptr;
+    } 
+    if(this->horaSalida!=nullptr) {
+        delete this->horaSalida; 
+        this->horaSalida=nullptr;
+    }
+    */
+}

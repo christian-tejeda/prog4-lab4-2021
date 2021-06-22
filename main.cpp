@@ -399,12 +399,12 @@ void menuCargarDatosPrueba(UsuarioHandler *uh, VideojuegoHandler *vh, CategoriaH
     partm1.insert(std::pair<string, Jugador *>(ibai->getNickname(), dynamic_cast<Jugador *>(ibai)));
     gamer->crearPartidaMultijugador(3, *f12, nullptr, fort, true, gamer, partm1);
     std::map<string, Jugador *> partm2;
-    partm1.insert(std::pair<string, Jugador *>(ari->getNickname(), dynamic_cast<Jugador *>(ari)));
-    partm1.insert(std::pair<string, Jugador *>(ibai->getNickname(), dynamic_cast<Jugador *>(ibai)));
+    partm2.insert(std::pair<string, Jugador *>("ari", ari));
+    partm2.insert(std::pair<string, Jugador *>(ibai->getNickname(),ibai));
     gamer->crearPartidaMultijugador(4, *f13, nullptr, fort, true, gamer, partm2);
     std::map<string, Jugador *> partm3;
-    partm1.insert(std::pair<string, Jugador *>(ibai->getNickname(), dynamic_cast<Jugador *>(ibai)));
-    ari->crearPartidaMultijugador(5, *f14, nullptr, mine, false, ari, partm2);
+    partm3.insert(std::pair<string, Jugador *>(ibai->getNickname(), dynamic_cast<Jugador *>(ibai)));
+    ari->crearPartidaMultijugador(5, *f14, nullptr, mine, false, ari, partm3);
     //Abandonos de partidas
     Partida *p3 = gamer->obtenerPartidaPorId(3);
     PartidaMultijugador *pm3 = dynamic_cast<PartidaMultijugador *>(p3);
