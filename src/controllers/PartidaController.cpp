@@ -127,7 +127,7 @@ set<DataJugador *> PartidaController::obtenerJugadoresConSuscripcionActiva()
     {
         Jugador *jgaux = dynamic_cast<Jugador *>(it->second);
         DataUsuario *dtjg;
-        dtjg =  jgaux->getData();
+        dtjg = jgaux->getData();
         res.insert(dynamic_cast<DataJugador *>(dtjg));
         //std::cout << dynamic_cast<DataJugador *>(dtjg)->getNickname(); error en getnickname
         //std::cout << "metio un data jugador pcont"; paso
@@ -213,4 +213,4 @@ int PartidaController::generarIdPartida()
     return idPartida - 1;
 }
 
-int PartidaController::idPartida = 0;
+int PartidaController::idPartida = 6;

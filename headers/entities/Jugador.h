@@ -61,7 +61,6 @@ public:
     bool tienePartidaSinFinalizar(Videojuego *vj); //operacion faltante en obtenerpartidasfinalizadas en elim videojuego
     map<std::string, Videojuego *> obtenerVideojuegosConSuscripcionActiva(Fecha *fa);
     int obtenerDuracionPartida(Videojuego *vj);
-    set<DataPartidaMultijugador *> obtenerPartidasPorParticipante(Jugador *jg);
     Partida *obtenerPartidaPorId(int id);
 
     ~Jugador();

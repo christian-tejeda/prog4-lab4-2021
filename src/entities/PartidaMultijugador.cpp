@@ -57,21 +57,30 @@ void PartidaMultijugador::eliminarPartidasVideojuego(Videojuego *videojuego)
 {
     set<DuracionParticipante *> dur = this->durpart;
     set<DuracionParticipante *>::iterator it;
-    for (it = dur.begin(); it != dur.end(); it++)
+    for (it = dur.begin(); it != dur.end(); ++it)
     {
         DuracionParticipante *cuestion = *it;
-        dur.erase(*it);
         delete cuestion;
     }
+    dur.clear();
+    this->durpart.clear();
 }
 
 DataPartida *PartidaMultijugador::getData()
 {
-    return new DataPartida(this->getId(),
-                           new DataVideojuego(this->getVideojuego()->getNombre(), this->getVideojuego()->getDescripcion(), this->getVideojuego()->getPeriodoValidez(), this->getVideojuego()->getNombreCategorias(), this->getVideojuego()->getRating()),
-                           this->getFechaInicio(),
-                           this->getFechaFin(),
-                           this->getDuracionTotal());
+    set<DuracionParticipante *> participantes = this->getDuracionParticipantes();
+    set<DataJugador *> dtParticipantes;
+    set<DuracionParticipante *>::iterator it;
+    for (it = participantes.begin(); it != participantes.end(); it++)
+    {
+        DataJugador *dtjg = dynamic_cast<DataJugador *>((*it)->getParticipante()->getData());
+        dtParticipantes.insert(dtjg);
+    }
+    return new DataPartidaMultijugador(this->getId(),
+                                       new DataVideojuego(this->getVideojuego()->getNombre(), this->getVideojuego()->getDescripcion(), this->getVideojuego()->getPeriodoValidez(), this->getVideojuego()->getNombreCategorias(), this->getVideojuego()->getRating()),
+                                       this->getFechaInicio(),
+                                       this->getFechaFin(),
+                                       this->getDuracionTotal(), this->getTransmitidaEnVivo(), *dynamic_cast<DataJugador *>(this->getHost()->getData()), dtParticipantes);
 }
 
 bool PartidaMultijugador::existeParticipante(Jugador *jg)
@@ -80,12 +89,9 @@ bool PartidaMultijugador::existeParticipante(Jugador *jg)
     for (it = this->durpart.begin(); it != this->durpart.end(); it++)
     {
         if ((*it)->getParticipante() == jg)
-            break;
+            return true;
     }
-    if (it != this->durpart.end())
-        return true;
-    else
-        return false;
+    return false;
 }
 
 void PartidaMultijugador::bajarParticipante(Jugador *jg, Fecha *f)
@@ -98,13 +104,10 @@ void PartidaMultijugador::bajarParticipante(Jugador *jg, Fecha *f)
         {
             (*it)->setHoraSalida(f);
             dur = (*it)->calcularDuracion();
-            break;
+            std::cout << "diff de fechas: " << dur << "\n";
+            this->setDuracionTotal(abs(dur));
+            return;
         }
-    }
-
-    if (dur >= 0.0F)
-    {
-        this->setDuracionTotal(abs(dur));
     }
 }
 

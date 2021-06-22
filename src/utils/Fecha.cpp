@@ -65,7 +65,7 @@ float Fecha::operator-(const Fecha &f)
     horas2 += mesesDias[i] * 24;
   horas2 += contarAniosBisiestos(f);
 
-  return horas2 - horas1;
+  return horas1 - horas2;
 }
 
 std::ostream &operator<<(std::ostream &os, Fecha f)

@@ -14,7 +14,7 @@
 DuracionParticipante::DuracionParticipante() {}
 DuracionParticipante::DuracionParticipante(Fecha *he, Fecha *hs, Jugador *jg)
 {
-    this->horaEntrada = he;
+    this->horaEntrada = new Fecha(he->getDia(), he->getMes(), he->getAnio(), he->getHora(), he->getMinuto());
     this->horaSalida = hs;
     this->participante = jg;
 }
