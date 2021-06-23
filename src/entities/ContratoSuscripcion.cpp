@@ -37,20 +37,42 @@ void ContratoSuscripcion::setFecha(Fecha &fe)
 }
 void ContratoSuscripcion::setActivo(Fecha *f)
 {
+  int contrato=(this->getFecha().getAnio());
+  //std::cout << contrato <<" contrato\n";
+  contrato=contrato-2020;
+  //std::cout << contrato <<" contrato\n";
+  contrato=contrato*24*12*30;
+  //std::cout << contrato <<" contrato\n";
+  //std::cout << contrato <<" contrato\n";
+  contrato=contrato+((this->getFecha().getMes())*24*30);
+  //std::cout << contrato <<" contrato\n";
+  contrato=contrato+((this->getFecha().getDia())*24);
+  //std::cout << contrato <<" contrato\n";
   switch (this->periodoValidez)
   {
   case mensual:
-    this->activa = (*f - this->getFecha()) <= 30 * 24;
+    contrato = (contrato+(30*24));
+  //std::cout << contrato <<" contrato\n";
     break;
   case trimestral:
-    this->activa = (*f - this->getFecha()) <= 90 * 24;
+    contrato = (contrato+(90*24));
+  //std::cout << contrato <<" contrato\n";
     break;
   case anual:
-    this->activa = (*f - this->getFecha()) <= 365 * 24;
+    contrato =(contrato+(360*24));
+  //std::cout << contrato <<" contrato\n";
     break;
   default:
     break;
-  }
+  }int actual=(f->getAnio()-2020)*12*30*24;
+  
+  //std::cout << actual <<"\n";
+  actual=actual+((f->getMes())*24*30);
+  //std::cout << actual <<"\n";
+  actual=actual+((f->getDia())*24);
+  //std::cout << actual <<"\n";
+  int dif=actual-contrato;
+  this->activa= (contrato>actual);
 }
 void ContratoSuscripcion::setFueCancelada(bool fueCancelada) {}
 void ContratoSuscripcion::setMetodoDePago(TipoMetodoPago metodoDePago) {}

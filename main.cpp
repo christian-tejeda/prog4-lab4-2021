@@ -458,7 +458,7 @@ void menuSuscribirseVideojuego(FactoryController *fact, Fecha *f)
     ISuscribirseVideojuego *iSuscAVj = fact->getISuscribirseVideojuego();
 
     set<DataSuscripcionJugador *> dataSuscJugador =
-        iSuscAVj->obtenerSuscripciones();
+        iSuscAVj->obtenerSuscripciones(f);
 
     std::set<DataSuscripcionJugador *>::iterator it;
 
@@ -626,10 +626,11 @@ void menuIniciarPartida(FactoryController *fact, Fecha *fechainicio)
     bool juegoValido = false;
     if (videojuegosDeJgConSus.size() != 0)
     {
+        std::cin.ignore();
         while (!juegoValido)
         {
             std::string nombreJueguito;
-            std::cin.ignore();
+            //std::cin.ignore();
             std::cout << "Ingrese el nombre del videojuego que desea iniciar partida: ";
             std::getline(std::cin, nombreJueguito);
             try
@@ -1284,7 +1285,7 @@ int main(int argc, char const *argv[])
     FactoryController *fact = FactoryController::getInstance();
 
     //Creacion variables globales
-    Fecha *fechaSist = new Fecha(1, 1, 2021, 15, 30); //Fecha de ejemplo
+    Fecha *fechaSist = new Fecha(26, 6, 2021, 15, 30); //Fecha de ejemplo
 
     bool salirInicial = false;
     bool salirJugador = true;

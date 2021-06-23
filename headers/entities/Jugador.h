@@ -41,7 +41,7 @@ public:
     void setDescripcion(std::string descripcion);
 
     //Operaciones
-    std::set<ContratoSuscripcion *> obtenerContratosActivos();
+    std::set<ContratoSuscripcion *> obtenerContratosActivos(Fecha *fecha);
     void contratarSuscripcion(Videojuego *vj, TipoPeriodoValidez validez,
                               TipoMetodoPago metodoPago, Fecha *f);
     void crearPartidaIndividual(int idPartida, Fecha fechaActual, Videojuego *vj, Jugador *host, PartidaIndividual *cont);

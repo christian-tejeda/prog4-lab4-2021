@@ -8,7 +8,7 @@
 class ISuscribirseVideojuego
 {
 public:
-  virtual set<DataSuscripcionJugador *> obtenerSuscripciones() = 0;
+  virtual set<DataSuscripcionJugador *> obtenerSuscripciones(Fecha* f) = 0;
   virtual void seleccionarVideojuego(string nombreVideojuego) = 0;
   virtual void cancelarSuscripcion() = 0;
   virtual void contratarSuscripcion(TipoPeriodoValidez validezSuscripcion,

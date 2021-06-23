@@ -45,6 +45,7 @@ void Jugador::contratarSuscripcion(Videojuego *vj, TipoPeriodoValidez validez,
 { //NUEVA
   ContratoSuscripcion *contrato =
       new ContratoSuscripcion(this, vj, metodoPago, validez);
+  contrato->setFecha(*f);
   this->contratos.insert(contrato);
   vj->agregarSuscriptor(contrato);
 }
@@ -162,7 +163,7 @@ int Jugador::obtenerDuracionPartida(Videojuego *vj)
   return res;
 }
 
-std::set<ContratoSuscripcion *> Jugador::obtenerContratosActivos()
+std::set<ContratoSuscripcion *> Jugador::obtenerContratosActivos(Fecha *fecha)
 {
   std::set<ContratoSuscripcion *> activos = std::set<ContratoSuscripcion *>();
 
@@ -170,10 +171,13 @@ std::set<ContratoSuscripcion *> Jugador::obtenerContratosActivos()
   for (it = this->contratos.begin(); it != this->contratos.end(); it++)
   {
     ContratoSuscripcion *contrato = (*it);
+    contrato->setActivo(fecha);
     if (contrato->esActivo())
     {
       activos.insert(contrato);
     }
+    
+    std::cout <<contrato->esActivo();
   }
 
   return activos;
@@ -255,6 +259,7 @@ map<std::string, Videojuego *> Jugador::obtenerVideojuegosConSuscripcionActiva(F
   set<ContratoSuscripcion *>::iterator it;
   for (it = this->contratos.begin(); it != this->contratos.end(); it++)
   {
+    (*it)->setActivo(fa);
     if ((*it)->esActivo())
     {
       res.insert({(*it)->getVideojuego()->getNombre(), (*it)->getVideojuego()});

@@ -52,7 +52,7 @@ public:
   set<DataEstadistica *> calcularEstadisticas(string nomVideojuego);
 
   /// ISuscribirseVideojuego
-  std::set<DataSuscripcionJugador *> obtenerSuscripciones();
+  std::set<DataSuscripcionJugador *> obtenerSuscripciones(Fecha *f);
   void seleccionarVideojuego(string nombreVideojuego);
   void cancelarSuscripcion();
   void contratarSuscripcion(TipoPeriodoValidez validez,

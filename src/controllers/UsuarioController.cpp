@@ -110,7 +110,7 @@ void UsuarioController::confirmarAltaUsuario(bool confirmar)
 
 // ISuscribirseAVideojuego
 
-std::set<DataSuscripcionJugador *> UsuarioController::obtenerSuscripciones()
+std::set<DataSuscripcionJugador *> UsuarioController::obtenerSuscripciones(Fecha *fecha)
 {
   std::set<DataSuscripcionJugador *> res = std::set<DataSuscripcionJugador *>();
 
@@ -118,7 +118,7 @@ std::set<DataSuscripcionJugador *> UsuarioController::obtenerSuscripciones()
   Jugador *jugador = dynamic_cast<Jugador *>(uc->getSesion());
 
   std::set<ContratoSuscripcion *> contratosActivos =
-      jugador->obtenerContratosActivos();
+      jugador->obtenerContratosActivos(fecha);
 
   std::set<ContratoSuscripcion *>::iterator it;
 
