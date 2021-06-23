@@ -58,6 +58,7 @@ public:
 
     map<int, PartidaIndividual *> obtenerPartidasFinalizadas();
 
+    ///TODO: diferencia???
     PartidaIndividual *obtenerPartida(int id);
 
     bool tieneSuscripcionActiva(Videojuego *videojuego);
@@ -70,6 +71,7 @@ public:
 
     int obtenerDuracionPartida(Videojuego *videojuego);
 
+    ///TODO: diferencia???
     Partida *obtenerPartidaPorId(int id);
 
     DataJugador getData();

@@ -47,12 +47,13 @@ void PartidaMultijugador::eliminarPartidasVideojuego(Videojuego *videojuego)
 {
     set<DuracionParticipante *> dur = this->participantes;
     set<DuracionParticipante *>::iterator it;
-    for (it = dur.begin(); it != dur.end(); it++)
+    for (it = dur.begin(); it != dur.end(); ++it)
     {
         DuracionParticipante *cuestion = *it;
-        dur.erase(*it);
-        delete cuestion;
+        delete cuestion; //o sino hacer cuestion->~DuracionParticipante();
     }
+    dur.clear();
+    this->participantes.clear();
 }
 
 DataPartidaMultijugador PartidaMultijugador::getData()

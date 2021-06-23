@@ -129,20 +129,22 @@ Partida *UsuarioHandler::obtenerPartidaPorId(int idPartida)
 {
     Partida *res = nullptr;
     map<string, Usuario *>::iterator it;
-
     for (it = this->users.begin(); it != this->users.end(); ++it)
     {
         Jugador *jug = dynamic_cast<Jugador *>(it->second);
         if (jug)
         {
             res = jug->obtenerPartidaPorId(idPartida);
+            if (res && res->getId() == idPartida)
+            {
+                return res;
+            }
         }
     }
     if (res)
         return res;
     else
         throw invalid_argument("Error: Partida no encontrada.\n");
-    ;
 }
 
 void UsuarioHandler::eliminarUsuario(Usuario *usuario)
@@ -190,25 +192,36 @@ float UsuarioHandler::obtenerHoras(Videojuego *videojuego)
     return res;
 }
 
-set<DataPartidaMultijugador> UsuarioHandler::obtenerPartidasMultijugadorActivasDeJugador(Jugador *jugador)
+set<DataPartidaMultijugador> UsuarioHandler::obtenerPartidasMultijugadorActivasDeJugador(Jugador *jg)
 {
-    set<DataPartidaMultijugador> res;
-    // map<string, Usuario *>::iterator it;
-    // for (it = this->users.begin(); it != this->users.end(); it++)
-    // {
-    //     Jugador *currentJugador = dynamic_cast<Jugador *>(it->second);
-    //     if (currentJugador)
-    //     {
-    //         set<DataPartidaMultijugador> dataPartidas = currentJugador->obtenerPartidasPorParticipante(jugador);
+    set<DataPartidaMultijugador> res = set<DataPartidaMultijugador>();
 
-    //         set<DataPartidaMultijugador>::iterator it2;
-    //         for (it2 = dataPartidas.begin(); it2 != dataPartidas.end(); it++)
-    //         {
-    //             res.insert((*it2));
-    //         }
-    //         dataPartidas.clear();
-    //     }
-    // }
-
+    map<string, Usuario *>::iterator it;
+    for (it = this->users.begin(); it != this->users.end(); it++)
+    {
+        Jugador *jugador = dynamic_cast<Jugador *>(it->second);
+        if (jugador)
+        {
+            map<int, Partida *> pIniciadas = jugador->obtenerPartidasSinFinalizar();
+            map<int, Partida *>::iterator it2;
+            for (it2 = pIniciadas.begin(); it2 != pIniciadas.end(); it2++)
+            {
+                PartidaMultijugador *pm = dynamic_cast<PartidaMultijugador *>(it2->second);
+                if (pm && pm->existeParticipante(jg))
+                {
+                    set<DuracionParticipante *> dps = pm->getDuracionParticipantes();
+                    set<DuracionParticipante *>::iterator it3;
+                    for (it3 = dps.begin(); it3 != dps.end(); it3++)
+                    {
+                        DuracionParticipante *dp = *it3;
+                        if (dp && dp->getParticipante() == jg && dp->getHoraSalida() == Fecha())
+                        {
+                            res.insert(pm->getData());
+                        }
+                    }
+                }
+            }
+        }
+    }
     return res;
 }

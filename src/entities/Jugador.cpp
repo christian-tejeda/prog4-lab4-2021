@@ -36,10 +36,9 @@ void Jugador::cancelarSuscripcionActiva(Videojuego *videojuego)
   }
 }
 
+///TODO: Para que la fecha?
 void Jugador::contratarSuscripcion(Videojuego *videojuego, TipoPeriodoValidez validez, TipoMetodoPago metodoPago, Fecha fecha)
 {
-  ///TODO: Para que la fecha?
-
   ContratoSuscripcion *contrato = new ContratoSuscripcion(this, videojuego, metodoPago, validez);
   this->contratos.insert(contrato);
   videojuego->agregarSuscriptor(contrato);
@@ -59,7 +58,10 @@ map<int, Partida *> Jugador::obtenerPartidasSinFinalizar()
   return res;
 }
 
-Partida *Jugador::obtenerPartidaPorId(int id) { return this->partidasIniciadas.find(id)->second; }
+Partida *Jugador::obtenerPartidaPorId(int id)
+{
+  return this->partidasIniciadas.find(id)->second;
+}
 
 void Jugador::finalizarPartida(int idPartida, Fecha fecha)
 {
@@ -113,7 +115,10 @@ void Jugador::eliminarPartidasDeVideojuego(Videojuego *videojuego)
   }
 }
 
-DataJugador Jugador::getData() { return DataJugador(this->getEmail(), this->getPassword(), this->getNickname(), this->getDescripcion()); }
+DataJugador Jugador::getData()
+{
+  return DataJugador(this->getEmail(), this->getPassword(), this->getNickname(), this->getDescripcion());
+}
 
 bool tieneSuscripcionActiva(Videojuego *vj)
 {
@@ -215,7 +220,10 @@ map<int, PartidaIndividual *> Jugador::obtenerPartidasFinalizadas()
   return res;
 }
 
-PartidaIndividual *Jugador::obtenerPartida(int id) { return dynamic_cast<PartidaIndividual *>(partidasIniciadas.find(id)->second); }
+PartidaIndividual *Jugador::obtenerPartida(int id)
+{
+  return dynamic_cast<PartidaIndividual *>(partidasIniciadas.find(id)->second);
+}
 
 bool Jugador::tieneSuscripcionActiva(Videojuego *videojuego)
 {

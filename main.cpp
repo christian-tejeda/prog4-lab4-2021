@@ -263,10 +263,10 @@ void menuCargarDatosPrueba(UsuarioHandler *uh, VideojuegoHandler *vh, CategoriaH
                                      contratos1,
                                      cats1,
                                      "Ironhide Game Studio");
-    vj1->agregarCategoria(cv1);
-    vj1->agregarCategoria(cv2);
-    vj1->agregarCategoria(cv6);
-    vj1->agregarCategoria(cv8);
+    vj1->setCategoria(cv1);
+    vj1->setCategoria(cv2);
+    vj1->setCategoria(cv6);
+    vj1->setCategoria(cv8);
     vh->agregarVideojuego(vj1);
     Desarrollador *des1 = dynamic_cast<Desarrollador *>(uh->obtenerUsuarioPorId("ironhide@mail.com"));
     des1->agregarVideojuegoPublicado(vj1);
@@ -287,11 +287,11 @@ void menuCargarDatosPrueba(UsuarioHandler *uh, VideojuegoHandler *vh, CategoriaH
                                      cats2,
                                      "Epic Games");
 
-    vj2->agregarCategoria(cv1);
-    vj2->agregarCategoria(cv2);
-    vj2->agregarCategoria(cv3);
-    vj2->agregarCategoria(cv5);
-    vj2->agregarCategoria(cv7);
+    vj2->setCategoria(cv1);
+    vj2->setCategoria(cv2);
+    vj2->setCategoria(cv3);
+    vj2->setCategoria(cv5);
+    vj2->setCategoria(cv7);
     vh->agregarVideojuego(vj2);
     Desarrollador *des2 = dynamic_cast<Desarrollador *>(uh->obtenerUsuarioPorId("epic@mail.com"));
     des2->agregarVideojuegoPublicado(vj2);
@@ -312,9 +312,9 @@ void menuCargarDatosPrueba(UsuarioHandler *uh, VideojuegoHandler *vh, CategoriaH
                                      cats3,
                                      "Mojang Studios");
 
-    vj3->agregarCategoria(cv1);
-    vj3->agregarCategoria(cv5);
-    vj3->agregarCategoria(cv8);
+    vj3->setCategoria(cv1);
+    vj3->setCategoria(cv5);
+    vj3->setCategoria(cv8);
     vh->agregarVideojuego(vj3);
     Desarrollador *des3 = dynamic_cast<Desarrollador *>(uh->obtenerUsuarioPorId("mojang@mail.com"));
     des3->agregarVideojuegoPublicado(vj3);
@@ -327,19 +327,13 @@ void menuCargarDatosPrueba(UsuarioHandler *uh, VideojuegoHandler *vh, CategoriaH
     pair<float, int> ratings4;
     map<string, Categoria *> cats4;
     set<ContratoSuscripcion *> contratos4 = set<ContratoSuscripcion *>();
-    Videojuego *vj4 = new Videojuego("FIFA 21",
-                                     "prueba 4",
-                                     susc4,
-                                     ratings4,
-                                     contratos4,
-                                     cats4,
-                                     "EA Sports");
+    Videojuego *vj4 = new Videojuego("FIFA 21", "prueba 4", susc4, ratings4, contratos4, cats4, "EA Sports");
 
-    vj4->agregarCategoria(cv1);
-    vj4->agregarCategoria(cv2);
-    vj4->agregarCategoria(cv3);
-    vj4->agregarCategoria(cv4);
-    vj4->agregarCategoria(cv8);
+    vj4->setCategoria(cv1);
+    vj4->setCategoria(cv2);
+    vj4->setCategoria(cv3);
+    vj4->setCategoria(cv4);
+    vj4->setCategoria(cv8);
     vh->agregarVideojuego(vj4);
     Desarrollador *des4 = dynamic_cast<Desarrollador *>(uh->obtenerUsuarioPorId("ea@mail.com"));
     des4->agregarVideojuegoPublicado(vj4);
@@ -373,6 +367,47 @@ void menuCargarDatosPrueba(UsuarioHandler *uh, VideojuegoHandler *vh, CategoriaH
     fort->agregarPuntaje(5);
     fort->agregarPuntaje(5);
     mine->agregarPuntaje(3);
+
+    //Inicio de partidas individuales
+    gamer->crearPartidaIndividual(0, fe7, kindom, gamer, nullptr);
+    PartidaIndividual *part = dynamic_cast<PartidaIndividual *>(uh->obtenerPartidaPorId(0));
+    gamer->crearPartidaIndividual(1, fe8, kindom, gamer, part);
+    ari->crearPartidaIndividual(2, fe9, mine, ari, nullptr);
+    //Finalizo individuales
+    gamer->finalizarPartida(0, f10);
+    gamer->finalizarPartida(1, f11);
+
+    //Inicio de partidas multijugador
+    Fecha f12 = Fecha(5, 6, 2021, 17, 0);
+    Fecha f13 = Fecha(6, 6, 2021, 17, 0);
+    Fecha f14 = Fecha(12, 6, 2021, 20, 0);
+    Fecha f15 = Fecha(5, 6, 2021, 19, 0);
+    Fecha f16 = Fecha(6, 6, 2021, 19, 0);
+    Fecha f17 = Fecha(5, 6, 2021, 18, 0);
+    Fecha f18 = Fecha(6, 6, 2021, 17, 30);
+    map<string, Jugador *> partm1;
+    partm1.insert(std::pair<string, Jugador *>(ari->getNickname(), dynamic_cast<Jugador *>(ari)));
+    partm1.insert(std::pair<string, Jugador *>(ibai->getNickname(), dynamic_cast<Jugador *>(ibai)));
+    gamer->crearPartidaMultijugador(3, f12, Fecha(), fort, true, gamer, partm1);
+    map<string, Jugador *> partm2;
+    partm2.insert(std::pair<string, Jugador *>("ari", ari));
+    partm2.insert(std::pair<string, Jugador *>(ibai->getNickname(), ibai));
+    gamer->crearPartidaMultijugador(4, f13, Fecha(), fort, true, gamer, partm2);
+    std::map<string, Jugador *> partm3;
+    partm3.insert(std::pair<string, Jugador *>(ibai->getNickname(), dynamic_cast<Jugador *>(ibai)));
+    ari->crearPartidaMultijugador(5, f14, Fecha(), mine, false, ari, partm3);
+    //Abandonos de partidas
+    Partida *p3 = gamer->obtenerPartidaPorId(3);
+    PartidaMultijugador *pm3 = dynamic_cast<PartidaMultijugador *>(p3);
+    Partida *p4 = gamer->obtenerPartidaPorId(4);
+    PartidaMultijugador *pm4 = dynamic_cast<PartidaMultijugador *>(p4);
+
+    pm3->bajarParticipante(ari, f17);
+    pm4->bajarParticipante(ari, f18);
+
+    //Finalizo multijugadores
+    gamer->finalizarPartida(3, f15);
+    gamer->finalizarPartida(4, f16);
 
     cout << "¡Datos cargados correctamente!\n";
 }
@@ -528,8 +563,10 @@ void menuAsignarPuntaje(FactoryController *fact)
         cout << "\tNombre: " << imprimir.getNombre() << "\t | \t"
              << "Descripcion:" << imprimir.getDescripcion() << "    \n";
     }
+    cout << "\n";
     cin.ignore();
-    getline(cin, nombre);
+    cout << ">";
+    getline(std::cin, nombre);
     cout << "\n";
     int punt;
     cout << "Seleccione un numero del 1 al 5 para puntuar al videojuego \n";
@@ -725,7 +762,7 @@ void menuIniciarPartida(FactoryController *fact, Fecha fechainicio)
     }
     else
     {
-        cout << "No tenes juegos :( \n";
+        cout << "No tenés juegos...\n";
     }
 }
 

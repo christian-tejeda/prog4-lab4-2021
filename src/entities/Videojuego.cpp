@@ -32,7 +32,10 @@ pair<float, int> Videojuego::getRating() { return this->rating; }
 
 map<string, Categoria *> Videojuego::getCategorias() { return this->categorias; }
 
-void Videojuego::agregarSuscriptor(ContratoSuscripcion *contrato) { this->contratos.insert(contrato); }
+void Videojuego::agregarSuscriptor(ContratoSuscripcion *contrato)
+{
+  this->contratos.insert(contrato);
+}
 
 set<string> Videojuego::getNombreCategorias()
 {

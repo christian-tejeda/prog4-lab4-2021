@@ -8,6 +8,7 @@
 #include "../../headers/entities/Jugador.h"
 #include "../../headers/handlers/UsuarioHandler.h"
 
+///TODO: en dev idPartida es 6
 int PartidaController::idPartida = 0;
 
 PartidaController::PartidaController()
