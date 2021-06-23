@@ -39,11 +39,13 @@ bool UsuarioHandler::existeJugadorConNickname(string nickname)
     return false;
 }
 
-void UsuarioHandler::agregarUsuario(DataUsuario usuario)
+void UsuarioHandler::agregarUsuario(DataUsuario dataUsuario)
 {
     Usuario *user;
-    DataJugador dataJugador = dynamic_cast<DataJugador &>(usuario);
-    DataDesarrollador dataDev = dynamic_cast<DataDesarrollador &>(usuario);
+
+    DataJugador dataJugador = static_cast<const DataJugador &>(dataUsuario);
+    DataDesarrollador dataDev = static_cast<const DataDesarrollador &>(dataUsuario);
+
     if (dataJugador != DataJugador())
     {
         user = new Jugador(dataJugador.getEmail(), dataJugador.getPassword(), dataJugador.getNickname(), dataJugador.getDescripcion());
