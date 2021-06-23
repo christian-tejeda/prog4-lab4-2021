@@ -1,31 +1,40 @@
-
-#include <string>
-#include <map>
-#include <set>
-#include <utility>
-
-#include "../../headers/datatypes/DataUsuario.h"
 #include "../../headers/datatypes/DataJugador.h"
-#include "../../headers/utils/enums.h"
-#include "../../headers/datatypes/DataVideojuego.h"
-#include "../../headers/utils/Fecha.h"
 
-using namespace std;
-
-DataJugador::DataJugador() {}
-
-DataJugador::DataJugador(std::string email, std::string password, std::string nickname, std::string descripcion) : DataUsuario(email, password)
+DataJugador::DataJugador()
 {
-    this->nickname = nickname;
-    this->descripcion = descripcion;
+    nickname = "";
+    descripcion = "";
 }
 
-std::string DataJugador::getNickname()
+DataJugador::DataJugador(const DataJugador &data) : DataUsuario(data)
 {
-    return this->nickname;
+    nickname = data.nickname;
+    descripcion = data.descripcion;
 }
-std::string DataJugador::getDescripcion()
+
+DataJugador::DataJugador(string email, string password, string nickname, string descripcion) : DataUsuario(email, password)
 {
-    return this->descripcion;
+    nickname = nickname;
+    descripcion = descripcion;
 }
+
+string DataJugador::getNickname() const { return nickname; }
+
+string DataJugador::getDescripcion() const { return descripcion; }
+
+bool operator<(const DataJugador &d1, const DataJugador &d2)
+{
+    return &d1 < &d2;
+}
+
+bool operator!=(const DataJugador &d1, const DataJugador &d2)
+{
+    return d1.getEmail() != d2.getEmail() || d1.getNickname() != d2.getNickname() || d1.getDescripcion() != d2.getDescripcion() || d1.getPassword() != d2.getPassword();
+}
+
+bool operator==(const DataJugador &d1, const DataJugador &d2)
+{
+    return !(d1 != d2);
+}
+
 DataJugador::~DataJugador(){};

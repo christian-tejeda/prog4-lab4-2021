@@ -5,78 +5,68 @@
 #include <utility>
 
 #include "../../headers/entities/Desarrollador.h"
-//#include "../../headers/entities/Usuario.h"
-//#include "../../headers/utils/enums.h"
-//#include "../../headers/datatypes/DataUsuario.h"
-//#include "../../headers/datatypes/DataDesarrollador.h"
-#include "../../headers/utils/Fecha.h"
+#include "../../headers/datatypes/DataDesarrollador.h"
 
 Desarrollador::Desarrollador() : Usuario(){};
 
-Desarrollador::Desarrollador(std::string email, std::string password,
-                             std::string nombreEmpresa)
-    : Usuario(email, password) {
+Desarrollador::Desarrollador(string email, string password, string nombreEmpresa) : Usuario(email, password)
+{
   this->nombreEmpresa = nombreEmpresa;
-  this->estadisticasDeInteres = std::set<TipoEstadistica>();
+  this->estadisticasDeInteres = set<TipoEstadistica>();
 }
 
-// Getters
 string Desarrollador::getNombreEmpresa() { return this->nombreEmpresa; }
 
-// Setters
-void Desarrollador::setNombreEmpresa(std::string nomEmpresa) {
-  this->nombreEmpresa = nomEmpresa;
-}
+void Desarrollador::setNombreEmpresa(string nombreEmpresa) { this->nombreEmpresa = nombreEmpresa; }
 
-// Operaciones
+DataDesarrollador Desarrollador::getData() { return DataDesarrollador(this->getEmail(), this->getPassword(), this->getNombreEmpresa()); }
 
-DataUsuario *Desarrollador::getData() {
-    return new DataDesarrollador(this->getEmail(), this->getPassword(), this->getNombreEmpresa());
-}
+set<TipoEstadistica> Desarrollador::getEstadisticasDeInteres() { return this->estadisticasDeInteres; }
 
-std::set<TipoEstadistica> Desarrollador::getEstadisticasDeInteres() {
-  return this->estadisticasDeInteres;
-}
+void Desarrollador::agregarEstadisticaDeInteres(TipoEstadistica estadistica) { this->estadisticasDeInteres.insert(estadistica); }
 
-void Desarrollador::agregarEstadisticaDeInteres(TipoEstadistica estadistica) {
-  this->estadisticasDeInteres.insert(estadistica);
-}
-
-void Desarrollador::removerEstadisticaDeInteres(TipoEstadistica estadistica) {
-  std::set<TipoEstadistica>::iterator it;
-
+void Desarrollador::removerEstadisticaDeInteres(TipoEstadistica estadistica)
+{
   bool removido = false;
-  std::set<TipoEstadistica> estadisticas = this->estadisticasDeInteres;
-  for (it = estadisticas.begin(); it != estadisticas.end(); it++) {
+  set<TipoEstadistica>::iterator it;
+  set<TipoEstadistica> estadisticas = this->estadisticasDeInteres;
+
+  for (it = estadisticas.begin(); it != estadisticas.end(); it++)
+  {
     TipoEstadistica tipoEs = (*it);
 
-    if (tipoEs == estadistica) {
+    if (tipoEs == estadistica)
+    {
       this->estadisticasDeInteres.erase(it);
       removido = true;
     }
   }
 }
 
-void Desarrollador::agregarVideojuegoPublicado(Videojuego *vj) {
-    std::string nombre=vj->getNombre();
-    this->publicaciones.insert(pair<std::string, Videojuego *>(nombre,vj));
+void Desarrollador::agregarVideojuegoPublicado(Videojuego *videojuego)
+{
+  this->publicaciones.insert(pair<string, Videojuego *>(videojuego->getNombre(), videojuego));
 }
 
-set<Videojuego *> Desarrollador::getVideojuegoPublicados() {
-  map<string, Videojuego *> vjs = this->publicaciones;
+set<Videojuego *> Desarrollador::getVideojuegoPublicados()
+{
+  map<string, Videojuego *> videojuegosPublicados = this->publicaciones;
+
   map<string, Videojuego *>::iterator it;
   set<Videojuego *> res;
-  for (it = vjs.begin(); it != vjs.end(); it++) {
-    Videojuego *video = it->second;
-    res.insert(video);
+  for (it = videojuegosPublicados.begin(); it != videojuegosPublicados.end(); it++)
+  {
+    Videojuego *videojuego = it->second;
+    res.insert(videojuego);
   }
-  
+
   return res;
 }
 
-void Desarrollador::eliminarVideojuegoPublicado(Videojuego *vj) {
+void Desarrollador::eliminarVideojuegoPublicado(Videojuego *videojuego)
+{
   map<string, Videojuego *>::iterator it;
-  it=this->publicaciones.find(vj->getNombre());
+  it = this->publicaciones.find(videojuego->getNombre());
   this->publicaciones.erase(it);
 }
 

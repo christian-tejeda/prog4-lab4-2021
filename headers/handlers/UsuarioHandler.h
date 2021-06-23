@@ -4,38 +4,36 @@
 #include <string>
 #include <map>
 #include <set>
-#include <utility>
 
 #include "../utils/enums.h"
-#include "../datatypes/DataVideojuego.h"
+#include "../datatypes/DataPartidaMultijugador.h"
 #include "../entities/Usuario.h"
 #include "../entities/Videojuego.h"
-#include "../utils/Fecha.h"
-
-using namespace std;
+#include "../entities/Partida.h"
 
 class UsuarioHandler
-{ //singleton
+{
 private:
     static UsuarioHandler *instancia;
     map<string, Usuario *> users;
+
     UsuarioHandler();
     ~UsuarioHandler();
 
 public:
     static UsuarioHandler *getInstance();
 
-    bool existeJugadorConNickname(string n);
+    bool existeJugadorConNickname(string nickname);
 
-    void agregarUsuario(DataUsuario *usuario);
+    void agregarUsuario(DataUsuario usuario);
 
-    map<string, Usuario *> obtenerJugadoresConSuscripcionActiva(Videojuego *vj);
+    map<string, Usuario *> obtenerJugadoresConSuscripcionActiva(Videojuego *videojuego);
 
-    Jugador *obtenerJugadorPorNickname(string n);
+    Jugador *obtenerJugadorPorNickname(string nickname);
 
-    Usuario *obtenerUsuarioPorId(string mail);
+    Usuario *obtenerUsuarioPorId(string email);
 
-    bool tienePartidaSinFinalizar(Videojuego *vj);
+    bool tienePartidaSinFinalizar(Videojuego *videojuego);
 
     map<string, Usuario *> obtenerUsuarios();
 
@@ -45,9 +43,9 @@ public:
 
     static void releaseInstance();
 
-    float obtenerHoras(Videojuego *vj);
+    float obtenerHoras(Videojuego *videojuego);
 
-    set<DataPartidaMultijugador *> obtenerPartidasMultijugadorActivasDeJugador(Jugador *jg);
+    set<DataPartidaMultijugador> obtenerPartidasMultijugadorActivasDeJugador(Jugador *jugador);
 };
 
 #endif

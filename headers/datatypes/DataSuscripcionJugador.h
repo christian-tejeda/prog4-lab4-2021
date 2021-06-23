@@ -2,29 +2,34 @@
 #define DATA_SUSCRIPCION_JUGADOR_H
 
 #include "../utils/enums.h"
+
 #include <string>
+
+using namespace std;
 
 class DataSuscripcionJugador
 {
 
 private:
-  std::string nombreVideojuego;
+  string nombreVideojuego;
   float precio;
   TipoPeriodoValidez validez;
   bool activo;
 
 public:
   DataSuscripcionJugador();
-  DataSuscripcionJugador(std::string nombreVideojuego, float precio,
-                         TipoPeriodoValidez validez, bool activo);
+  DataSuscripcionJugador(const DataSuscripcionJugador &data);
+  DataSuscripcionJugador(string nombreVideojuego, float precio, TipoPeriodoValidez validez, bool activo);
 
-  std::string getNombreVideojuego();
-  float getPrecio();
-  TipoPeriodoValidez getValidez();
+  string getNombreVideojuego() const;
+  float getPrecio() const;
+  TipoPeriodoValidez getValidez() const;
 
-  bool esSuscripcionActiva();
+  bool esSuscripcionActiva() const;
 
-  friend std::ostream &operator<<(std::ostream &os, const DataSuscripcionJugador &dt);
+  friend ostream &operator<<(ostream &os, const DataSuscripcionJugador &dt);
+  friend bool operator<(const DataSuscripcionJugador &d1, const DataSuscripcionJugador &d2);
+  friend bool operator!=(const DataSuscripcionJugador &d1, const DataSuscripcionJugador &d2);
 };
 
 #endif

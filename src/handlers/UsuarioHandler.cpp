@@ -5,12 +5,10 @@
 
 #include "../../headers/utils/enums.h"
 #include "../../headers/entities/Categoria.h"
-//#include "../../headers/entities/Genero.h"
-//#include "../../headers/entities/Plataforma.h"
 #include "../../headers/handlers/UsuarioHandler.h"
 #include "../../headers/entities/Desarrollador.h"
-
-using namespace std;
+#include "../../headers/entities/Jugador.h"
+#include "../../headers/datatypes/DataDesarrollador.h"
 
 UsuarioHandler *UsuarioHandler::instancia = nullptr;
 
@@ -26,9 +24,9 @@ UsuarioHandler *UsuarioHandler::getInstance()
 
 bool UsuarioHandler::existeJugadorConNickname(string nickname)
 {
-    map<std::string, Usuario *> users = this->users;
+    map<string, Usuario *> users = this->users;
 
-    map<std::string, Usuario *>::iterator it;
+    map<string, Usuario *>::iterator it;
 
     for (it = users.begin(); it != users.end(); it++)
     {
@@ -41,50 +39,49 @@ bool UsuarioHandler::existeJugadorConNickname(string nickname)
     return false;
 }
 
-void UsuarioHandler::agregarUsuario(DataUsuario *usuario)
+void UsuarioHandler::agregarUsuario(DataUsuario usuario)
 {
     Usuario *user;
-    DataJugador *dtJg = dynamic_cast<DataJugador *>(usuario);
-    DataDesarrollador *dtDev = dynamic_cast<DataDesarrollador *>(usuario);
-    if (dtJg)
+    DataJugador dataJugador = dynamic_cast<DataJugador &>(usuario);
+    DataDesarrollador dataDev = dynamic_cast<DataDesarrollador &>(usuario);
+    if (dataJugador != DataJugador())
     {
-        user = new Jugador(dtJg->getEmail(), dtJg->getPassword(), dtJg->getNickname(), dtJg->getDescripcion());
+        user = new Jugador(dataJugador.getEmail(), dataJugador.getPassword(), dataJugador.getNickname(), dataJugador.getDescripcion());
     }
     else
     {
-        user = new Desarrollador(dtDev->getEmail(), dtDev->getPassword(), dtDev->getNombreEmpresa());
+        user = new Desarrollador(dataDev.getEmail(), dataDev.getPassword(), dataDev.getNombreEmpresa());
     }
 
-    this->users.insert(std::pair<std::string, Usuario *>(user->getEmail(), user));
+    this->users.insert(pair<string, Usuario *>(user->getEmail(), user));
 }
 
-map<string, Usuario *> UsuarioHandler::obtenerJugadoresConSuscripcionActiva(Videojuego *vj)
-{//deberia estar bien
-    map<string, Usuario *>::iterator it;
+map<string, Usuario *> UsuarioHandler::obtenerJugadoresConSuscripcionActiva(Videojuego *videojuego)
+{
     map<string, Usuario *> res;
+    map<string, Usuario *>::iterator it;
+
     for (it = this->users.begin(); it != this->users.end(); it++)
     {
-        Jugador *testJugador = dynamic_cast<Jugador *>(it->second);
-        if (testJugador != nullptr)
+        Jugador *jugador = dynamic_cast<Jugador *>(it->second);
+        if (jugador != nullptr)
         {
-            if (dynamic_cast<Jugador *>(it->second)->tieneSuscripcionActiva(vj))
+            if (dynamic_cast<Jugador *>(it->second)->tieneSuscripcionActiva(videojuego))
             {
-                //std::cout << "metimos algun jugador con sus activa uh";paso
-                res.insert(std::pair<std::string, Usuario *>(it->first, it->second));
-                //std::cout << dynamic_cast<Jugador*>(it->second)->getNickname();//FUNCIONA
-                //std::cout << it->second->getEmail(); se imprimen los mail correctamente 
+                res.insert(pair<string, Usuario *>(it->first, it->second));
             }
         }
     }
+
     return res;
 }
 
 Jugador *UsuarioHandler::obtenerJugadorPorNickname(string nickname)
 {
 
-    map<std::string, Usuario *> users = this->users;
+    map<string, Usuario *> users = this->users;
 
-    map<std::string, Usuario *>::iterator it;
+    map<string, Usuario *>::iterator it;
 
     for (it = users.begin(); it != users.end(); it++)
     {
@@ -97,29 +94,32 @@ Jugador *UsuarioHandler::obtenerJugadorPorNickname(string nickname)
     return nullptr;
 }
 
-//Retorna un puntero a la instancia Usuario.
-//En caso de no encontrarla, retorna nullptr.
-Usuario *UsuarioHandler::obtenerUsuarioPorId(string mail)
+Usuario *UsuarioHandler::obtenerUsuarioPorId(string email)
 {
-    std::map<string, Usuario *>::iterator iter = this->users.find(mail);
+    map<string, Usuario *>::iterator iter = this->users.find(email);
+
     if (iter != this->users.end())
         return iter->second;
     else
         return nullptr;
 }
 
-bool UsuarioHandler::tienePartidaSinFinalizar(Videojuego *vj)
+bool UsuarioHandler::tienePartidaSinFinalizar(Videojuego *videojuego)
 {
-    map<std::string, Usuario *> users = this->users;
-    map<std::string, Usuario *>::iterator it;
+    map<string, Usuario *> users = this->users;
+    map<string, Usuario *>::iterator it;
     bool tiene = false;
+
     for (it = users.begin(); it != users.end(); it++)
     {
         Jugador *jugador = dynamic_cast<Jugador *>(it->second);
         if (jugador != nullptr)
             if (!tiene)
-                tiene = jugador->tienePartidaSinFinalizar(vj);
+            {
+                tiene = jugador->tienePartidaSinFinalizar(videojuego);
+            }
     }
+
     return tiene;
 }
 
@@ -129,7 +129,8 @@ Partida *UsuarioHandler::obtenerPartidaPorId(int idPartida)
 {
     Partida *res = nullptr;
     map<string, Usuario *>::iterator it;
-    for (it = this->users.begin(); res != nullptr && it != this->users.end(); ++it)
+
+    for (it = this->users.begin(); it != this->users.end(); ++it)
     {
         Jugador *jug = dynamic_cast<Jugador *>(it->second);
         if (jug)
@@ -140,21 +141,20 @@ Partida *UsuarioHandler::obtenerPartidaPorId(int idPartida)
     if (res)
         return res;
     else
-        throw std::invalid_argument("Error: Partida no encontrada.\n");
+        throw invalid_argument("Error: Partida no encontrada.\n");
     ;
 }
 
-void UsuarioHandler::eliminarUsuario(Usuario *usuario) {}
+void UsuarioHandler::eliminarUsuario(Usuario *usuario)
+{
+    ///TODO: vacio??
+}
 
 UsuarioHandler::~UsuarioHandler()
 {
-    map<std::string, Usuario *>::iterator it;
-    Usuario *toDelete = nullptr;
-
+    map<string, Usuario *>::iterator it;
     for (it = users.begin(); it != users.end(); ++it)
     {
-        //toDelete = it->second;
-        //this->users.erase(it->first);
         delete it->second;
         it->second = nullptr;
     }
@@ -171,40 +171,44 @@ void UsuarioHandler::releaseInstance()
     }
 }
 
-float UsuarioHandler::obtenerHoras(Videojuego *vj)
+float UsuarioHandler::obtenerHoras(Videojuego *videojuego)
 {
     map<string, Usuario *> coleccion = this->users;
     map<string, Usuario *>::iterator it;
     float res = 0;
+
     for (it = coleccion.begin(); it != coleccion.end(); it++)
     {
         Jugador *jugador = dynamic_cast<Jugador *>(it->second);
         if (jugador != nullptr)
         {
-            float duracion = jugador->obtenerDuracionPartida(vj);
-            res = res + duracion;
+            float duracion = jugador->obtenerDuracionPartida(videojuego);
+            res += duracion;
         }
     }
+
     return res;
 }
 
-set<DataPartidaMultijugador *> UsuarioHandler::obtenerPartidasMultijugadorActivasDeJugador(Jugador *jg)
+set<DataPartidaMultijugador> UsuarioHandler::obtenerPartidasMultijugadorActivasDeJugador(Jugador *jugador)
 {
-    set<DataPartidaMultijugador *> res;
-    map<string, Usuario *>::iterator it;
-    for (it = this->users.begin(); it != this->users.end(); it++)
-    {
-        Jugador *jugador = dynamic_cast<Jugador *>(it->second);
-        if (jugador)
-        {
-            set<DataPartidaMultijugador *> colDtm = jugador->obtenerPartidasPorParticipante(jg);
-            set<DataPartidaMultijugador *>::iterator it2;
-            for (it2 = colDtm.begin(); it2 != colDtm.end(); it++)
-            {
-                res.insert((*it2));
-            }
-            colDtm.clear();
-        }
-    }
+    set<DataPartidaMultijugador> res;
+    // map<string, Usuario *>::iterator it;
+    // for (it = this->users.begin(); it != this->users.end(); it++)
+    // {
+    //     Jugador *currentJugador = dynamic_cast<Jugador *>(it->second);
+    //     if (currentJugador)
+    //     {
+    //         set<DataPartidaMultijugador> dataPartidas = currentJugador->obtenerPartidasPorParticipante(jugador);
+
+    //         set<DataPartidaMultijugador>::iterator it2;
+    //         for (it2 = dataPartidas.begin(); it2 != dataPartidas.end(); it++)
+    //         {
+    //             res.insert((*it2));
+    //         }
+    //         dataPartidas.clear();
+    //     }
+    // }
+
     return res;
 }

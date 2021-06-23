@@ -1,49 +1,48 @@
-
-#include <string>
-#include <map>
-#include <set>
-#include <utility>
-
 #include "../../headers/datatypes/DataPartida.h"
-//#include "../../headers/utils/enums.h"
-//#include "../../headers/datatypes/DataVideojuego.h"
-//#include "../../headers/utils/Fecha.h"
 
-using namespace std;
-
-DataPartida::DataPartida() {}
-
-DataPartida::DataPartida(int id, DataVideojuego * videojuego, Fecha fechaInicio, Fecha *fechaFin, float DuracionTotal)
+DataPartida::DataPartida()
 {
-    this->id = id;
-    this->videojuego = videojuego;
-    this->fechaInicio = fechaInicio;
-    this->fechaFin = fechaFin;
-    this->DuracionTotal = DuracionTotal;
+    id = -1;
 }
 
-int DataPartida::getId()
+DataPartida::DataPartida(const DataPartida &data)
 {
-    return this->id;
+    id = data.id;
+    dataVideojuego = data.dataVideojuego;
+    fechaInicio = data.fechaInicio;
+    fechaFin = data.fechaFin;
+    duracionTotal = data.duracionTotal;
 }
 
-Fecha DataPartida::getFechaInicio()
+DataPartida::DataPartida(int id, DataVideojuego dataVideojuego, Fecha fechaInicio, Fecha fechaFin, float duracionTotal)
 {
-    return this->fechaInicio;
+    id = id;
+    dataVideojuego = dataVideojuego;
+    fechaInicio = fechaInicio;
+    fechaFin = fechaFin;
+    duracionTotal = duracionTotal;
 }
 
-Fecha *DataPartida::getFechaFin()
+int DataPartida::getId() const { return id; }
+
+Fecha DataPartida::getFechaInicio() const { return fechaInicio; }
+
+Fecha DataPartida::getFechaFin() const { return fechaFin; }
+
+DataVideojuego DataPartida::getDataVideojuego() const { return dataVideojuego; }
+
+float DataPartida::getDuracionTotal() const { return duracionTotal; }
+
+bool operator<(const DataPartida &d1, const DataPartida &d2)
 {
-    return this->fechaFin;
-}
-DataVideojuego * DataPartida::getVideojuego()
-{
-    return this->videojuego;
+    return &d1 < &d2;
 }
 
-float DataPartida::getDuracionTotal()
+bool operator!=(const DataPartida &d1, const DataPartida &d2)
 {
-    return this->DuracionTotal;
+    return d1.getId() != d2.getId() || d1.getFechaInicio() != d2.getFechaInicio() || d1.getFechaFin() != d2.getFechaFin() || d1.getDuracionTotal() != d2.getDuracionTotal() || d1.getDataVideojuego() != d2.getDataVideojuego();
 }
 
-DataPartida::~DataPartida() {}
+DataPartida::~DataPartida()
+{
+}

@@ -5,12 +5,8 @@
 
 #include "../../headers/utils/enums.h"
 #include "../../headers/entities/Categoria.h"
-//#include "../../headers/entities/Genero.h"
-//#include "../../headers/entities/Plataforma.h"
 #include "../../headers/handlers/VideojuegoHandler.h"
 #include "../../headers/controllers/VideojuegoController.h"
-
-using namespace std;
 
 VideojuegoHandler *VideojuegoHandler::instancia = nullptr;
 
@@ -19,66 +15,69 @@ VideojuegoHandler::VideojuegoHandler() {}
 VideojuegoHandler *VideojuegoHandler::getInstance()
 {
     if (instancia == nullptr)
-    {
         instancia = new VideojuegoHandler();
-    }
 
     return instancia;
 }
 
-void VideojuegoHandler::agregarVideojuego(Videojuego *vj)
+void VideojuegoHandler::agregarVideojuego(Videojuego *videojuego)
 {
-    this->vjs.insert(std::pair<std::string, Videojuego *>(vj->getNombre(), vj));
+    this->videojuegos.insert(pair<string, Videojuego *>(videojuego->getNombre(), videojuego));
 }
 
-map<string, Videojuego *> VideojuegoHandler::obtenerVideojuegos()
-{
-    return this->vjs;
-}
+map<string, Videojuego *> VideojuegoHandler::obtenerVideojuegos() { return this->videojuegos; }
 
 Videojuego *VideojuegoHandler::obtenerVideojuegoPorId(string nombre)
 {
     map<string, Videojuego *>::iterator it;
-    it = this->vjs.find(nombre);
-    if (it == this->vjs.end())
-    {
+    it = this->videojuegos.find(nombre);
+    if (it == this->videojuegos.end())
         return nullptr;
-    }
     else
         return it->second;
 }
 
-void VideojuegoHandler::eliminarVideojuego(Videojuego *vj)
+void VideojuegoHandler::eliminarVideojuego(Videojuego *videojuego)
 {
-    string clave = vj->getNombre();
-    this->vjs.erase(clave);
-    delete vj;
+    string nombre = videojuego->getNombre();
+    this->videojuegos.erase(nombre);
+
+    delete videojuego;
 }
 
-map<string, Jugador *> VideojuegoHandler::obtenerJugadoresVideojuego(Videojuego *vj) { return map<string, Jugador *>(); }
+map<string, Jugador *> VideojuegoHandler::obtenerJugadoresVideojuego(Videojuego *vj)
+{
+    ///TODO: why?
+    return map<string, Jugador *>();
+}
 
-set<std::string> VideojuegoHandler::obtenerNombresVideojuegos()
+set<string> VideojuegoHandler::obtenerNombresVideojuegos()
 {
     map<string, Videojuego *>::iterator it;
-    set<std::string> res;
-    for (it = this->vjs.begin(); it != this->vjs.end(); it++)
+    set<string> res;
+
+    for (it = this->videojuegos.begin(); it != this->videojuegos.end(); it++)
     {
         res.insert(it->second->getNombre());
     }
+
     return res;
 }
 
 VideojuegoHandler::~VideojuegoHandler()
 {
-    map<string, Videojuego *>::iterator it;
-    VideojuegoController *vc = new VideojuegoController;
-    for (it = this->vjs.begin(); it != this->vjs.end(); it++)
-    {
-        vc->seleccionarVideojuego(it->second->getNombre());
-        //Videojuego *vj=vc->obtenerVideojuegoG();
-        vc->eleminarVideojuegoGeneral();
-    }
-    this->vjs.clear();
+    /// TODO: Por que el handler conoce al controller ???
+
+    // VideojuegoController *videojuegoController = VideojuegoController::getInstance();
+    // map<string, Videojuego *>::iterator it;
+
+    // for (it = this->videojuegos.begin(); it != this->videojuegos.end(); it++)
+    // {
+    //     videojuegoController->seleccionarVideojuego(it->second->getNombre());
+    //     videojuegoController->eleminarVideojuegoGeneral();
+    // }
+
+    // this->videojuegos.clear();
 }
 
 void VideojuegoHandler::releaseInstance()

@@ -2,10 +2,9 @@
 #define PROMEDIO_RATING_STRATEGY
 
 #include "../interfaces/IStrategyEstadistica.h"
-#include <utility>
 
-class PromedioRatingStrategy : public IStrategyIEstadistica {
-
+class PromedioRatingStrategy : public IStrategyIEstadistica
+{
 private:
   static PromedioRatingStrategy *instancia;
 
@@ -16,7 +15,7 @@ private:
 public:
   static PromedioRatingStrategy *getInstance();
 
-  float calcularEstadistica(Videojuego *vj);
+  float calcularEstadistica(Videojuego *videojuego);
 };
 
 #endif

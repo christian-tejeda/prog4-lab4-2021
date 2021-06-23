@@ -4,30 +4,28 @@
 #include "../utils/Fecha.h"
 #include "../entities/Jugador.h"
 
-class Jugador; //fwd dec
+class Jugador;
 
 class DuracionParticipante
 {
 private:
-    Fecha *horaEntrada;
-    Fecha *horaSalida;
+    Fecha entrada;
+    Fecha salida;
     Jugador *participante;
 
 public:
     DuracionParticipante();
-    DuracionParticipante(Fecha *he, Fecha *hs, Jugador *jg); //hora entrada/ hora salida
+    DuracionParticipante(Fecha fechaEntrada, Fecha fechaSalida, Jugador *participante);
 
-    //Getters
-    Fecha *getHoraEntrada();
-    Fecha *getHoraSalida();
+    Fecha getHoraEntrada();
+    Fecha getHoraSalida();
     Jugador *getParticipante();
 
-    //Setters
-    void setHoraEntrada(Fecha *f);
-    void setHoraSalida(Fecha *f);
-    void setParticipante(Jugador *prt);
+    void setHoraEntrada(Fecha fechaEntrada);
+    void setHoraSalida(Fecha fechaSalida);
+    void setParticipante(Jugador *participante);
 
-    void terminarParticipacion(Fecha *f);
+    void terminarParticipacion(Fecha fecha);
     float calcularDuracion();
 
     ~DuracionParticipante();

@@ -3,9 +3,9 @@
 
 #include "interfaces/IStrategyEstadistica.h"
 #include "utils/enums.h"
-#include <utility>
 
-class FactoryStrategyEstadistica {
+class FactoryStrategyEstadistica
+{
 private:
   static FactoryStrategyEstadistica *instancia;
 

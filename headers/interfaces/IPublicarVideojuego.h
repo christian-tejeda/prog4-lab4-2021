@@ -7,14 +7,15 @@
 class IPublicarVideojuego
 {
 public:
-    virtual void ingresarDatosVideojuego(DataVideojuego *DataV) = 0;
-    virtual set<DataCategoria *> obtenerCategorias() = 0;
-    // virtual void agregarPlataformaAVideojuego(string plataforma) = 0;
-    // virtual void agregarGeneroAVideojuego(string genero) = 0;
-    // virtual void agregarOtraCategoriaAVideojuego(string cat) = 0;
-    virtual void agregarCategoriaAVideojuego(string cat) = 0;
-    virtual void obtenerDataVideojuegoIngresada() = 0;
-    virtual void confirmarPublicacionVideojuego(bool confirmar) = 0;
+    virtual void ingresarDatosVideojuego(DataVideojuego data) = 0;
+
+    virtual set<DataCategoria> obtenerCategorias() = 0;
+
+    virtual void agregarCategoriaAVideojuego(string categoria) = 0;
+
+    virtual DataVideojuego obtenerDataVideojuegoIngresada() = 0;
+
+    virtual void confirmarPublicacionVideojuego() = 0;
 
     virtual ~IPublicarVideojuego(){};
 };

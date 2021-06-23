@@ -1,30 +1,31 @@
-
-#include <string>
-#include <map>
-#include <set>
-#include <utility>
-
 #include "../../headers/datatypes/DataUsuario.h"
-// #include "../../headers/utils/enums.h"
-// #include "../../headers/datatypes/DataVideojuego.h"
-// #include "../../headers/utils/Fecha.h"
-
-using namespace std;
 
 DataUsuario::DataUsuario() {}
 
-DataUsuario::DataUsuario(std::string email, std::string password)
+DataUsuario::DataUsuario(const DataUsuario &data)
 {
-    this->email = email;
-    this->password = password;
+    email = data.email;
+    password = data.password;
 }
 
-std::string DataUsuario::getEmail()
+DataUsuario::DataUsuario(string email, string password)
 {
-    return this->email;
+    email = email;
+    password = password;
 }
-std::string DataUsuario::getPassword()
+
+string DataUsuario::getEmail() const { return email; }
+
+string DataUsuario::getPassword() const { return password; }
+
+bool operator<(const DataUsuario &d1, const DataUsuario &d2)
 {
-    return this->password;
+    return &d1 < &d2;
 }
-//DataUsuario::~DataUsuario(){};
+
+bool operator!=(const DataUsuario &d1, const DataUsuario &d2)
+{
+    return d1.getPassword() != d2.getPassword() || d1.getEmail() != d2.getEmail();
+}
+
+DataUsuario::~DataUsuario(){};

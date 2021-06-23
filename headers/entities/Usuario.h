@@ -2,33 +2,24 @@
 #define USUARIO_H
 
 #include <string>
-#include <map>
-#include <set>
-#include <utility>
 
 #include "../datatypes/DataUsuario.h"
 
 class Usuario
 {
 private:
-    std::string email;
-    std::string password;
+    string email;
+    string password;
 
 public:
-    //Constructores
     Usuario();
-    Usuario(std::string email, std::string password);
+    Usuario(string email, string password);
 
-    //Getters
-    std::string getEmail();
-    std::string getPassword();
+    string getEmail();
+    string getPassword();
 
-    //Setters
-    void setEmail(std::string email);
-    void setPassword(std::string password);
-
-    //Operaciones
-    virtual DataUsuario *getData() = 0;
+    void setEmail(string email);
+    void setPassword(string password);
 
     virtual ~Usuario(){};
 };

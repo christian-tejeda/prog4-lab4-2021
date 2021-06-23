@@ -5,35 +5,48 @@
 #include <utility>
 
 #include "../../headers/datatypes/DataCategoria.h"
-#include "../../headers/utils/Fecha.h"
 
 using namespace std;
 
-DataCategoria::DataCategoria() {}
+DataCategoria::DataCategoria()
+{
+    nombre = "";
+    descripcion = "";
+}
 
 DataCategoria::DataCategoria(string nombre, string descripcion)
 {
-    this->nombre = nombre;
-    this->descripcion = descripcion;
-}
-DataCategoria::DataCategoria(string nombre, string descripcion,TipoCategoria tipo)
-{
-    this->nombre = nombre;
-    this->descripcion = descripcion;
-    this->tipo=tipo;
-}
-std::string DataCategoria::getNombre() const
-{
-    return this->nombre;
+    nombre = nombre;
+    descripcion = descripcion;
 }
 
-std::string DataCategoria::getDescripcion() const
+DataCategoria::DataCategoria(const DataCategoria &data)
 {
-    return this->descripcion;
+    nombre = data.nombre;
+    descripcion = data.descripcion;
 }
-TipoCategoria DataCategoria::getTipo() const
+
+DataCategoria::DataCategoria(string nombre, string descripcion, TipoCategoria tipo)
 {
-    return this->tipo;
+    nombre = nombre;
+    descripcion = descripcion;
+    tipo = tipo;
+}
+
+string DataCategoria::getNombre() const { return nombre; }
+
+string DataCategoria::getDescripcion() const { return descripcion; }
+
+TipoCategoria DataCategoria::getTipo() const { return tipo; }
+
+bool operator<(const DataCategoria &d1, const DataCategoria &d2)
+{
+    return &d1 < &d2;
+}
+
+bool operator!=(const DataCategoria &d1, const DataCategoria &d2)
+{
+    return d1.getNombre() != d2.getNombre() || d1.getDescripcion() != d2.getDescripcion();
 }
 
 DataCategoria::~DataCategoria() {}

@@ -6,8 +6,9 @@
 class IFinalizarPartida
 {
 public:
-    virtual set<DataPartida *> obtenerPartidasSinFinalizarDeJugador() = 0;
-    virtual void finalizarPartida(int idPartida,Fecha * fecha) = 0;
+    virtual set<DataPartida> obtenerPartidasSinFinalizarDeJugador() = 0;
+
+    virtual void finalizarPartida(int idPartida, Fecha fecha) = 0;
 
     virtual ~IFinalizarPartida(){};
 };

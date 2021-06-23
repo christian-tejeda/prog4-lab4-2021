@@ -5,37 +5,19 @@
 #include <utility>
 
 #include "../../headers/entities/Usuario.h"
-// #include "../../headers/utils/enums.h"
-// #include "../../headers/datatypes/DataVideojuego.h"
-// #include "../../headers/utils/Fecha.h"
-
-using namespace std;
 
 Usuario::Usuario() {}
 
-Usuario::Usuario(std::string email, std::string password)
+Usuario::Usuario(string email, string password)
 {
     this->email = email;
     this->password = password;
 }
 
-std::string Usuario::getEmail()
-{
-    return this->email;
-}
-std::string Usuario::getPassword()
-{
-    return this->password;
-}
+string Usuario::getEmail() { return this->email; }
 
-//Setters
-void Usuario::setEmail(std::string email)
-{
-    this->email = email;
-}
+string Usuario::getPassword() { return this->password; }
 
-void Usuario::setPassword(std::string password)
-{
-    this->password = password;
-}
-//Usuario::~Usuario(){};
+void Usuario::setEmail(string email) { this->email = email; }
+
+void Usuario::setPassword(string password) { this->password = password; }

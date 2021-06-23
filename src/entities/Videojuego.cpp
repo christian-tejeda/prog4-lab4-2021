@@ -7,14 +7,11 @@
 
 #include "../../headers/FactoryStrategyEstadistica.h"
 #include "../../headers/entities/Videojuego.h"
+#include "../../headers/entities/ContratoSuscripcion.h"
 
 Videojuego::Videojuego() {}
-Videojuego::Videojuego(std::string nombre, std::string descripcion,
-                       map<TipoPeriodoValidez, float> suscripciones,
-                       pair<float, int> rating,
-                       set<ContratoSuscripcion *> contratos,
-                       map<string, Categoria *> categorias,
-                       std::string nombreEmpresa)
+
+Videojuego::Videojuego(string nombre, string descripcion, map<TipoPeriodoValidez, float> suscripciones, pair<float, int> rating, set<ContratoSuscripcion *> contratos, map<string, Categoria *> categorias, string nombreEmpresa)
 {
   this->nombre = nombre;
   this->descripcion = descripcion;
@@ -25,64 +22,72 @@ Videojuego::Videojuego(std::string nombre, std::string descripcion,
   this->nombreEmpresa = nombreEmpresa;
 }
 
-// Getters
-std::string Videojuego::getNombre() { return this->nombre; }
-std::string Videojuego::getDescripcion() { return this->descripcion; }
-map<TipoPeriodoValidez, float> Videojuego::getSuscripciones()
-{
-  return this->suscripciones;
-}
+string Videojuego::getNombre() { return this->nombre; }
+
+string Videojuego::getDescripcion() { return this->descripcion; }
+
+map<TipoPeriodoValidez, float> Videojuego::getSuscripciones() { return this->suscripciones; }
+
 pair<float, int> Videojuego::getRating() { return this->rating; }
 
-map<string, Categoria *> Videojuego::getCategorias()
-{
-  return this->categorias;
-}
+map<string, Categoria *> Videojuego::getCategorias() { return this->categorias; }
 
-void Videojuego::agregarSuscriptor(ContratoSuscripcion *contrato) {
-  this->contratos.insert(contrato);
-}
+void Videojuego::agregarSuscriptor(ContratoSuscripcion *contrato) { this->contratos.insert(contrato); }
 
 set<string> Videojuego::getNombreCategorias()
 {
   set<string> res;
   map<string, Categoria *>::iterator it;
+
   for (it = this->categorias.begin(); it != this->categorias.end(); it++)
   {
     string agregar = it->first;
     res.insert(agregar);
   }
+
   return res;
 }
 
-map<TipoPeriodoValidez, float> Videojuego::getPeriodoValidez()
+map<TipoPeriodoValidez, float> Videojuego::getPeriodoValidez() { return this->suscripciones; }
+
+void Videojuego::setNombre(string nombre) { this->nombre = nombre; }
+
+void Videojuego::setDescripcion(string descripcion) { this->descripcion = descripcion; }
+
+void Videojuego::setSuscripciones(TipoPeriodoValidez validez, float precio)
 {
-  return this->suscripciones;
+  ///TODO: nada??
 }
 
-// Setters
-void Videojuego::setNombre(std::string nombre) { this->nombre = nombre; }
-void Videojuego::setDescripcion(std::string desc) { this->descripcion = desc; }
-void Videojuego::setSuscripciones(TipoPeriodoValidez validez, float precio) {}
-void Videojuego::setRating(float prom, int cantVotos) {}
-
-void Videojuego::setCategoria(Categoria *cat)
+void Videojuego::setRating(float prom, int cantVotos)
 {
-  this->categorias.insert(pair<std::string, Categoria *>(cat->getNombre(), cat));
+  ///TODO: nada??
 }
 
-void Videojuego::agregarCategoria(Categoria o) {}
+void Videojuego::setCategoria(Categoria *categoria)
+{
+  this->categorias.insert(pair<string, Categoria *>(categoria->getNombre(), categoria));
+}
+
+void Videojuego::agregarCategoria(Categoria *o)
+{
+  ///TODO: nada??
+}
+
+string Videojuego::getNombreEmpresa() { return this->nombreEmpresa; }
 
 set<Jugador *> Videojuego::getSuscriptores()
 {
   set<Jugador *> res;
   set<ContratoSuscripcion *>::iterator it;
+
   for (it = this->contratos.begin(); it != this->contratos.end(); it++)
   {
     ContratoSuscripcion *contrato = *it;
-    Jugador *player = contrato->getJugador();
-    res.insert(player);
+    Jugador *jugador = contrato->getJugador();
+    res.insert(jugador);
   }
+
   return res;
 }
 int Videojuego::getCantidadSuscriptores() { return this->contratos.size(); }
@@ -103,19 +108,12 @@ void Videojuego::agregarPuntaje(float puntaje)
   this->rating.second++;
 }
 
-DataVideojuego *Videojuego::getData()
+DataVideojuego Videojuego::getData()
 {
-  DataVideojuego *data = new DataVideojuego(this->nombre, this->descripcion, this->suscripciones,
-                                            this->getNombreCategorias(), this->rating);
-  data->setNombreEmpresa(this->nombreEmpresa);
-  DataVideojuego *res;
+  DataVideojuego data(this->nombre, this->descripcion, this->suscripciones, this->getNombreCategorias(), this->rating);
+  data.setNombreEmpresa(this->nombreEmpresa);
 
   return data;
-}
-
-std::string Videojuego::getNombreEmpresa()
-{
-  return this->nombreEmpresa;
 }
 
 Videojuego::~Videojuego() {}

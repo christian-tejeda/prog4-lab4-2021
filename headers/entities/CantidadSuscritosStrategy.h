@@ -2,9 +2,9 @@
 #define CANTIDAD_SUSCRITOS_STRATEGY_H
 
 #include "../interfaces/IStrategyEstadistica.h"
-#include <utility>
 
-class CantidadSuscritosStrategy : public IStrategyIEstadistica {
+class CantidadSuscritosStrategy : public IStrategyIEstadistica
+{
 private:
   static CantidadSuscritosStrategy *instancia;
 
@@ -15,7 +15,7 @@ private:
 public:
   static CantidadSuscritosStrategy *getInstance();
 
-  float calcularEstadistica(Videojuego *vj);
+  float calcularEstadistica(Videojuego *videojuego);
 };
 
 #endif

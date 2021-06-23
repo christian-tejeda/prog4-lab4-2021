@@ -4,8 +4,6 @@
 #include "../utils/enums.h"
 #include "../utils/Fecha.h"
 
-#include <string>
-
 using namespace std;
 
 class DataContratoSuscripcion
@@ -22,17 +20,20 @@ private:
 
 public:
     DataContratoSuscripcion();
+    DataContratoSuscripcion(const DataContratoSuscripcion &data);
     DataContratoSuscripcion(bool activa, string nombreVideojuego, string nombreJugador, float precio, TipoPeriodoValidez periodoValidez, bool cancelada, Fecha fecha, TipoMetodoPago metodoPago);
 
-    //Getters
     bool getActiva() const;
     string getNombreVideojuego() const;
+    string getNombreJugador() const;
     float getPrecio() const;
     TipoPeriodoValidez getPeriodoValidez() const;
     bool getCancelada() const;
     Fecha getFechaSuscripcion() const;
     TipoMetodoPago getMetodoPago() const;
-    string getNombreJugador() const;
+
+    friend bool operator<(const DataContratoSuscripcion &d1, const DataContratoSuscripcion &d2);
+    friend bool operator!=(const DataContratoSuscripcion &d1, const DataContratoSuscripcion &d2);
 
     ~DataContratoSuscripcion();
 };

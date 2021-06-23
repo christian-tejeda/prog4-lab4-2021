@@ -4,58 +4,48 @@
 #include <set>
 #include <utility>
 
-//#include "../../headers/entities/Partida.h"
 #include "../../headers/entities/PartidaMultijugador.h"
 
 PartidaMultijugador::PartidaMultijugador()
 {
 }
 
-//no cumple req datapartidamultijugador PartidaMultijugador(DataPartidaMultijugador dataPartidaMultijugador);
-
-PartidaMultijugador::PartidaMultijugador(int id, Fecha fechaInicio, Fecha *fechaFin, float duracionTotal, Videojuego *vj, Jugador *host, bool trasmitida, set<DuracionParticipante *> durpart) : Partida(id, fechaInicio, fechaFin, duracionTotal, vj, host)
+PartidaMultijugador::PartidaMultijugador(int id, Fecha fechaInicio, Fecha fechaFin, float duracionTotal, Videojuego *videojuego, Jugador *host, bool trasmitida, set<DuracionParticipante *> participantes) : Partida(id, fechaInicio, fechaFin, duracionTotal, videojuego, host)
 {
     this->transmitidaEnVivo = trasmitida;
-    this->durpart = durpart;
+    this->participantes = participantes;
 }
 
-bool PartidaMultijugador::getTransmitidaEnVivo()
-{
-    return this->transmitidaEnVivo;
-}
-set<DuracionParticipante *> PartidaMultijugador::getDuracionParticipantes()
-{
-    return this->durpart;
-}
+bool PartidaMultijugador::getTransmitidaEnVivo() { return this->transmitidaEnVivo; }
 
-void PartidaMultijugador::setTransmitidaEnVivo(bool enVivo)
-{
-    this->transmitidaEnVivo = enVivo;
-}
+set<DuracionParticipante *> PartidaMultijugador::getDuracionParticipantes() { return this->participantes; }
+
+void PartidaMultijugador::setTransmitidaEnVivo(bool enVivo) { this->transmitidaEnVivo = enVivo; }
 
 void PartidaMultijugador::agregarParticipante(Jugador *participante)
 {
+    ///TODO: vacio???
 }
-void PartidaMultijugador::finalizar(Fecha *fecha)
+
+void PartidaMultijugador::finalizar(Fecha fecha)
 {
-    set<DuracionParticipante *> dur = this->durpart;
-    float d = 0;
-    int con = 0;
-    //d=fecha-this->fechaInicio();
+    float duracionTotal = 0;
+
+    set<DuracionParticipante *> participantes = this->participantes;
     set<DuracionParticipante *>::iterator it;
-    for (it = dur.begin(); it != dur.end(); it++)
+    for (it = participantes.begin(); it != participantes.end(); it++)
     {
-        DuracionParticipante *cuestion = *it;
-        //cuestion->setHoraSalida(fecha);
-        cuestion->terminarParticipacion(fecha);
-        con++;
+        DuracionParticipante *duracionParticipante = *it;
+        duracionParticipante->terminarParticipacion(fecha);
+        duracionTotal += duracionParticipante->calcularDuracion();
     }
     this->setFechaFin(fecha);
-    this->setDuracionTotal(d * con);
+    this->setDuracionTotal(duracionTotal * participantes.size());
 }
+
 void PartidaMultijugador::eliminarPartidasVideojuego(Videojuego *videojuego)
 {
-    set<DuracionParticipante *> dur = this->durpart;
+    set<DuracionParticipante *> dur = this->participantes;
     set<DuracionParticipante *>::iterator it;
     for (it = dur.begin(); it != dur.end(); it++)
     {
@@ -65,49 +55,56 @@ void PartidaMultijugador::eliminarPartidasVideojuego(Videojuego *videojuego)
     }
 }
 
-DataPartida *PartidaMultijugador::getData()
+DataPartidaMultijugador PartidaMultijugador::getData()
 {
-    return new DataPartida(this->getId(),
-                           new DataVideojuego(this->getVideojuego()->getNombre(), this->getVideojuego()->getDescripcion(), this->getVideojuego()->getPeriodoValidez(), this->getVideojuego()->getNombreCategorias(), this->getVideojuego()->getRating()),
-                           this->getFechaInicio(),
-                           this->getFechaFin(),
-                           this->getDuracionTotal());
-}
-
-bool PartidaMultijugador::existeParticipante(Jugador *jg)
-{
+    set<DataJugador> participantes = set<DataJugador>();
     set<DuracionParticipante *>::iterator it;
-    for (it = this->durpart.begin(); it != this->durpart.end(); it++)
+
+    for (it = this->participantes.begin(); it != this->participantes.end(); it++)
     {
-        if ((*it)->getParticipante() == jg)
-            break;
+        DuracionParticipante *duracionParticipante = *it;
+        participantes.insert(duracionParticipante->getParticipante()->getData());
     }
-    if (it != this->durpart.end())
-        return true;
-    else
-        return false;
+
+    DataVideojuego dataVideojuego = DataVideojuego(this->getVideojuego()->getNombre(), this->getVideojuego()->getDescripcion(), this->getVideojuego()->getPeriodoValidez(), this->getVideojuego()->getNombreCategorias(), this->getVideojuego()->getRating());
+
+    return DataPartidaMultijugador(this->getId(), dataVideojuego, this->getFechaInicio(), this->getFechaFin(), this->getDuracionTotal(), this->getTransmitidaEnVivo(), this->getHost()->getData(), participantes);
 }
 
-void PartidaMultijugador::bajarParticipante(Jugador *jg, Fecha *f)
+bool PartidaMultijugador::existeParticipante(Jugador *jugador)
 {
-    float dur = -1;
+    set<DuracionParticipante *> participantes = this->participantes;
     set<DuracionParticipante *>::iterator it;
-    for (it = this->durpart.begin(); it != this->durpart.end(); it++)
+    for (it = participantes.begin(); it != participantes.end(); it++)
     {
-        if ((*it)->getParticipante() == jg)
+        DuracionParticipante *duracionParticipante = *it;
+        if (duracionParticipante->getParticipante() == jugador)
+            return true;
+    }
+
+    return false;
+}
+
+void PartidaMultijugador::bajarParticipante(Jugador *jugador, Fecha fecha)
+{
+    set<DuracionParticipante *> participantes = this->participantes;
+    float duracion = -1;
+    set<DuracionParticipante *>::iterator it;
+    for (it = participantes.begin(); it != participantes.end(); it++)
+    {
+        DuracionParticipante *duracionParticipante = *it;
+        if (duracionParticipante->getParticipante() == jugador)
         {
-            (*it)->setHoraSalida(f);
-            dur = (*it)->calcularDuracion();
+            duracionParticipante->setHoraSalida(fecha);
+            duracion = duracionParticipante->calcularDuracion();
             break;
         }
     }
 
-    if (dur >= 0.0F)
+    if (duracion >= 0.0F)
     {
-        this->setDuracionTotal(abs(dur));
+        this->setDuracionTotal(abs(duracion));
     }
 }
 
-PartidaMultijugador::~PartidaMultijugador()
-{
-}
+PartidaMultijugador::~PartidaMultijugador() {}

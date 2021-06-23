@@ -2,34 +2,33 @@
 
 DataSuscripcionJugador::DataSuscripcionJugador() {}
 
-DataSuscripcionJugador::DataSuscripcionJugador(std::string nombreVideojuego,
-                                               float precio,
-                                               TipoPeriodoValidez validez,
-                                               bool activo)
+DataSuscripcionJugador::DataSuscripcionJugador(const DataSuscripcionJugador &data)
 {
-  this->nombreVideojuego = nombreVideojuego;
-  this->precio = precio;
-  this->validez = validez;
-  this->activo = activo;
+  nombreVideojuego = data.nombreVideojuego;
+  precio = data.precio;
+  validez = data.validez;
+  activo = data.activo;
 }
 
-std::string DataSuscripcionJugador::getNombreVideojuego()
+DataSuscripcionJugador::DataSuscripcionJugador(string nombreVideojuego, float precio, TipoPeriodoValidez validez, bool activo)
 {
-  return this->nombreVideojuego;
+  nombreVideojuego = nombreVideojuego;
+  precio = precio;
+  validez = validez;
+  activo = activo;
 }
 
-float DataSuscripcionJugador::getPrecio() { return this->precio; }
+string DataSuscripcionJugador::getNombreVideojuego() const { return nombreVideojuego; }
 
-TipoPeriodoValidez DataSuscripcionJugador::getValidez()
+float DataSuscripcionJugador::getPrecio() const { return precio; }
+
+TipoPeriodoValidez DataSuscripcionJugador::getValidez() const { return validez; }
+
+bool DataSuscripcionJugador::esSuscripcionActiva() const { return activo; }
+
+ostream &operator<<(ostream &os, const DataSuscripcionJugador &dataSuscJugador)
 {
-  return this->validez;
-}
-
-bool DataSuscripcionJugador::esSuscripcionActiva() { return this->activo; }
-
-std::ostream &operator<<(std::ostream &os, const DataSuscripcionJugador &dataSuscJugador)
-{
-  std::string validez;
+  string validez;
 
   switch (dataSuscJugador.validez)
   {
@@ -47,14 +46,24 @@ std::ostream &operator<<(std::ostream &os, const DataSuscripcionJugador &dataSus
     break;
   }
 
-  std::string nombreVideojuego = dataSuscJugador.nombreVideojuego;
-  std::string precio = std::to_string(dataSuscJugador.precio);
+  string nombreVideojuego = dataSuscJugador.nombreVideojuego;
+  string precio = to_string(dataSuscJugador.precio);
 
-  std::string breakline = "\n";
+  string breakline = "\n";
 
-  os << std::string("Videojuego: ") << nombreVideojuego << breakline;
-  os << std::string("Periodo Validez: ") << validez << breakline;
-  os << std::string("Precio: ") << precio << breakline;
+  os << string("Videojuego: ") << nombreVideojuego << breakline;
+  os << string("Periodo Validez: ") << validez << breakline;
+  os << string("Precio: ") << precio << breakline;
 
   return os;
+}
+
+bool operator<(const DataSuscripcionJugador &d1, const DataSuscripcionJugador &d2)
+{
+  return &d1 < &d2;
+}
+
+bool operator!=(const DataSuscripcionJugador &d1, const DataSuscripcionJugador &d2)
+{
+  return d1.getValidez() != d2.getValidez() || d1.getPrecio() != d2.getPrecio() || d1.getNombreVideojuego() != d2.getNombreVideojuego() || d1.esSuscripcionActiva() != d2.esSuscripcionActiva();
 }

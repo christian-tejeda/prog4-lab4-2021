@@ -12,51 +12,28 @@
 #include "../../headers/utils/Fecha.h"
 
 DuracionParticipante::DuracionParticipante() {}
-DuracionParticipante::DuracionParticipante(Fecha *he, Fecha *hs, Jugador *jg)
+
+DuracionParticipante::DuracionParticipante(Fecha entrada, Fecha salida, Jugador *participante)
 {
-    this->horaEntrada = he;
-    this->horaSalida = hs;
-    this->participante = jg;
+    this->entrada = entrada;
+    this->salida = salida;
+    this->participante = participante;
 }
 
-//Getters
-Fecha *DuracionParticipante::getHoraEntrada()
-{
-    return this->horaEntrada;
-}
-Fecha *DuracionParticipante::getHoraSalida()
-{
-    return this->horaSalida;
-}
-Jugador *DuracionParticipante::getParticipante()
-{
-    return this->participante;
-}
-//Setters
-void DuracionParticipante::setHoraEntrada(Fecha *f)
-{
-    this->horaEntrada = f;
-}
-void DuracionParticipante::setHoraSalida(Fecha *f)
-{
-    this->horaSalida = f;
-}
-void DuracionParticipante::setParticipante(Jugador *prt)
-{
-    this->participante = prt;
-}
-void DuracionParticipante::terminarParticipacion(Fecha *f)
-{
-    this->horaSalida = f;
-}
-DuracionParticipante::~DuracionParticipante()
-{
-    this->participante = nullptr;
-    delete this->horaEntrada;
-    delete this->horaSalida;
-}
-float DuracionParticipante::calcularDuracion()
-{
-    return *this->horaSalida - *this->horaEntrada;
-}
-//DuracionParticipante::~DuracionParticipante() {}
+Fecha DuracionParticipante::getHoraEntrada() { return this->entrada; }
+
+Fecha DuracionParticipante::getHoraSalida() { return this->salida; }
+
+Jugador *DuracionParticipante::getParticipante() { return this->participante; }
+
+void DuracionParticipante::setHoraEntrada(Fecha entrada) { this->entrada = entrada; }
+
+void DuracionParticipante::setHoraSalida(Fecha salida) { this->salida = salida; }
+
+void DuracionParticipante::setParticipante(Jugador *participante) { this->participante = participante; }
+
+void DuracionParticipante::terminarParticipacion(Fecha fecha) { this->salida = fecha; }
+
+DuracionParticipante::~DuracionParticipante() { this->participante = nullptr; }
+
+float DuracionParticipante::calcularDuracion() { return this->salida - this->entrada; }

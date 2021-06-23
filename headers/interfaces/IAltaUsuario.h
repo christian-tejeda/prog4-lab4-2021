@@ -7,9 +7,11 @@
 class IAltaUsuario
 {
 public:
-    virtual void ingresarDatosJugador(DataJugador *dataJugador) = 0;
-    virtual void ingresarDatosDesarrollador(DataDesarrollador *dataDesarrollador) = 0;
-    virtual void confirmarAltaUsuario(bool confirmar) = 0;
+    virtual void ingresarDatosJugador(DataJugador dataJugador) = 0;
+
+    virtual void ingresarDatosDesarrollador(DataDesarrollador dataDesarrollador) = 0;
+
+    virtual void confirmarAltaUsuario() = 0;
 
     virtual ~IAltaUsuario(){};
 };

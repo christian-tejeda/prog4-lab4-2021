@@ -1,38 +1,37 @@
-
-#include <string>
-#include <map>
-#include <set>
-#include <utility>
-
-#include "../../headers/datatypes/DataPartida.h"
-#include "../../headers/utils/enums.h"
 #include "../../headers/datatypes/DataPartidaMultijugador.h"
-#include "../../headers/datatypes/DataVideojuego.h"
-#include "../../headers/utils/Fecha.h"
 
 using namespace std;
 
 DataPartidaMultijugador::DataPartidaMultijugador() {}
 
-DataPartidaMultijugador::DataPartidaMultijugador(int id, DataVideojuego * videojuego, Fecha fechaInicio, Fecha *fechaFin, float DuracionTotal, bool esTrasmitida, DataJugador creador, set<DataJugador *> participantes) : DataPartida(id, videojuego, fechaInicio, fechaFin, DuracionTotal)
+DataPartidaMultijugador::DataPartidaMultijugador(const DataPartidaMultijugador &data) : DataPartida(data)
 {
-    this->trasmitida = esTrasmitida;
-    this->creador = creador;
-    this->participantes = participantes;
+    transmitida = data.transmitida;
+    creador = data.creador;
+    participantes = data.participantes;
 }
 
-bool DataPartidaMultijugador::getTramistida()
+DataPartidaMultijugador::DataPartidaMultijugador(int id, DataVideojuego dataVideojuego, Fecha fechaInicio, Fecha fechaFin, float duracionTotal, bool trasmitida, DataJugador creador, set<DataJugador> participantes) : DataPartida(id, dataVideojuego, fechaInicio, fechaFin, duracionTotal)
 {
-    return this->trasmitida;
-}
-DataJugador DataPartidaMultijugador::getCreador()
-{
-    return this->creador;
+    trasmitida = trasmitida;
+    creador = creador;
+    participantes = participantes;
 }
 
-set<DataJugador *> DataPartidaMultijugador::getParticipantes()
+bool DataPartidaMultijugador::getTransmitida() const { return transmitida; }
+
+DataJugador DataPartidaMultijugador::getCreador() const { return creador; }
+
+set<DataJugador> DataPartidaMultijugador::getParticipantes() const { return participantes; }
+
+bool operator<(const DataPartidaMultijugador &d1, const DataPartidaMultijugador &d2)
 {
-    return this->participantes;
+    return &d1 < &d2;
+}
+
+bool operator!=(const DataPartidaMultijugador &d1, const DataPartidaMultijugador &d2)
+{
+    return d1.getId() != d2.getId() || d1.getFechaInicio() != d2.getFechaInicio() || d1.getFechaFin() != d2.getFechaFin() || d1.getDuracionTotal() != d2.getDuracionTotal() || d1.getDataVideojuego() != d2.getDataVideojuego() || d1.getCreador() != d2.getCreador() || d1.getTransmitida() != d2.getTransmitida() || d1.getParticipantes() != d2.getParticipantes();
 }
 
 DataPartidaMultijugador::~DataPartidaMultijugador() {}

@@ -15,264 +15,213 @@
 
 using namespace std;
 
-VideojuegoController::VideojuegoController()
-{
-}
+VideojuegoController::VideojuegoController() {}
 
-//op de singleton
-//VideojuegoController::VideojuegoController *getInstance() {}
-
-//Getters
-DataVideojuego *VideojuegoController::getDataVideojuego()
+DataVideojuego VideojuegoController::getDataVideojuego()
 {
     DataVideojuego res;
-    return nullptr;
-}
-Videojuego *VideojuegoController::getVideojuego() { return nullptr; }
-//ops del interface
-void VideojuegoController::ingresarDatosVideojuego(DataVideojuego *DataV)
-{
-    DataVideojuego *nuevoDataVdj = DataV;
-    this->dataVideojuego = nuevoDataVdj;
-    UsuarioController *uc;
-    uc = uc->getInstance();
-    Desarrollador *des = dynamic_cast<Desarrollador *>(uc->getSesion());
-    this->dataVideojuego->setNombreEmpresa(des->getNombreEmpresa());
-}
-
-set<DataCategoria *> VideojuegoController::obtenerCategorias()
-{
-    CategoriaHandler *cH;
-    cH = cH->getInstance();
-    map<std::string, Categoria *> cats = cH->obtenerCategorias();
-    set<DataCategoria *> res;
-    map<std::string, Categoria *>::iterator it;
-    for (it = cats.begin(); it != cats.end(); it++)
-    {
-        Categoria *cat = it->second;
-
-        DataCategoria *data = new DataCategoria(cat->getNombre(), cat->getDescripcion(), cat->getTipo());
-        res.insert(data);
-        //delete data;
-    }
     return res;
 }
 
-void VideojuegoController::agregarCategoriaAVideojuego(string cat)
-{
-    this->dataVideojuego->agregarCategoria(cat);
-};
+Videojuego *VideojuegoController::getVideojuego() { return nullptr; }
 
-void VideojuegoController::obtenerDataVideojuegoIngresada()
+void VideojuegoController::ingresarDatosVideojuego(DataVideojuego data)
 {
-    std::cout << "Datos ingresados del videojuego:\n";
-    std::cout << "Nombre: " << this->dataVideojuego->getNombre() << "\n";
-    std::cout << "Descripcion: " << this->dataVideojuego->getDescripcion() << "\n";
-    std::cout << "Costes de suscripcion:\n";
-    std::cout << "\t Mensual:" << this->dataVideojuego->getSuscripciones()[mensual] << "\n";
-    std::cout << "\t Trimestral:" << this->dataVideojuego->getSuscripciones()[trimestral] << "\n";
-    std::cout << "\t Anual:" << this->dataVideojuego->getSuscripciones()[anual] << "\n";
-    std::cout << "\t Vitalicia:" << this->dataVideojuego->getSuscripciones()[vitalicia] << "\n";
+    UsuarioController *usuarioController = UsuarioController::getInstance();
+    Desarrollador *dev = dynamic_cast<Desarrollador *>(usuarioController->getSesion());
 
-    std::set<string> cats = this->dataVideojuego->getNombreCategorias();
-    std::set<string>::iterator it;
-    std::cout << "Categorias:";
-    for (it = cats.begin(); it != cats.end(); it++)
-    {
-        std::cout << " " << (*it) << " ";
-    }
-    std::cout << "\n";
-}
-void VideojuegoController::confirmarPublicacionVideojuego(bool confirmar)
-{
-    if (confirmar)
-    {
-        set<ContratoSuscripcion *> nuevoContratos;
-        CategoriaHandler *ch;
-        VideojuegoHandler *vjh;
-        ch = ch->getInstance();
-        std::map<string, Categoria *> nuevasCategorias;
-        set<std::string>::iterator iter;
-        set<std::string> nombrescat = this->dataVideojuego->getNombreCategorias();
-        for (iter = nombrescat.begin(); iter != nombrescat.end(); iter++)
-        {
-            Categoria *nuevaCat = ch->obtenerCategoriaPorId(*iter);
-            nuevasCategorias.insert(pair<string, Categoria *>(*iter, nuevaCat));
-        };
-        Videojuego *vdj = new Videojuego(
-            this->dataVideojuego->getNombre(),
-            this->dataVideojuego->getDescripcion(),
-            this->dataVideojuego->getSuscripciones(),
-            this->dataVideojuego->getRating(),
-            nuevoContratos,
-            nuevasCategorias,
-            this->dataVideojuego->getNombreEmpresa());
-        vjh = vjh->getInstance();
-        vjh->agregarVideojuego(vdj);
-        UsuarioController *uC;
-        uC = uC->getInstance();
-        Desarrollador *des = dynamic_cast<Desarrollador *>(uC->getSesion());
-        des->agregarVideojuegoPublicado(vdj);
-
-        std::cout << "Videojuego publicado exitosamente.\n";
-    }
+    this->dataVideojuego = data;
+    this->dataVideojuego.setNombreEmpresa(dev->getNombreEmpresa());
 }
 
-// set<DataContratoSuscripcion *> VideojuegoController::obtenerSuscripciones()
-// {
-//     set<DataContratoSuscripcion *> res;
-//     res.insert(nullptr);
-//     return res;
-// }
+set<DataCategoria> VideojuegoController::obtenerCategorias()
+{
+    CategoriaHandler *categoriaHandler = CategoriaHandler::getInstance();
 
-set<DataVideojuego *> VideojuegoController::obtenerVideojuegosPublicadosPorDesarrolladorConPartidasFinalizadas()
+    map<string, Categoria *> categorias = categoriaHandler->obtenerCategorias();
+
+    set<DataCategoria> res;
+    map<string, Categoria *>::iterator it;
+    for (it = categorias.begin(); it != categorias.end(); it++)
+    {
+        Categoria *cat = it->second;
+        DataCategoria data = DataCategoria(cat->getNombre(), cat->getDescripcion(), cat->getTipo());
+        res.insert(data);
+    }
+
+    return res;
+}
+
+void VideojuegoController::agregarCategoriaAVideojuego(string categoria) { this->dataVideojuego.agregarCategoria(categoria); };
+
+DataVideojuego VideojuegoController::obtenerDataVideojuegoIngresada() { return this->dataVideojuego; }
+
+void VideojuegoController::confirmarPublicacionVideojuego()
+{
+    UsuarioController *usuarioController = UsuarioController::getInstance();
+    CategoriaHandler *categoriaHandler = CategoriaHandler::getInstance();
+    VideojuegoHandler *videojuegoHandler = VideojuegoHandler::getInstance();
+
+    set<ContratoSuscripcion *> nuevosContratos;
+    map<string, Categoria *> nuevasCategorias;
+    set<string>::iterator iter;
+
+    set<string> nombrescat = this->dataVideojuego.getNombreCategorias();
+
+    for (iter = nombrescat.begin(); iter != nombrescat.end(); iter++)
+    {
+        Categoria *nuevaCat = categoriaHandler->obtenerCategoriaPorId(*iter);
+        nuevasCategorias.insert(pair<string, Categoria *>(*iter, nuevaCat));
+    };
+
+    Videojuego *videojuego = new Videojuego(this->dataVideojuego.getNombre(), this->dataVideojuego.getDescripcion(), this->dataVideojuego.getSuscripciones(), this->dataVideojuego.getRating(), nuevosContratos, nuevasCategorias, this->dataVideojuego.getNombreEmpresa());
+
+    videojuegoHandler->agregarVideojuego(videojuego);
+
+    Desarrollador *dev = dynamic_cast<Desarrollador *>(usuarioController->getSesion());
+
+    dev->agregarVideojuegoPublicado(videojuego);
+}
+
+set<DataVideojuego> VideojuegoController::obtenerVideojuegosPublicadosPorDesarrolladorConPartidasFinalizadas()
 {
 
-    UsuarioController *uc = UsuarioController::getInstance();
-    Desarrollador *des = dynamic_cast<Desarrollador *>(uc->getSesion());
-    set<Videojuego *> vjs = des->getVideojuegoPublicados();
-    UsuarioHandler *uh;
-    uh = uh->getInstance();
-    set<DataVideojuego *> res;
+    UsuarioController *usuarioController = UsuarioController::getInstance();
+    UsuarioHandler *usuarioHandler = UsuarioHandler::getInstance();
+
+    Desarrollador *dev = dynamic_cast<Desarrollador *>(usuarioController->getSesion());
+    set<Videojuego *> vjs = dev->getVideojuegoPublicados();
+
+    set<DataVideojuego> res;
     set<Videojuego *>::iterator it;
-    it = vjs.begin();
+
     for (it = vjs.begin(); it != vjs.end(); it++)
     {
-        Videojuego *vj = *it;
-        bool tiene = uh->tienePartidaSinFinalizar(vj);
+        Videojuego *videojuego = *it;
+        bool tiene = usuarioHandler->tienePartidaSinFinalizar(videojuego);
         if (!tiene)
         {
-            DataVideojuego *dvj = vj->getData();
+            DataVideojuego dvj = videojuego->getData();
             res.insert(dvj);
         }
     }
     return res;
 }
-void VideojuegoController::seleccionarVideojuego(string nombre)
+void VideojuegoController::seleccionarVideojuego(string nombreVideojuego)
 {
-    VideojuegoHandler *vH;
-    vH = vH->getInstance();
-    Videojuego *res = vH->obtenerVideojuegoPorId(nombre);
-    this->videojuego = res;
+    VideojuegoHandler *videojuegoHandler = VideojuegoHandler::getInstance();
+
+    Videojuego *videojuego = videojuegoHandler->obtenerVideojuegoPorId(nombreVideojuego);
+    this->videojuego = videojuego;
 }
-void VideojuegoController::confirmarEliminarVideojuego(bool confirmar)
+
+void VideojuegoController::confirmarEliminarVideojuego()
 {
-    //en proceso
-    UsuarioController *uc;
-    uc = uc->getInstance();
-    Desarrollador *dev = dynamic_cast<Desarrollador *>(uc->getSesion());
-    Videojuego *video = this->videojuego;
-    dev->eliminarVideojuegoPublicado(video);
-    UsuarioHandler *uH;
-    uH = uH->getInstance();
-    map<string, Usuario *> users = uH->obtenerUsuarios();
+
+    UsuarioController *usuarioController = UsuarioController::getInstance();
+    UsuarioHandler *usuarioHandler = UsuarioHandler::getInstance();
+    VideojuegoHandler *videojuegoHandler = VideojuegoHandler::getInstance();
+
+    Desarrollador *dev = dynamic_cast<Desarrollador *>(usuarioController->getSesion());
+    Videojuego *videojuego = this->videojuego;
+
+    dev->eliminarVideojuegoPublicado(videojuego);
+
+    map<string, Usuario *> usuarios = usuarioHandler->obtenerUsuarios();
     map<string, Usuario *>::iterator it;
-    for (it = users.begin(); it != users.end(); it++)
+
+    for (it = usuarios.begin(); it != usuarios.end(); it++)
     {
         Jugador *jugador = dynamic_cast<Jugador *>(it->second);
         if (jugador != nullptr)
         {
-            jugador->eliminarContratosDeVideojuego(video);
-            jugador->eliminarPartidasDeVideojuego(video);
+            jugador->eliminarContratosDeVideojuego(videojuego);
+            jugador->eliminarPartidasDeVideojuego(videojuego);
         }
     }
-    VideojuegoHandler *vH;
-    vH = vH->getInstance();
-    vH->eliminarVideojuego(video);
-    //video->~Videojuego();
-}
-void VideojuegoController::puntuarVideojuego(int puntaje)
-{
-    this->videojuego->agregarPuntaje(puntaje);
+
+    videojuegoHandler->eliminarVideojuego(videojuego);
 }
 
-set<DataVideojuego *> VideojuegoController::obtenerVideojuegos()
+void VideojuegoController::puntuarVideojuego(int puntaje) { this->videojuego->agregarPuntaje(puntaje); }
+
+set<DataVideojuego> VideojuegoController::obtenerVideojuegos()
 {
-    VideojuegoHandler *vH;
-    vH = vH->getInstance();
-    map<std::string, Videojuego *> vjs = vH->obtenerVideojuegos();
-    map<std::string, Videojuego *>::iterator it;
-    set<DataVideojuego *> res;
-    for (it = vjs.begin(); it != vjs.end(); it++)
+    VideojuegoHandler *videojuegoHandler = VideojuegoHandler::getInstance();
+
+    map<string, Videojuego *> videojuegos = videojuegoHandler->obtenerVideojuegos();
+
+    set<DataVideojuego> res = set<DataVideojuego>();
+    map<string, Videojuego *>::iterator it;
+    for (it = videojuegos.begin(); it != videojuegos.end(); it++)
     {
-        Videojuego *video = it->second;
-        DataVideojuego *data = new DataVideojuego(video->getNombre(), video->getDescripcion(), video->getSuscripciones(), video->getNombreCategorias(), video->getRating());
-        res.insert(data);
+        Videojuego *videojuego = it->second;
+        DataVideojuego dataVideojuego = DataVideojuego(videojuego->getNombre(), videojuego->getDescripcion(), videojuego->getSuscripciones(), videojuego->getNombreCategorias(), videojuego->getRating());
+        res.insert(dataVideojuego);
     }
+
     return res;
 }
-DataVideojuego *VideojuegoController::obtenerDataVideojuego(string nombre)
+
+DataVideojuego VideojuegoController::obtenerDataVideojuego(string nombreVideojuego)
 {
-    this->seleccionarVideojuego(nombre);
-    Videojuego *este = this->videojuego; //string nombre, string descripcion, map<TipoPeriodoValidez, float> suscripciones, set<string> nombreCategorias, pair<float, int> rating);
-    DataVideojuego *res = new DataVideojuego(este->getNombre(), este->getDescripcion(), este->getSuscripciones(), este->getNombreCategorias(), este->getRating());
-    UsuarioController *uc;
-    uc = uc->getInstance();
-    Desarrollador *des = dynamic_cast<Desarrollador *>(uc->getSesion());
-    res->setNombreEmpresa(este->getNombreEmpresa());
-    if (des != nullptr)
+    UsuarioController *usuarioController = UsuarioController::getInstance();
+
+    this->seleccionarVideojuego(nombreVideojuego);
+    DataVideojuego res = DataVideojuego(this->videojuego->getNombre(), this->videojuego->getDescripcion(), this->videojuego->getSuscripciones(), this->videojuego->getNombreCategorias(), this->videojuego->getRating());
+
+    Desarrollador *dev = dynamic_cast<Desarrollador *>(usuarioController->getSesion());
+    res.setNombreEmpresa(this->videojuego->getNombreEmpresa());
+
+    if (dev != nullptr)
     {
-        UsuarioHandler *uH;
-        uH = uH->getInstance();
-        res->setHorasTotales(uH->obtenerHoras(este));
+        UsuarioHandler *usuarioHandler = UsuarioHandler::getInstance();
+        res.setHorasTotales(usuarioHandler->obtenerHoras(this->videojuego));
     }
     else
     {
-        res->setHorasTotales(-1);
+        res.setHorasTotales(-1);
     }
+
     return res;
 }
-void VideojuegoController::agregarCategoria(std::string nombre, std::string descripcion, TipoCategoria tipo)
-{
-    this->dataCategoria = new DataCategoria(nombre, descripcion, tipo);
-}
-//void VideojuegoController::agregarGenero(DataGenero *genero) {}
-//void VideojuegoController::agregarOtraCategoria(DataCategoria *otra) {}
 
-void VideojuegoController::confirmarAgregarCategoria(bool confirmar)
+void VideojuegoController::agregarCategoria(string nombre, string descripcion, TipoCategoria tipo) { this->dataCategoria = DataCategoria(nombre, descripcion, tipo); }
+
+void VideojuegoController::confirmarAgregarCategoria()
 {
-    if (confirmar)
-    {
-        CategoriaHandler *ch;
-        ch = ch->getInstance();
-        ch->crearNuevaCategoria(this->dataCategoria->getNombre(), this->dataCategoria->getDescripcion(), this->dataCategoria->getTipo());
-    }
-    //delete this->dataCategoria;
-}
-VideojuegoController::~VideojuegoController()
-{
-    //if (this->dataVideojuego!=nullptr) delete this->dataVideojuego;
-    //if (this->dataCategoria!=nullptr) delete this->dataCategoria;
-    this->videojuego = nullptr;
+
+    CategoriaHandler *categoriaHandler = CategoriaHandler::getInstance();
+
+    categoriaHandler->crearNuevaCategoria(this->dataCategoria.getNombre(), this->dataCategoria.getDescripcion(), this->dataCategoria.getTipo());
 }
 
-set<std::string> VideojuegoController::obtenerNombreVideojuegos()
+VideojuegoController::~VideojuegoController() { this->videojuego = nullptr; }
+
+set<string> VideojuegoController::obtenerNombreVideojuegos()
 {
-    VideojuegoHandler *vH;
-    vH = vH->getInstance();
-    return vH->obtenerNombresVideojuegos();
+    VideojuegoHandler *videojuegoHandler = VideojuegoHandler::getInstance();
+
+    return videojuegoHandler->obtenerNombresVideojuegos();
 }
 
-void VideojuegoController::eleminarVideojuegoGeneral(){
-        //en proceso
-    UsuarioController *uc;
-    uc = uc->getInstance();
-    Videojuego *video = this->videojuego;
-    UsuarioHandler *uH;
-    uH = uH->getInstance();
-    map<string, Usuario *> users = uH->obtenerUsuarios();
+void VideojuegoController::eleminarVideojuegoGeneral()
+{
+
+    UsuarioController *usuarioController = UsuarioController::getInstance();
+    UsuarioHandler *usuarioHandler = UsuarioHandler::getInstance();
+
+    map<string, Usuario *> usuarios = usuarioHandler->obtenerUsuarios();
     map<string, Usuario *>::iterator it;
-    for (it = users.begin(); it != users.end(); it++)
+    for (it = usuarios.begin(); it != usuarios.end(); it++)
     {
         Jugador *jugador = dynamic_cast<Jugador *>(it->second);
         if (jugador != nullptr)
         {
-            jugador->eliminarContratosDeVideojuego(video);
-            jugador->eliminarPartidasDeVideojuego(video);
+            jugador->eliminarContratosDeVideojuego(this->videojuego);
+            jugador->eliminarPartidasDeVideojuego(this->videojuego);
         }
     }
-    VideojuegoHandler *vH;
-    vH = vH->getInstance();
-    delete video;
-    //vH->eliminarVideojuego(video);
+
+    delete this->videojuego;
 }

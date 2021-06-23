@@ -1,66 +1,53 @@
-
-#include <string>
-#include <map>
-#include <set>
-#include <utility>
-
-#include "../../headers/datatypes/DataUsuario.h"
-#include "../../headers/utils/enums.h"
 #include "../../headers/datatypes/DataVideojuego.h"
-#include "../../headers/utils/Fecha.h"
 
-using namespace std;
+DataVideojuego::DataVideojuego() {}
 
-DataVideojuego::DataVideojuego() {
-}
-
-DataVideojuego::DataVideojuego(string nombre, string descripcion, map<TipoPeriodoValidez, float> suscripciones, set<string> nombreCategorias, pair<float, int> rating) {
-    this->nombre = nombre;
-    this->descripcion = descripcion;
-    this->suscripciones = suscripciones;
-    this->categorias = nombreCategorias;
-    this->rating = rating;
-}
-//Getters
-string DataVideojuego::getNombre(){
-    return this->nombre;
+DataVideojuego::DataVideojuego(const DataVideojuego &data)
+{
+    nombre = data.nombre;
+    descripcion = data.descripcion;
+    suscripciones = data.suscripciones;
+    categorias = data.categorias;
+    rating = data.rating;
 }
 
-string DataVideojuego::getDescripcion(){
-    return this->descripcion;
+DataVideojuego::DataVideojuego(string nombre, string descripcion, map<TipoPeriodoValidez, float> suscripciones, set<string> nombreCategorias, pair<float, int> rating)
+{
+    nombre = nombre;
+    descripcion = descripcion;
+    suscripciones = suscripciones;
+    categorias = nombreCategorias;
+    rating = rating;
 }
 
-map<TipoPeriodoValidez, float> DataVideojuego::getSuscripciones(){
-    return this->suscripciones;
+string DataVideojuego::getNombre() const { return nombre; }
+
+string DataVideojuego::getDescripcion() const { return descripcion; }
+
+map<TipoPeriodoValidez, float> DataVideojuego::getSuscripciones() const { return suscripciones; }
+
+set<string> DataVideojuego::getNombreCategorias() const { return categorias; }
+
+string DataVideojuego::getNombreEmpresa() const { return nombreEmpresa; }
+
+float DataVideojuego::getHorasTotales() const { return horastotales; }
+
+pair<float, int> DataVideojuego::getRating() const { return rating; }
+
+void DataVideojuego::setNombreEmpresa(string nombreEmpresa) { nombreEmpresa = nombreEmpresa; }
+
+void DataVideojuego::setHorasTotales(float horas) { horastotales = horas; }
+
+void DataVideojuego::agregarCategoria(string categoria) { categorias.insert(categoria); }
+
+bool operator<(const DataVideojuego &d1, const DataVideojuego &d2)
+{
+    return &d1 < &d2;
 }
 
-set<string> DataVideojuego::getNombreCategorias() {
-    return this->categorias;
-}
-//Los métodos addCategoria(cat), addPlataforma(plataforma), addGenero(genero) equivalen a aplicarle el metodo insert al set
-string DataVideojuego::getNombreEmpresa() {
-    return this->nombreEmpresa;
+bool operator!=(const DataVideojuego &d1, const DataVideojuego &d2)
+{
+    return d1.getNombre() != d2.getNombre() || d1.getHorasTotales() != d2.getHorasTotales() || d1.getDescripcion() != d2.getDescripcion() || d1.getNombreEmpresa() != d2.getNombreEmpresa() || d1.getRating() != d2.getRating() || d1.getSuscripciones() != d2.getSuscripciones();
 }
 
-float DataVideojuego::getHorasTotales() {
-    return this->horastotales;
-}
-
-pair<float, int> DataVideojuego::getRating() {
-    return this->rating;
-}
-
-void DataVideojuego::setNombreEmpresa(std::string nombreEmpresa) {
-    this->nombreEmpresa=nombreEmpresa;
-}
-
-void DataVideojuego::setHorasTotales(float horas) {
-    this->horastotales=horas;
-}
-
-void DataVideojuego::agregarCategoria(string categoria) {
-    this->categorias.insert(categoria);
-}
-
-DataVideojuego::~DataVideojuego() {
-}
+DataVideojuego::~DataVideojuego() {}

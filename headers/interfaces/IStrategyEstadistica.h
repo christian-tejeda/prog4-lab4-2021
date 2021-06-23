@@ -3,9 +3,10 @@
 
 #include "../entities/Videojuego.h"
 
-class IStrategyIEstadistica {
+class IStrategyIEstadistica
+{
 public:
-  virtual float calcularEstadistica(Videojuego *vj) = 0;
+  virtual float calcularEstadistica(Videojuego *videojuego) = 0;
 };
 
 #endif

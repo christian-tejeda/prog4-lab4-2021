@@ -7,15 +7,18 @@ FactoryStrategyEstadistica *FactoryStrategyEstadistica::instancia = nullptr;
 
 FactoryStrategyEstadistica::FactoryStrategyEstadistica() {}
 
-FactoryStrategyEstadistica *FactoryStrategyEstadistica::getInstance() {
+FactoryStrategyEstadistica *FactoryStrategyEstadistica::getInstance()
+{
   if (instancia == nullptr)
     instancia = new FactoryStrategyEstadistica();
+
   return instancia;
 }
 
-IStrategyIEstadistica *
-FactoryStrategyEstadistica::getStrategy(TipoEstadistica tipoEstadistica) {
-  switch (tipoEstadistica) {
+IStrategyIEstadistica *FactoryStrategyEstadistica::getStrategy(TipoEstadistica tipoEstadistica)
+{
+  switch (tipoEstadistica)
+  {
   case horasJugadas:
     return TotalHorasJugadasStrategy::getInstance();
   case promedioRating:

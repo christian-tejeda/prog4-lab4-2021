@@ -4,48 +4,37 @@
 #include <map>
 #include <set>
 #include <string>
-#include <utility>
 
-#include "../datatypes/DataDesarrollador.h"
-#include "../datatypes/DataUsuario.h"
 #include "../entities/Usuario.h"
 #include "../entities/Videojuego.h"
 #include "../utils/enums.h"
-//#include "../entities/Individual.h"
-//#include "../entities/Multijugador.h"
-//#include "../entities/ContratoSuscripcion.h"
-#include "../entities/Videojuego.h"
+#include "../datatypes/DataDesarrollador.h"
 
-// using namespace std;
-
-class Desarrollador : public Usuario {
+class Desarrollador : public Usuario
+{
 private:
-  std::string nombreEmpresa;
+  string nombreEmpresa;
   map<string, Videojuego *> publicaciones;
-  std::set<TipoEstadistica> estadisticasDeInteres;
+  set<TipoEstadistica> estadisticasDeInteres;
 
 public:
-  // Constructores
   Desarrollador();
-  Desarrollador(std::string email, std::string password,
-                std::string nombreEmpresa);
+  Desarrollador(string email, string password, string nombreEmpresa);
 
-  // Getters
-  std::string getNombreEmpresa();
-  std::set<TipoEstadistica> getEstadisticasDeInteres();
+  string getNombreEmpresa();
+  set<TipoEstadistica> getEstadisticasDeInteres();
 
-  // Setters
-  void setEmail(std::string email);
-  void setPassword(std::string password);
-  void setNombreEmpresa(std::string nomEmpresa);
+  void setEmail(string email);
+  void setPassword(string password);
+  void setNombreEmpresa(string nombreEmpresa);
 
-  // Operaciones
-  DataUsuario *getData();
-  void agregarVideojuegoPublicado(Videojuego *vj);
+  void agregarVideojuegoPublicado(Videojuego *videojuego);
   set<Videojuego *> getVideojuegoPublicados();
-  void eliminarVideojuegoPublicado(Videojuego *vj);
+  void eliminarVideojuegoPublicado(Videojuego *videojuego);
   void agregarEstadisticaDeInteres(TipoEstadistica estadistica);
   void removerEstadisticaDeInteres(TipoEstadistica estadistica);
+
+  DataDesarrollador getData();
 
   ~Desarrollador();
 };

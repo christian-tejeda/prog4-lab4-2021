@@ -4,12 +4,10 @@
 #include <map>
 #include <set>
 #include <string>
-#include <utility>
 
 #include "../datatypes/DataVideojuego.h"
 #include "../utils/enums.h"
 #include "Categoria.h"
-#include "Jugador.h"
 
 class ContratoSuscripcion;
 class Jugador;
@@ -17,48 +15,43 @@ class Jugador;
 class Videojuego
 {
 private:
-  std::string nombre;
-  std::string descripcion;
+  string nombre;
+  string descripcion;
   map<TipoPeriodoValidez, float> suscripciones;
   pair<float, int> rating;
-
   set<ContratoSuscripcion *> contratos;
   map<string, Categoria *> categorias;
-  std::string nombreEmpresa;
+  string nombreEmpresa;
 
 public:
   Videojuego();
-  Videojuego(std::string nombre, std::string descripcion,
-             map<TipoPeriodoValidez, float> suscripciones,
-             pair<float, int> rating, set<ContratoSuscripcion *> contratos,
-             map<string, Categoria *> categorias, std::string nombreEmpresa);
+  Videojuego(string nombre, string descripcion, map<TipoPeriodoValidez, float> suscripciones, pair<float, int> rating, set<ContratoSuscripcion *> contratos, map<string, Categoria *> categorias, string nombreEmpresa);
 
-  // Getters
-  std::string getNombre();
-  std::string getDescripcion();
+  string getNombre();
+  string getDescripcion();
   map<TipoPeriodoValidez, float> getSuscripciones();
   pair<float, int> getRating();
   set<ContratoSuscripcion *> getContratos();
   map<string, Categoria *> getCategorias();
   set<string> getNombreCategorias();
   map<TipoPeriodoValidez, float> getPeriodoValidez();
-  std::string getNombreEmpresa();
+  string getNombreEmpresa();
 
-  void setNombre(std::string nombre);
-  void setDescripcion(std::string desc);
+  void setNombre(string nombre);
+  void setDescripcion(string descripcion);
   void setSuscripciones(TipoPeriodoValidez validez, float precio);
-  void setRating(float prom, int cantVotos);
-  void setContrato(ContratoSuscripcion *);
-  void setCategoria(Categoria *cat);
+  void setRating(float promedio, int cantidadVotos);
+  void setContrato(ContratoSuscripcion *contrato);
+  void setCategoria(Categoria *categoria);
 
-  void agregarCategoria(Categoria o);
+  void agregarCategoria(Categoria *categoria);
   set<Jugador *> getSuscriptores();
   int getCantidadSuscriptores();
   void agregarPuntaje(float puntaje);
-  DataVideojuego *getData();
   void agregarSuscriptor(ContratoSuscripcion *contrato);
-
   float calcularEstadistica(TipoEstadistica tipoEstadistica);
+
+  DataVideojuego getData();
 
   ~Videojuego();
 };

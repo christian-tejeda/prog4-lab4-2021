@@ -4,7 +4,6 @@
 #include <string>
 #include <map>
 #include <set>
-#include <utility>
 
 #include "../utils/enums.h"
 
@@ -15,33 +14,34 @@ class DataVideojuego
 private:
     string nombre;
     string descripcion;
-    map<TipoPeriodoValidez, float> suscripciones; // Datatype Suscripcion
+    map<TipoPeriodoValidez, float> suscripciones;
     set<string> categorias;
     string nombreEmpresa;
 
-    //Posible implementacion del datatype Rating
-    //rating.first = promedio
-    //rating.second = totalVotos
     pair<float, int> rating;
     float horastotales;
 
 public:
     DataVideojuego();
+    DataVideojuego(const DataVideojuego &data);
     DataVideojuego(string nombre, string descripcion, map<TipoPeriodoValidez, float> suscripciones, set<string> categorias, pair<float, int> rating);
-    //Getters
-    string getNombre();
-    string getDescripcion();//const
-    map<TipoPeriodoValidez, float> getSuscripciones();//const
-    set<string> getNombreCategorias();
-    //Los métodos addCategoria(cat), addPlataforma(plataforma), addGenero(genero) equivalen a aplicarle el metodo insert al set
-    string getNombreEmpresa();
-    float getHorasTotales();
-    pair<float, int> getRating();
 
-    void setNombreEmpresa(std::string nombreEmpresa);
+    string getNombre() const;
+    string getDescripcion() const;
+    map<TipoPeriodoValidez, float> getSuscripciones() const;
+    set<string> getNombreCategorias() const;
+
+    string getNombreEmpresa() const;
+    float getHorasTotales() const;
+    pair<float, int> getRating() const;
+
+    void setNombreEmpresa(string nombreEmpresa);
     void setHorasTotales(float horas);
+    void agregarCategoria(string categoria);
 
-    void agregarCategoria(std::string categoria);
+    friend bool operator<(const DataVideojuego &d1, const DataVideojuego &d2);
+    friend bool operator!=(const DataVideojuego &d1, const DataVideojuego &d2);
+
     ~DataVideojuego();
 };
 

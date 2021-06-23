@@ -2,14 +2,9 @@
 #define DATA_PARTIDA_H
 
 #include <string>
-#include <map>
-#include <set>
-#include <utility>
 
-#include "../utils/enums.h"
 #include "../datatypes/DataVideojuego.h"
 #include "../utils/Fecha.h"
-//#include "../entities/Videojuego.h"
 
 using namespace std;
 
@@ -17,23 +12,25 @@ class DataPartida
 {
 private:
     int id;
-    DataVideojuego * videojuego;
+    DataVideojuego dataVideojuego;
     Fecha fechaInicio;
-    Fecha *fechaFin;
-    float DuracionTotal;
+    Fecha fechaFin;
+    float duracionTotal;
 
 public:
     DataPartida();
-    DataPartida(int id, DataVideojuego * videojuego, Fecha fechaInicio, Fecha *fechaFin, float DuracionTotal);
-    //Getters
-    int getId();
-    DataVideojuego * getVideojuego();
-    Fecha getFechaInicio();
-    Fecha *getFechaFin();
-    float getDuracionTotal();
-    //Setters
+    DataPartida(const DataPartida &data);
+    DataPartida(int id, DataVideojuego dataVideojuego, Fecha fechaInicio, Fecha fechaFin, float duracionTotal);
 
-    //Destructor
+    int getId() const;
+    DataVideojuego getDataVideojuego() const;
+    Fecha getFechaInicio() const;
+    Fecha getFechaFin() const;
+    float getDuracionTotal() const;
+
+    friend bool operator<(const DataPartida &d1, const DataPartida &d2);
+    friend bool operator!=(const DataPartida &d1, const DataPartida &d2);
+
     virtual ~DataPartida();
 };
 

@@ -4,41 +4,49 @@
 
 #include <iostream>
 
-Fecha::Fecha(){};
+Fecha::Fecha()
+{
+  anio = mes = dia = hora = minuto = -1;
+};
 
 Fecha::Fecha(const Fecha &fecha)
 {
-  this->anio = fecha.anio;
-  this->mes = fecha.mes;
-  this->dia = fecha.dia;
-  this->hora = fecha.hora;
-  this->minuto = fecha.minuto;
+  anio = fecha.anio;
+  mes = fecha.mes;
+  dia = fecha.dia;
+  hora = fecha.hora;
+  minuto = fecha.minuto;
 };
 
 Fecha::Fecha(int dia, int mes, int anio, int hora, int minuto)
 {
-  this->anio = anio;
-  this->mes = mes;
-  this->dia = dia;
-  this->hora = hora;
-  this->minuto = minuto;
+  anio = anio;
+  mes = mes;
+  dia = dia;
+  hora = hora;
+  minuto = minuto;
 };
 
-int Fecha::getDia() { return this->dia; };
+int Fecha::getDia() const { return dia; };
 
-int Fecha::getMes() { return this->mes; };
+int Fecha::getMes() const { return mes; };
 
-int Fecha::getAnio() { return this->anio; };
+int Fecha::getAnio() const { return anio; };
 
-int Fecha::getHora() { return this->hora; };
+int Fecha::getHora() const { return hora; };
 
-int Fecha::getMinuto() { return this->minuto; };
+int Fecha::getMinuto() const { return minuto; };
 
 bool Fecha::operator==(Fecha opFecha)
 {
   return dia == opFecha.dia && mes == opFecha.mes && anio == opFecha.anio &&
          hora == opFecha.hora && minuto == opFecha.minuto;
 };
+
+bool operator!=(const Fecha &f1, const Fecha &f2)
+{
+  return f1.getAnio() != f2.getAnio() || f1.getMes() || f2.getMes() || f1.getDia() != f2.getDia() || f1.getHora() != f2.getHora() || f1.getMinuto() != f2.getMinuto();
+}
 
 int Fecha::contarAniosBisiestos(const Fecha &f)
 {
@@ -68,13 +76,13 @@ float Fecha::operator-(const Fecha &f)
   return horas2 - horas1;
 }
 
-std::ostream &operator<<(std::ostream &os, Fecha f)
+ostream &operator<<(ostream &os, Fecha f)
 {
-  os << std::setfill('0') << std::setw(2) << f.getDia() << '/'
-     << std::setfill('0') << std::setw(2) << f.getMes() << '/'
+  os << setfill('0') << setw(2) << f.getDia() << '/'
+     << setfill('0') << setw(2) << f.getMes() << '/'
      << f.getAnio() << " , "
-     << std::setfill('0') << std::setw(2) << f.getHora() << ':'
-     << std::setfill('0') << std::setw(2) << f.getMinuto();
+     << setfill('0') << setw(2) << f.getHora() << ':'
+     << setfill('0') << setw(2) << f.getMinuto();
   return os;
 };
 

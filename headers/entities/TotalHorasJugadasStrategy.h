@@ -2,9 +2,9 @@
 #define TOTAL_HORAS_JUGADAS_STRATEGY
 
 #include "../interfaces/IStrategyEstadistica.h"
-#include <utility>
 
-class TotalHorasJugadasStrategy : public IStrategyIEstadistica {
+class TotalHorasJugadasStrategy : public IStrategyIEstadistica
+{
 private:
   static TotalHorasJugadasStrategy *instancia;
 
@@ -15,7 +15,7 @@ private:
 public:
   static TotalHorasJugadasStrategy *getInstance();
 
-  float calcularEstadistica(Videojuego *vj);
+  float calcularEstadistica(Videojuego *videojuego);
 };
 
 #endif

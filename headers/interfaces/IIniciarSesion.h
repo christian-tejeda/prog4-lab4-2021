@@ -10,13 +10,11 @@
 using namespace std;
 
 class IIniciarSesion
-{ //interface
+{
 public:
-    // virtual set<DataPartidaMultijugador *> obtenerPartidasMultijugadorActivasDeJugador() = 0;
-    // virtual void seleccionarPartida(int id) = 0;
-    // virtual void seleccionarVideojuego(string nombreVideojuego) = 0;
-    virtual bool iniciarSesion(string mail, string password) = 0;
-    virtual void confirmarInicioSesion(bool confirmar, string mail, bool &jg, bool &dev) = 0;
+    virtual bool iniciarSesion(string email, string password) = 0;
+
+    virtual void confirmarInicioSesion(string email, bool &jugador, bool &dev) = 0;
 
     virtual ~IIniciarSesion(){};
 };

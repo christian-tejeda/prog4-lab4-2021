@@ -6,8 +6,9 @@
 class IAbandonarPartida
 {
 public:
-    virtual set<DataPartidaMultijugador *> obtenerPartidasMultijugadorActivasDeJugador() = 0;
-    virtual void abandonarPartida(int idPartida, Fecha *f) = 0;
+    virtual set<DataPartidaMultijugador> obtenerPartidasMultijugadorActivasDeJugador() = 0;
+
+    virtual void abandonarPartida(int idPartida, Fecha fecha) = 0;
 
     virtual ~IAbandonarPartida(){};
 };

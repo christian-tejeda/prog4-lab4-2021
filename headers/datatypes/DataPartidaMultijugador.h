@@ -1,12 +1,8 @@
 #ifndef DATA_PARTIDA_MULTIJUGADOR_H
 #define DATA_PARTIDA_MULTIJUGADOR_H
 
-#include <string>
-#include <map>
 #include <set>
-#include <utility>
 
-#include "../utils/enums.h"
 #include "../datatypes/DataPartida.h"
 #include "../datatypes/DataJugador.h"
 #include "../utils/Fecha.h"
@@ -16,26 +12,22 @@ using namespace std;
 class DataPartidaMultijugador : public DataPartida
 {
 private:
-    bool trasmitida;
-    DataJugador creador;              //PREGUNTAR!
-    set<DataJugador *> participantes; //PREGUNTAR!
+    bool transmitida;
+    DataJugador creador;
+    set<DataJugador> participantes;
 
 public:
     DataPartidaMultijugador();
-    DataPartidaMultijugador(int id, DataVideojuego * videojuego, Fecha fechaInicio, Fecha *fechaFin, float DuracionTotal, bool esTrasmitida, DataJugador creador, set<DataJugador *> participantes);
-    //Getters
-    //int getId();
-    //DataVideojuego getVideojuego();
-    //Fecha getFechaInicio();
-    //Fecha getFechaFin();
-    //float getDuracionTotal();
-    bool getTramistida();
-    DataJugador getCreador();
-    set<DataJugador *> getParticipantes();
+    DataPartidaMultijugador(const DataPartidaMultijugador &data);
+    DataPartidaMultijugador(int id, DataVideojuego videojuego, Fecha fechaInicio, Fecha fechaFin, float duracionTotal, bool esTransmitida, DataJugador creador, set<DataJugador> participantes);
 
-    //Setters
+    bool getTransmitida() const;
+    DataJugador getCreador() const;
+    set<DataJugador> getParticipantes() const;
 
-    //Destructor
+    friend bool operator<(const DataPartidaMultijugador &d1, const DataPartidaMultijugador &d2);
+    friend bool operator!=(const DataPartidaMultijugador &d1, const DataPartidaMultijugador &d2);
+
     ~DataPartidaMultijugador();
 };
 

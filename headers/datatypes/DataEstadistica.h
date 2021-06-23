@@ -5,19 +5,25 @@
 #include <iostream>
 
 #include "../utils/enums.h"
+
 using namespace std;
-class DataEstadistica {
+class DataEstadistica
+{
 private:
   TipoEstadistica estadistica;
   float resultado;
 
 public:
   DataEstadistica();
+  DataEstadistica(const DataEstadistica &data);
   DataEstadistica(TipoEstadistica estadistica, float resultado);
 
-  TipoEstadistica getEstadistica();
-  float getResultado();
-  friend ostream &operator<<(ostream &os, const DataEstadistica &dt); 
+  TipoEstadistica getEstadistica() const;
+  float getResultado() const;
+
+  friend ostream &operator<<(ostream &os, const DataEstadistica &dt);
+  friend bool operator<(const DataEstadistica &d1, const DataEstadistica &d2);
+  friend bool operator!=(const DataEstadistica &d1, const DataEstadistica &d2);
 
   ~DataEstadistica();
 };

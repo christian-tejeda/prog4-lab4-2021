@@ -1,26 +1,32 @@
-
-#include <map>
-#include <set>
-#include <string>
-#include <utility>
-
 #include "../../headers/datatypes/DataEstadistica.h"
-#include "../../headers/utils/enums.h"
 
-DataEstadistica::DataEstadistica() {}
-
-DataEstadistica::DataEstadistica(TipoEstadistica estadistica, float resultado) {
-  this->estadistica = estadistica;
-  this->resultado = resultado;
+DataEstadistica::DataEstadistica()
+{
+  resultado = -1;
 }
 
-TipoEstadistica DataEstadistica::getEstadistica() { return this->estadistica; }
+DataEstadistica::DataEstadistica(const DataEstadistica &data)
+{
+  estadistica = data.estadistica;
+  resultado = data.resultado;
+}
 
-ostream &operator<<(ostream &os, const DataEstadistica &dataSuscJugador) {
+DataEstadistica::DataEstadistica(TipoEstadistica estadistica, float resultado)
+{
+  estadistica = estadistica;
+  resultado = resultado;
+}
 
+TipoEstadistica DataEstadistica::getEstadistica() const { return estadistica; }
+
+float DataEstadistica::getResultado() const { return resultado; }
+
+ostream &operator<<(ostream &os, const DataEstadistica &dataSuscJugador)
+{
   string estadistica;
 
-  switch (dataSuscJugador.estadistica) {
+  switch (dataSuscJugador.estadistica)
+  {
   case horasJugadas:
     estadistica = "Horas jugadas: ";
     break;
@@ -30,15 +36,25 @@ ostream &operator<<(ostream &os, const DataEstadistica &dataSuscJugador) {
   case cantidadSuscritos:
     estadistica = "Cantidad suscritos: ";
     break;
+  default:
+    estadistica = "";
   }
 
-  string resultado = std::to_string(dataSuscJugador.resultado);
+  string resultado = to_string(dataSuscJugador.resultado);
 
   os << estadistica << resultado;
 
   return os;
 }
 
-float DataEstadistica::getResultado() { return this->resultado; }
+bool operator<(const DataEstadistica &d1, const DataEstadistica &d2)
+{
+  return &d1 < &d2;
+}
+
+bool operator!=(const DataEstadistica &d1, const DataEstadistica &d2)
+{
+  return d1.getEstadistica() != d2.getEstadistica() || d1.getResultado() != d2.getResultado();
+}
 
 DataEstadistica::~DataEstadistica() {}

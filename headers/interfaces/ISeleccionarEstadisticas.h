@@ -1,15 +1,16 @@
 #ifndef I_SELECCIONAR_ESTADISTICAS_H
 #define I_SELECCIONAR_ESTADISTICAS_H
 
-#include <string>
 #include <set>
+
 #include "../datatypes/DataEstadistica.h"
 
 class ISeleccionarEstadisticas
 {
 public:
-    virtual std::set<DataEstadistica *> listarEstadisticas() = 0;
-    virtual void seleccionarEstadisticas(set<TipoEstadistica> numeroEstadistica) = 0;
+    virtual set<DataEstadistica> obtenerEstadisticas() = 0;
+
+    virtual void seleccionarEstadisticas(set<TipoEstadistica> tipoEstadisticas) = 0;
 
     virtual ~ISeleccionarEstadisticas(){};
 };

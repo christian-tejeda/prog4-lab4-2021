@@ -4,12 +4,15 @@ CantidadSuscritosStrategy *CantidadSuscritosStrategy::instancia = nullptr;
 
 CantidadSuscritosStrategy::CantidadSuscritosStrategy() {}
 
-CantidadSuscritosStrategy *CantidadSuscritosStrategy::getInstance() {
+CantidadSuscritosStrategy *CantidadSuscritosStrategy::getInstance()
+{
   if (instancia == nullptr)
     instancia = new CantidadSuscritosStrategy();
+
   return instancia;
 }
 
-float CantidadSuscritosStrategy::calcularEstadistica(Videojuego *vj) {
-  return vj->getCantidadSuscriptores();
+float CantidadSuscritosStrategy::calcularEstadistica(Videojuego *videojuego)
+{
+  return videojuego->getCantidadSuscriptores();
 }

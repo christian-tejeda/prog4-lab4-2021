@@ -6,31 +6,32 @@
 
 #include "../entities/Videojuego.h"
 
-using namespace std;
-
 class VideojuegoHandler
 {
 private:
     static VideojuegoHandler *instancia;
-    map<string, Videojuego *> vjs;
+
+    map<string, Videojuego *> videojuegos;
+
     VideojuegoHandler();
     ~VideojuegoHandler();
 
 public:
     static VideojuegoHandler *getInstance();
 
-    void agregarVideojuego(Videojuego *vj);
+    void agregarVideojuego(Videojuego *videojuego);
 
     map<string, Videojuego *> obtenerVideojuegos();
 
     Videojuego *obtenerVideojuegoPorId(string nombre);
 
-    void eliminarVideojuego(Videojuego *vj);
+    void eliminarVideojuego(Videojuego *videojuego);
 
-    map<string, Jugador *> obtenerJugadoresVideojuego(Videojuego *vj);
+    map<string, Jugador *> obtenerJugadoresVideojuego(Videojuego *videojuego);
 
     static void releaseInstance();
-    set<std::string> obtenerNombresVideojuegos();
+
+    set<string> obtenerNombresVideojuegos();
 };
 
 #endif

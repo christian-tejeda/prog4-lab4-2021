@@ -6,9 +6,6 @@
 #include "../entities/Videojuego.h"
 #include "../utils/enums.h"
 
-class Jugador;    //forward declaration
-class Videojuego; //forward declaration
-
 class ContratoSuscripcion
 {
 private:
@@ -22,8 +19,8 @@ private:
 
 public:
     ContratoSuscripcion();
-    ContratoSuscripcion(Jugador *jg, Videojuego *vj, TipoMetodoPago metodoDePago, TipoPeriodoValidez validez);
-    //getters
+    ContratoSuscripcion(Jugador *jugador, Videojuego *videojuego, TipoMetodoPago metodoDePago, TipoPeriodoValidez validez);
+
     ContratoSuscripcion getContratoSuscripcion();
     Jugador *getJugador();
     Videojuego *getVideojuego();
@@ -31,17 +28,17 @@ public:
     Fecha getFecha();
     TipoPeriodoValidez getValidez();
     TipoMetodoPago getMetodoDePago();
-    //setters
-    void setVideojuego(Videojuego *vj);
-    void setJugador(Jugador *jg);
-    void setFecha(Fecha &fe);
-    void setActivo(Fecha *f);
+
+    void setVideojuego(Videojuego *videojuego);
+    void setJugador(Jugador *jugador);
+    void setFecha(Fecha fecha);
+    void setActivo(Fecha fecha);
     void setFueCancelada(bool fueCancelada);
     void setMetodoDePago(TipoMetodoPago metodoDePago);
     void setPeriodoDeValidez(TipoPeriodoValidez periodoValidez);
-    //ops
+
     void cancelar();
-    bool perteneceAVideojuego(Videojuego *vj);
+    bool perteneceAVideojuego(Videojuego *videojuego);
     bool esActivo();
 };
 

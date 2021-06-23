@@ -1,193 +1,154 @@
 #include "../../headers/controllers/UsuarioController.h"
+#include "../../headers/handlers/UsuarioHandler.h"
+#include "../../headers/handlers/VideojuegoHandler.h"
 
 UsuarioController *UsuarioController::instancia = nullptr;
 
 UsuarioController::UsuarioController()
 {
-  this->dataDesarrollador = nullptr;
-  this->dataJugador = nullptr;
   this->sesion = nullptr;
   this->videojuego = nullptr;
 }
 
-// op de singleton
 UsuarioController *UsuarioController::getInstance()
 {
   if (instancia == nullptr)
     instancia = new UsuarioController();
+
   return instancia;
 }
 
 Usuario *UsuarioController::getSesion() { return this->sesion; }
-DataDesarrollador *UsuarioController::getDataDesarrollador()
-{
-  return this->dataDesarrollador;
-}
-DataJugador *UsuarioController::getDataJugador() { return this->dataJugador; }
+
+DataDesarrollador UsuarioController::getDataDesarrollador() { return this->dataDesarrollador; }
+
+DataJugador UsuarioController::getDataJugador() { return this->dataJugador; }
+
 Videojuego *UsuarioController::getVideojuego() { return this->videojuego; }
 
 TipoMetodoPago UsuarioController::getMetodoPago() { return this->metodoPago; }
 
-// métodos de ISeleccionarEstadisticas
-std::set<DataEstadistica *> UsuarioController::listarEstadisticas()
+set<DataEstadistica> UsuarioController::obtenerEstadisticas()
 {
-  set<DataEstadistica *> res;
-  for (int eint = horasJugadas; eint != Last; eint++)
+  set<DataEstadistica> res;
+
+  for (int tipoEstadistica = horasJugadas; tipoEstadistica != Last; tipoEstadistica++)
   {
-    TipoEstadistica tipoest = static_cast<TipoEstadistica>(eint);
-    DataEstadistica *est = new DataEstadistica(tipoest, 3.14);
-    res.insert(est);
+    TipoEstadistica tipo = static_cast<TipoEstadistica>(tipoEstadistica);
+    DataEstadistica dataEstadistica = DataEstadistica(tipo, 3.14);
+    res.insert(dataEstadistica);
   }
+
   return res;
 }
-void UsuarioController::seleccionarEstadisticas(set<TipoEstadistica> estadisticas){
-    set<TipoEstadistica>::iterator it;
-    for (it = estadisticas.begin(); it != estadisticas.end(); it++) {
-      TipoEstadistica estadistica = *it;
-      Desarrollador *des = dynamic_cast<Desarrollador *>(this->sesion);
-      des->agregarEstadisticaDeInteres(estadistica);
-    }
+
+void UsuarioController::seleccionarEstadisticas(set<TipoEstadistica> estadisticas)
+{
+  set<TipoEstadistica>::iterator it;
+
+  for (it = estadisticas.begin(); it != estadisticas.end(); it++)
+  {
+    TipoEstadistica tipoEstadistica = *it;
+    Desarrollador *dev = dynamic_cast<Desarrollador *>(this->sesion);
+    dev->agregarEstadisticaDeInteres(tipoEstadistica);
+  }
 }
 
-
-// métodos de IAltaUsuario
-void UsuarioController::ingresarDatosJugador(DataJugador *dataJugador)
+void UsuarioController::ingresarDatosJugador(DataJugador dataJugador)
 {
 
-  UsuarioHandler *uh = UsuarioHandler::getInstance();
-  bool existeNick = uh->existeJugadorConNickname(dataJugador->getNickname());
+  UsuarioHandler *usuarioHandler = UsuarioHandler::getInstance();
+  bool existeNick = usuarioHandler->existeJugadorConNickname(dataJugador.getNickname());
 
-  if (existeNick)
+  if (!existeNick)
   {
-    throw std::invalid_argument("Error: Ya existe un jugador con ese nickname. "
-                                "Pruebe con uno distinto.");
+    this->dataJugador = dataJugador;
+    return;
+  }
+
+  throw invalid_argument("Error: Ya existe un jugador con ese nickname.");
+}
+
+void UsuarioController::ingresarDatosDesarrollador(DataDesarrollador dataDesarrollador) { this->dataDesarrollador = dataDesarrollador; }
+
+void UsuarioController::confirmarAltaUsuario()
+{
+  UsuarioHandler *usuarioHandler = UsuarioHandler::getInstance();
+
+  DataUsuario dataUsuario;
+  if (this->dataJugador != DataJugador())
+  {
+    dataUsuario = this->dataJugador;
   }
   else
   {
-    this->dataJugador = dataJugador;
-  }
-}
-
-void UsuarioController::ingresarDatosDesarrollador(
-    DataDesarrollador *dataDesarrollador)
-{
-  this->dataDesarrollador = dataDesarrollador;
-}
-
-void UsuarioController::confirmarAltaUsuario(bool confirmar)
-{
-  try
-  {
-    if (confirmar)
-    {
-      UsuarioHandler *uh = UsuarioHandler::getInstance();
-      DataUsuario *dtUser = nullptr;
-      if (this->dataJugador != nullptr)
-      {
-        dtUser = this->dataJugador;
-      }
-      else
-      {
-        dtUser = this->dataDesarrollador;
-      }
-
-      uh->agregarUsuario(dtUser);
-      std::cout << "¡Usuario agregado correctamente!\n";
-    }
-  }
-  catch (const std::invalid_argument &ex)
-  {
-    std::cout << ex.what() << '\n';
+    dataUsuario = this->dataDesarrollador;
   }
 
-  if (this->dataJugador != nullptr)
-    delete this->dataJugador;
-  if (this->dataDesarrollador != nullptr)
-    delete this->dataDesarrollador;
+  usuarioHandler->agregarUsuario(dataUsuario);
 }
 
-// ISuscribirseAVideojuego
-
-std::set<DataSuscripcionJugador *> UsuarioController::obtenerSuscripciones()
+set<DataSuscripcionJugador> UsuarioController::obtenerSuscripciones()
 {
-  std::set<DataSuscripcionJugador *> res = std::set<DataSuscripcionJugador *>();
 
-  UsuarioController *uc = UsuarioController::getInstance();
-  Jugador *jugador = dynamic_cast<Jugador *>(uc->getSesion());
+  UsuarioController *usuarioController = UsuarioController::getInstance();
+  Jugador *jugador = dynamic_cast<Jugador *>(usuarioController->getSesion());
 
-  std::set<ContratoSuscripcion *> contratosActivos =
-      jugador->obtenerContratosActivos();
+  set<ContratoSuscripcion *> contratosActivos = jugador->obtenerContratosActivos();
 
-  std::set<ContratoSuscripcion *>::iterator it;
-
+  set<DataSuscripcionJugador> res = set<DataSuscripcionJugador>();
+  set<ContratoSuscripcion *>::iterator it;
   for (it = contratosActivos.begin(); it != contratosActivos.end(); it++)
   {
-
     ContratoSuscripcion *contrato = (*it);
     TipoPeriodoValidez validez = contrato->getValidez();
     Videojuego *videojuego = contrato->getVideojuego();
     float precio = videojuego->getSuscripciones()[contrato->getValidez()];
+    res.insert(DataSuscripcionJugador(videojuego->getNombre(), precio, validez, true));
 
-    /// Agrego unico contrato (validez) activo asociado a [videojuego]
-    res.insert(new DataSuscripcionJugador(videojuego->getNombre(), precio,
-                                          validez, true));
+    map<TipoPeriodoValidez, float> suscripciones = videojuego->getSuscripciones();
+    map<TipoPeriodoValidez, float>::iterator itSusc;
 
-    std::map<TipoPeriodoValidez, float> suscripciones =
-        videojuego->getSuscripciones();
-    std::map<TipoPeriodoValidez, float>::iterator itSusc;
-
-    /// Como hay un unico contrato activo (por lo tanto un unico)
-    /// TipoPeriodoValidez activo, se que el resto son inactivos
-    /// para un Videojuego dado
-    for (itSusc = suscripciones.begin(); itSusc != suscripciones.end();
-         itSusc++)
+    for (itSusc = suscripciones.begin(); itSusc != suscripciones.end(); itSusc++)
     {
       if (validez != (*itSusc).first)
       {
-        res.insert(new DataSuscripcionJugador(videojuego->getNombre(), precio,
-                                              validez, false));
+        res.insert(DataSuscripcionJugador(videojuego->getNombre(), precio, validez, false));
       }
     }
   }
 
-  /// El chequeo anterior solo contempla a aquellos Videojuegos
-  /// en el cual el Jugador tenga una suscripcion activa, ahora
-  /// itero sobre todos los Videojuegos del Sistema y agrego aquellos que falten
+  VideojuegoHandler *videojuegoHandler = VideojuegoHandler::getInstance();
 
-  VideojuegoHandler *vH = VideojuegoHandler::getInstance();
-  std::map<string, Videojuego *> videojuegos = vH->obtenerVideojuegos();
+  map<string, Videojuego *> videojuegos = videojuegoHandler->obtenerVideojuegos();
 
-  std::set<DataSuscripcionJugador *>::iterator itRes;
-  std::map<string, Videojuego *>::iterator itVj;
+  set<DataSuscripcionJugador>::iterator itRes;
+  map<string, Videojuego *>::iterator itVj;
 
   for (itVj = videojuegos.begin(); itVj != videojuegos.end(); itVj++)
   {
-    Videojuego *vj = (*itVj).second;
+    Videojuego *videojuego = (*itVj).second;
 
     bool agregado = false;
-
     for (itRes = res.begin(); itRes != res.end() && !agregado; itRes++)
     {
-      std::string nombreVideojuegoActual = (*itRes)->getNombreVideojuego();
+      DataSuscripcionJugador dataSuscJugador = *itRes;
+      string nombreVideojuegoActual = dataSuscJugador.getNombreVideojuego();
 
-      if (vj->getNombre() == nombreVideojuegoActual)
+      if (videojuego->getNombre() == nombreVideojuegoActual)
       {
         agregado = true;
       }
     }
 
-    /// Si no esta en res, lo agrego
     if (!agregado)
     {
-      std::map<TipoPeriodoValidez, float>::iterator itSuscVj;
-      std::map<TipoPeriodoValidez, float> suscripcionesVjActual =
-          vj->getSuscripciones();
+      map<TipoPeriodoValidez, float>::iterator itSuscVj;
+      map<TipoPeriodoValidez, float> suscripcionesVjActual = videojuego->getSuscripciones();
 
-      for (itSuscVj = suscripcionesVjActual.begin();
-           itSuscVj != suscripcionesVjActual.end(); itSuscVj++)
+      for (itSuscVj = suscripcionesVjActual.begin(); itSuscVj != suscripcionesVjActual.end(); itSuscVj++)
       {
-        res.insert(new DataSuscripcionJugador(
-            vj->getNombre(), (*itSuscVj).second, (*itSuscVj).first, false));
+        res.insert(DataSuscripcionJugador(videojuego->getNombre(), (*itSuscVj).second, (*itSuscVj).first, false));
       }
     }
   }
@@ -197,16 +158,16 @@ std::set<DataSuscripcionJugador *> UsuarioController::obtenerSuscripciones()
 
 void UsuarioController::seleccionarVideojuego(string nombreVideojuego)
 {
-  VideojuegoHandler *vH = VideojuegoHandler::getInstance();
+  VideojuegoHandler *videojuegoHandler = VideojuegoHandler::getInstance();
 
-  this->videojuego = vH->obtenerVideojuegoPorId(nombreVideojuego);
+  this->videojuego = videojuegoHandler->obtenerVideojuegoPorId(nombreVideojuego);
 }
 
 void UsuarioController::cancelarSuscripcion()
 {
-  UsuarioController *uc = UsuarioController::getInstance();
-  Jugador *jugador = dynamic_cast<Jugador *>(uc->getSesion());
+  UsuarioController *usuarioController = UsuarioController::getInstance();
 
+  Jugador *jugador = dynamic_cast<Jugador *>(usuarioController->getSesion());
   jugador->cancelarSuscripcionActiva(this->videojuego);
 }
 
@@ -216,29 +177,24 @@ void UsuarioController::contratarSuscripcion(TipoPeriodoValidez validezSuscripci
   this->metodoPago = metodoPago;
 }
 
-void UsuarioController::confirmarSuscripcion(bool confirmar, Fecha *f)
+void UsuarioController::confirmarSuscripcion(Fecha fecha)
 {
-  if (confirmar)
-  {
-    UsuarioController *uc = UsuarioController::getInstance();
-    Jugador *jugador = dynamic_cast<Jugador *>(uc->getSesion());
+  UsuarioController *usuarioController = UsuarioController::getInstance();
 
-    jugador->contratarSuscripcion(this->videojuego, this->validezSuscripcion, this->metodoPago, f);
-    this->videojuego = nullptr;
-    std::cout << "Suscripción contratada correctamente!\n";
-  }
+  Jugador *jugador = dynamic_cast<Jugador *>(usuarioController->getSesion());
+  jugador->contratarSuscripcion(this->videojuego, this->validezSuscripcion, this->metodoPago, fecha);
+
   this->videojuego = nullptr;
 }
 
-// métodos de IConsultarEstadisticas
-set<DataVideojuego *>
-UsuarioController::obtenerVideojuegosPublicadosPorDesarrollador()
+set<DataVideojuego> UsuarioController::obtenerVideojuegosPublicadosPorDesarrollador()
 {
-  std::set<DataVideojuego *> res = std::set<DataVideojuego *>();
-  UsuarioController *uc = UsuarioController::getInstance();
-  Desarrollador *des = dynamic_cast<Desarrollador *>(uc->getSesion());
-  set<Videojuego *> vjs = des->getVideojuegoPublicados();
+  UsuarioController *usuarioController = UsuarioController::getInstance();
 
+  Desarrollador *dev = dynamic_cast<Desarrollador *>(usuarioController->getSesion());
+  set<Videojuego *> vjs = dev->getVideojuegoPublicados();
+
+  set<DataVideojuego> res = set<DataVideojuego>();
   set<Videojuego *>::iterator it;
 
   for (it = vjs.begin(); it != vjs.end(); it++)
@@ -250,59 +206,51 @@ UsuarioController::obtenerVideojuegosPublicadosPorDesarrollador()
   return res;
 }
 
-set<DataEstadistica *>
-UsuarioController::calcularEstadisticas(string nomVideojuego)
+set<DataEstadistica> UsuarioController::calcularEstadisticas(string nombreVideojuego)
 {
-  std::set<DataEstadistica *> res = std::set<DataEstadistica *>();
+  UsuarioController *usuarioController = UsuarioController::getInstance();
+  VideojuegoHandler *videojuegoHandler = VideojuegoHandler::getInstance();
 
-  VideojuegoHandler *vH = VideojuegoHandler::getInstance();
-  Videojuego *videojuego = vH->obtenerVideojuegoPorId(nomVideojuego);
+  Videojuego *videojuego = videojuegoHandler->obtenerVideojuegoPorId(nombreVideojuego);
+  Desarrollador *dev = dynamic_cast<Desarrollador *>(usuarioController->getSesion());
 
-  UsuarioController *uc = UsuarioController::getInstance();
-  Desarrollador *dev = dynamic_cast<Desarrollador *>(uc->getSesion());
+  set<TipoEstadistica> estadisticasDeInteres = dev->getEstadisticasDeInteres();
 
-  std::set<TipoEstadistica> estadisticasDeInteres =
-      dev->getEstadisticasDeInteres();
+  set<DataEstadistica> res = set<DataEstadistica>();
+  set<TipoEstadistica>::iterator it;
 
-  std::set<TipoEstadistica>::iterator it;
-
-  for (it = estadisticasDeInteres.begin(); it != estadisticasDeInteres.end();
-       it++)
+  for (it = estadisticasDeInteres.begin(); it != estadisticasDeInteres.end(); it++)
   {
     TipoEstadistica estadistica = (*it);
     float resultado = videojuego->calcularEstadistica(estadistica);
 
-    res.insert(new DataEstadistica(estadistica, resultado));
+    res.insert(DataEstadistica(estadistica, resultado));
   }
 
   return res;
 }
 
-// métodos de IIniciarSesion
-bool UsuarioController::iniciarSesion(string mail, string password)
+bool UsuarioController::iniciarSesion(string email, string password)
 {
-  UsuarioHandler *uh = UsuarioHandler::getInstance();
-  Usuario *user = uh->obtenerUsuarioPorId(mail);
-  if (user != nullptr && user->getPassword() == password)
-    return true;
-  else
-    return false;
+  UsuarioHandler *usuarioHandler = UsuarioHandler::getInstance();
+
+  Usuario *usuario = usuarioHandler->obtenerUsuarioPorId(email);
+
+  return usuario != nullptr && usuario->getPassword() == password ? true : false;
 }
 
-void UsuarioController::confirmarInicioSesion(bool confirmar, string mail,
-                                              bool &jg, bool &dev)
+void UsuarioController::confirmarInicioSesion(string email, bool &jugador, bool &dev)
 {
-  if (confirmar)
-  {
-    UsuarioHandler *uh = UsuarioHandler::getInstance();
-    this->sesion = uh->obtenerUsuarioPorId(mail);
 
-    Jugador *sesionJg = dynamic_cast<Jugador *>(this->sesion);
-    if (sesionJg)
-      jg = false;
-    else
-      dev = false;
-  }
+  UsuarioHandler *usuarioHandler = UsuarioHandler::getInstance();
+  this->sesion = usuarioHandler->obtenerUsuarioPorId(email);
+
+  Jugador *sesionJugador = dynamic_cast<Jugador *>(this->sesion);
+
+  if (sesionJugador)
+    jugador = false;
+  else
+    dev = false;
 }
 
 UsuarioController::~UsuarioController() { this->sesion = nullptr; }

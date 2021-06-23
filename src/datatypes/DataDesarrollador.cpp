@@ -1,27 +1,35 @@
 
 #include <string>
-#include <map>
-#include <set>
-#include <utility>
 
-#include "../../headers/datatypes/DataUsuario.h"
 #include "../../headers/datatypes/DataDesarrollador.h"
-#include "../../headers/utils/enums.h"
-#include "../../headers/datatypes/DataVideojuego.h"
-#include "../../headers/utils/Fecha.h"
 
 using namespace std;
 
-DataDesarrollador::DataDesarrollador() {}
-
-DataDesarrollador::DataDesarrollador(std::string email, std::string password, std::string nombreEmpresa) : DataUsuario(email, password)
+DataDesarrollador::DataDesarrollador()
 {
-    this->nombreEmpresa = nombreEmpresa;
+    nombreEmpresa = "";
 }
 
-std::string DataDesarrollador::getNombreEmpresa()
+DataDesarrollador::DataDesarrollador(const DataDesarrollador &data) : DataUsuario(data)
 {
-    return this->nombreEmpresa;
+    nombreEmpresa = data.nombreEmpresa;
+}
+
+DataDesarrollador::DataDesarrollador(string email, string password, string nombreEmpresa) : DataUsuario(email, password)
+{
+    nombreEmpresa = nombreEmpresa;
+}
+
+string DataDesarrollador::getNombreEmpresa() const { return nombreEmpresa; }
+
+bool operator<(const DataDesarrollador &d1, const DataDesarrollador &d2)
+{
+    return &d1 < &d2;
+}
+
+bool operator!=(const DataDesarrollador &d1, const DataDesarrollador &d2)
+{
+    return d1.getEmail() != d2.getEmail() || d2.getNombreEmpresa() != d2.getNombreEmpresa() || d1.getPassword() != d2.getPassword();
 }
 
 DataDesarrollador::~DataDesarrollador(){};

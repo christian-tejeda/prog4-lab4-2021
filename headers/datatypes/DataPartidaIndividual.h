@@ -1,12 +1,6 @@
 #ifndef DATA_PARTIDA_INDIVIDUAL_H
 #define DATA_PARTIDA_INDIVIDUAL_H
 
-#include <string>
-#include <map>
-#include <set>
-#include <utility>
-
-#include "../utils/enums.h"
 #include "../datatypes/DataPartida.h"
 
 using namespace std;
@@ -18,18 +12,14 @@ private:
 
 public:
     DataPartidaIndividual();
-    DataPartidaIndividual(int id, DataVideojuego * videojuego, Fecha fechaInicio, Fecha *fechaFin, float DuracionTotal, bool esContinuacion);
-    //Getters
-    //int getId() const;
-    //DataVideojuego getVideojuego();
-    //DataFecha getFechaInicio();
-    //DataFecha getFechaFin();
-    //float getDuracionTotal();
-    bool getContinuacion();
+    DataPartidaIndividual(const DataPartidaIndividual &data);
+    DataPartidaIndividual(int id, DataVideojuego videojuego, Fecha fechaInicio, Fecha fechaFin, float duracionTotal, bool esContinuacion);
 
-    //Setters
+    bool getContinuacion() const;
 
-    //Destructor
+    friend bool operator<(const DataPartidaIndividual &d1, const DataPartidaIndividual &d2);
+    friend bool operator!=(const DataPartidaIndividual &d1, const DataPartidaIndividual &d2);
+
     ~DataPartidaIndividual();
 };
 

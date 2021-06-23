@@ -6,9 +6,11 @@
 class IEliminarVideojuego
 {
 public:
-    virtual set<DataVideojuego *> obtenerVideojuegosPublicadosPorDesarrolladorConPartidasFinalizadas() = 0;
-    virtual void seleccionarVideojuego(string nombre) = 0;
-    virtual void confirmarEliminarVideojuego(bool confirmar) = 0;
+    virtual set<DataVideojuego> obtenerVideojuegosPublicadosPorDesarrolladorConPartidasFinalizadas() = 0;
+
+    virtual void seleccionarVideojuego(string nombreVideojuego) = 0;
+
+    virtual void confirmarEliminarVideojuego() = 0;
 
     virtual ~IEliminarVideojuego(){};
 };
