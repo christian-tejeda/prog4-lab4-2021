@@ -1227,15 +1227,15 @@ void menuSeleccionarEstadisticas(FactoryController *fact)
         {
         case 1:
             std::cout << "Total horas jugadas agregado exitsosamente \n";
-            estadisticasDeInteres.insert(TipoEstadistica::horasJugadas);
+            estadisticasDeInteres.insert(horasJugadas);
             break;
         case 2:
             std::cout << "Promedio rating agregado exitosamente \n";
-            estadisticasDeInteres.insert(TipoEstadistica::promedioRating);
+            estadisticasDeInteres.insert(promedioRating);
             break;
         case 3:
             std::cout << "Cantidad suscritos agregado exitosamente \n";
-            estadisticasDeInteres.insert(TipoEstadistica::cantidadSuscritos);
+            estadisticasDeInteres.insert(cantidadSuscritos);
             break;
         }
 

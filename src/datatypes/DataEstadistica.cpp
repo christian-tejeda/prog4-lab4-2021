@@ -9,18 +9,21 @@
 
 DataEstadistica::DataEstadistica() {}
 
-DataEstadistica::DataEstadistica(TipoEstadistica estadistica, float resultado) {
+DataEstadistica::DataEstadistica(TipoEstadistica estadistica, float resultado)
+{
   this->estadistica = estadistica;
   this->resultado = resultado;
 }
 
 TipoEstadistica DataEstadistica::getEstadistica() { return this->estadistica; }
 
-ostream &operator<<(ostream &os, const DataEstadistica &dataSuscJugador) {
+ostream &operator<<(ostream &os, const DataEstadistica &dataSuscJugador)
+{
 
   string estadistica;
 
-  switch (dataSuscJugador.estadistica) {
+  switch (dataSuscJugador.estadistica)
+  {
   case horasJugadas:
     estadistica = "Horas jugadas: ";
     break;
@@ -30,6 +33,8 @@ ostream &operator<<(ostream &os, const DataEstadistica &dataSuscJugador) {
   case cantidadSuscritos:
     estadistica = "Cantidad suscritos: ";
     break;
+  default:
+    estadistica = "";
   }
 
   string resultado = std::to_string(dataSuscJugador.resultado);

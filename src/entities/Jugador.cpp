@@ -176,8 +176,6 @@ std::set<ContratoSuscripcion *> Jugador::obtenerContratosActivos(Fecha *fecha)
     {
       activos.insert(contrato);
     }
-    
-    std::cout <<contrato->esActivo();
   }
 
   return activos;
@@ -214,7 +212,7 @@ map<int, PartidaIndividual *> Jugador::obtenerPartidasFinalizadas() //pronta ?)
       PartidaIndividual *testpartida = dynamic_cast<PartidaIndividual *>(it->second);
       if (testpartida != nullptr)
       {
-        res.insert({it->first, dynamic_cast<PartidaIndividual *>(it->second)});
+        res.insert(pair<int, PartidaIndividual *>(it->first, dynamic_cast<PartidaIndividual *>(it->second)));
       }
     }
   }
@@ -262,7 +260,7 @@ map<std::string, Videojuego *> Jugador::obtenerVideojuegosConSuscripcionActiva(F
     (*it)->setActivo(fa);
     if ((*it)->esActivo())
     {
-      res.insert({(*it)->getVideojuego()->getNombre(), (*it)->getVideojuego()});
+      res.insert(pair<string, Videojuego *>((*it)->getVideojuego()->getNombre(), (*it)->getVideojuego()));
     }
   }
   return res;
