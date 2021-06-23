@@ -266,10 +266,10 @@ void menuCargarDatosPrueba(UsuarioHandler *uh, VideojuegoHandler *vh, CategoriaH
                                      contratos1,
                                      cats1,
                                      "Ironhide Game Studio");
-    vj1->agregarCategoria(*cv1);
-    vj1->agregarCategoria(*cv2);
-    vj1->agregarCategoria(*cv6);
-    vj1->agregarCategoria(*cv8);
+    vj1->setCategoria(cv1);
+    vj1->setCategoria(cv2);
+    vj1->setCategoria(cv6);
+    vj1->setCategoria(cv8);
     vh->agregarVideojuego(vj1);
     Desarrollador *des1 = dynamic_cast<Desarrollador *>(uh->obtenerUsuarioPorId("ironhide@mail.com"));
     des1->agregarVideojuegoPublicado(vj1);
@@ -290,11 +290,11 @@ void menuCargarDatosPrueba(UsuarioHandler *uh, VideojuegoHandler *vh, CategoriaH
                                      cats2,
                                      "Epic Games");
 
-    vj2->agregarCategoria(*cv1);
-    vj2->agregarCategoria(*cv2);
-    vj2->agregarCategoria(*cv3);
-    vj2->agregarCategoria(*cv5);
-    vj2->agregarCategoria(*cv7);
+    vj2->setCategoria(cv1);
+    vj2->setCategoria(cv2);
+    vj2->setCategoria(cv3);
+    vj2->setCategoria(cv5);
+    vj2->setCategoria(cv7);
     vh->agregarVideojuego(vj2);
     Desarrollador *des2 = dynamic_cast<Desarrollador *>(uh->obtenerUsuarioPorId("epic@mail.com"));
     des2->agregarVideojuegoPublicado(vj2);
@@ -315,9 +315,9 @@ void menuCargarDatosPrueba(UsuarioHandler *uh, VideojuegoHandler *vh, CategoriaH
                                      cats3,
                                      "Mojang Studios");
 
-    vj3->agregarCategoria(*cv1);
-    vj3->agregarCategoria(*cv5);
-    vj3->agregarCategoria(*cv8);
+    vj3->setCategoria(cv1);
+    vj3->setCategoria(cv5);
+    vj3->setCategoria(cv8);
     vh->agregarVideojuego(vj3);
     Desarrollador *des3 = dynamic_cast<Desarrollador *>(uh->obtenerUsuarioPorId("mojang@mail.com"));
     des3->agregarVideojuegoPublicado(vj3);
@@ -338,11 +338,11 @@ void menuCargarDatosPrueba(UsuarioHandler *uh, VideojuegoHandler *vh, CategoriaH
                                      cats4,
                                      "EA Sports");
 
-    vj4->agregarCategoria(*cv1);
-    vj4->agregarCategoria(*cv2);
-    vj4->agregarCategoria(*cv3);
-    vj4->agregarCategoria(*cv4);
-    vj4->agregarCategoria(*cv8);
+    vj4->setCategoria(cv1);
+    vj4->setCategoria(cv2);
+    vj4->setCategoria(cv3);
+    vj4->setCategoria(cv4);
+    vj4->setCategoria(cv8);
     vh->agregarVideojuego(vj4);
     Desarrollador *des4 = dynamic_cast<Desarrollador *>(uh->obtenerUsuarioPorId("ea@mail.com"));
     des4->agregarVideojuegoPublicado(vj4);
@@ -400,7 +400,7 @@ void menuCargarDatosPrueba(UsuarioHandler *uh, VideojuegoHandler *vh, CategoriaH
     gamer->crearPartidaMultijugador(3, *f12, nullptr, fort, true, gamer, partm1);
     std::map<string, Jugador *> partm2;
     partm2.insert(std::pair<string, Jugador *>("ari", ari));
-    partm2.insert(std::pair<string, Jugador *>(ibai->getNickname(),ibai));
+    partm2.insert(std::pair<string, Jugador *>(ibai->getNickname(), ibai));
     gamer->crearPartidaMultijugador(4, *f13, nullptr, fort, true, gamer, partm2);
     std::map<string, Jugador *> partm3;
     partm3.insert(std::pair<string, Jugador *>(ibai->getNickname(), dynamic_cast<Jugador *>(ibai)));
@@ -575,7 +575,7 @@ void menuAsignarPuntaje(FactoryController *fact)
     IAsignarPuntaje *ap = fact->getIAsignarPuntaje();
     std::string nombre = "";
     int conf;
-    std::cout << "Seleccione el Videojuego que desea ver la informacion:  \n";
+    std::cout << "Seleccione el Videojuego que desea puntuar:  \n";
 
     //VideojuegoController * vc;
     set<DataVideojuego *> data = ap->obtenerVideojuegos();
@@ -586,7 +586,9 @@ void menuAsignarPuntaje(FactoryController *fact)
         std::cout << "\tNombre: " << imprimir->getNombre() << "\t | \t"
                   << "Descripcion:" << imprimir->getDescripcion() << "    \n";
     }
+    std::cout << "\n";
     std::cin.ignore();
+    std::cout << ">";
     std::getline(std::cin, nombre);
     std::cout << "\n";
     int punt;
@@ -784,7 +786,7 @@ void menuIniciarPartida(FactoryController *fact, Fecha *fechainicio)
     }
     else
     {
-        std::cout << "No tenes juegos :( \n";
+        std::cout << "No tenés juegos...\n";
     }
 }
 
@@ -920,12 +922,13 @@ void menuVerInfoVideojuego(FactoryController *fact)
         std::cout << "      -trimensual   :" << tri << "\n";
         std::cout << "      -anual        :" << anu << "\n";
         std::cout << "      -vitalicia    :" << vit << "\n";
-        std::cout << "     Categorias:\n";
+        std::cout << "     Categorias: ";
         for (it2 = categorias.begin(); it2 != categorias.end(); it2++)
         {
             std::string catActual = *it2;
-            std::cout << " \t " << catActual << "\n";
+            std::cout << "| " << catActual << " ";
         }
+        std::cout << "|\n";
         std::cout << "     NombreEmpresa  :" << empresa << "\n";
         std::cout << "     PuntajePromedio:" << puntaje << "\n";
 
@@ -1203,7 +1206,7 @@ void menuEliminarVideojuego(FactoryController *fact)
 
 void menuSeleccionarEstadisticas(FactoryController *fact)
 {
-    std::cout << "Bienvenido al menu de seleccionar estadisticas :smile: \n";
+    std::cout << "Bienvenido al menu de seleccionar estadisticas.\n";
     ISeleccionarEstadisticas *se = fact->getISeleccionarEstadisticas();
 
     bool agregar = true;
@@ -1235,7 +1238,7 @@ void menuSeleccionarEstadisticas(FactoryController *fact)
             break;
         }
 
-        std::cout << "Desea agregar mas estadisticas? (y/n) \n";
+        std::cout << "Desea agregar mas estadisticas? (y/n) ";
         std::string seguirAgregando;
         std::cin >> seguirAgregando;
 

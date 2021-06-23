@@ -39,16 +39,18 @@ void PartidaMultijugador::agregarParticipante(Jugador *participante)
 void PartidaMultijugador::finalizar(Fecha *fecha)
 {
     set<DuracionParticipante *> dur = this->durpart;
-    float d = 0;
-    int con = 0;
+    double d = *fecha - this->getFechaInicio();
+    int con = 1; //arranca en 1 debido al host
     //d=fecha-this->fechaInicio();
     set<DuracionParticipante *>::iterator it;
     for (it = dur.begin(); it != dur.end(); it++)
     {
         DuracionParticipante *cuestion = *it;
-        //cuestion->setHoraSalida(fecha);
-        cuestion->terminarParticipacion(fecha);
-        con++;
+        if (cuestion->getHoraSalida() == nullptr)
+        {
+            cuestion->terminarParticipacion(fecha);
+            con++;
+        }
     }
     this->setFechaFin(fecha);
     this->setDuracionTotal(d * con);
@@ -60,7 +62,7 @@ void PartidaMultijugador::eliminarPartidasVideojuego(Videojuego *videojuego)
     for (it = dur.begin(); it != dur.end(); ++it)
     {
         DuracionParticipante *cuestion = *it;
-        delete cuestion;//o sino hacer cuestion->~DuracionParticipante();
+        delete cuestion; //o sino hacer cuestion->~DuracionParticipante();
     }
     dur.clear();
     this->durpart.clear();
@@ -104,8 +106,7 @@ void PartidaMultijugador::bajarParticipante(Jugador *jg, Fecha *f)
         {
             (*it)->setHoraSalida(f);
             dur = (*it)->calcularDuracion();
-            std::cout << "diff de fechas: " << dur << "\n";
-            this->setDuracionTotal(abs(dur));
+            this->setDuracionTotal(dur);
             return;
         }
     }

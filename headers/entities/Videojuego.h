@@ -51,7 +51,6 @@ public:
   void setContrato(ContratoSuscripcion *);
   void setCategoria(Categoria *cat);
 
-  void agregarCategoria(Categoria o);
   set<Jugador *> getSuscriptores();
   int getCantidadSuscriptores();
   void agregarPuntaje(float puntaje);

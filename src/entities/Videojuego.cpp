@@ -39,7 +39,8 @@ map<string, Categoria *> Videojuego::getCategorias()
   return this->categorias;
 }
 
-void Videojuego::agregarSuscriptor(ContratoSuscripcion *contrato) {
+void Videojuego::agregarSuscriptor(ContratoSuscripcion *contrato)
+{
   this->contratos.insert(contrato);
 }
 
@@ -70,8 +71,6 @@ void Videojuego::setCategoria(Categoria *cat)
 {
   this->categorias.insert(pair<std::string, Categoria *>(cat->getNombre(), cat));
 }
-
-void Videojuego::agregarCategoria(Categoria o) {}
 
 set<Jugador *> Videojuego::getSuscriptores()
 {

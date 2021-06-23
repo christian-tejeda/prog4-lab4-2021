@@ -56,16 +56,20 @@ double Fecha::operator-(const Fecha &f)
   //se calcula en horas el 1er argumento
   double horas1 = anio * 365 * 24 + dia * 24 + hora + minuto * (1 / 60);
   for (int i = 0; i < mes - 1; i++)
-    horas1 += mesesDias[i] * 24;
-  horas1 += contarAniosBisiestos(*this);
+    horas1 += (double)(mesesDias[i] * 24);
+  horas1 += (double)contarAniosBisiestos(*this);
 
   //se calcula en horas el 2do argumento
   double horas2 = f.anio * 365 * 24 + f.dia * 24 + f.hora + f.minuto * (1 / 60);
   for (int i = 0; i < f.mes - 1; i++)
-    horas2 += mesesDias[i] * 24;
-  horas2 += contarAniosBisiestos(f);
+    horas2 += (double)(mesesDias[i] * 24);
+  horas2 += (double)contarAniosBisiestos(f);
 
-  return horas1 - horas2;
+  double printDiff = (double)(horas1 - horas2);
+  if (horas1 - horas2 > (double)0)
+    return (double)(horas1 - horas2);
+  else
+    return (double)(horas2 - horas1);
 }
 
 std::ostream &operator<<(std::ostream &os, Fecha f)
